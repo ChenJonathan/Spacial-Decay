@@ -96,13 +96,18 @@ public partial class MapController : DanmakuGameController
         StartMap();
     }
 
-    public override void Update()
+    public void Update()
     {
-        if (!Paused)
-            base.Update();
-
         if (Input.GetKeyDown(KeyCode.Escape) && MapIndicator.Instance.CurrentState != MapIndicator.State.Clickable)
             Paused = !Paused;
+    }
+
+    public override void FixedUpdate()
+    {
+        if(!Paused)
+        {
+            base.FixedUpdate();
+        }
     }
 
     public void StartMap()

@@ -14,14 +14,13 @@ public class Player : DanmakuCollider
 
     private LivesCounter livesCounter;
     private DashCounter dashCounter;
-
-    [SerializeField]
-    private int lives = MAX_LIVES;
+    
+    private int lives = maxLives;
     public int Lives
     {
         get { return lives; }
     }
-    public static readonly int MAX_LIVES = 5;
+    public static int maxLives = 5;
 
     private bool moving;
     public bool IsMoving
@@ -37,8 +36,8 @@ public class Player : DanmakuCollider
     private bool selecting = false;
     private int dashes = 0;
     private float dashCooldown = 0;
-    private static readonly float MAX_DASH_COOLDOWN = 2;
-    public static readonly int MAX_DASHES = 3;
+    public static int maxDashes = 3;
+    private static float MAX_DASH_COOLDOWN = 3;
 
     private bool invincible = false;
     public bool IsInvincible
@@ -46,7 +45,7 @@ public class Player : DanmakuCollider
         get { return invincible; }
     }
     private static readonly float INVINCIBILITY_ON_SPAWN = 0;
-    private static readonly float INVINCIBILITY_ON_HIT = 3;
+    private static readonly float INVINCIBILITY_ON_HIT = 2;
 
     [SerializeField]
     private float moveSpeed = 360;
@@ -58,6 +57,7 @@ public class Player : DanmakuCollider
     private Vector2 target;
     private SpriteRenderer targetRenderer;
     private LineRenderer dashRenderer;
+    private ParticleSystem hitEffect;
 
     private Vector2 mousePos = Vector2.zero;
     
@@ -76,6 +76,7 @@ public class Player : DanmakuCollider
         targetRenderer = targetObject.GetComponent<SpriteRenderer>();
         dashRenderer = targetObject.GetComponent<LineRenderer>();
         dashRenderer.sortingOrder = -1;
+        hitEffect = GetComponentInChildren<ParticleSystem>();
 
         GameObject[] counters = GameObject.FindGameObjectsWithTag("Counter"); // TODO Don't hard code
         livesCounter = counters[1].GetComponent<LivesCounter>();
@@ -111,7 +112,7 @@ public class Player : DanmakuCollider
             }
 
             // Dash cooldown
-            if(dashes < MAX_DASHES)
+            if(dashes < maxDashes)
             {
                 dashCooldown += Time.deltaTime;
                 if(dashCooldown >= MAX_DASH_COOLDOWN)
@@ -200,6 +201,7 @@ public class Player : DanmakuCollider
         lives--;
         livesCounter.UpdateCounter(lives);
         StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+        hitEffect.Play();
     }
 
     private void SetMoveTarget(Vector2 target)
@@ -236,36 +238,8 @@ public class Player : DanmakuCollider
 
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        if(!dashing)
-        {
-            danmaku.Deactivate();
-            if (!invincible)
-            {
-                Hit();
-            }
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-        if(enemy != null)
-        {
-            if(dashing)
-            {
-                enemy.Damage(50);
-            }
-            else if(!invincible)
-            {
-                Hit();
-            }
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-        if(enemy != null && !dashing && !invincible)
+        danmaku.Deactivate();
+        if(!dashing && !invincible)
         {
             Hit();
         }

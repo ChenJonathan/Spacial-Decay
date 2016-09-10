@@ -22,7 +22,7 @@ public class LivesCounter : MonoBehaviour {
     
 	void Start()
     {
-        int maxLives = Player.MAX_LIVES;
+        int maxLives = Player.maxLives;
         heartSize = heartPrefab.GetComponent<RectTransform>().sizeDelta.x;
         RectTransform rt = GetComponent<RectTransform>();
         rt.anchoredPosition = new Vector2(2 * gap + heartSize * transform.localScale.x / 2, -2 * gap - heartSize * transform.localScale.y / 2);
@@ -61,7 +61,7 @@ public class LivesCounter : MonoBehaviour {
             {
                 livesCounter[i].SetActive(false);
             }
-            if(Player.MAX_LIVES > maxDisplayCount)
+            if(Player.maxLives > maxDisplayCount)
                 livesCounter[maxDisplayCount].SetActive(false);
         }
         else

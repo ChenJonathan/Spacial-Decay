@@ -2,6 +2,7 @@
 using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
+using DanmakU.Controllers;
 
 public class DarkEnemy : Enemy
 {
@@ -15,9 +16,10 @@ public class DarkEnemy : Enemy
     {
         fireData = new FireBuilder(bulletPrefab, field);
         fireData.From(transform);
-        fireData.Towards(player.transform);
-        fireData.WithSpeed(6);
-        fireData.WithModifier(new CircularBurstModifier(360, new DynamicInt(10, 20), 0, 0));
+        fireData.WithSpeed(3);
+        fireData.WithAngularSpeed(45);
+        fireData.WithModifier(new CircularBurstModifier(340, new DynamicInt(10, 20), 0, 0));
+        fireData.WithController(new AccelerationController(3));
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
         transform.RotateAround(transform.position, transform.forward, 180f);
@@ -35,12 +37,12 @@ public class DarkEnemy : Enemy
 
     public override void NormalFixedUpdate()
     {
-        if(transform.position.y <= -10)
+        if(transform.position.y <= -8)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
             transform.RotateAround(transform.position, transform.forward, 180f);
         }
-        else if(transform.position.y >= 10)
+        else if(transform.position.y >= 8)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
             transform.RotateAround(transform.position, transform.forward, 180f);

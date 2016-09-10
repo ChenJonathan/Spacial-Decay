@@ -176,9 +176,11 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 1205748683}
-    - {fileID: 11410376, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+    - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
     - {fileID: 11450628, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
     - {fileID: 11450628, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
+    - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
+    - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 406163933}
     serializedStrings:
       keys:
@@ -196,8 +198,8 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,2,3]}'
-      - 4
+      - '{"$content":[2,3,4,5]}'
+      - 6
       - true
       - 1000
       - 100
@@ -215,12 +217,12 @@ MonoBehaviour:
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
   field: {fileID: 1205748683}
-  playerPrefab: {fileID: 11410376, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   waves:
   - {fileID: 11450628, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
   - {fileID: 11450628, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
-  - {fileID: 11450628, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-  - {fileID: 11450628, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
+  - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
+  - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
   waveMessage: {fileID: 406163933}
 --- !u!4 &174129276
 Transform:

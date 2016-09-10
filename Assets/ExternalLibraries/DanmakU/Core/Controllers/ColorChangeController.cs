@@ -9,8 +9,8 @@ namespace DanmakU.Controllers {
 
 	[System.Serializable]
 	public class ColorChangeController : IDanmakuController {
-		
-		//TODO Document
+
+        //TODO Document
 
 		[SerializeField, Show]
 		private Gradient colorGradient;

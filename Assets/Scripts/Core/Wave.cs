@@ -67,10 +67,13 @@ public class Wave : MonoBehaviour
                 LevelController.Singleton.EndWave();
             }
         }
-        else if(time >= spawnQueue[0].Time)
+        else
         {
-            SpawnEnemy(spawnQueue[0]);
-            spawnQueue.RemoveAt(0);
+            while(spawnQueue.Count > 0 && time >= spawnQueue[0].Time)
+            {
+                SpawnEnemy(spawnQueue[0]);
+                spawnQueue.RemoveAt(0);
+            }
         }
     }
 

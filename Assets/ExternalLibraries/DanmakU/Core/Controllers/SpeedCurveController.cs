@@ -17,23 +17,23 @@ namespace DanmakU.Controllers {
 		}
 		
 		[SerializeField, Show]
-		private AnimationCurve speedCuve;
+		private AnimationCurve speedCurve;
 		public AnimationCurve SpeedCurve {
 			get {
-				return SpeedCurve;
+				return speedCurve;
 			}
 		}
 
-		#region IDanmakuController implementation
+        #region IDanmakuController implementation
 
-		public virtual void Update (Danmaku danmaku, float dt) {
+        public virtual void Update (Danmaku danmaku, float dt) {
 			if (Absolute) {
-				danmaku.Speed = speedCuve.Evaluate (danmaku.Time);
+				danmaku.Speed = speedCurve.Evaluate (danmaku.Time);
 			} else {
 				float time = danmaku.Time;
 				float oldTime = time - dt;
 				if(oldTime > 0) {
-					float deltaV = speedCuve.Evaluate(time) - speedCuve.Evaluate(oldTime);
+					float deltaV = speedCurve.Evaluate(time) - speedCurve.Evaluate(oldTime);
 					danmaku.Speed += deltaV;
 				}
 			}

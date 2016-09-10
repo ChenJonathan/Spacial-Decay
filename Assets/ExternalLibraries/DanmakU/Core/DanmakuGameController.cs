@@ -28,7 +28,7 @@ namespace DanmakU {
 		[SerializeField]
 		private float angleResolution = 0.1f;
 
-		public virtual void Update() {
+		public virtual void FixedUpdate() {
             Danmaku.UpdateAll ();
 		}
 

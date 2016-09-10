@@ -57,11 +57,11 @@ public partial class LevelController : DanmakuGameController, IPausable
         StartWave();
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
         if(!Paused)
         {
-            base.Update();
+            base.FixedUpdate();
         }
     }
 
@@ -105,25 +105,10 @@ public partial class LevelController : DanmakuGameController, IPausable
         }
 
         waveMessage.SetActive(false);
-        StartWave();
-    }
-    
-    public void Pause(bool value)
-    {
-        /*
-        Paused = value;
-        Player.Paused = value;
-        if (currentWave != null)
+        while(!Input.GetMouseButtonDown(1))
         {
-            currentWave.Paused = value;
-            foreach (Enemy enemy in currentWave.Enemies)
-                enemy.Paused = value;
+            yield return null;
         }
-        
-        if (Paused)
-            MapIndicator.Instance.CurrentState = MapIndicator.State.ViewOnly;
-        else
-            MapIndicator.Instance.CurrentState = MapIndicator.State.Invisible;
-        */
+        StartWave();
     }
 }
