@@ -12,9 +12,9 @@ public class DarkEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 0.3f;
 
-    public void Start()
+    public override void Start()
     {
-        fireData = new FireBuilder(bulletPrefab, field);
+        fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(3);
         fireData.WithAngularSpeed(45);
@@ -25,27 +25,33 @@ public class DarkEnemy : Enemy
         transform.RotateAround(transform.position, transform.forward, 180f);
     }
 
-    public override void NormalUpdate()
+    public override void Update()
     {
-        fireCooldown -= Time.deltaTime;
-        if(fireCooldown <= 0)
+        if(!LevelController.Singleton.Paused)
         {
-            fireData.Fire();
-            fireCooldown = MAX_FIRE_COOLDOWN;
+            fireCooldown -= Time.deltaTime;
+            if(fireCooldown <= 0)
+            {
+                fireData.Fire();
+                fireCooldown = MAX_FIRE_COOLDOWN;
+            }
         }
     }
 
-    public override void NormalFixedUpdate()
+    public override void FixedUpdate()
     {
-        if(transform.position.y <= -8)
+        if(!LevelController.Singleton.Paused)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
-            transform.RotateAround(transform.position, transform.forward, 180f);
-        }
-        else if(transform.position.y >= 8)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-            transform.RotateAround(transform.position, transform.forward, 180f);
+            if(transform.position.y <= -8)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
+                transform.RotateAround(transform.position, transform.forward, 180f);
+            }
+            else if(transform.position.y >= 8)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+                transform.RotateAround(transform.position, transform.forward, 180f);
+            }
         }
     }
 }

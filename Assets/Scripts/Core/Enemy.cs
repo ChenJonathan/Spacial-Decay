@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 using DanmakU;
-using System.Collections.Generic;
 
-public class Enemy : DanmakuCollider
+public partial class Enemy : DanmakuCollider
 {
-    protected Player player;
-    protected DanmakuField field;
+    [HideInInspector]
+    public Player Player;
+    [HideInInspector]
+    public DanmakuField Field;
 
     public int MaxHealth;
     [HideInInspector]
@@ -16,17 +16,15 @@ public class Enemy : DanmakuCollider
     
     private GameObject healthBar;
     private float healthBarSize = 1.0f;
-
-    [SerializeField]
-    private GameObject damageGUIPrefab;
+    
     [SerializeField]
     private GameObject healthBarPrefab;
 
     public override sealed void Awake()
     {
         base.Awake();
-        player = LevelController.Singleton.Player;
-        field = LevelController.Singleton.Field;
+        Player = LevelController.Singleton.Player;
+        Field = LevelController.Singleton.Field;
         TagFilter = "Friendly";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
@@ -36,25 +34,36 @@ public class Enemy : DanmakuCollider
         Health = MaxHealth;
     }
 
-    public void Update()
+    public virtual void Start()
     {
-        if(!LevelController.Singleton.Paused)
-            NormalUpdate();
+        InitializeAttackBehavior();
+        InitializeMovementBehavior();
     }
 
-    public virtual void NormalUpdate() { }
+    public virtual void Update()
+    {
+        if(!LevelController.Singleton.Paused)
+        {
+            if(attackBehavior)
+                attackBehavior.BehaviorUpdate(this);
+            if(movementBehavior)
+                movementBehavior.BehaviorUpdate(this);
+        }
+    }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if(!LevelController.Singleton.Paused)
         {
             if(FacePlayer)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, player.transform.position - transform.position), Time.deltaTime * 4);
-            NormalFixedUpdate();
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position), Time.fixedDeltaTime * 4);
+
+            if(attackBehavior)
+                attackBehavior.BehaviorFixedUpdate(this);
+            if(movementBehavior)
+                movementBehavior.BehaviorFixedUpdate(this);
         }
     }
-
-    public virtual void NormalFixedUpdate() { }
 
     public virtual void Damage(int damage)
     {
@@ -79,11 +88,5 @@ public class Enemy : DanmakuCollider
     {
         Damage(danmaku.Damage);
         danmaku.Deactivate();
-
-        /*
-        GameObject damageGUI = (GameObject) Instantiate(damageGUIPrefab, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-        damageGUI.transform.parent = Field.transform;
-        damageGUI.GetComponent<TextMesh>().text = "" + danmaku.Damage;
-        */
     }
 }

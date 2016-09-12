@@ -12,37 +12,45 @@ public class HomingEnemy : Enemy
     private float fireCooldown = maxFireCooldown;
     private static float maxFireCooldown = 2;
 
-	public void Start()
+	public override void Start()
     {
-        fireData = new FireBuilder(bulletPrefab, field);
+        fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.Towards(player.transform);
+        fireData.Towards(Player.transform);
         fireData.WithRotation(90);
         fireData.WithSpeed(10);
 
         HomingController hc = new HomingController();
-        hc.Target = player.transform;
+        hc.Target = Player.transform;
         fireData.WithController(hc);
         fireData.WithController(new AccelerationController(3));
 	}
 	
-	public override void NormalUpdate()
+	public override void Update()
     {
-        fireCooldown -= Time.deltaTime;
-	    if(fireCooldown <= 0)
+        if(!LevelController.Singleton.Paused)
         {
-            fireData.Fire();
-            fireCooldown = maxFireCooldown;
+            fireCooldown -= Time.deltaTime;
+            if(fireCooldown <= 0)
+            {
+                fireData.Fire();
+                fireCooldown = maxFireCooldown;
+            }
         }
     }
 
-    public override void NormalFixedUpdate()
+    public override void FixedUpdate()
     {
-        Vector3 direction = player.transform.position - transform.position;
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
-        if(direction.magnitude <= 5)
+        base.FixedUpdate();
+
+        if(!LevelController.Singleton.Paused)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Vector3 direction = Player.transform.position - transform.position;
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
+            if(direction.magnitude <= 5)
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
         }
     }
 }

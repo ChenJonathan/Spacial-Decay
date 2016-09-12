@@ -57,11 +57,11 @@ public partial class LevelController : DanmakuGameController, IPausable
         StartWave();
     }
 
-    public override void FixedUpdate()
+    public override void Update()
     {
         if(!Paused)
         {
-            base.FixedUpdate();
+            base.Update();
         }
     }
 
@@ -105,10 +105,6 @@ public partial class LevelController : DanmakuGameController, IPausable
         }
 
         waveMessage.SetActive(false);
-        while(!Input.GetMouseButtonDown(1))
-        {
-            yield return null;
-        }
         StartWave();
     }
 }

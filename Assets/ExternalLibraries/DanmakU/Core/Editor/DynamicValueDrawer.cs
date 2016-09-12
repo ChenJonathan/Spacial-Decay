@@ -39,7 +39,7 @@ namespace DanmakU.Editor {
 				minProp.intValue = maxProp.intValue;
 				break;
 			case 1: // random
-				maxProp.intValue = EditorGUI.IntField(minRect, GUIContent.none, maxProp.intValue);
+				maxProp.intValue = EditorGUI.IntField(maxRect, GUIContent.none, maxProp.intValue);
 				minProp.intValue = EditorGUI.IntField(minRect, GUIContent.none, minProp.intValue);
 				if(minProp.intValue > maxProp.intValue) {
 					int temp = maxProp.intValue;

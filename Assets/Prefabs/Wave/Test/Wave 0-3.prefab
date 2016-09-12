@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawns:
-  - Prefab: {fileID: 11410496, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
+  - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
     Locations:
     - {x: -20, y: 9}
     - {x: -21, y: 8}
@@ -61,25 +61,6 @@ MonoBehaviour:
     - {x: -20, y: -7}
     - {x: -21, y: -8}
     - {x: -20, y: -9}
-    - {x: 20, y: 9}
-    - {x: 21, y: 8}
-    - {x: 20, y: 7}
-    - {x: 21, y: 6}
-    - {x: 20, y: 5}
-    - {x: 21, y: 4}
-    - {x: 20, y: 3}
-    - {x: 21, y: 2}
-    - {x: 20, y: 1}
-    - {x: 21, y: 0}
-    - {x: 20, y: -1}
-    - {x: 21, y: -2}
-    - {x: 20, y: -3}
-    - {x: 21, y: -4}
-    - {x: 20, y: -5}
-    - {x: 21, y: -6}
-    - {x: 20, y: -7}
-    - {x: 21, y: -8}
-    - {x: 20, y: -9}
     Times:
     - 2
     - 2
@@ -100,6 +81,28 @@ MonoBehaviour:
     - 2
     - 2
     - 2
+  - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
+    Locations:
+    - {x: 20, y: 9}
+    - {x: 21, y: 8}
+    - {x: 20, y: 7}
+    - {x: 21, y: 6}
+    - {x: 20, y: 5}
+    - {x: 21, y: 4}
+    - {x: 20, y: 3}
+    - {x: 21, y: 2}
+    - {x: 20, y: 1}
+    - {x: 21, y: 0}
+    - {x: 20, y: -1}
+    - {x: 21, y: -2}
+    - {x: 20, y: -3}
+    - {x: 21, y: -4}
+    - {x: 20, y: -5}
+    - {x: 21, y: -6}
+    - {x: 20, y: -7}
+    - {x: 21, y: -8}
+    - {x: 20, y: -9}
+    Times:
     - 8
     - 8
     - 8
@@ -127,17 +130,21 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: spawns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.size
-      value: 38
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.size
-      value: 38
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 11410496, guid: b769857731e86bc4f959ce1126f8d312,
+      objectReference: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312,
         type: 2}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
@@ -551,6 +558,167 @@ Prefab:
       propertyPath: spawns.Array.data[0].Times.Array.data[37]
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[0].Locations.Array.data[37].y
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[0].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[1].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[2].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[3].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[4].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[5].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[6].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[7].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[8].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[9].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[10].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[11].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[12].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[13].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[14].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[15].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[16].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[17].x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Locations.Array.data[18].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[1]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[0]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[2]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[3]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[4]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[5]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[6]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[7]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[8]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[9]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[10]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[11]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[12]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[13]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[14]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[15]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[16]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[17]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Times.Array.data[18]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[1].Prefab
+      value: 
+      objectReference: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 188780}

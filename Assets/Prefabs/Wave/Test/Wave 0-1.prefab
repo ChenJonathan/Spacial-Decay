@@ -40,7 +40,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawns:
-  - Prefab: {fileID: 11480714, guid: c034dbc9c84ba9b48b16e5d5ea9dfa9b, type: 2}
+  - Prefab: {fileID: 11442184, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+    Locations:
+    - {x: 20, y: 0}
+    - {x: -20, y: 0}
+    Times:
+    - 2
+    - 2
+  - Prefab: {fileID: 11442184, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+    Locations:
+    - {x: 20, y: 0}
+    - {x: -20, y: 0}
+    Times:
+    - 2
+    - 2
+  - Prefab: {fileID: 11442184, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
     Locations:
     - {x: 20, y: 0}
     - {x: -20, y: 0}
@@ -55,6 +69,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: spawns.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -65,7 +83,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 11480714, guid: c034dbc9c84ba9b48b16e5d5ea9dfa9b,
+      objectReference: {fileID: 11442184, guid: 8ee757bc63c51cb42807d20493850671,
         type: 2}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x

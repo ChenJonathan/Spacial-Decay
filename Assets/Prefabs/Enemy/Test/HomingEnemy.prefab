@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21249720}
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
-  - 114: {fileID: 11480714}
+  - 114: {fileID: 11416366}
   m_Layer: 12
-  m_Name: FighterEnemy
+  m_Name: HomingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 175464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,7 +89,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &11480714
+--- !u!114 &11416366
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -97,17 +97,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aed5c86eedcc52246bd169e67e86a0f3, type: 3}
+  m_Script: {fileID: 11500000, guid: f7e21aa1cbc6f5942a5d207bcd5e059a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 103538, guid: b0cf55af6b69c8f4ca18aa93ea4778ba, type: 2}
-    - {fileID: 167222, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
+      - List<AttackBehavior> attackBehaviors
+      - List<MovementBehavior> movementBehaviors
+      - Player Player
+      - DanmakuField Field
       - int MaxHealth
       - int Health
       - bool FacePlayer
@@ -116,7 +120,11 @@ MonoBehaviour:
       - string tagFilter
       values:
       - 0
-      - 100
+      - '{"$content":[]}'
+      - '{"$content":[]}'
+      - null
+      - null
+      - 250
       - 0
       - true
       - 1
@@ -125,16 +133,20 @@ MonoBehaviour:
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -88800
+  _id: -224464
   dbg: 0
   _dirty: 0
   tagFilter: 
-  MaxHealth: 100
+  attackBehaviors: []
+  movementBehaviors: []
+  Player: {fileID: 0}
+  Field: {fileID: 0}
+  MaxHealth: 250
   Health: 0
   FacePlayer: 1
   damageGUIPrefab: {fileID: 103538, guid: b0cf55af6b69c8f4ca18aa93ea4778ba, type: 2}
-  healthBarPrefab: {fileID: 167222, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
 --- !u!212 &21249720
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -231,12 +243,12 @@ Prefab:
       objectReference: {fileID: 103538, guid: b0cf55af6b69c8f4ca18aa93ea4778ba, type: 2}
     - target: {fileID: 0}
       propertyPath: _serializationData.serializedStrings.values.Array.data[2]
-      value: 0
+      value: '{"$content":[]}'
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe,
+      objectReference: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92,
         type: 2}
     - target: {fileID: 0}
       propertyPath: _serializationData.serializedStrings.values.Array.data[0]
@@ -269,14 +281,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: healthBarPrefab
       value: 
-      objectReference: {fileID: 167222, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+      objectReference: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     - target: {fileID: 0}
       propertyPath: _serializationData.serializedStrings.values.Array.data[1]
-      value: 100
+      value: '{"$content":[]}'
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MaxHealth
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FacePlayer
@@ -294,6 +306,22 @@ Prefab:
       propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _serializationData.serializedObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175464}

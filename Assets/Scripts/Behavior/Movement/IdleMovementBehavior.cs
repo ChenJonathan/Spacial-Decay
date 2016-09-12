@@ -1,0 +1,1 @@
+﻿public class IdleMovementBehavior : Enemy.MovementBehavior { }

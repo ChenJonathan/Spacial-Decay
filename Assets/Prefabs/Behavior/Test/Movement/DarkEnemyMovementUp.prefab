@@ -1,50 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &188780
+--- !u!1 &141918
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 437044}
-  - 114: {fileID: 11450628}
+  - 4: {fileID: 419524}
+  - 114: {fileID: 11456002}
   m_Layer: 0
-  m_Name: Wave 0-2
+  m_Name: DarkEnemyMovementUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &437044
+--- !u!4 &419524
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188780}
+  m_GameObject: {fileID: 141918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11450628
+--- !u!114 &11456002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188780}
+  m_GameObject: {fileID: 141918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f2aa7ddc54557e4fb3c67cc0d1348ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawns:
-  - Prefab: {fileID: 11442184, guid: afb15c526336e464eaf6753fdc641482, type: 2}
-    Locations:
-    - {x: 0, y: -12}
-    Times:
-    - 2
+  duration: 8
+  repeat: 1
+  direction: {x: 0, y: 16}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -53,39 +50,34 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Times.Array.size
+      propertyPath: duration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceFromPlayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deltaSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: target.y
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: direction.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: repeat
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Locations.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Prefab
-      value: 
-      objectReference: {fileID: 11442184, guid: afb15c526336e464eaf6753fdc641482,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Locations.Array.data[1].x
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Times.Array.data[1]
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Locations.Array.data[0].y
-      value: -12
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Times.Array.data[0]
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 188780}
+  m_RootGameObject: {fileID: 141918}
   m_IsPrefabParent: 1
