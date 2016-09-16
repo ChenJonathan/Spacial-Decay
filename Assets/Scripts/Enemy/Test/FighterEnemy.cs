@@ -11,7 +11,7 @@ public class FighterEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 1f;
 
-	public override void Start()
+	public void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
@@ -20,7 +20,7 @@ public class FighterEnemy : Enemy
         fireData.WithModifier(new CircularBurstModifier(100, 5, 0, 0));
 	}
 	
-	public override void Update()
+	public void Update()
     {
         if(!LevelController.Singleton.Paused)
         {

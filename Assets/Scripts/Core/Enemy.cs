@@ -34,34 +34,12 @@ public partial class Enemy : DanmakuCollider
         Health = MaxHealth;
     }
 
-    public virtual void Start()
-    {
-        InitializeAttackBehavior();
-        InitializeMovementBehavior();
-    }
-
-    public virtual void Update()
-    {
-        if(!LevelController.Singleton.Paused)
-        {
-            if(attackBehavior)
-                attackBehavior.BehaviorUpdate(this);
-            if(movementBehavior)
-                movementBehavior.BehaviorUpdate(this);
-        }
-    }
-
     public virtual void FixedUpdate()
     {
         if(!LevelController.Singleton.Paused)
         {
             if(FacePlayer)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position), Time.fixedDeltaTime * 4);
-
-            if(attackBehavior)
-                attackBehavior.BehaviorFixedUpdate(this);
-            if(movementBehavior)
-                movementBehavior.BehaviorFixedUpdate(this);
         }
     }
 

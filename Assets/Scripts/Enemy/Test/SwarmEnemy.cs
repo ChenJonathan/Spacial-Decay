@@ -16,7 +16,7 @@ public class SwarmEnemy : Enemy
 
     private Rigidbody2D rigidbody2d;
 
-	public override void Start()
+	public void Start()
     {
         direction = transform.position.x < 0 ? 1 : -1;
         transform.Rotate(Vector3.forward * -90 * direction);
@@ -31,7 +31,7 @@ public class SwarmEnemy : Enemy
         rigidbody2d.velocity = new Vector2(direction * 4, 0);
 	}
 	
-	public override void Update()
+	public void Update()
     {
         if(!LevelController.Singleton.Paused)
         {

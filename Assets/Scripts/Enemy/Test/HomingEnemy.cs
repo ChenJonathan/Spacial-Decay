@@ -12,7 +12,7 @@ public class HomingEnemy : Enemy
     private float fireCooldown = maxFireCooldown;
     private static float maxFireCooldown = 2;
 
-	public override void Start()
+	public void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
@@ -26,7 +26,7 @@ public class HomingEnemy : Enemy
         fireData.WithController(new AccelerationController(3));
 	}
 	
-	public override void Update()
+	public void Update()
     {
         if(!LevelController.Singleton.Paused)
         {

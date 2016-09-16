@@ -12,7 +12,7 @@ public class DarkEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 0.3f;
 
-    public override void Start()
+    public void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
@@ -25,7 +25,7 @@ public class DarkEnemy : Enemy
         transform.RotateAround(transform.position, transform.forward, 180f);
     }
 
-    public override void Update()
+    public void Update()
     {
         if(!LevelController.Singleton.Paused)
         {

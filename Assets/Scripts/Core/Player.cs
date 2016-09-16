@@ -53,7 +53,16 @@ public class Player : DanmakuCollider
     private float dashSpeed = 720;
     [SerializeField]
     private float rotateSpeed = 18;
-    
+
+    [SerializeField]
+    private Color dashStartActive;
+    [SerializeField]
+    private Color dashEndActive;
+    [SerializeField]
+    private Color dashStartInactive;
+    [SerializeField]
+    private Color dashEndInactive;
+
     private Vector2 target;
     private SpriteRenderer targetRenderer;
     private LineRenderer dashRenderer;
@@ -72,15 +81,20 @@ public class Player : DanmakuCollider
 
         target = new Vector2(transform.position.x, transform.position.y);
         GameObject targetObject = (GameObject)Instantiate(targetPrefab, Vector3.zero, Quaternion.identity);
-        targetObject.transform.parent = LevelController.Singleton.transform;
         targetRenderer = targetObject.GetComponent<SpriteRenderer>();
         dashRenderer = targetObject.GetComponent<LineRenderer>();
         dashRenderer.sortingOrder = -1;
+        dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
+        dashRenderer.SetColors(dashStartInactive, dashEndInactive);
         hitEffect = GetComponentInChildren<ParticleSystem>();
 
-        GameObject[] counters = GameObject.FindGameObjectsWithTag("Counter"); // TODO Don't hard code
-        livesCounter = counters[1].GetComponent<LivesCounter>();
-        dashCounter = counters[0].GetComponent<DashCounter>();
+        foreach(GameObject counter in GameObject.FindGameObjectsWithTag("Counter"))
+        {
+            if(counter.GetComponent<LivesCounter>() != null)
+                livesCounter = counter.GetComponent<LivesCounter>();
+            if(counter.GetComponent<DashCounter>() != null)
+                dashCounter = counter.GetComponent<DashCounter>();
+        }
     }
 
     public void Start()
@@ -119,6 +133,7 @@ public class Player : DanmakuCollider
                 {
                     dashes++;
                     dashCooldown = 0;
+                    dashRenderer.SetColors(dashStartActive, dashEndActive);
                     dashCounter.UpdateCounter(dashes);
                 }
             }
@@ -154,7 +169,7 @@ public class Player : DanmakuCollider
         mousePos.x = Input.mousePosition.x / Screen.width;
         mousePos.y = Input.mousePosition.y / Screen.height;
 
-        if(Input.GetMouseButtonDown(0) && dashes > 0)
+        if(Input.GetMouseButtonDown(0))
         {
             // Begin dash targeting
             selecting = true;
@@ -168,14 +183,19 @@ public class Player : DanmakuCollider
             // Dash targeting
             if(Input.GetMouseButtonUp(0))
             {
-                dashing = true;
+                if(dashes > 0)
+                {
+                    dashing = true;
+                    dashes--;
+                    if(dashes == 0)
+                        dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+                }
                 selecting = false;
-                dashes--;
                 SetMoveTarget(field.WorldPoint(mousePos));
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
             }
-            else if(Input.GetMouseButton(0) && dashes > 0)
+            else
             {
                 targetRenderer.transform.position = field.WorldPoint(mousePos);
                 dashRenderer.SetPosition(0, transform.position);

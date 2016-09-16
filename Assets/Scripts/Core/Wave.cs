@@ -4,9 +4,11 @@ using DanmakU;
 
 public class Wave : MonoBehaviour
 {
-    public List<SpawnChain> spawns;
+    public List<EnemyChain> EnemyChains;
+    public List<WarningChain> WarningChains;
 
-    private List<SpawnData> spawnQueue;
+    private List<EnemyData> enemyQueue;
+    private List<WarningData> warningQueue;
     private List<Enemy> enemies;
 
     private DanmakuField field;
@@ -16,40 +18,75 @@ public class Wave : MonoBehaviour
     [System.Serializable]
     public struct SpawnData
     {
-        public Enemy Prefab;
-
         public Vector2 Location;
         public float Time;
     }
 
     [System.Serializable]
-    public struct SpawnChain
+    public struct EnemyData
     {
         public Enemy Prefab;
+        public SpawnData Data;
+    }
 
-        public List<Vector2> Locations;
-        public List<float> Times;
+    [System.Serializable]
+    public struct EnemyChain
+    {
+        public Enemy Prefab;
+        public List<SpawnData> Data;
+    }
+
+    [System.Serializable]
+    public struct WarningData
+    {
+        public Warning Prefab;
+        public float Duration;
+        public SpawnData Data;
+    }
+
+    [System.Serializable]
+    public struct WarningChain
+    {
+        public Warning Prefab;
+        public float Duration;
+        public List<SpawnData> Data;
     }
 
     void Start()
     {
         field = ((LevelController)LevelController.Instance).Field;
-        spawnQueue = new List<SpawnData>();
+        enemyQueue = new List<EnemyData>();
+        warningQueue = new List<WarningData>();
         enemies = new List<Enemy>();
 
-        foreach(SpawnChain chain in spawns)
+        foreach(EnemyChain chain in EnemyChains)
         {
-            int numSpawns = Mathf.Min(chain.Locations.Count, chain.Times.Count);
+            int numSpawns = chain.Data.Count;
             for(int i = 0; i < numSpawns; i++)
             {
-                SpawnData spawn;
+                EnemyData spawn;
                 spawn.Prefab = chain.Prefab;
-                spawn.Location = chain.Locations[i];
-                spawn.Time = chain.Times[i];
-                spawnQueue.Add(spawn);
+                spawn.Data.Location = chain.Data[i].Location;
+                spawn.Data.Time = chain.Data[i].Time;
+                enemyQueue.Add(spawn);
             }
         }
-        spawnQueue.Sort((a, b)=>(int)(a.Time * 100 - b.Time * 100));
+        enemyQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
+
+        foreach(WarningChain chain in WarningChains)
+        {
+            int numSpawns = chain.Data.Count;
+            for(int i = 0; i < numSpawns; i++)
+            {
+                WarningData spawn;
+                spawn.Prefab = chain.Prefab;
+                spawn.Duration = chain.Duration;
+                spawn.Data.Location = chain.Data[i].Location;
+                spawn.Data.Time = chain.Data[i].Time;
+                warningQueue.Add(spawn);
+            }
+        }
+        warningQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
 
         time = 0;
     }
@@ -57,7 +94,7 @@ public class Wave : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if(spawnQueue.Count == 0)
+        if(enemyQueue.Count == 0)
         {
             if(enemies.Count == 0)
             {
@@ -69,27 +106,57 @@ public class Wave : MonoBehaviour
         }
         else
         {
-            while(spawnQueue.Count > 0 && time >= spawnQueue[0].Time)
+            while(enemyQueue.Count > 0 && time >= enemyQueue[0].Data.Time)
             {
-                SpawnEnemy(spawnQueue[0]);
-                spawnQueue.RemoveAt(0);
+                SpawnEnemy(enemyQueue[0]);
+                enemyQueue.RemoveAt(0);
+            }
+            while(warningQueue.Count > 0 && time >= warningQueue[0].Data.Time)
+            {
+                SpawnWarning(warningQueue[0]);
+                warningQueue.RemoveAt(0);
             }
         }
     }
 
-    public Enemy SpawnEnemy(SpawnData enemy)
+    /// <summary>
+    /// Spawns an enemy.
+    /// </summary>
+    /// <param name="enemy"></param>
+    /// <returns></returns>
+    public Enemy SpawnEnemy(EnemyData enemy)
     {
-        Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Location, Quaternion.identity);
+        Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Data.Location, Quaternion.identity);
         temp.transform.parent = field.transform;
         enemies.Add(temp);
         return temp;
     }
 
+    /// <summary>
+    /// Spawns a warning message.
+    /// </summary>
+    /// <param name="warning"></param>
+    /// <returns></returns>
+    public Warning SpawnWarning(WarningData warning)
+    {
+        Warning temp = (Warning)Instantiate(warning.Prefab, warning.Data.Location, Quaternion.identity);
+        temp.Duration = warning.Duration;
+        temp.transform.parent = field.transform;
+        return temp;
+    }
+
+    /// <summary>
+    /// To be called when an enemy dies. Stops the Wave from tracking the enemy.
+    /// </summary>
+    /// <param name="enemy">The enemy that died.</param>
     public void UnregisterEnemy(Enemy enemy)
     {
         enemies.Remove(enemy);
     }
 
+    /// <summary>
+    /// Kills all enemies and empties the list of tracked enemies.
+    /// </summary>
     public void ClearEnemies()
     {
         for(int i = enemies.Count - 1; i >= 0; i--)
