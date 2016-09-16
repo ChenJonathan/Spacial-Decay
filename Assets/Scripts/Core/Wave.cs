@@ -41,6 +41,8 @@ public class Wave : MonoBehaviour
     {
         public Warning Prefab;
         public float Duration;
+        public float FadeInDuration;
+        public float FadeOutDuration;
         public SpawnData Data;
     }
 
@@ -49,6 +51,8 @@ public class Wave : MonoBehaviour
     {
         public Warning Prefab;
         public float Duration;
+        public float FadeInDuration;
+        public float FadeOutDuration;
         public List<SpawnData> Data;
     }
 
@@ -81,6 +85,8 @@ public class Wave : MonoBehaviour
                 WarningData spawn;
                 spawn.Prefab = chain.Prefab;
                 spawn.Duration = chain.Duration;
+                spawn.FadeInDuration = chain.FadeInDuration;
+                spawn.FadeOutDuration = chain.FadeOutDuration;
                 spawn.Data.Location = chain.Data[i].Location;
                 spawn.Data.Time = chain.Data[i].Time;
                 warningQueue.Add(spawn);
@@ -141,6 +147,8 @@ public class Wave : MonoBehaviour
     {
         Warning temp = (Warning)Instantiate(warning.Prefab, warning.Data.Location, Quaternion.identity);
         temp.Duration = warning.Duration;
+        temp.FadeInDuration = warning.FadeInDuration;
+        temp.FadeOutDuration = warning.FadeOutDuration;
         temp.transform.parent = field.transform;
         return temp;
     }

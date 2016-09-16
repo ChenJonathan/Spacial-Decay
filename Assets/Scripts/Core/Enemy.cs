@@ -7,6 +7,8 @@ public partial class Enemy : DanmakuCollider
     public Player Player;
     [HideInInspector]
     public DanmakuField Field;
+    [HideInInspector]
+    public Wave Wave;
 
     public int MaxHealth;
     [HideInInspector]
@@ -25,6 +27,7 @@ public partial class Enemy : DanmakuCollider
         base.Awake();
         Player = LevelController.Singleton.Player;
         Field = LevelController.Singleton.Field;
+        Wave = LevelController.Singleton.Wave;
         TagFilter = "Friendly";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
@@ -58,8 +61,13 @@ public partial class Enemy : DanmakuCollider
 
     public virtual void Die()
     {
-        LevelController.Singleton.Wave.UnregisterEnemy(this);
         Destroy(gameObject);
+        LevelController.Singleton.Wave.UnregisterEnemy(this);
+    }
+
+    public void OnDestroy()
+    {
+        Die();
     }
 
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)

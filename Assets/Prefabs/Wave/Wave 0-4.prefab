@@ -48,6 +48,8 @@ MonoBehaviour:
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 5
+    FadeInDuration: 2
+    FadeOutDuration: 2
     Data:
     - Location: {x: 0, y: 9}
       Time: 0
