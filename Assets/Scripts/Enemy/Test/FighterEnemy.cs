@@ -11,7 +11,7 @@ public class FighterEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 1f;
 
-	public void Start()
+	public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);

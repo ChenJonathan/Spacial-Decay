@@ -12,7 +12,7 @@ public class DarkEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 0.3f;
 
-    public void Start()
+    public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);

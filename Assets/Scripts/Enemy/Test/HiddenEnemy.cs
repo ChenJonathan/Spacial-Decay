@@ -18,7 +18,7 @@ public class HiddenEnemy : Enemy
     private List<Wave.WarningData> warningList;
     private float time;
 
-	public void Start()
+	public override void Start()
     {
         fireList.Sort((a, b) => (int)(a.Time * 100 - b.Time * 100));
 

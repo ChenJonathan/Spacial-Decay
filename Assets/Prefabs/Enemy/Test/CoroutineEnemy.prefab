@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21249720}
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
-  - 114: {fileID: 114000011813409250}
+  - 114: {fileID: 114000013815621762}
   m_Layer: 12
-  m_Name: FighterEnemy
+  m_Name: CoroutineEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +271,7 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175464}
   m_IsPrefabParent: 1
---- !u!114 &114000011813409250
+--- !u!114 &114000013815621762
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aed5c86eedcc52246bd169e67e86a0f3, type: 3}
+  m_Script: {fileID: 11500000, guid: e9d10a1bb7aab584d898005f361a35c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
@@ -304,13 +304,13 @@ MonoBehaviour:
       - null
       - 100
       - 0
-      - true
+      - false
       - 1
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -63058
+  _id: -7262
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -319,6 +319,6 @@ MonoBehaviour:
   Wave: {fileID: 0}
   MaxHealth: 100
   Health: 0
-  FacePlayer: 1
+  FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}

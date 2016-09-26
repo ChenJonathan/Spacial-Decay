@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DanmakU;
+using System.Collections;
 
 public partial class Enemy : DanmakuCollider
 {
@@ -37,6 +38,11 @@ public partial class Enemy : DanmakuCollider
         Health = MaxHealth;
     }
 
+    public virtual void Start()
+    {
+        StartCoroutine(Run());
+    }
+
     public virtual void FixedUpdate()
     {
         if(!LevelController.Singleton.Paused)
@@ -57,6 +63,11 @@ public partial class Enemy : DanmakuCollider
         {
             Die();
         }
+    }
+
+    protected virtual IEnumerator Run()
+    {
+        return null;
     }
 
     public virtual void Die()
