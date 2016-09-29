@@ -2,8 +2,9 @@
 using DanmakU;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public partial class LevelController : DanmakuGameController, IPausable
+public class LevelController : DanmakuGameController, IPausable
 {
     [SerializeField]
     private DanmakuField field;
@@ -76,15 +77,7 @@ public partial class LevelController : DanmakuGameController, IPausable
         Destroy(currentWave.gameObject);
         waveCount++;
 
-        if(waveCount == waves.Count)
-        {
-            Debug.Log("Level complete");
-            // TODO
-        }
-        else
-        {
-            StartCoroutine(ShowWaveMessage());
-        }
+        StartCoroutine(ShowWaveMessage());
     }
 
     private IEnumerator ShowWaveMessage()
@@ -105,6 +98,13 @@ public partial class LevelController : DanmakuGameController, IPausable
         }
 
         waveMessage.SetActive(false);
-        StartWave();
+        if(waveCount == waves.Count)
+        {
+            SceneManager.LoadScene("Level Select");
+        }
+        else
+        {
+            StartWave();
+        }
     }
 }
