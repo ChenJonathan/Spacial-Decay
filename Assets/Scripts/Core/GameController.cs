@@ -9,6 +9,7 @@ public class GameController : Singleton<GameController>, IPausable
     public Level StartLevel;
     [HideInInspector]
     public Level CurrentLevel;
+    public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
 
@@ -27,11 +28,16 @@ public class GameController : Singleton<GameController>, IPausable
     {
         base.Awake();
 
-        DontDestroyOnLoad(gameObject);
-        unlockedLevels = new List<Level>();
-        unlockedLevels.Add(StartLevel);
-        StartLevel.gameObject.SetActive(true);
-        SceneManager.sceneLoaded += OnLoad;
+        // Destroyed instances stop here
+        if(Singleton == this)
+        {
+            DontDestroyOnLoad(gameObject);
+            unlockedLevels = new List<Level>();
+            unlockedLevels.Add(StartLevel);
+            StartLevel.gameObject.SetActive(true);
+            StartLevel.Appear();
+            SceneManager.sceneLoaded += OnLoad;
+        }
     }
 
     public void LoadLevel(Level level)
@@ -42,7 +48,7 @@ public class GameController : Singleton<GameController>, IPausable
 
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name.Equals("Level Select"))
+            if(scene.name.Equals("Level Select"))
         {
             // Re-enable previously unlocked levels
             foreach(Level level in unlockedLevels)
@@ -56,8 +62,18 @@ public class GameController : Singleton<GameController>, IPausable
                 foreach(Level level in CurrentLevel.Unlocks)
                 {
                     if(!unlockedLevels.Contains(level))
+                    {
                         unlockedLevels.Add(level);
+                        level.GetComponent<LineRenderer>().SetPosition(0, CurrentLevel.transform.position);
+                        level.GetComponent<LineRenderer>().SetPosition(1, level.transform.position);
+
+                        // Send probe to new levels
+                        Probe clone = ((Probe)Instantiate(ProbePrefab, CurrentLevel.transform.position, Quaternion.identity));
+                        clone.SetDestination(level);
+                        clone.transform.parent = CurrentLevel.transform;
+                    }
                 }
+                CurrentLevel = null;
             }
         }
         else

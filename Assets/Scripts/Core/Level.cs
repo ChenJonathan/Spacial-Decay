@@ -5,26 +5,31 @@ using UnityEngine;
 public class Level : MonoBehaviour
 {
     public string Scene;
-    public Probe ProbePrefab;
     public List<Level> Unlocks;
 
     private SpriteRenderer sprite;
+    private LineRenderer line;
+    private bool clickable;
 
     public void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        line = GetComponent<LineRenderer>();
+        clickable = true;
     }
 
-    public void OnEnable()
+    public void Appear()
     {
-        StartCoroutine(Appear(1));
+        clickable = false;
+        StartCoroutine(Appear(1.5f));
     }
 
-    public IEnumerator Appear(float duration)
+    private IEnumerator Appear(float duration)
     {
         Color color = sprite.color;
         color.a = 0;
         sprite.color = color;
+        line.SetColors(color, color);
 
         for(int i = 1; i <= 100; i++)
         {
@@ -33,21 +38,17 @@ public class Level : MonoBehaviour
             // Increase alpha
             color.a = i / 100.0f;
             sprite.color = color;
+            line.SetColors(color, color);
         }
 
-        // Send probe to new levels
-        if(GameController.Singleton.CurrentLevel == this)
+        clickable = true;
+    }
+
+    public void OnMouseOver()
+    {
+        if(Input.GetMouseButtonDown(0) && clickable)
         {
-            foreach(Level level in Unlocks)
-            {
-                if(level.gameObject.activeInHierarchy == false)
-                {
-                    Probe clone = ((Probe)Instantiate(ProbePrefab, transform.position, Quaternion.identity));
-                    clone.SetDestination(level);
-                    clone.transform.parent = transform;
-                }
-            }
-            GameController.Singleton.CurrentLevel = null;
+            GameController.Singleton.LoadLevel(this);
         }
     }
 }

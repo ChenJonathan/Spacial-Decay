@@ -5,6 +5,7 @@ using UnityEngine;
 public class Probe : MonoBehaviour
 {
     private SpriteRenderer sprite;
+    private float distance;
 
     public void Awake()
     {
@@ -13,6 +14,7 @@ public class Probe : MonoBehaviour
 
     public void SetDestination(Level level)
     {
+        distance = (level.transform.position - transform.position).magnitude;
         StartCoroutine(Travel(level));
     }
 
@@ -25,26 +27,32 @@ public class Probe : MonoBehaviour
         
         while(true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.005f);
             
             color.a += 0.05f * direction;
             sprite.color = color;
 
             if(color.a <= 0)
             {
-                yield return new WaitForSeconds(0.1f);
-
-                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, 0.5f);
+                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, distance / 7);
                 direction = 1;
-            }
-            else if(color.a >= 1)
-            {
+
                 if(transform.position == level.transform.position)
                 {
+                    yield return new WaitForSeconds(0.5f);
+
                     level.gameObject.SetActive(true);
+                    level.Appear();
                     Destroy(gameObject);
                     yield break;
                 }
+                else
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
+            else if(color.a >= 1)
+            {
                 direction = -1;
             }
         }
