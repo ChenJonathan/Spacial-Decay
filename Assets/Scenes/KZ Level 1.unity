@@ -60,7 +60,7 @@ LightmapSettings:
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
-    m_CompAOExponent: 0
+    m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
@@ -69,7 +69,7 @@ LightmapSettings:
     m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 1024
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
   m_LightingDataAsset: {fileID: 0}
   m_RuntimeCPUUsage: 25
@@ -184,9 +184,6 @@ MonoBehaviour:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
     - {fileID: 114000010057563132, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
-    - {fileID: 114000013255767860, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
-    - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-    - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 406163933}
     serializedStrings:
       keys:
@@ -205,8 +202,8 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
+      - '{"$content":[2]}'
+      - 3
       - true
       - 1000
       - 100
@@ -229,9 +226,6 @@ MonoBehaviour:
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   waves:
   - {fileID: 114000010057563132, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
-  - {fileID: 114000013255767860, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
-  - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-  - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
   waveMessage: {fileID: 406163933}
 --- !u!4 &174129276
 Transform:
