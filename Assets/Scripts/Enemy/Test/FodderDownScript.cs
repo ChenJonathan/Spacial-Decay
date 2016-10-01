@@ -10,7 +10,7 @@ public class FodderDownScript : Enemy
     private FireBuilder fireData;
     private float fireCooldown = 0;
     private static readonly float MAX_FIRE_COOLDOWN = 1f;
-    private float deathTimer = 1f;
+    private float deathTimer = 2f;
 
     public override void Start()
     {
@@ -26,7 +26,7 @@ public class FodderDownScript : Enemy
         if (!LevelController.Singleton.Paused)
         {
             fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0)
+            if (fireCooldown <= 0 && deathTimer > 1)
             {
                 fireData.Fire();
                 fireCooldown = MAX_FIRE_COOLDOWN / 4;

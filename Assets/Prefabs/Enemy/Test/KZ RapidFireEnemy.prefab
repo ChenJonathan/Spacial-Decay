@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000013399299038}
   - 114: {fileID: 114000013271819086}
   m_Layer: 12
-  m_Name: RapidFireEnemy
+  m_Name: KZ RapidFireEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

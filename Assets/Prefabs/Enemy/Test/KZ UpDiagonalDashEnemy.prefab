@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000012542071066}
   - 114: {fileID: 114000011110259194}
   m_Layer: 12
-  m_Name: CannonFodderAngleUp
+  m_Name: KZ UpDiagonalDashEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

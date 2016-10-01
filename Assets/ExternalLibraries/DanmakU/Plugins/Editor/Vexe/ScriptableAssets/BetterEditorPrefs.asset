@@ -22,11 +22,11 @@ MonoBehaviour:
       - Dictionary<int, Vector3> Vector3s
       - Dictionary<int, Color> Colors
       values:
+      - '{"$content":[{"Key":1671264597,"Value":28},{"Key":-2012658474,"Value":10},{"Key":1671502677,"Value":28},{"Key":-2012420394,"Value":10}]}'
       - '{}'
       - '{}'
-      - '{}'
-      - '{}'
-      - '{}'
+      - '{"$content":[{"Key":-908185250,"Value":false},{"Key":-907947170,"Value":false},{"Key":273756951,"Value":true}]}'
+      - '{"$content":[{"Key":-686512010,"Value":{"x":14.0,"y":134.0,"z":0.0}},{"Key":-686273930,"Value":{"x":14.0,"y":134.0,"z":0.0}}]}'
       - '{}'
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,

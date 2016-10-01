@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000010989829872}
   - 114: {fileID: 114000014114509546}
   m_Layer: 12
-  m_Name: CannonFodderEnemy
+  m_Name: KZ FodderEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

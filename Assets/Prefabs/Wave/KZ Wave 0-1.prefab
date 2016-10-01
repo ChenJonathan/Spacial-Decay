@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000013141128222}
+  m_RootGameObject: {fileID: 1000010225391452}
   m_IsPrefabParent: 1
---- !u!1 &1000013141128222
+--- !u!1 &1000010225391452
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000013866476222}
-  - 114: {fileID: 114000013255767860}
+  - 4: {fileID: 4000011614844190}
+  - 114: {fileID: 114000010057563132}
   m_Layer: 0
-  m_Name: Wave 0-7
+  m_Name: KZ Wave 0-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000013866476222
+--- !u!4 &4000011614844190
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013141128222}
+  m_GameObject: {fileID: 1000010225391452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,102 +40,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000013255767860
+--- !u!114 &114000010057563132
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013141128222}
+  m_GameObject: {fileID: 1000010225391452}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyChains:
-  - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
+  - Prefab: {fileID: 114000013064677850, guid: a109618ca4908774a8ff88f9aac65fd7, type: 2}
     Data:
-    - Location: {x: 20, y: 6}
+    - Location: {x: 20, y: 1}
       Time: 3
-    - Location: {x: 20, y: -6}
-      Time: 3
-    - Location: {x: 20, y: 6}
+    - Location: {x: 20, y: 1}
+      Time: 4
+    - Location: {x: 20, y: 1}
       Time: 5
-    - Location: {x: 20, y: -6}
-      Time: 5
-    - Location: {x: 20, y: 6}
+    - Location: {x: 20, y: 1}
+      Time: 6
+    - Location: {x: 20, y: 1}
       Time: 7
-    - Location: {x: 20, y: -6}
-      Time: 7
-    - Location: {x: 20, y: 6}
+    - Location: {x: 20, y: 1}
+      Time: 8
+    - Location: {x: 20, y: 1}
       Time: 9
-    - Location: {x: 20, y: -6}
-      Time: 9
-    - Location: {x: 20, y: 6}
+    - Location: {x: 20, y: 1}
+      Time: 10
+    - Location: {x: 20, y: 1}
       Time: 11
-    - Location: {x: 20, y: -6}
-      Time: 11
-    - Location: {x: 20, y: 6}
-      Time: 13
-    - Location: {x: 20, y: -6}
-      Time: 13
-    - Location: {x: 20, y: 6}
-      Time: 15
-    - Location: {x: 20, y: -6}
-      Time: 15
-    - Location: {x: 20, y: 6}
-      Time: 17
-    - Location: {x: 20, y: -6}
-      Time: 17
-    - Location: {x: 20, y: 6}
-      Time: 19
-    - Location: {x: 20, y: -6}
-      Time: 19
-    - Location: {x: 20, y: 6}
-      Time: 21
-    - Location: {x: 20, y: -6}
-      Time: 21
-  - Prefab: {fileID: 114000013271819086, guid: 5959ed90b0e7e4b40b7101f1bb4c330b, type: 2}
+    - Location: {x: 20, y: 1}
+      Time: 12
+  - Prefab: {fileID: 114000011110259194, guid: 5604f9f3f877f324e966e085a104497e, type: 2}
     Data:
-    - Location: {x: 20, y: 8}
-      Time: 28
-    - Location: {x: 20, y: -8}
-      Time: 28
-    - Location: {x: 20, y: 8}
-      Time: 28.2
-    - Location: {x: 20, y: -8}
-      Time: 28.2
-    - Location: {x: 20, y: 8}
-      Time: 28.4
-    - Location: {x: 20, y: -8}
-      Time: 28.4
-    - Location: {x: 20, y: 8}
-      Time: 28.6
-    - Location: {x: 20, y: -8}
-      Time: 28.6
-    - Location: {x: 20, y: 8}
-      Time: 28.8
-    - Location: {x: 20, y: -8}
-      Time: 28.8
-    - Location: {x: 20, y: 8}
-      Time: 29
-    - Location: {x: 20, y: -8}
-      Time: 29
-    - Location: {x: 20, y: 8}
-      Time: 29.2
-    - Location: {x: 20, y: -8}
-      Time: 29.2
-    - Location: {x: 20, y: 8}
-      Time: 29.4
-    - Location: {x: 20, y: -8}
-      Time: 29.4
-    - Location: {x: 20, y: 8}
-      Time: 29.6
-    - Location: {x: 20, y: -8}
-      Time: 29.6
-    - Location: {x: 20, y: 8}
-      Time: 29.8
-    - Location: {x: 20, y: -8}
-      Time: 29.8
+    - Location: {x: 20, y: -1}
+      Time: 3.5
+    - Location: {x: 20, y: -1}
+      Time: 4.5
+    - Location: {x: 20, y: -1}
+      Time: 5.5
+    - Location: {x: 20, y: -1}
+      Time: 6.5
+    - Location: {x: 20, y: -1}
+      Time: 7.5
+    - Location: {x: 20, y: -1}
+      Time: 8.5
+    - Location: {x: 20, y: -1}
+      Time: 9.5
+    - Location: {x: 20, y: -1}
+      Time: 10.5
+    - Location: {x: 20, y: -1}
+      Time: 11.5
+    - Location: {x: 20, y: -1}
+      Time: 12.5
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -146,12 +106,3 @@ MonoBehaviour:
       Time: 0
     - Location: {x: 16, y: -6}
       Time: 0
-  - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
-    Duration: 3
-    FadeInDuration: 1
-    FadeOutDuration: 1
-    Data:
-    - Location: {x: 16, y: 8}
-      Time: 23
-    - Location: {x: 16, y: -8}
-      Time: 23
