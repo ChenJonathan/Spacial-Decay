@@ -15,7 +15,9 @@ public partial class Enemy : DanmakuCollider
     [HideInInspector]
     public int Health;
     
-    public bool FacePlayer;
+    [SerializeField]
+    protected bool FacePlayer;
+    protected Quaternion TargetRotation;
     
     private GameObject healthBar;
     private float healthBarSize = 1.0f;
@@ -43,12 +45,19 @@ public partial class Enemy : DanmakuCollider
         StartCoroutine(Run());
     }
 
+    protected virtual IEnumerator Run()
+    {
+        return null;
+    }
+
     public virtual void FixedUpdate()
     {
         if(!LevelController.Singleton.Paused)
         {
             if(FacePlayer)
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position), Time.fixedDeltaTime * 4);
+                TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
+            if(TargetRotation != null)
+                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 4);
         }
     }
 
@@ -65,11 +74,6 @@ public partial class Enemy : DanmakuCollider
         }
     }
 
-    protected virtual IEnumerator Run()
-    {
-        return null;
-    }
-
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -79,6 +83,11 @@ public partial class Enemy : DanmakuCollider
     public void OnDestroy()
     {
         Die();
+    }
+
+    protected void Rotate(float degrees)
+    {
+        TargetRotation *= Quaternion.Euler(new Vector3(0, 0, degrees));
     }
 
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)

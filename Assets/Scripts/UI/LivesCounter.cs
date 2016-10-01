@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using DanmakU;
 using System.Collections;
 
-public class LivesCounter : MonoBehaviour {
-
+public class LivesCounter : MonoBehaviour
+{
     [SerializeField]
     private GameObject heartPrefab;
     [SerializeField]
@@ -20,7 +20,7 @@ public class LivesCounter : MonoBehaviour {
 
     private GameObject[] livesCounter;
     
-	void Start()
+	public void Start()
     {
         int maxLives = Player.maxLives;
         heartSize = heartPrefab.GetComponent<RectTransform>().sizeDelta.x;

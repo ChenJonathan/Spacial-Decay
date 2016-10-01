@@ -183,10 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 114000010057563132, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
-    - {fileID: 114000013255767860, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
     - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-    - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 406163933}
     serializedStrings:
       keys:
@@ -205,8 +202,8 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
+      - '{"$content":[2]}'
+      - 3
       - true
       - 1000
       - 100
@@ -228,10 +225,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   waves:
-  - {fileID: 114000010057563132, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
-  - {fileID: 114000013255767860, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
   - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-  - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
   waveMessage: {fileID: 406163933}
 --- !u!4 &174129276
 Transform:

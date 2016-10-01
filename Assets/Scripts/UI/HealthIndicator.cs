@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthIndicator : MonoBehaviour {
-    
+public class HealthIndicator : MonoBehaviour
+{
     [SerializeField]
     private int duration = 3;
     [SerializeField]
@@ -18,7 +18,7 @@ public class HealthIndicator : MonoBehaviour {
 
     private bool active;
     
-    void Awake()
+    public void Awake()
     {
         health = 1.0f;
 
@@ -30,7 +30,7 @@ public class HealthIndicator : MonoBehaviour {
         SetVisibility(0);
     }
 	
-	void Update()
+	public void Update()
     {
         transform.parent.rotation = Quaternion.identity;
         transform.parent.position = transform.parent.parent.position + new Vector3(0, -1.5f, 0);

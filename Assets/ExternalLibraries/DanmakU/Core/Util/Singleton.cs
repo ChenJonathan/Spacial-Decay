@@ -19,6 +19,7 @@ namespace DanmakU {
 	public abstract class Singleton<T> : BetterBehaviour where T : Singleton<T> {
 
 		private static T instance;
+        [SerializeField]
 		private bool keepBetweenScenes = true;
 
 		public static T Instance {
@@ -41,7 +42,7 @@ namespace DanmakU {
 			}
 			if(instance != null) {
 				if(instance.destroyNewInstances) {
-					Destroy (this);
+					Destroy (gameObject);
 					return;
 				} else {
 					Destroy (instance);
