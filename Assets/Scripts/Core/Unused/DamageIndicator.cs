@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class DamageIndicator : MonoBehaviour {
-    
+public class DamageIndicator : MonoBehaviour
+{
     [SerializeField]
     private int scrollSpeed = 2;
     [SerializeField]
