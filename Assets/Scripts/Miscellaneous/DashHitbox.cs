@@ -19,7 +19,7 @@ public class DashHitbox : MonoBehaviour
     /// Called when the hitbox first collides with an object. Handles collision with enemies.
     /// </summary>
     /// <param name="collider">The collider that the player collided with</param>
-    void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         Enemy enemy = collider.gameObject.GetComponent<Enemy>();
         if(enemy != null)
@@ -39,7 +39,7 @@ public class DashHitbox : MonoBehaviour
     /// Called repeatedly when the hitbox continues to collide with an object. Handles collision with enemies.
     /// </summary>
     /// <param name="collider">The collider that the player collided with</param>
-    void OnTriggerStay2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
         Enemy enemy = collider.gameObject.GetComponent<Enemy>();
         if(enemy != null && !player.IsDashing && !player.IsInvincible)

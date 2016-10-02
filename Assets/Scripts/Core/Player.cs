@@ -271,7 +271,7 @@ public class Player : DanmakuCollider
     /// <summary>
     /// Coroutine to make the player invincible for some time. Also handles the flashing effect.
     /// </summary>
-    public IEnumerator setInvincible(float time)
+    private IEnumerator setInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;

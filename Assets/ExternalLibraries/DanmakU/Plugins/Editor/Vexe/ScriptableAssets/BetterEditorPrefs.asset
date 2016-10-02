@@ -31,6 +31,6 @@ MonoBehaviour:
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: 804
+  _id: -1
   dbg: 0
-  _dirty: 106
+  _dirty: 0

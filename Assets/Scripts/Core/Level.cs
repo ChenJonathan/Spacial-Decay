@@ -56,14 +56,22 @@ public class Level : MonoBehaviour
             line.SetColors(color, color);
         }
 
-        highlightEffect.Play();
+        Highlight();
         clickable = true;
+    }
+
+    /// <summary>
+    /// Starts the particle effect to indicate that the level is newly unlocked.
+    /// </summary>
+    public void Highlight()
+    {
+        highlightEffect.Play();
     }
 
     /// <summary>
     /// Called when the mouse is on top of the object. Starts the corresponding level on click.
     /// </summary>
-    public void OnMouseOver()
+    private void OnMouseOver()
     {
         if(Input.GetMouseButtonDown(0) && clickable)
         {

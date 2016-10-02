@@ -14,6 +14,7 @@ public class GameController : Singleton<GameController>, IPausable
     public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
+    private List<Level> newLevels;
     
     /// <summary>
     /// Returns the only instance of the GameController.
@@ -47,6 +48,7 @@ public class GameController : Singleton<GameController>, IPausable
             DontDestroyOnLoad(gameObject);
             unlockedLevels = new List<Level>();
             unlockedLevels.Add(StartLevel);
+            newLevels = new List<Level>();
             StartLevel.gameObject.SetActive(true);
             StartLevel.Appear();
             SceneManager.sceneLoaded += OnLoad;
@@ -60,6 +62,7 @@ public class GameController : Singleton<GameController>, IPausable
     public void LoadLevel(Level level)
     {
         GameController.Singleton.CurrentLevel = level;
+        newLevels.Remove(level);
         SceneManager.LoadScene(level.Scene);
     }
 
@@ -80,6 +83,12 @@ public class GameController : Singleton<GameController>, IPausable
                     Destroy(probe.gameObject);
             }
 
+            // Highlight unplayed levels
+            foreach(Level level in newLevels)
+            {
+                level.Highlight();
+            }
+
             // Unlock new levels
             if(CurrentLevel != null)
             {
@@ -88,6 +97,9 @@ public class GameController : Singleton<GameController>, IPausable
                     if(!unlockedLevels.Contains(level))
                     {
                         unlockedLevels.Add(level);
+                        newLevels.Add(level);
+
+                        // Set line between the two levels
                         level.GetComponent<LineRenderer>().SetPosition(0, CurrentLevel.transform.position);
                         level.GetComponent<LineRenderer>().SetPosition(1, level.transform.position);
 
