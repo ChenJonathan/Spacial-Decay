@@ -23,6 +23,7 @@ public class Level : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         line = GetComponent<LineRenderer>();
         highlightEffect = GetComponentInChildren<ParticleSystem>();
+        highlightEffect.startColor = sprite.color;
         clickable = true;
     }
 

@@ -13,6 +13,8 @@ public partial class Enemy : DanmakuCollider
     public DanmakuField Field;
     [HideInInspector]
     public Wave Wave;
+    [HideInInspector]
+    public int Difficulty;
     
     // Enemy health values
     public int MaxHealth;
@@ -40,6 +42,7 @@ public partial class Enemy : DanmakuCollider
         Player = LevelController.Singleton.Player;
         Field = LevelController.Singleton.Field;
         Wave = LevelController.Singleton.Wave;
+        Difficulty = Wave.Difficulty;
         TagFilter = "Friendly";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);

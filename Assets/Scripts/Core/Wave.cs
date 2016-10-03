@@ -24,6 +24,13 @@ public class Wave : MonoBehaviour
     // Time elapsed since the start of the wave
     private float time;
 
+    // Difficulty of the wave, from 0 to 2
+    private int difficulty;
+    public int Difficulty
+    {
+        get { return difficulty; }
+    }
+
     /// <summary>
     /// Contains the time and location to spawn an object.
     /// </summary>

@@ -12,7 +12,7 @@ public class Scroll : MonoBehaviour
     private float currentCameraSpeed;
 
     private readonly float CAMERA_START_SPEED = 0.2f;
-    private readonly float CAMERA_ACCELERATION = 0.2f;
+    private readonly float CAMERA_ACCELERATION = 0.4f;
     private readonly float CAMERA_MAX_Y = 57.6269100001f;
 
     /// <summary>
