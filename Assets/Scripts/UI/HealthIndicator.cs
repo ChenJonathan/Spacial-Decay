@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class HealthIndicator : MonoBehaviour {
-    
+/// <summary>
+/// A visual display for enemy health. Only appears briefly when the enemy is damaged.
+/// </summary>
+public class HealthIndicator : MonoBehaviour
+{
     [SerializeField]
     private int duration = 3;
     [SerializeField]
@@ -16,9 +18,10 @@ public class HealthIndicator : MonoBehaviour {
 
     private float health;
 
-    private bool active;
-    
-    void Awake()
+    /// <summary>
+    /// Called on initialization (before Start). Handles initialization.
+    /// </summary>
+    public void Awake()
     {
         health = 1.0f;
 
@@ -29,8 +32,11 @@ public class HealthIndicator : MonoBehaviour {
         
         SetVisibility(0);
     }
-	
-	void Update()
+
+    /// <summary>
+    /// Updates the display by fading it out over time.
+    /// </summary>
+    public void Update()
     {
         transform.parent.rotation = Quaternion.identity;
         transform.parent.position = transform.parent.parent.position + new Vector3(0, -1.5f, 0);
@@ -51,6 +57,10 @@ public class HealthIndicator : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Makes the display fully visible.
+    /// </summary>
+    /// <param name="healthProportion">Fraction of health remaining</param>
     public void Activate(float healthProportion)
     {
         health = healthProportion;
@@ -58,6 +68,10 @@ public class HealthIndicator : MonoBehaviour {
         remaining = duration;
     }
 
+    /// <summary>
+    /// Sets the visibility of the display.
+    /// </summary>
+    /// <param name="value">How visible the display should be</param>
     private void SetVisibility(float value)
     {
         Color bgColor = bgRenderer.color;

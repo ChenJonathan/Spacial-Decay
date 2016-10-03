@@ -1,10 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
 using DanmakU;
 
+/// <summary>
+/// Utility functions involving the boundary box.
+/// </summary>
 public class BoundsUtil
 {
-	public static Vector2 VerifyBounds(Vector2 objCenter, Bounds2D obj, Bounds2D field)
+    /// <summary>
+    /// Makes sure that the <paramref name="objCenter"/> specified will allow the <paramref name="obj"/> to remain in the <paramref name="field"/>.
+    /// Returns the original <paramref name="objCenter"/> if it is valid or a new location otherwise.
+    /// </summary>
+    /// <param name="objCenter">The location of the object's center</param>
+    /// <param name="obj">The object's bounds</param>
+    /// <param name="field">The bounding box to fit the object in</param>
+    /// <returns>The location to move the object to</returns>
+    public static Vector2 VerifyBounds(Vector2 objCenter, Bounds2D obj, Bounds2D field)
     {
         Vector2 maxOffset = field.Max - (objCenter + obj.Extents);
         Vector2 minOffset = field.Min - (objCenter - obj.Extents);

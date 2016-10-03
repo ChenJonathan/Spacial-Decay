@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using System.Collections.Generic;
 
-public partial class MapController : DanmakuGameController
+public class MapController : DanmakuGameController
 {
     [SerializeField]
     private DanmakuField field;

@@ -22,7 +22,7 @@ public class DarkEnemy : Enemy
         fireData.WithController(new AccelerationController(3));
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-        transform.RotateAround(transform.position, transform.forward, 180f);
+        SetRotation(0);
     }
 
     public void Update()
@@ -40,17 +40,19 @@ public class DarkEnemy : Enemy
 
     public override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(!LevelController.Singleton.Paused)
         {
             if(transform.position.y <= -8)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
-                transform.RotateAround(transform.position, transform.forward, 180f);
+                SetRotation(0);
             }
             else if(transform.position.y >= 8)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-                transform.RotateAround(transform.position, transform.forward, 180f);
+                SetRotation(180);
             }
         }
     }

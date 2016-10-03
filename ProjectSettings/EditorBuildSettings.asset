@@ -4,4 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level Select.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 4.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 5.unity
+  - enabled: 1
+    path: Assets/Scenes/Level 6.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 1.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 2.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 3.unity
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
