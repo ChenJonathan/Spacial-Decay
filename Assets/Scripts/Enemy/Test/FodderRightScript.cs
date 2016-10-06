@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class FodderScript : Enemy
+public class FodderRightScript : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -45,7 +45,7 @@ public class FodderScript : Enemy
             {
                 Die();
             }
-            Vector3 direction = new Vector3(-1.0f, 0.0f);
+            Vector3 direction = new Vector3(1.0f, 0.0f);
             GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
         }
 

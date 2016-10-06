@@ -54,95 +54,55 @@ MonoBehaviour:
   EnemyChains:
   - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
-    - Location: {x: 20, y: 6}
-      Time: 3
     - Location: {x: 20, y: -6}
       Time: 3
-    - Location: {x: 20, y: 6}
-      Time: 5
     - Location: {x: 20, y: -6}
       Time: 5
-    - Location: {x: 20, y: 6}
-      Time: 7
     - Location: {x: 20, y: -6}
       Time: 7
-    - Location: {x: 20, y: 6}
-      Time: 9
     - Location: {x: 20, y: -6}
       Time: 9
-    - Location: {x: 20, y: 6}
-      Time: 11
     - Location: {x: 20, y: -6}
       Time: 11
-    - Location: {x: 20, y: 6}
-      Time: 13
     - Location: {x: 20, y: -6}
       Time: 13
-    - Location: {x: 20, y: 6}
-      Time: 15
     - Location: {x: 20, y: -6}
       Time: 15
-    - Location: {x: 20, y: 6}
-      Time: 17
     - Location: {x: 20, y: -6}
       Time: 17
-    - Location: {x: 20, y: 6}
-      Time: 19
     - Location: {x: 20, y: -6}
       Time: 19
-    - Location: {x: 20, y: 6}
-      Time: 21
     - Location: {x: 20, y: -6}
       Time: 21
-  - Prefab: {fileID: 114000013271819086, guid: 5959ed90b0e7e4b40b7101f1bb4c330b, type: 2}
+  - Prefab: {fileID: 114000013179431626, guid: d3cfa9ceb558fdf4780160d01becb6a0, type: 2}
     Data:
-    - Location: {x: 20, y: 8}
-      Time: 28
-    - Location: {x: 20, y: -8}
-      Time: 28
-    - Location: {x: 20, y: 8}
-      Time: 28.2
-    - Location: {x: 20, y: -8}
-      Time: 28.2
-    - Location: {x: 20, y: 8}
-      Time: 28.4
-    - Location: {x: 20, y: -8}
-      Time: 28.4
-    - Location: {x: 20, y: 8}
-      Time: 28.6
-    - Location: {x: 20, y: -8}
-      Time: 28.6
-    - Location: {x: 20, y: 8}
-      Time: 28.8
-    - Location: {x: 20, y: -8}
-      Time: 28.8
-    - Location: {x: 20, y: 8}
-      Time: 29
-    - Location: {x: 20, y: -8}
-      Time: 29
-    - Location: {x: 20, y: 8}
-      Time: 29.2
-    - Location: {x: 20, y: -8}
-      Time: 29.2
-    - Location: {x: 20, y: 8}
-      Time: 29.4
-    - Location: {x: 20, y: -8}
-      Time: 29.4
-    - Location: {x: 20, y: 8}
-      Time: 29.6
-    - Location: {x: 20, y: -8}
-      Time: 29.6
-    - Location: {x: 20, y: 8}
-      Time: 29.8
-    - Location: {x: 20, y: -8}
-      Time: 29.8
+    - Location: {x: -20, y: 6}
+      Time: 3
+    - Location: {x: -20, y: 6}
+      Time: 5
+    - Location: {x: -20, y: 6}
+      Time: 7
+    - Location: {x: -20, y: 6}
+      Time: 9
+    - Location: {x: -20, y: 6}
+      Time: 11
+    - Location: {x: -20, y: 6}
+      Time: 13
+    - Location: {x: -20, y: 6}
+      Time: 15
+    - Location: {x: -20, y: 6}
+      Time: 17
+    - Location: {x: -20, y: 6}
+      Time: 19
+    - Location: {x: -20, y: 6}
+      Time: 21
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 6}
+    - Location: {x: -16, y: 6}
       Time: 0
     - Location: {x: 16, y: -6}
       Time: 0

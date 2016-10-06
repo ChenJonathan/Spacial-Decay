@@ -54,55 +54,19 @@ MonoBehaviour:
   EnemyChains:
   - Prefab: {fileID: 114000013064677850, guid: a109618ca4908774a8ff88f9aac65fd7, type: 2}
     Data:
-    - Location: {x: 20, y: 1}
+    - Location: {x: 18, y: 11}
       Time: 3
-    - Location: {x: 20, y: 1}
-      Time: 4
-    - Location: {x: 20, y: 1}
-      Time: 5
-    - Location: {x: 20, y: 1}
-      Time: 6
-    - Location: {x: 20, y: 1}
-      Time: 7
-    - Location: {x: 20, y: 1}
-      Time: 8
-    - Location: {x: 20, y: 1}
-      Time: 9
-    - Location: {x: 20, y: 1}
-      Time: 10
-    - Location: {x: 20, y: 1}
-      Time: 11
-    - Location: {x: 20, y: 1}
-      Time: 12
   - Prefab: {fileID: 114000011110259194, guid: 5604f9f3f877f324e966e085a104497e, type: 2}
     Data:
-    - Location: {x: 20, y: -1}
-      Time: 3.5
-    - Location: {x: 20, y: -1}
-      Time: 4.5
-    - Location: {x: 20, y: -1}
-      Time: 5.5
-    - Location: {x: 20, y: -1}
-      Time: 6.5
-    - Location: {x: 20, y: -1}
-      Time: 7.5
-    - Location: {x: 20, y: -1}
-      Time: 8.5
-    - Location: {x: 20, y: -1}
-      Time: 9.5
-    - Location: {x: 20, y: -1}
-      Time: 10.5
-    - Location: {x: 20, y: -1}
-      Time: 11.5
-    - Location: {x: 20, y: -1}
-      Time: 12.5
+    - Location: {x: -18, y: -10}
+      Time: 3
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 6}
+    - Location: {x: 16, y: 9}
       Time: 0
-    - Location: {x: 16, y: -6}
+    - Location: {x: -16, y: -9}
       Time: 0
