@@ -42,12 +42,12 @@ public class Probe : MonoBehaviour
         {
             yield return new WaitForSeconds(0.005f);
             
-            color.a += 0.05f * direction;
+            color.a += 0.1f * direction;
             sprite.color = color;
 
             if(color.a <= 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, totalDistance / 7);
+                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, totalDistance / 6);
                 direction = 1;
 
                 if(transform.position == level.transform.position)

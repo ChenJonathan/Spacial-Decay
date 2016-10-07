@@ -25,8 +25,10 @@ public class DarkEnemy : Enemy
         SetRotation(0);
     }
 
-    public void Update()
+    public override void Update()
     {
+        base.Update();
+
         if(!LevelController.Singleton.Paused)
         {
             fireCooldown -= Time.deltaTime;

@@ -63,6 +63,9 @@ public class Player : DanmakuCollider
     [SerializeField]
     private float rotateSpeed = 18;
 
+    // Storage for player velocity when the level is paused
+    private Vector3 oldVelocity;
+
     // Dash selection line colors
     [SerializeField]
     private Color dashStartActive;
@@ -127,7 +130,24 @@ public class Player : DanmakuCollider
     /// </summary>
     public void Update()
     {
-	    if(!LevelController.Singleton.Paused)
+        // Stores the player's velocity when the level is paused
+        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
+        {
+            oldVelocity = GetComponent<Rigidbody2D>().velocity;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+            // Cancel dash targeting on pause
+            selecting = false;
+            SetMoveTarget(field.WorldPoint(mousePos));
+            dashRenderer.enabled = false;
+        }
+        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
+        {
+            GetComponent<Rigidbody2D>().velocity = oldVelocity;
+            oldVelocity = Vector3.zero;
+        }
+
+        if(!LevelController.Singleton.Paused)
         {
             HandleInput();
             

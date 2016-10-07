@@ -26,6 +26,9 @@ public partial class Enemy : DanmakuCollider
     protected bool FacePlayer; // Enemy constantly rotates toward the player if true - overrides TargetRotation
     protected Quaternion TargetRotation; // Enemy constantly rotates toward this rotation if it is not null
 
+    // Storage for enemy velocity when the level is paused
+    private Vector3 oldVelocity;
+
     // Enemy health bar reference and size
     private GameObject healthBar;
     private float healthBarSize = 1.0f;
@@ -66,6 +69,21 @@ public partial class Enemy : DanmakuCollider
     protected virtual IEnumerator Run()
     {
         return null;
+    }
+
+    public virtual void Update()
+    {
+        // Stores the enemy's velocity when the level is paused
+        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
+        {
+            oldVelocity = GetComponent<Rigidbody2D>().velocity;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
+        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
+        {
+            GetComponent<Rigidbody2D>().velocity = oldVelocity;
+            oldVelocity = Vector3.zero;
+        }
     }
 
     /// <summary>

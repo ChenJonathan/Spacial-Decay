@@ -21,9 +21,11 @@ public class FodderRightScript : Enemy
 
     }
 
-    public void Update()
+    public override void Update()
     {
-        if (!LevelController.Singleton.Paused)
+        base.Update();
+
+        if(!LevelController.Singleton.Paused)
         {
             fireCooldown -= Time.deltaTime;
             if (fireCooldown <= 0)
