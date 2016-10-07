@@ -9,6 +9,7 @@ TagManager:
   - Counter
   - Map
   - Level
+  - Select
   layers:
   - Default
   - TransparentFX

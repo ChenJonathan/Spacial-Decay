@@ -11,6 +11,8 @@ public class GameController : Singleton<GameController>, IPausable
     public Level StartLevel;
     [HideInInspector]
     public Level CurrentLevel;
+    [HideInInspector]
+    public int Difficulty;
     public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
@@ -73,7 +75,7 @@ public class GameController : Singleton<GameController>, IPausable
     /// <param name="mode">How the scene was loaded</param>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
-            if(scene.name.Equals("Level Select"))
+        if(scene.name.Equals("Level Select"))
         {
             // Re-enable previously unlocked levels
             foreach(Level level in unlockedLevels)
