@@ -76,10 +76,7 @@ public class Level : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && clickable)
         {
-            if(!DifficultySelect.Instance.gameObject.activeSelf || DifficultySelect.Instance.Level != this)
-                DifficultySelect.Instance.Activate(this);
-            else
-                DifficultySelect.Instance.Deactivate();
+            GameController.Singleton.LoadLevel(this);
         }
     }
 }
