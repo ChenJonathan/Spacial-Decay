@@ -90,7 +90,7 @@ public class Player : DanmakuCollider
     public override void Awake()
     {
         base.Awake();
-        TagFilter = "Enemy";
+        TagFilter = "Enemy|Laser";
 
         // Retrieve references
         field = LevelController.Singleton.Field;
@@ -323,7 +323,8 @@ public class Player : DanmakuCollider
     /// <param name="info">Information about the collision</param>
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        danmaku.Deactivate();
+        if (danmaku.Tag != "Laser")
+            danmaku.Deactivate();
         if(!dashing && !invincible)
         {
             Hit();
