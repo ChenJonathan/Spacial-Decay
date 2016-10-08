@@ -1,64 +1,30 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>
 /// Scroll bars that scroll through the level select vertically when moused over.
 /// </summary>
-public class Scroll : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Scroll : MonoBehaviour
 {
-    // Scroll direction
-    public bool Up;
-
-    private Camera mainCamera;
-    private bool mouseOver;
-    private float currentCameraSpeed;
-
-    private readonly float CAMERA_START_SPEED = 0.2f;
-    private readonly float CAMERA_ACCELERATION = 0.4f;
+    private readonly float CAMERA_SPEED = 2;
     private readonly float CAMERA_MAX_Y = 57.6269100001f;
 
     /// <summary>
-    /// Called on scroll bar instantiation. Handles initialization.
-    /// </summary>
-    public void Awake()
-    {
-        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        mouseOver = false;
-        currentCameraSpeed = CAMERA_START_SPEED;
-    }
-
-    /// <summary>
-    /// Called periodically. Shifts the camera and increases the scroll speed over time if moused over.
+    /// Called periodically. Shifts the camera based on mouse position.
     /// </summary>
     public void Update()
     {
-        if(mouseOver)
+        float border = Screen.height / 4;
+        float y = transform.position.y;
+        if(Input.mousePosition.y > Screen.height - border)
         {
-            mainCamera.transform.position = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.y + (Up ? currentCameraSpeed : -currentCameraSpeed));
-
-            if(mainCamera.transform.position.y < -CAMERA_MAX_Y)
-                mainCamera.transform.position = new Vector2(mainCamera.transform.position.x, -CAMERA_MAX_Y);
-            else if(mainCamera.transform.position.y > CAMERA_MAX_Y)
-                mainCamera.transform.position = new Vector2(mainCamera.transform.position.x, CAMERA_MAX_Y);
-
-            currentCameraSpeed += CAMERA_ACCELERATION * Time.deltaTime;
+            float ratio = Mathf.InverseLerp(Screen.height - border, Screen.height, Input.mousePosition.y);
+            y = Mathf.Clamp(transform.position.y + ratio * ratio * CAMERA_SPEED, -CAMERA_MAX_Y, CAMERA_MAX_Y);
         }
-    }
-
-    /// <summary>
-    /// Called when the mouse first hovers over the scroll bar. Resets the scroll speed.
-    /// </summary>
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        mouseOver = true;
-        currentCameraSpeed = CAMERA_START_SPEED;
-    }
-
-    /// <summary>
-    /// Called when the mouse leaves the scroll bar.
-    /// </summary>
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        mouseOver = false;
+        else if(Input.mousePosition.y < border)
+        {
+            float ratio = Mathf.InverseLerp(border, 0, Input.mousePosition.y);
+            y = Mathf.Clamp(transform.position.y - ratio * ratio * CAMERA_SPEED, -CAMERA_MAX_Y, CAMERA_MAX_Y);
+        }
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }

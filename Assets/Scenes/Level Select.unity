@@ -161,7 +161,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 255841190}
   - 114: {fileID: 255841193}
-  - 114: {fileID: 255841192}
   - 222: {fileID: 255841191}
   m_Layer: 0
   m_Name: ScrollUp
@@ -194,18 +193,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 255841189}
---- !u!114 &255841192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 255841189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8358f504e802f341a560b5366321eed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Up: 1
 --- !u!114 &255841193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,7 +1294,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1193179346}
   - 114: {fileID: 1193179349}
-  - 114: {fileID: 1193179347}
   - 222: {fileID: 1193179348}
   m_Layer: 0
   m_Name: ScrollDown
@@ -1334,18 +1320,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1193179347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1193179345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8358f504e802f341a560b5366321eed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Up: 0
 --- !u!222 &1193179348
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2347,6 +2321,7 @@ GameObject:
   - 92: {fileID: 1637573696}
   - 124: {fileID: 1637573695}
   - 81: {fileID: 1637573694}
+  - 114: {fileID: 1637573699}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2422,6 +2397,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1637573699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1637573693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8358f504e802f341a560b5366321eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1640963585
 Prefab:
   m_ObjectHideFlags: 0
