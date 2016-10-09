@@ -125,7 +125,6 @@ public partial class Enemy : DanmakuCollider
     public virtual void Die()
     {
         Destroy(gameObject);
-        LevelController.Singleton.Wave.UnregisterEnemy(this);
     }
 
     /// <summary>
@@ -133,7 +132,7 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public void OnDestroy()
     {
-        Die();
+        Wave.UnregisterEnemy(this);
     }
 
     #region Rotation methods
