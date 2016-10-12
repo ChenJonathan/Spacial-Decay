@@ -84,6 +84,11 @@ public class LevelController : DanmakuGameController, IPausable
     /// </summary>
     public override void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Paused = !Paused;
+        else if(Input.GetKeyDown(KeyCode.Tab))
+            SceneManager.LoadScene("Level Select");
+
         if(!Paused)
         {
             base.Update();

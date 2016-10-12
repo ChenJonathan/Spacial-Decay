@@ -26,8 +26,10 @@ public class HomingEnemy : Enemy
         fireData.WithController(new AccelerationController(3));
 	}
 	
-	public void Update()
+	public override void Update()
     {
+        base.Update();
+
         if(!LevelController.Singleton.Paused)
         {
             fireCooldown -= Time.deltaTime;

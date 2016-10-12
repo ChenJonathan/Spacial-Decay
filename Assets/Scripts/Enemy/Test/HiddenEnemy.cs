@@ -42,8 +42,10 @@ public class HiddenEnemy : Enemy
         }
 	}
 	
-	public void Update()
+	public override void Update()
     {
+        base.Update();
+
         if(!LevelController.Singleton.Paused)
         {
             time += Time.deltaTime;

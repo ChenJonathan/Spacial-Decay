@@ -126,6 +126,7 @@ public class Wave : MonoBehaviour
         warningQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
 
         time = 0;
+        difficulty = GameController.Singleton.Difficulty;
     }
 
     public void Update()
