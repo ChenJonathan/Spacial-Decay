@@ -284,10 +284,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
+    - {fileID: 11442878, guid: fd1b1dcd956c33f41a9b7f1cb043d259, type: 2}
     - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
+      - DanmakuPrefab warningPrefab
       - DanmakuPrefab bulletPrefab
       - Player Player
       - DanmakuField Field
@@ -300,6 +302,7 @@ MonoBehaviour:
       - string tagFilter
       values:
       - 0
+      - 1
       - null
       - null
       - null
@@ -307,7 +310,7 @@ MonoBehaviour:
       - 100
       - 0
       - false
-      - 1
+      - 2
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -324,4 +327,5 @@ MonoBehaviour:
   Health: 0
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  warningPrefab: {fileID: 11442878, guid: fd1b1dcd956c33f41a9b7f1cb043d259, type: 2}
   bulletPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
