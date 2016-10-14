@@ -106,12 +106,3 @@ MonoBehaviour:
       Time: 0
     - Location: {x: 16, y: -6}
       Time: 0
-  - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
-    Duration: 3
-    FadeInDuration: 1
-    FadeOutDuration: 1
-    Data:
-    - Location: {x: 16, y: 8}
-      Time: 23
-    - Location: {x: 16, y: -8}
-      Time: 23

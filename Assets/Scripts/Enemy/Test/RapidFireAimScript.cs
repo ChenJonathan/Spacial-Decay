@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class RapidFireScript : Enemy
+public class RapidFireAimScript : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -17,20 +17,20 @@ public class RapidFireScript : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(6 + 2 * Difficulty);
-        fireData.WithModifier(new RandomizeAngleModifier(360));
+        fireData.WithSpeed(3 + 3 * Difficulty);
     }
 
     public override void Update()
     {
         base.Update();
 
-        if(!LevelController.Singleton.Paused)
-        {   
+        if (!LevelController.Singleton.Paused)
+        {
             fireCooldown -= Time.deltaTime;
             if (fireCooldown < 0)
             {
                 fireData.Fire();
+                fireCooldown = MAX_FIRE_COOLDOWN;
             }
         }
     }
@@ -46,11 +46,12 @@ public class RapidFireScript : Enemy
             {
                 Vector3 direction = new Vector3(-1.0f, 0.0f);
                 GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
-            } else
+            }
+            else
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f);
             }
-            
+
         }
     }
 }

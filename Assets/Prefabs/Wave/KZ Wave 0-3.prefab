@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000010225391452}
+  m_RootGameObject: {fileID: 1000013141128222}
   m_IsPrefabParent: 1
---- !u!1 &1000010225391452
+--- !u!1 &1000013141128222
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000011614844190}
-  - 114: {fileID: 114000010057563132}
+  - 4: {fileID: 4000013866476222}
+  - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: KZ Wave 0-1
+  m_Name: KZ Wave 0-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000011614844190
+--- !u!4 &4000013866476222
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010225391452}
+  m_GameObject: {fileID: 1000013141128222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,25 +40,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000010057563132
+--- !u!114 &114000013255767860
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010225391452}
+  m_GameObject: {fileID: 1000013141128222}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyChains:
-  - Prefab: {fileID: 114000013064677850, guid: a109618ca4908774a8ff88f9aac65fd7, type: 2}
+  - Prefab: {fileID: 114000013271819086, guid: 5959ed90b0e7e4b40b7101f1bb4c330b, type: 2}
     Data:
-    - Location: {x: 18, y: 10}
+    - Location: {x: 20, y: 0}
       Time: 3
-  - Prefab: {fileID: 114000011110259194, guid: 5604f9f3f877f324e966e085a104497e, type: 2}
+  - Prefab: {fileID: 114000013950007678, guid: 5f974452ca2652943b1a841a4d9a3e24, type: 2}
     Data:
-    - Location: {x: -18, y: -10}
+    - Location: {x: 20, y: 0}
       Time: 3
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -66,7 +66,5 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 9}
-      Time: 0
-    - Location: {x: -16, y: -9}
+    - Location: {x: 16, y: 0}
       Time: 0
