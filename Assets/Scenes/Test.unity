@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 114000013255767860, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
+    - {fileID: 114000013255767860, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
     - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
     - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 406163933}
@@ -227,7 +227,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   waves:
-  - {fileID: 114000013255767860, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
+  - {fileID: 114000013255767860, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
   - {fileID: 0}
   - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
   - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}

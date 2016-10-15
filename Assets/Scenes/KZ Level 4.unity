@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
+    - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
     serializedStrings:
       keys:
       - bool Paused
@@ -222,7 +222,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
+  - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
