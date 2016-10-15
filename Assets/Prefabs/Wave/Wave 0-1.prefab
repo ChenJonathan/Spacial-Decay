@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearEnemiesOnEnd: 0
+  ClearDanmakuOnEnd: 1
   EnemyChains:
   - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
     Data:

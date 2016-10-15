@@ -44,7 +44,7 @@ public class DifficultySelect : Singleton<DifficultySelect>
     {
         if(level != null)
         {
-            transform.position = mainCamera.WorldToScreenPoint(level.transform.position) + new Vector3(0, 200, 0);
+            transform.position = mainCamera.WorldToScreenPoint(level.transform.position) + new Vector3(0, (float)(0.25 * Screen.height), 0);
         }
     }
 

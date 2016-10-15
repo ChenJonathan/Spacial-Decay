@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// <summary>
 /// The overarching controller class that stores data about completed levels.
 /// </summary>
-public class GameController : Singleton<GameController>, IPausable
+public class GameController : Singleton<GameController>
 {
     public Level StartLevel;
     [HideInInspector]
@@ -25,16 +25,6 @@ public class GameController : Singleton<GameController>, IPausable
     public static GameController Singleton
     {
         get { return Instance; }
-    }
-
-    /// <summary>
-    /// Returns whether or not the game is paused.
-    /// </summary>
-    /// <returns>Whether or not the game is paused</returns>
-    public bool Paused
-    {
-        get;
-        set;
     }
 
     /// <summary>

@@ -183,15 +183,14 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 11450628, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-    - {fileID: 406163933}
+    - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
+    - {fileID: 1000010442842560, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     serializedStrings:
       keys:
       - bool Paused
       - DanmakuField field
       - Player playerPrefab
-      - List<Wave> waves
-      - GameObject waveMessage
+      - List<GameObject> events
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -202,8 +201,7 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2]}'
-      - 3
+      - '{"$content":[2,3]}'
       - true
       - 1000
       - 100
@@ -224,9 +222,9 @@ MonoBehaviour:
   angleResolution: 0.1
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-  waves:
-  - {fileID: 11450628, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-  waveMessage: {fileID: 406163933}
+  events:
+  - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
+  - {fileID: 1000010442842560, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -240,80 +238,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!1 &406163933
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 406163936}
-  - 222: {fileID: 406163935}
-  - 114: {fileID: 406163934}
-  m_Layer: 5
-  m_Name: WaveMessage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &406163934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 406163933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 71
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Wave Complete
---- !u!222 &406163935
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 406163933}
---- !u!224 &406163936
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 406163933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 642657038}
-  m_RootOrder: 2
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &470040170
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +387,6 @@ RectTransform:
   m_Children:
   - {fileID: 1453609951}
   - {fileID: 1417255039}
-  - {fileID: 406163936}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
