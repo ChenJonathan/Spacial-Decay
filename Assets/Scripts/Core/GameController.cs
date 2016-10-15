@@ -1,29 +1,35 @@
 ﻿using UnityEngine;
 using DanmakU;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using System.Collections.Generic;
 
-public class GameController : Singleton<GameController>, IPausable
+/// <summary>
+/// The overarching controller class that stores data about completed levels.
+/// </summary>
+public class GameController : Singleton<GameController>
 {
     public Level StartLevel;
     [HideInInspector]
     public Level CurrentLevel;
+    [HideInInspector]
+    public int Difficulty;
     public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
-
+    private List<Level> newLevels;
+    
+    /// <summary>
+    /// Returns the only instance of the GameController.
+    /// </summary>
+    /// <returns>The GameController instance</returns>
     public static GameController Singleton
     {
         get { return Instance; }
     }
 
-    public bool Paused
-    {
-        get;
-        set;
-    }
-
+    /// <summary>
+    /// Called when the GameController is instantiated. Handles game initialization.
+    /// </summary>
     public override void Awake()
     {
         base.Awake();
@@ -34,26 +40,45 @@ public class GameController : Singleton<GameController>, IPausable
             DontDestroyOnLoad(gameObject);
             unlockedLevels = new List<Level>();
             unlockedLevels.Add(StartLevel);
+            newLevels = new List<Level>();
             StartLevel.gameObject.SetActive(true);
             StartLevel.Appear();
             SceneManager.sceneLoaded += OnLoad;
         }
     }
 
+    /// <summary>
+    /// Called by Level objects to load a specific level.
+    /// </summary>
+    /// <param name="level">The level to load</param>
     public void LoadLevel(Level level)
     {
         GameController.Singleton.CurrentLevel = level;
+        newLevels.Remove(level);
         SceneManager.LoadScene(level.Scene);
     }
 
+    /// <summary>
+    /// Called whenever a scene is loaded. Activates and deactivates the Level objects and controls the level unlock animation.
+    /// </summary>
+    /// <param name="scene">The scene that was loaded</param>
+    /// <param name="mode">How the scene was loaded</param>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
-            if(scene.name.Equals("Level Select"))
+        if(scene.name.Equals("Level Select"))
         {
             // Re-enable previously unlocked levels
             foreach(Level level in unlockedLevels)
             {
                 level.gameObject.SetActive(true);
+                foreach(Probe probe in level.GetComponentsInChildren<Probe>())
+                    Destroy(probe.gameObject);
+            }
+
+            // Highlight unplayed levels
+            foreach(Level level in newLevels)
+            {
+                level.Highlight();
             }
 
             // Unlock new levels
@@ -64,6 +89,9 @@ public class GameController : Singleton<GameController>, IPausable
                     if(!unlockedLevels.Contains(level))
                     {
                         unlockedLevels.Add(level);
+                        newLevels.Add(level);
+
+                        // Set line between the two levels
                         level.GetComponent<LineRenderer>().SetPosition(0, CurrentLevel.transform.position);
                         level.GetComponent<LineRenderer>().SetPosition(1, level.transform.position);
 

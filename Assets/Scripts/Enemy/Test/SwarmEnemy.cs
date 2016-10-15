@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using DanmakU;
 
 public class SwarmEnemy : Enemy
@@ -31,8 +30,10 @@ public class SwarmEnemy : Enemy
         rigidbody2d.velocity = new Vector2(direction * 4, 0);
 	}
 	
-	public void Update()
+	public override void Update()
     {
+        base.Update();
+
         if(!LevelController.Singleton.Paused)
         {
             if(moveTimer <= 0)

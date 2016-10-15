@@ -1,23 +1,36 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A space probe that travels to a level, unlocking it.
+/// </summary>
 public class Probe : MonoBehaviour
 {
     private SpriteRenderer sprite;
-    private float distance;
+    private float totalDistance; // Total distance between start location and destination
 
+    /// <summary>
+    /// Called when the probe is instantiated.
+    /// </summary>
     public void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
     }
 
+    /// <summary>
+    /// Sets the probe's destination. Call this immediately after instantiating the probe.
+    /// </summary>
+    /// <param name="level">The level object to travel towards</param>
     public void SetDestination(Level level)
     {
-        distance = (level.transform.position - transform.position).magnitude;
+        totalDistance = (level.transform.position - transform.position).magnitude;
         StartCoroutine(Travel(level));
     }
 
+    /// <summary>
+    /// Coroutine to move the probe towards its destination.
+    /// </summary>
+    /// <param name="warning">The level object to travel towards</param>
     public IEnumerator Travel(Level level)
     {
         int direction = 1;
@@ -29,12 +42,12 @@ public class Probe : MonoBehaviour
         {
             yield return new WaitForSeconds(0.005f);
             
-            color.a += 0.05f * direction;
+            color.a += 0.1f * direction;
             sprite.color = color;
 
             if(color.a <= 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, distance / 7);
+                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, totalDistance / 6);
                 direction = 1;
 
                 if(transform.position == level.transform.position)

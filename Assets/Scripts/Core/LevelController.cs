@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using DanmakU;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Controls the level, calling events sequentially.
+/// </summary>
 public class LevelController : DanmakuGameController, IPausable
 {
+    // Field to spawn the bullets in
     [SerializeField]
     private DanmakuField field;
     public DanmakuField Field
@@ -13,6 +16,7 @@ public class LevelController : DanmakuGameController, IPausable
         get { return field; }
     }
 
+    // The player prefab to be instantiated
     [SerializeField]
     private Player playerPrefab;
     private Player player;
@@ -21,28 +25,38 @@ public class LevelController : DanmakuGameController, IPausable
         get { return player; }
     }
 
+    // List of events in order
     [SerializeField]
-    private List<Wave> waves;
-    private Wave currentWave;
-    public Wave Wave
+    private List<GameObject> events;
+    private GameObject currentEvent; // Current wave
+    public GameObject Event
     {
-        get { return currentWave; }
+        get { return currentEvent; }
     }
-    private int waveCount;
+    private int eventCount; // Current event number
 
-    public GameObject waveMessage;
-
+    /// <summary>
+    /// Returns the only instance of the LevelController.
+    /// </summary>
+    /// <returns>The LevelController instance</returns>
     public static LevelController Singleton
     {
         get { return (LevelController)Instance; }
     }
 
+    /// <summary>
+    /// Returns whether or not the game is paused.
+    /// </summary>
+    /// <returns>Whether or not the game is paused</returns>
     public bool Paused
     {
         get;
         set;
     }
 
+    /// <summary>
+    /// Called when the LevelController is instantiated (before Start). Instantiates the player.
+    /// </summary>
     public override void Awake()
     {
         base.Awake();
@@ -52,59 +66,55 @@ public class LevelController : DanmakuGameController, IPausable
         player.transform.parent = Field.transform;
     }
 
+    /// <summary>
+    /// Called when the LevelController is instantiated. Starts the first wave.
+    /// </summary>
     public void Start()
     {
-        waveCount = 0;
-        StartWave();
+        eventCount = 0;
+        StartEvent();
     }
 
+    /// <summary>
+    /// Called periodically. Updates bullets.
+    /// </summary>
     public override void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Paused = !Paused;
+        else if(Input.GetKeyDown(KeyCode.Tab))
+            SceneManager.LoadScene("Level Select");
+
         if(!Paused)
         {
             base.Update();
         }
     }
 
-    public void StartWave()
+    /// <summary>
+    /// Instantiates the current event.
+    /// </summary>
+    public void StartEvent()
     {
-        currentWave = Instantiate(waves[waveCount]);
-        currentWave.transform.parent = transform;
+        currentEvent = Instantiate(events[eventCount]);
+        currentEvent.transform.SetParent(transform);
     }
 
-    public void EndWave()
+    /// <summary>
+    /// Called when the current event is completed. Shows the wave completion message.
+    /// </summary>
+    public void EndEvent()
     {
-        Destroy(currentWave.gameObject);
-        waveCount++;
+        Destroy(currentEvent.gameObject);
+        eventCount++;
 
-        StartCoroutine(ShowWaveMessage());
-    }
-
-    private IEnumerator ShowWaveMessage()
-    {
-        CanvasRenderer messageRender = waveMessage.GetComponent<CanvasRenderer>();
-        waveMessage.SetActive(true);
-
-        for(float a = 0f; a <= 1f; a += 0.01f)
-        {
-            messageRender.SetAlpha(a);
-            yield return null;
-        }
-        yield return new WaitForSeconds(2);
-        for(float a = 1f; a >= 0f; a -= 0.01f)
-        {
-            messageRender.SetAlpha(a);
-            yield return null;
-        }
-
-        waveMessage.SetActive(false);
-        if(waveCount == waves.Count)
+        if(eventCount == events.Count)
         {
             SceneManager.LoadScene("Level Select");
         }
         else
         {
-            StartWave();
+            StartEvent();
         }
     }
 }

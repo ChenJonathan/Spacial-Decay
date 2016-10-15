@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using DanmakU;
-using System.Collections;
 
+/// <summary>
+/// Visual display for the player's dash charges.
+/// </summary>
 public class DashCounter : MonoBehaviour
 {
     [SerializeField]
@@ -14,12 +14,15 @@ public class DashCounter : MonoBehaviour
     private float orbSize;
 
     [SerializeField]
-    private float gap = 6;
+    private float gap = 6; // Space between orbs
 
     private GameObject[] orbsCounterActive;
     private GameObject[] orbsCounterInactive;
 
-    void Start()
+    /// <summary>
+    /// Called on instantiation. Handles initialization.
+    /// </summary>
+    public void Start()
     {
         orbSize = orbActivePrefab.GetComponent<RectTransform>().sizeDelta.x;
         RectTransform rt = GetComponent<RectTransform>();
@@ -44,6 +47,10 @@ public class DashCounter : MonoBehaviour
         UpdateCounter(0);
     }
 
+    /// <summary>
+    /// Updates the counter with a new number of active dash charges.
+    /// </summary>
+    /// <param name="orbs">The number of active dash charges</param>
     public void UpdateCounter(int orbs)
     {
         orbs = Mathf.Max(orbs, 0);
