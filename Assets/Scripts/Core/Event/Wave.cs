@@ -2,19 +2,42 @@
 using System.Collections.Generic;
 using DanmakU;
 
+/// <summary>
+/// A fragment of a level. Contains lists of enemies and warnings to spawn.
+/// </summary>
 public class Wave : MonoBehaviour
 {
+    // Wave options
+    public bool ClearEnemiesOnEnd;
+    public bool ClearDanmakuOnEnd;
+
+    // Lists of enemies and warnings ordered by prefab
     public List<EnemyChain> EnemyChains;
     public List<WarningChain> WarningChains;
 
+    // Queues to spawn objects sorted by time
     private List<EnemyData> enemyQueue;
     private List<WarningData> warningQueue;
+
+    // Active enemies
     private List<Enemy> enemies;
 
+    // The field that the bullets are spawned in
     private DanmakuField field;
 
+    // Time elapsed since the start of the wave
     private float time;
 
+    // Difficulty of the wave, from 0 to 2
+    private int difficulty;
+    public int Difficulty
+    {
+        get { return difficulty; }
+    }
+
+    /// <summary>
+    /// Contains the time and location to spawn an object.
+    /// </summary>
     [System.Serializable]
     public struct SpawnData
     {
@@ -22,6 +45,9 @@ public class Wave : MonoBehaviour
         public float Time;
     }
 
+    /// <summary>
+    /// Contains data about a specific enemy and spawn time.
+    /// </summary>
     [System.Serializable]
     public struct EnemyData
     {
@@ -29,6 +55,9 @@ public class Wave : MonoBehaviour
         public SpawnData Data;
     }
 
+    /// <summary>
+    /// Contains data about a specific enemy and the times and locations to spawn it.
+    /// </summary>
     [System.Serializable]
     public struct EnemyChain
     {
@@ -36,6 +65,9 @@ public class Wave : MonoBehaviour
         public List<SpawnData> Data;
     }
 
+    /// <summary>
+    /// Contains data about a specific warning and spawn time.
+    /// </summary>
     [System.Serializable]
     public struct WarningData
     {
@@ -46,6 +78,9 @@ public class Wave : MonoBehaviour
         public SpawnData Data;
     }
 
+    /// <summary>
+    /// Contains data about a specific warning and the times and locations to spawn it.
+    /// </summary>
     [System.Serializable]
     public struct WarningChain
     {
@@ -56,7 +91,7 @@ public class Wave : MonoBehaviour
         public List<SpawnData> Data;
     }
 
-    void Start()
+    public void Start()
     {
         field = ((LevelController)LevelController.Instance).Field;
         enemyQueue = new List<EnemyData>();
@@ -95,19 +130,17 @@ public class Wave : MonoBehaviour
         warningQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
 
         time = 0;
+        difficulty = GameController.Singleton.Difficulty;
     }
 
-    void Update()
+    public void Update()
     {
         time += Time.deltaTime;
         if(enemyQueue.Count == 0)
         {
             if(enemies.Count == 0)
             {
-                Danmaku.DeactivateAllImmediate();
-                ClearEnemies();
-
-                LevelController.Singleton.EndWave();
+                End();
             }
         }
         else
@@ -125,11 +158,22 @@ public class Wave : MonoBehaviour
         }
     }
 
+    public void End()
+    {
+        if(ClearEnemiesOnEnd)
+            ClearEnemies();
+        if(ClearDanmakuOnEnd)
+            Danmaku.DeactivateAllImmediate();
+
+        LevelController.Singleton.EndEvent();
+
+    }
+
     /// <summary>
     /// Spawns an enemy.
     /// </summary>
-    /// <param name="enemy"></param>
-    /// <returns></returns>
+    /// <param name="enemy">The enemy prefab to spawn</param>
+    /// <returns>The enemy that was spawned</returns>
     public Enemy SpawnEnemy(EnemyData enemy)
     {
         Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Data.Location, Quaternion.identity);
@@ -141,8 +185,8 @@ public class Wave : MonoBehaviour
     /// <summary>
     /// Spawns a warning message.
     /// </summary>
-    /// <param name="warning"></param>
-    /// <returns></returns>
+    /// <param name="warning">The warning prefab to spawn</param>
+    /// <returns>The warning that was spawned</returns>
     public Warning SpawnWarning(WarningData warning)
     {
         Warning temp = (Warning)Instantiate(warning.Prefab, warning.Data.Location, Quaternion.identity);

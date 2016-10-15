@@ -183,8 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 11450628, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
-    - {fileID: 11450628, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
+    - {fileID: 114000013255767860, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
     - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
     - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 406163933}
@@ -199,25 +198,28 @@ MonoBehaviour:
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
       - float angleResolution
+      - bool keepBetweenScenes
       - bool destroyNewInstances
       values:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
+      - '{"$content":[2,null,3,4]}'
+      - 5
       - true
       - 1000
       - 100
       - 0.100000001490116
       - false
+      - true
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   _id: -8962
   dbg: 0
   _dirty: 0
-  destroyNewInstances: 0
+  keepBetweenScenes: 0
+  destroyNewInstances: 1
   FrameRateIndependent: 1
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
@@ -225,8 +227,8 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   waves:
-  - {fileID: 11450628, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
-  - {fileID: 11450628, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
+  - {fileID: 114000013255767860, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+  - {fileID: 0}
   - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
   - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
   waveMessage: {fileID: 406163933}
@@ -327,7 +329,7 @@ GameObject:
   - 4: {fileID: 470040171}
   - 212: {fileID: 470040172}
   m_Layer: 8
-  m_Name: spr_stars02
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +596,7 @@ GameObject:
   - 114: {fileID: 1417255041}
   - 114: {fileID: 1417255040}
   m_Layer: 5
-  m_Name: Rush Counter
+  m_Name: Dash Counter
   m_TagString: Counter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,6 +761,7 @@ GameObject:
   - 4: {fileID: 1480303254}
   - 20: {fileID: 1480303253}
   - 92: {fileID: 1480303252}
+  - 81: {fileID: 1480303250}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -766,6 +769,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &1480303250
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1480303249}
+  m_Enabled: 1
 --- !u!92 &1480303252
 Behaviour:
   m_ObjectHideFlags: 0
@@ -831,7 +841,6 @@ GameObject:
   - 20: {fileID: 1821701583}
   - 124: {fileID: 1821701582}
   - 92: {fileID: 1821701581}
-  - 81: {fileID: 1821701580}
   m_Layer: 8
   m_Name: Background Camera
   m_TagString: Untagged
@@ -839,13 +848,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1821701580
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1821701579}
-  m_Enabled: 1
 --- !u!92 &1821701581
 Behaviour:
   m_ObjectHideFlags: 0

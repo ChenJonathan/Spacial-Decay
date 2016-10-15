@@ -291,6 +291,7 @@ MonoBehaviour:
       - DanmakuPrefab bulletPrefab
       - Player Player
       - DanmakuField Field
+      - Wave Wave
       - int MaxHealth
       - int Health
       - bool FacePlayer
@@ -298,6 +299,7 @@ MonoBehaviour:
       - string tagFilter
       values:
       - 0
+      - null
       - null
       - null
       - 100
@@ -314,6 +316,7 @@ MonoBehaviour:
   tagFilter: 
   Player: {fileID: 0}
   Field: {fileID: 0}
+  Wave: {fileID: 0}
   MaxHealth: 100
   Health: 0
   FacePlayer: 1
