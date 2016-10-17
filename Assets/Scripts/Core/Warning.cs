@@ -53,21 +53,23 @@ public class Warning : MonoBehaviour
     /// <returns>The warning that was spawned</returns>
     public virtual void Update()
     {
-        time += Time.deltaTime;
-        if(time > duration)
-            Destroy(gameObject);
-        else if(time > duration - fadeOutDuration)
+        if(!LevelController.Singleton.Paused)
         {
-            Color color = renderer2d.color;
-            color.a = Mathf.Lerp(1, 0, (time - (duration - fadeOutDuration)) / fadeOutDuration);
-            renderer2d.color = color;
+            time += Time.deltaTime;
+            if(time > duration)
+                Destroy(gameObject);
+            else if(time > duration - fadeOutDuration)
+            {
+                Color color = renderer2d.color;
+                color.a = Mathf.Lerp(1, 0, (time - (duration - fadeOutDuration)) / fadeOutDuration);
+                renderer2d.color = color;
+            }
+            else if(time < fadeInDuration)
+            {
+                Color color = renderer2d.color;
+                color.a = Mathf.Lerp(0, 1, time / fadeInDuration);
+                renderer2d.color = color;
+            }
         }
-        else if(time < fadeInDuration)
-        {
-            Color color = renderer2d.color;
-            color.a = Mathf.Lerp(0, 1, time / fadeInDuration);
-            renderer2d.color = color;
-        }
-
     }
 }

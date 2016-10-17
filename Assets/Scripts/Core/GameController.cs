@@ -6,11 +6,13 @@ using System.Collections.Generic;
 /// <summary>
 /// The overarching controller class that stores data about completed levels.
 /// </summary>
-public class GameController : Singleton<GameController>, IPausable
+public class GameController : Singleton<GameController>
 {
     public Level StartLevel;
     [HideInInspector]
     public Level CurrentLevel;
+    [HideInInspector]
+    public int Difficulty;
     public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
@@ -23,16 +25,6 @@ public class GameController : Singleton<GameController>, IPausable
     public static GameController Singleton
     {
         get { return Instance; }
-    }
-
-    /// <summary>
-    /// Returns whether or not the game is paused.
-    /// </summary>
-    /// <returns>Whether or not the game is paused</returns>
-    public bool Paused
-    {
-        get;
-        set;
     }
 
     /// <summary>
@@ -73,7 +65,7 @@ public class GameController : Singleton<GameController>, IPausable
     /// <param name="mode">How the scene was loaded</param>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
-            if(scene.name.Equals("Level Select"))
+        if(scene.name.Equals("Level Select"))
         {
             // Re-enable previously unlocked levels
             foreach(Level level in unlockedLevels)

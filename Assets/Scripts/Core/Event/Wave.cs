@@ -7,6 +7,10 @@ using DanmakU;
 /// </summary>
 public class Wave : MonoBehaviour
 {
+    // Wave options
+    public bool ClearEnemiesOnEnd;
+    public bool ClearDanmakuOnEnd;
+
     // Lists of enemies and warnings ordered by prefab
     public List<EnemyChain> EnemyChains;
     public List<WarningChain> WarningChains;
@@ -23,6 +27,13 @@ public class Wave : MonoBehaviour
 
     // Time elapsed since the start of the wave
     private float time;
+
+    // Difficulty of the wave, from 0 to 2
+    private int difficulty;
+    public int Difficulty
+    {
+        get { return difficulty; }
+    }
 
     /// <summary>
     /// Contains the time and location to spawn an object.
@@ -119,6 +130,7 @@ public class Wave : MonoBehaviour
         warningQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
 
         time = 0;
+        difficulty = GameController.Singleton.Difficulty;
     }
 
     public void Update()
@@ -128,10 +140,7 @@ public class Wave : MonoBehaviour
         {
             if(enemies.Count == 0)
             {
-                Danmaku.DeactivateAllImmediate();
-                ClearEnemies();
-
-                LevelController.Singleton.EndWave();
+                End();
             }
         }
         else
@@ -147,6 +156,17 @@ public class Wave : MonoBehaviour
                 warningQueue.RemoveAt(0);
             }
         }
+    }
+
+    public void End()
+    {
+        if(ClearEnemiesOnEnd)
+            ClearEnemies();
+        if(ClearDanmakuOnEnd)
+            Danmaku.DeactivateAllImmediate();
+
+        LevelController.Singleton.EndEvent();
+
     }
 
     /// <summary>

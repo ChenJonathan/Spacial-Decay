@@ -122,6 +122,7 @@ MonoBehaviour:
       - Player Player
       - DanmakuField Field
       - Wave Wave
+      - int Difficulty
       - int MaxHealth
       - int Health
       - bool FacePlayer
@@ -132,7 +133,8 @@ MonoBehaviour:
       - null
       - null
       - null
-      - 50
+      - 0
+      - 200
       - 0
       - true
       - 1
@@ -147,7 +149,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   Field: {fileID: 0}
   Wave: {fileID: 0}
-  MaxHealth: 50
+  Difficulty: 0
+  MaxHealth: 200
   Health: 0
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
@@ -181,7 +184,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a278fa2547c98dd4093949664a70324a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d33325fee59274345b3a15df5dfeccf9, type: 3}
+  m_Color: {r: 0.98039216, g: 0.39215687, b: 0.39215687, a: 1}
   m_FlipX: 0
   m_FlipY: 0

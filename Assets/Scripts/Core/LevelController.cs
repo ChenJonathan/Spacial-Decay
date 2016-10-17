@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using DanmakU;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Controls the level, calling waves sequentially and handling dialogue and messages.
+/// Controls the level, calling events sequentially.
 /// </summary>
 public class LevelController : DanmakuGameController, IPausable
 {
@@ -26,18 +25,15 @@ public class LevelController : DanmakuGameController, IPausable
         get { return player; }
     }
 
-    // List of waves in order
+    // List of events in order
     [SerializeField]
-    private List<Wave> waves;
-    private Wave currentWave; // Current wave
-    public Wave Wave
+    private List<GameObject> events;
+    private GameObject currentEvent; // Current wave
+    public GameObject Event
     {
-        get { return currentWave; }
+        get { return currentEvent; }
     }
-    private int waveCount; // Current wave number
-
-    // Spawned on wave completion
-    public GameObject waveMessage;
+    private int eventCount; // Current event number
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -75,8 +71,8 @@ public class LevelController : DanmakuGameController, IPausable
     /// </summary>
     public void Start()
     {
-        waveCount = 0;
-        StartWave();
+        eventCount = 0;
+        StartEvent();
     }
 
     /// <summary>
@@ -84,6 +80,11 @@ public class LevelController : DanmakuGameController, IPausable
     /// </summary>
     public override void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Paused = !Paused;
+        else if(Input.GetKeyDown(KeyCode.Tab))
+            SceneManager.LoadScene("Level Select");
+
         if(!Paused)
         {
             base.Update();
@@ -91,53 +92,29 @@ public class LevelController : DanmakuGameController, IPausable
     }
 
     /// <summary>
-    /// Instantiates the current wave.
+    /// Instantiates the current event.
     /// </summary>
-    public void StartWave()
+    public void StartEvent()
     {
-        currentWave = Instantiate(waves[waveCount]);
-        currentWave.transform.parent = transform;
+        currentEvent = Instantiate(events[eventCount]);
+        currentEvent.transform.SetParent(transform);
     }
 
     /// <summary>
-    /// Called when the current wave is completed. Shows the wave completion message.
+    /// Called when the current event is completed. Shows the wave completion message.
     /// </summary>
-    public void EndWave()
+    public void EndEvent()
     {
-        Destroy(currentWave.gameObject);
-        waveCount++;
+        Destroy(currentEvent.gameObject);
+        eventCount++;
 
-        StartCoroutine(ShowWaveMessage());
-    }
-
-    /// <summary>
-    /// Coroutine to display the wave completion message. Starts the next wave when the message is finished.
-    /// </summary>
-    private IEnumerator ShowWaveMessage()
-    {
-        CanvasRenderer messageRender = waveMessage.GetComponent<CanvasRenderer>();
-        waveMessage.SetActive(true);
-
-        for(float a = 0f; a <= 1f; a += 0.02f)
-        {
-            messageRender.SetAlpha(a);
-            yield return null;
-        }
-        yield return new WaitForSeconds(1);
-        for(float a = 1f; a >= 0f; a -= 0.02f)
-        {
-            messageRender.SetAlpha(a);
-            yield return null;
-        }
-
-        waveMessage.SetActive(false);
-        if(waveCount == waves.Count)
+        if(eventCount == events.Count)
         {
             SceneManager.LoadScene("Level Select");
         }
         else
         {
-            StartWave();
+            StartEvent();
         }
     }
 }

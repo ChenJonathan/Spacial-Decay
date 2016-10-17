@@ -8,46 +8,99 @@ public class FodderUpScript : Enemy
     public DanmakuPrefab bulletPrefab;
 
     private FireBuilder fireData;
-    private float fireCooldown = 0;
-    private static readonly float MAX_FIRE_COOLDOWN = 1f;
-    private float deathTimer = 2f;
+    private Rigidbody2D rigidbody2d;
+    private bool alive = true;
+    private int start = 5;
 
     public override void Start()
     {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.Towards(Player.transform);
-        fireData.WithSpeed(20);
+        fireData.WithSpeed(6 + 2 * Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(100 + 40 * Difficulty, new DynamicInt(10 + 5 * Difficulty, 20 + 10 * Difficulty), 0, 0));
 
+        base.Start();
     }
 
-    public void Update()
+    protected override IEnumerator Run()
     {
-        if (!LevelController.Singleton.Paused)
+        do
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0 && deathTimer > 1)
+            // Down Left
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(4 + start, 4 + start);
+            start = 0;
+            yield return new WaitForSeconds(2);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
             {
                 fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN / 4;
+                yield return new WaitForSeconds(0.2f);
             }
-        }
-    }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-
-        if (!LevelController.Singleton.Paused)
-        {
-            deathTimer -= Time.deltaTime;
-            if (deathTimer <= 0)
-            {
-                Die();
-            }
+            //Up Left
             FacePlayer = true;
-            Vector3 direction = new Vector3(-1.0f, 1.0f);
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 20;
-        }
+            rigidbody2d.velocity = new Vector2(4, -4);
+            yield return new WaitForSeconds(2);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            //Up Right
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(-4, -4);
+            yield return new WaitForSeconds(2);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            //Down Right
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(-4, 4);
+            yield return new WaitForSeconds(2);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(0.2f);
+            }
+        } while (alive);
+        Die();
     }
 }

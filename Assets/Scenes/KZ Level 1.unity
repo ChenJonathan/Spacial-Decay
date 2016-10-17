@@ -183,14 +183,14 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 114000010057563132, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
+    - {fileID: 1000010225391452, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
     - {fileID: 406163933}
     serializedStrings:
       keys:
       - bool Paused
       - DanmakuField field
       - Player playerPrefab
-      - List<Wave> waves
+      - List<GameObject> events
       - GameObject waveMessage
       - bool FrameRateIndependent
       - int danmakuInitialCount
@@ -224,8 +224,8 @@ MonoBehaviour:
   angleResolution: 0.1
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-  waves:
-  - {fileID: 114000010057563132, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
+  events:
+  - {fileID: 1000010225391452, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
   waveMessage: {fileID: 406163933}
 --- !u!4 &174129276
 Transform:

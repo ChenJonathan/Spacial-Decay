@@ -17,19 +17,21 @@ public class FodderScript : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(20);
+        fireData.WithSpeed(5 + Difficulty * 2);
 
     }
 
-    public void Update()
+    public override void Update()
     {
-        if (!LevelController.Singleton.Paused)
+        base.Update();
+
+        if(!LevelController.Singleton.Paused)
         {
             fireCooldown -= Time.deltaTime;
             if (fireCooldown <= 0)
             {
                 fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN/2;
+                fireCooldown = MAX_FIRE_COOLDOWN / (1 + Difficulty / 4);
             }
         }
     }

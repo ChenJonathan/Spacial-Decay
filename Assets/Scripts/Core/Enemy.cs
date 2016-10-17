@@ -13,6 +13,8 @@ public partial class Enemy : DanmakuCollider
     public DanmakuField Field;
     [HideInInspector]
     public Wave Wave;
+    [HideInInspector]
+    public int Difficulty;
     
     // Enemy health values
     public int MaxHealth;
@@ -23,6 +25,9 @@ public partial class Enemy : DanmakuCollider
     [SerializeField]
     protected bool FacePlayer; // Enemy constantly rotates toward the player if true - overrides TargetRotation
     protected Quaternion TargetRotation; // Enemy constantly rotates toward this rotation if it is not null
+
+    // Storage for enemy velocity when the level is paused
+    private Vector3 oldVelocity;
 
     // Enemy health bar reference and size
     private GameObject healthBar;
@@ -39,7 +44,8 @@ public partial class Enemy : DanmakuCollider
         base.Awake();
         Player = LevelController.Singleton.Player;
         Field = LevelController.Singleton.Field;
-        Wave = LevelController.Singleton.Wave;
+        Wave = LevelController.Singleton.Event.GetComponent<Wave>();
+        Difficulty = Wave.Difficulty;
         TagFilter = "Friendly";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
@@ -65,6 +71,21 @@ public partial class Enemy : DanmakuCollider
         return null;
     }
 
+    public virtual void Update()
+    {
+        // Stores the enemy's velocity when the level is paused
+        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
+        {
+            oldVelocity = GetComponent<Rigidbody2D>().velocity;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
+        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
+        {
+            GetComponent<Rigidbody2D>().velocity = oldVelocity;
+            oldVelocity = Vector3.zero;
+        }
+    }
+
     /// <summary>
     /// Called in fixed-time intervals. Updates the enemy rotation and handles other physics-related functions.
     /// </summary>
@@ -77,7 +98,7 @@ public partial class Enemy : DanmakuCollider
             if(FacePlayer)
                 TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
             if(TargetRotation != null)
-                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 4);
+                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 8);
         }
     }
 
@@ -104,7 +125,6 @@ public partial class Enemy : DanmakuCollider
     public virtual void Die()
     {
         Destroy(gameObject);
-        LevelController.Singleton.Wave.UnregisterEnemy(this);
     }
 
     /// <summary>
@@ -112,7 +132,7 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public void OnDestroy()
     {
-        Die();
+        Wave.UnregisterEnemy(this);
     }
 
     #region Rotation methods

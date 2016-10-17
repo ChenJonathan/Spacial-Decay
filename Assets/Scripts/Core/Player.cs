@@ -63,6 +63,9 @@ public class Player : DanmakuCollider
     [SerializeField]
     private float rotateSpeed = 18;
 
+    // Storage for player velocity when the level is paused
+    private Vector3 oldVelocity;
+
     // Dash selection line colors
     [SerializeField]
     private Color dashStartActive;
@@ -87,7 +90,7 @@ public class Player : DanmakuCollider
     public override void Awake()
     {
         base.Awake();
-        TagFilter = "Enemy";
+        TagFilter = "Enemy|Laser";
 
         // Retrieve references
         field = LevelController.Singleton.Field;
@@ -127,7 +130,24 @@ public class Player : DanmakuCollider
     /// </summary>
     public void Update()
     {
-	    if(!LevelController.Singleton.Paused)
+        // Stores the player's velocity when the level is paused
+        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
+        {
+            oldVelocity = GetComponent<Rigidbody2D>().velocity;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+
+            // Cancel dash targeting on pause
+            selecting = false;
+            SetMoveTarget(field.WorldPoint(mousePos));
+            dashRenderer.enabled = false;
+        }
+        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
+        {
+            GetComponent<Rigidbody2D>().velocity = oldVelocity;
+            oldVelocity = Vector3.zero;
+        }
+
+        if(!LevelController.Singleton.Paused)
         {
             HandleInput();
             
@@ -213,13 +233,16 @@ public class Player : DanmakuCollider
             // Dash targeting
             if(Input.GetMouseButtonUp(0))
             {
+                // Begin dash
                 if(dashes > 0)
                 {
-                    dashing = true;
+                    SetDashTarget(field.WorldPoint(mousePos));
                     dashes--;
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
                 }
+
+                // Disable dash selection
                 selecting = false;
                 SetMoveTarget(field.WorldPoint(mousePos));
                 dashRenderer.enabled = false;
@@ -261,11 +284,22 @@ public class Player : DanmakuCollider
     /// Sets the movement target and the target location. Note that the two may not be the same.
     /// The visual target can be out of bounds but the target location cannot.
     /// </summary>
-    private void SetMoveTarget(Vector2 target)
+    public void SetMoveTarget(Vector2 target)
     {
         moving = true;
         targetRenderer.transform.position = target;
         this.target = BoundsUtil.VerifyBounds(target, new Bounds2D(collider2d.bounds), field.MovementBounds);
+    }
+
+    /// <summary>
+    /// Sets the dash target and the target location. Note that the two may not be the same.
+    /// The visual target can be out of bounds but the target location cannot.
+    /// The player will be locked out of controlling movement until the dash target is reached.
+    /// </summary>
+    public void SetDashTarget(Vector2 target)
+    {
+        dashing = true;
+        SetMoveTarget(target);
     }
 
     /// <summary>
@@ -303,7 +337,8 @@ public class Player : DanmakuCollider
     /// <param name="info">Information about the collision</param>
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        danmaku.Deactivate();
+        if (danmaku.Tag != "Laser")
+            danmaku.Deactivate();
         if(!dashing && !invincible)
         {
             Hit();
