@@ -13,7 +13,6 @@ public class Level : MonoBehaviour
     private SpriteRenderer sprite;
     private LineRenderer line; // Indicates the level that unlocked this level
     private ParticleSystem highlightEffect; // Indicates a newly unlocked level
-    private bool clickable; // Whether the corresponding level will load on click or not
 
     /// <summary>
     /// Called when the object is instantiated. Handles initialization.
@@ -24,7 +23,6 @@ public class Level : MonoBehaviour
         line = GetComponent<LineRenderer>();
         highlightEffect = GetComponentInChildren<ParticleSystem>();
         highlightEffect.startColor = sprite.color;
-        clickable = true;
     }
 
     /// <summary>
@@ -32,7 +30,6 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Appear()
     {
-        clickable = false;
         StartCoroutine(Appear(1.5f));
     }
 
@@ -58,7 +55,6 @@ public class Level : MonoBehaviour
         }
 
         Highlight();
-        clickable = true;
     }
 
     /// <summary>
@@ -74,7 +70,7 @@ public class Level : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(0) && clickable)
+        if(Input.GetMouseButtonDown(0))
         {
             if(!DifficultySelect.Instance.gameObject.activeSelf || DifficultySelect.Instance.Level != this)
                 DifficultySelect.Instance.Activate(this);

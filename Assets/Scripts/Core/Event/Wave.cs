@@ -7,6 +7,10 @@ using DanmakU;
 /// </summary>
 public class Wave : MonoBehaviour
 {
+    // Wave options
+    public bool ClearEnemiesOnEnd;
+    public bool ClearDanmakuOnEnd;
+
     // Lists of enemies and warnings ordered by prefab
     public List<EnemyChain> EnemyChains;
     public List<WarningChain> WarningChains;
@@ -136,10 +140,7 @@ public class Wave : MonoBehaviour
         {
             if(enemies.Count == 0)
             {
-                Danmaku.DeactivateAllImmediate();
-                ClearEnemies();
-
-                LevelController.Singleton.EndWave();
+                End();
             }
         }
         else
@@ -155,6 +156,17 @@ public class Wave : MonoBehaviour
                 warningQueue.RemoveAt(0);
             }
         }
+    }
+
+    public void End()
+    {
+        if(ClearEnemiesOnEnd)
+            ClearEnemies();
+        if(ClearDanmakuOnEnd)
+            Danmaku.DeactivateAllImmediate();
+
+        LevelController.Singleton.EndEvent();
+
     }
 
     /// <summary>

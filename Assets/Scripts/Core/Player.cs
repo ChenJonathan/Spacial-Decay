@@ -233,13 +233,16 @@ public class Player : DanmakuCollider
             // Dash targeting
             if(Input.GetMouseButtonUp(0))
             {
+                // Begin dash
                 if(dashes > 0)
                 {
-                    dashing = true;
+                    SetDashTarget(field.WorldPoint(mousePos));
                     dashes--;
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
                 }
+
+                // Disable dash selection
                 selecting = false;
                 SetMoveTarget(field.WorldPoint(mousePos));
                 dashRenderer.enabled = false;
@@ -281,11 +284,22 @@ public class Player : DanmakuCollider
     /// Sets the movement target and the target location. Note that the two may not be the same.
     /// The visual target can be out of bounds but the target location cannot.
     /// </summary>
-    private void SetMoveTarget(Vector2 target)
+    public void SetMoveTarget(Vector2 target)
     {
         moving = true;
         targetRenderer.transform.position = target;
         this.target = BoundsUtil.VerifyBounds(target, new Bounds2D(collider2d.bounds), field.MovementBounds);
+    }
+
+    /// <summary>
+    /// Sets the dash target and the target location. Note that the two may not be the same.
+    /// The visual target can be out of bounds but the target location cannot.
+    /// The player will be locked out of controlling movement until the dash target is reached.
+    /// </summary>
+    public void SetDashTarget(Vector2 target)
+    {
+        dashing = true;
+        SetMoveTarget(target);
     }
 
     /// <summary>

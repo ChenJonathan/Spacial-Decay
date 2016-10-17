@@ -44,7 +44,7 @@ public partial class Enemy : DanmakuCollider
         base.Awake();
         Player = LevelController.Singleton.Player;
         Field = LevelController.Singleton.Field;
-        Wave = LevelController.Singleton.Wave;
+        Wave = LevelController.Singleton.Event.GetComponent<Wave>();
         Difficulty = Wave.Difficulty;
         TagFilter = "Friendly";
 
@@ -98,7 +98,7 @@ public partial class Enemy : DanmakuCollider
             if(FacePlayer)
                 TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
             if(TargetRotation != null)
-                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 4);
+                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 8);
         }
     }
 

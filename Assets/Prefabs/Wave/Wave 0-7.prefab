@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Wave 0-1
+  m_Name: Wave 0-7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,25 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
-  ClearDanmakuOnEnd: 1
   EnemyChains:
-  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+  - Prefab: {fileID: 114000012258096244, guid: 6494f6a6f3309f34fa92561110d8ec5c, type: 2}
     Data:
-    - Location: {x: -20, y: 0}
+    - Location: {x: 0, y: 15}
       Time: 3
-    - Location: {x: 20, y: 0}
-      Time: 3
-  WarningChains:
-  - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
-    Duration: 3
-    FadeInDuration: 1
-    FadeOutDuration: 1
-    Data:
-    - Location: {x: -16, y: 0}
-      Time: 0
-    - Location: {x: 16, y: 0}
-      Time: 0
+  WarningChains: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -67,32 +54,33 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
-      propertyPath: spawns.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0,
+        type: 2}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[1].x
-      value: -20
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[1]
-      value: 2
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spawns.Array.data[0].Locations.Array.data[0].y
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[0]
