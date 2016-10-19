@@ -33,13 +33,15 @@ public class PetalCrescentDiagonalEnemy : Enemy
 
 		fireDataPetal = new FireBuilder(petalPrefab, Field);
 		fireDataPetal.From(transform);
+		fireDataPetal.Towards(Player.transform);
 		fireDataPetal.WithSpeed(6);
-		fireDataPetal.WithModifier(new CircularBurstModifier(45, 5, 0, 0));
+		fireDataPetal.WithModifier(new CircularBurstModifier(45, 1, 0, 0));
 
 		fireDataCrescent = new FireBuilder (crescentPrefab, Field);
 		fireDataCrescent.From(transform);
+		fireDataCrescent.Towards(Player.transform);
 		fireDataCrescent.WithSpeed(6);
-		//fireDataCrescent.WithModifier(new CircularBurstModifier(45, 5, 0, 0));
+		fireDataCrescent.WithModifier(new CircularBurstModifier(45, 5, 0, 0));
 		base.Start();
 	}
 
@@ -49,7 +51,7 @@ public class PetalCrescentDiagonalEnemy : Enemy
 		float timePassed = 0;
 		float radians = Mathf.PI / 2.0f; //init at top of circle
 		float time = 0;
-
+		StartCoroutine (Attack());
 		for (int cycles = 0; cycles < 3; cycles++) {
 			timePassed = 0;
 			while (timePassed < period) {
@@ -64,6 +66,16 @@ public class PetalCrescentDiagonalEnemy : Enemy
 		rigidbody2d.velocity = new Vector2(-10, 0);
 		yield return new WaitForSeconds (2);
 		Die();
+	}
+
+	private IEnumerator Attack()
+	{
+		while (true) {
+			fireDataPetal.Fire ();
+			yield return new WaitForSeconds (0.1f);
+			fireDataCrescent.Fire();
+			yield return new WaitForSeconds (2.0f);
+		}
 	}
 }
 
