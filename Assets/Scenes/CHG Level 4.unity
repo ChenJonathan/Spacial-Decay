@@ -183,10 +183,9 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: cf8ac4130e6274de7bb6e6fa5da6dd43, type: 2}
-    - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-    - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-    - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+    - {fileID: 1000012781792588, guid: fc5c46fa11e8744b9af3efbf99fbade3, type: 2}
+    - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+    - {fileID: 188780, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
     serializedStrings:
       keys:
       - bool Paused
@@ -203,7 +202,7 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
+      - '{"$content":[2,3,4]}'
       - true
       - 1000
       - 100
@@ -225,10 +224,9 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000013141128222, guid: cf8ac4130e6274de7bb6e6fa5da6dd43, type: 2}
-  - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-  - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-  - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+  - {fileID: 1000012781792588, guid: fc5c46fa11e8744b9af3efbf99fbade3, type: 2}
+  - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+  - {fileID: 188780, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
