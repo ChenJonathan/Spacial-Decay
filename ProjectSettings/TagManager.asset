@@ -9,6 +9,7 @@ TagManager:
   - Counter
   - Map
   - Level
+  - Laser
   layers:
   - Default
   - TransparentFX

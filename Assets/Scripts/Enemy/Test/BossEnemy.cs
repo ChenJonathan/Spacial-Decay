@@ -31,11 +31,6 @@ public class BossEnemy : Enemy
 
         StartCoroutine(Attack());
     }
-	
-	public override void Update()
-    {
-        base.Update();
-    }
 
     public override void FixedUpdate()
     {
@@ -43,17 +38,10 @@ public class BossEnemy : Enemy
 
         if(!LevelController.Singleton.Paused)
         {
-            if(!still)
+            if(!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
             {
-                if(Vector3.Distance(transform.position, Vector3.zero) > 0.1)
-                {
-                    Vector3 direction = Vector3.zero - transform.position;
-                    GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
-                }
-                else
-                {
-                    GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                }
+                Vector3 direction = Vector3.zero - transform.position;
+                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
             }
             else
             {
@@ -81,8 +69,9 @@ public class BossEnemy : Enemy
             int direction;
             for(int i = 0; i < 3; i++)
             {
+                SetRotation(180);
                 position = Player.transform.position;
-                direction = Random.Range(0, 2) * 2 - 1;
+                direction = Random.Range(0, 2) * 2 - 1; // -1 or 1
                 for(int j = 0; j < 16; j++)
                 {
                     fireDataBullet.Towards(position);
