@@ -13,7 +13,7 @@ public class BorderEnemy : Enemy
     
     private Vector3 direction;
     private static readonly float MAX_PAUSE_COOLDOWN = 2f;
-    private float pauseCooldown = MAX_PAUSE_COOLDOWN;
+    private float pauseCooldown;
     public float dieTime = 50f;
     Vector3 vectorToTarget;
     Quaternion q;    
@@ -24,11 +24,13 @@ public class BorderEnemy : Enemy
         fireData.From(transform);
         fireData.Towards(Player.transform);
         fireData.WithSpeed(6);
-        fireData.WithModifier(new CircularBurstModifier(30, 3, 0, 0));         
+        fireData.WithModifier(new CircularBurstModifier(30, 3 + Difficulty, 0, 0));
+        pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
     }
 
     public void Update()
     {
+        base.Update();
         if (!LevelController.Singleton.Paused && dieTime >= 0)
         {
             fireCooldown -= Time.deltaTime;
@@ -41,7 +43,7 @@ public class BorderEnemy : Enemy
 
             if (pauseCooldown <= -1f)
             {
-                pauseCooldown = MAX_PAUSE_COOLDOWN;
+                pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
             }
         }
     }
