@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010928093600}
   - 114: {fileID: 114000013755707592}
   m_Layer: 0
-  m_Name: nliao Wave 0-1
+  m_Name: Three Circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,6 +60,14 @@ MonoBehaviour:
       Time: 3
     - Location: {x: 0, y: 0}
       Time: 4
+    - Location: {x: 10, y: 10}
+      Time: 3
+    - Location: {x: 10, y: 10}
+      Time: 4
+    - Location: {x: -10, y: 10}
+      Time: 3
+    - Location: {x: -10, y: 10}
+      Time: 4
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -67,4 +75,8 @@ MonoBehaviour:
     FadeOutDuration: 1
     Data:
     - Location: {x: 0, y: 0}
+      Time: 0
+    - Location: {x: 10, y: 10}
+      Time: 0
+    - Location: {x: -10, y: 10}
       Time: 0
