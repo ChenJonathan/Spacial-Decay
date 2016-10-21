@@ -18,7 +18,7 @@ public class RegularCircleScript1 : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(3 + Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(7, 12), 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(10, 15), 0, 0));
 
         if(transform.position.x > 18)
         {
@@ -53,7 +53,7 @@ public class RegularCircleScript1 : Enemy
             if (fireCooldown <= 0 && timer > 2)
             {
                 fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
+                fireCooldown = MAX_FIRE_COOLDOWN - (.66f * Difficulty);
             }
         }
     }

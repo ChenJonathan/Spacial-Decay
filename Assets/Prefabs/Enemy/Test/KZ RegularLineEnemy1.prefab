@@ -113,7 +113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
-    serializedObjects: []
+    serializedObjects:
+    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
@@ -127,20 +129,20 @@ MonoBehaviour:
       - GameObject healthBarPrefab
       - string tagFilter
       values:
-      - null
+      - 0
       - null
       - null
       - null
       - 0
-      - 0
+      - 50
       - 0
       - false
-      - null
+      - 1
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -1
+  _id: 11292
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -148,11 +150,11 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 0
+  MaxHealth: 50
   Health: 0
   FacePlayer: 0
-  healthBarPrefab: {fileID: 0}
-  bulletPrefab: {fileID: 0}
+  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
 --- !u!212 &212000013138133854
 SpriteRenderer:
   m_ObjectHideFlags: 1
