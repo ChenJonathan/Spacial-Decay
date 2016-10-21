@@ -159,7 +159,7 @@ public partial class Enemy : DanmakuCollider
     /// Rotates the enemy in a direction.
     /// </summary>
     /// <param name="direction">A vector representing the direction to rotate towards</param>
-    protected void SetRotation(Vector3 direction)
+    protected void SetRotation(Vector2 direction)
     {
         SetRotation(Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90);
     }

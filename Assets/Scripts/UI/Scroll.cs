@@ -9,10 +9,20 @@ public class Scroll : MonoBehaviour
     private readonly float CAMERA_MAX_Y = 57.6269100001f;
 
     /// <summary>
+    /// Initializes the camera variable.
+    /// </summary>
+    public void Start()
+    {
+        // Match background size
+        GetComponent<Camera>().fieldOfView = 2.0f * Mathf.Atan(419.84f / GetComponent<Camera>().aspect / 400f) * Mathf.Rad2Deg;
+    }
+
+    /// <summary>
     /// Called periodically. Shifts the camera based on mouse position.
     /// </summary>
     public void Update()
     {
+        // Scrolling
         float border = Screen.height / 4;
         float y = transform.position.y;
         if(Input.mousePosition.y > Screen.height - border)
