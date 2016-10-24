@@ -13,6 +13,7 @@ public class RegularCircleScript1 : Enemy
     private static readonly float MAX_FIRE_COOLDOWN = 2f;
     private float timer = 0;
 
+    //Arrive on the scene
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
@@ -43,6 +44,7 @@ public class RegularCircleScript1 : Enemy
         }
     }
 
+    //Static shooting
     public override void Update()
     {
         base.Update();
@@ -58,6 +60,7 @@ public class RegularCircleScript1 : Enemy
         }
     }
 
+    //STOP!
     public override void FixedUpdate()
     {
         base.FixedUpdate();

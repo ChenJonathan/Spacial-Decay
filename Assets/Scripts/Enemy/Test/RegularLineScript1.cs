@@ -17,6 +17,7 @@ public class RegularLineScript1 : Enemy
     private bool down = false;
     private bool right = false;
 
+    //Arrive on Scene
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
@@ -50,6 +51,7 @@ public class RegularLineScript1 : Enemy
         }
     }
 
+    //Static shooting
     public override void Update()
     {
         base.Update();
@@ -65,6 +67,7 @@ public class RegularLineScript1 : Enemy
         }
     }
 
+    //Move around the edge
     public override void FixedUpdate()
     {
         base.FixedUpdate();
