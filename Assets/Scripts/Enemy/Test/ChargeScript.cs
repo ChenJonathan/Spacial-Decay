@@ -26,85 +26,89 @@ public class ChargeScript : Enemy
     protected override IEnumerator Run()
     {
         //SPAWN ON RIGHT SIDE
-        if(transform.position.x > 0)
+        if (!LevelController.Singleton.Paused)
         {
-            rigidbody2d.velocity = new Vector2(-3, 0);
-            rigidbody2d.rotation = 90;
-            yield return new WaitForSeconds(2);
-            rigidbody2d.velocity = Vector2.zero;
-
-            while (alive)
+            if (transform.position.x > 0)
             {
-                fireData.Facing(Vector2.down);
-                for (int j = 0; j < 1 + Difficulty; j++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
-                rigidbody2d.velocity = new Vector2(-14, 0);
-                for (int i = 0; i < (4 * (Difficulty + 1)); i++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
+                rigidbody2d.velocity = new Vector2(-3, 0);
+                rigidbody2d.rotation = 90;
+                yield return new WaitForSeconds(2);
                 rigidbody2d.velocity = Vector2.zero;
-                rigidbody2d.MoveRotation(270);
 
-                fireData.Facing(Vector2.up);
-                for (int j = 0; j < 1 + Difficulty; j++)
+                while (alive)
                 {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    fireData.Facing(Vector2.down);
+                    for (int j = 0; j < 1 + Difficulty; j++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = new Vector2(-14, 0);
+                    for (int i = 0; i < (4 * (Difficulty + 1)); i++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = Vector2.zero;
+                    rigidbody2d.MoveRotation(270);
+
+                    fireData.Facing(Vector2.up);
+                    for (int j = 0; j < 1 + Difficulty; j++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = new Vector2(14, 0);
+                    for (int i = 0; i < (4 * (Difficulty + 1)); i++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = Vector2.zero;
+                    rigidbody2d.MoveRotation(90);
                 }
-                rigidbody2d.velocity = new Vector2(14, 0);
-                for (int i = 0; i < (4 * (Difficulty + 1)); i++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
-                rigidbody2d.velocity = Vector2.zero;
-                rigidbody2d.MoveRotation(90);
+
+                //SPAWN ON LEFT SIDE
             }
-
-        //SPAWN ON LEFT SIDE
-        } else if(transform.position.x < 0)
-        {
-            rigidbody2d.velocity = new Vector2(3, 0);
-            rigidbody2d.rotation = 270;
-            yield return new WaitForSeconds(2);
-            rigidbody2d.velocity = Vector2.zero;
-
-            while (alive)
+            else if (transform.position.x < 0)
             {
-                fireData.Facing(Vector2.up);
-                for (int j = 0; j < 1 + Difficulty; j++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
-                rigidbody2d.velocity = new Vector2(14, 0);
-                for (int i = 0; i < (4 * (Difficulty + 1)); i++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
+                rigidbody2d.velocity = new Vector2(3, 0);
+                rigidbody2d.rotation = 270;
+                yield return new WaitForSeconds(2);
                 rigidbody2d.velocity = Vector2.zero;
-                rigidbody2d.MoveRotation(90);
 
-                fireData.Facing(Vector2.down);
-                for (int j = 0; j < 1 + Difficulty; j++)
+                while (alive)
                 {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    fireData.Facing(Vector2.up);
+                    for (int j = 0; j < 1 + Difficulty; j++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = new Vector2(14, 0);
+                    for (int i = 0; i < (4 * (Difficulty + 1)); i++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = Vector2.zero;
+                    rigidbody2d.MoveRotation(90);
+
+                    fireData.Facing(Vector2.down);
+                    for (int j = 0; j < 1 + Difficulty; j++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = new Vector2(-14, 0);
+                    for (int i = 0; i < (4 * (Difficulty + 1)); i++)
+                    {
+                        fireData.Fire();
+                        yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
+                    }
+                    rigidbody2d.velocity = Vector2.zero;
+                    rigidbody2d.MoveRotation(270);
                 }
-                rigidbody2d.velocity = new Vector2(-14, 0);
-                for (int i = 0; i < (4 * (Difficulty + 1)); i++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
-                }
-                rigidbody2d.velocity = Vector2.zero;
-                rigidbody2d.MoveRotation(270);
             }
         }
     }
