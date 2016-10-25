@@ -183,18 +183,15 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 114000013255767860, guid: 830434081c1caa746b133c4b2272414e, type: 2}
-    - {fileID: 114000013255767860, guid: 34054df9daf1cca4d90087a8ba2e7c22, type: 2}
-    - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-    - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
-    - {fileID: 406163933}
+    - {fileID: 1000012781792588, guid: fc5c46fa11e8744b9af3efbf99fbade3, type: 2}
+    - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+    - {fileID: 188780, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
     serializedStrings:
       keys:
       - bool Paused
       - DanmakuField field
       - Player playerPrefab
-      - List<Wave> waves
-      - GameObject waveMessage
+      - List<GameObject> events
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -205,8 +202,7 @@ MonoBehaviour:
       - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
+      - '{"$content":[2,3,4]}'
       - true
       - 1000
       - 100
@@ -227,12 +223,10 @@ MonoBehaviour:
   angleResolution: 0.1
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-  waves:
-  - {fileID: 114000013255767860, guid: 830434081c1caa746b133c4b2272414e, type: 2}
-  - {fileID: 114000013255767860, guid: 34054df9daf1cca4d90087a8ba2e7c22, type: 2}
-  - {fileID: 11450628, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
-  - {fileID: 11450628, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
-  waveMessage: {fileID: 406163933}
+  events:
+  - {fileID: 1000012781792588, guid: fc5c46fa11e8744b9af3efbf99fbade3, type: 2}
+  - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+  - {fileID: 188780, guid: 74f92b0c692c2c741aad41a8ba676df4, type: 2}
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
