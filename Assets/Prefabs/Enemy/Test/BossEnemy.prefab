@@ -118,6 +118,7 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
@@ -131,7 +132,8 @@ MonoBehaviour:
       - 0
       - 500
       - 0
-      - true
+      - 8.0
+      - false
       - 3
       - null
   _serializerType:
@@ -147,7 +149,8 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 500
   Health: 0
-  FacePlayer: 1
+  RotateSpeed: 8
+  FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   BulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
   LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}

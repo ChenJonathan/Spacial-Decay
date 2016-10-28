@@ -134,7 +134,7 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 5
+      - 50
       - 0
       - false
       - 1
@@ -150,7 +150,7 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 5
+  MaxHealth: 50
   Health: 0
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}

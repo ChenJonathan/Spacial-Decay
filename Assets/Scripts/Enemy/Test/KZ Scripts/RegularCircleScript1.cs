@@ -13,12 +13,13 @@ public class RegularCircleScript1 : Enemy
     private static readonly float MAX_FIRE_COOLDOWN = 2f;
     private float timer = 0;
 
+    //Arrive on the scene
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(3 + Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(7, 12), 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(10, 15), 0, 0));
 
         if(transform.position.x > 18)
         {
@@ -43,6 +44,7 @@ public class RegularCircleScript1 : Enemy
         }
     }
 
+    //Static shooting
     public override void Update()
     {
         base.Update();
@@ -53,11 +55,12 @@ public class RegularCircleScript1 : Enemy
             if (fireCooldown <= 0 && timer > 2)
             {
                 fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
+                fireCooldown = MAX_FIRE_COOLDOWN - (.66f * Difficulty);
             }
         }
     }
 
+    //STOP!
     public override void FixedUpdate()
     {
         base.FixedUpdate();
