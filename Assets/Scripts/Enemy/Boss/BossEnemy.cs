@@ -35,6 +35,8 @@ public class BossEnemy : Enemy
         fireDataLaser.WithController(new AutoDeactivateController(0.25f));
 
         towers = new List<Tower>();
+
+        SetRotation(180);
     }
 
     public override void FixedUpdate()
