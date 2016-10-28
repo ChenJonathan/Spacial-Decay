@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21249720}
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
-  - 114: {fileID: 11416366}
+  - 114: {fileID: 114000012665843988}
   m_Layer: 12
-  m_Name: BossEnemy
+  m_Name: Tower
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 175464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,69 +90,6 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &11416366
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 175464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e21aa1cbc6f5942a5d207bcd5e059a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _serializationData:
-    serializedObjects:
-    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-    - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
-    - {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-    serializedStrings:
-      keys:
-      - DanmakuPrefab BulletPrefab
-      - DanmakuPrefab LaserPrefab
-      - Tower TowerPrefab
-      - Player Player
-      - DanmakuField Field
-      - Wave Wave
-      - int Difficulty
-      - int MaxHealth
-      - int Health
-      - bool FacePlayer
-      - GameObject healthBarPrefab
-      - string tagFilter
-      values:
-      - 0
-      - 1
-      - 2
-      - null
-      - null
-      - null
-      - 0
-      - 500
-      - 0
-      - true
-      - 3
-      - null
-  _serializerType:
-    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  _id: -224464
-  dbg: 0
-  _dirty: 0
-  tagFilter: 
-  Player: {fileID: 0}
-  Field: {fileID: 0}
-  Wave: {fileID: 0}
-  Difficulty: 0
-  MaxHealth: 500
-  Health: 0
-  FacePlayer: 1
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  BulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-  LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
-  TowerPrefab: {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9,
-    type: 2}
 --- !u!212 &21249720
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -182,7 +119,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4055b7b4106d1174dbc2b3e5dc69e94a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16ce78ee6b782c64bba4de0475304538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -335,3 +272,63 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175464}
   m_IsPrefabParent: 1
+--- !u!114 &114000012665843988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18655115d8d2b52479737758c2f44fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializationData:
+    serializedObjects:
+    - {fileID: 11442878, guid: bf191685777693a49b04b28f2fe11fc3, type: 2}
+    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    serializedStrings:
+      keys:
+      - DanmakuPrefab BulletPrefab
+      - BossEnemy Boss
+      - Player Player
+      - DanmakuField Field
+      - Wave Wave
+      - int Difficulty
+      - int MaxHealth
+      - int Health
+      - float RotateSpeed
+      - bool FacePlayer
+      - GameObject healthBarPrefab
+      - string tagFilter
+      values:
+      - 0
+      - null
+      - null
+      - null
+      - null
+      - 0
+      - 100
+      - 0
+      - 8.0
+      - false
+      - 1
+      - null
+  _serializerType:
+    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _id: -45860
+  dbg: 0
+  _dirty: 0
+  tagFilter: 
+  Player: {fileID: 0}
+  Field: {fileID: 0}
+  Wave: {fileID: 0}
+  Difficulty: 0
+  MaxHealth: 100
+  Health: 0
+  RotateSpeed: 8
+  FacePlayer: 0
+  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  BulletPrefab: {fileID: 11442878, guid: bf191685777693a49b04b28f2fe11fc3, type: 2}
+  Boss: {fileID: 0}

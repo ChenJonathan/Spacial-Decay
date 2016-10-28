@@ -5,7 +5,7 @@ using DanmakU;
 /// <summary>
 /// The player. Follows the mouse cursor and performs a dash when left click is held and released.
 /// </summary>
-public class Player : DanmakuCollider
+public class Player : MonoBehaviour
 {
     // Visual indicator that shows where the enemy is headed
     [SerializeField]
@@ -87,11 +87,8 @@ public class Player : DanmakuCollider
     /// <summary>
     /// Called when the player is instantiated (before Start). Handles player initialization.
     /// </summary>
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
-        TagFilter = "Enemy|Laser";
-
         // Retrieve references
         field = LevelController.Singleton.Field;
         collider2d = GetComponent<Collider2D>();
@@ -331,15 +328,33 @@ public class Player : DanmakuCollider
     }
 
     /// <summary>
-    /// Called when the player collides with a bullet.
+    /// Called when the player first collides with an object. Handles collision with enemies.
     /// </summary>
-    /// <param name="danmaku">The bullet that the player collided with</param>
-    /// <param name="info">Information about the collision</param>
-    protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
+    /// <param name="collider">The collider that the player collided with</param>
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (danmaku.Tag != "Laser")
-            danmaku.Deactivate();
-        if(!dashing && !invincible)
+        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+        if(enemy != null)
+        {
+            if(dashing)
+            {
+                enemy.Damage(50);
+            }
+            else if(!invincible)
+            {
+                Hit();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Called repeatedly when the player continues to collide with an object. Handles collision with enemies.
+    /// </summary>
+    /// <param name="collider">The collider that the player collided with</param>
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+        if(enemy != null && !dashing && !invincible)
         {
             Hit();
         }

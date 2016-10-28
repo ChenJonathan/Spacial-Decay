@@ -18,7 +18,7 @@ public class RegularLineScript1 : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(3 + Difficulty);
-        fireData.WithModifier(new LinearBurstModifier(7, 0, 0);
+        fireData.WithModifier(new LinearBurstModifier(7, 0, 0));
 
         if (transform.position.x > 18)
         {
