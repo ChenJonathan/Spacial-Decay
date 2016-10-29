@@ -220,10 +220,13 @@ public class Player : MonoBehaviour
                     Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
                     if(enemy != null)
                     {
-                        if(dashing && !hitEnemies.Contains(enemy))
+                        if(dashing)
                         {
-                            hitEnemies.Add(enemy);
-                            enemy.Damage(50);
+                            if(!hitEnemies.Contains(enemy))
+                            {
+                                hitEnemies.Add(enemy);
+                                enemy.Damage(50);
+                            }
                         }
                         else if(!invincible)
                         {
