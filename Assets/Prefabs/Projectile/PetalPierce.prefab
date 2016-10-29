@@ -11,8 +11,8 @@ GameObject:
   - 212: {fileID: 21289382}
   - 114: {fileID: 11442878}
   m_Layer: 14
-  m_Name: PetalTower
-  m_TagString: Laser
+  m_Name: PetalPierce
+  m_TagString: Piercing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

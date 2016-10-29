@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DanmakU;
+using System.Collections.Generic;
 
 /// <summary>
 /// The player. Follows the mouse cursor and performs a dash when left click is held and released.
@@ -65,6 +66,9 @@ public class Player : MonoBehaviour
 
     // Storage for player velocity when the level is paused
     private Vector3 oldVelocity;
+
+    // List of enemies hit during a dash - prevents the player from hitting enemies multiple times
+    private List<Enemy> hitEnemies = new List<Enemy>();
 
     // Dash selection line colors
     [SerializeField]
@@ -157,8 +161,9 @@ public class Player : MonoBehaviour
                 {
                     // Player reached its target
                     targetRenderer.enabled = false;
-                    dashing = false;
                     rigidbody2d.velocity = Vector3.zero;
+                    dashing = false;
+                    hitEnemies.Clear();
                 }
             }
             else if(selecting)
@@ -182,7 +187,7 @@ public class Player : MonoBehaviour
 	}
 
     /// <summary>
-    /// Called in fixed-time intervals. Handles movement and rotation.
+    /// Called in fixed-time intervals. Handles movement, rotation, and collision detection.
     /// </summary>
     public void FixedUpdate()
     {
@@ -204,6 +209,28 @@ public class Player : MonoBehaviour
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
                     Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+            }
+            
+            // Collision detection
+            RaycastHit2D[] hitArray = Physics2D.RaycastAll(transform.position, rigidbody2d.velocity, rigidbody2d.velocity.magnitude * Time.fixedDeltaTime);
+            if(hitArray.Length > 0)
+            {
+                foreach(RaycastHit2D hit in hitArray)
+                {
+                    Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                    if(enemy != null)
+                    {
+                        if(dashing && !hitEnemies.Contains(enemy))
+                        {
+                            hitEnemies.Add(enemy);
+                            enemy.Damage(50);
+                        }
+                        else if(!invincible)
+                        {
+                            Hit();
+                        }
+                    }
+                }
             }
         }
     }
@@ -325,38 +352,5 @@ public class Player : MonoBehaviour
         renderer.material.color = color;
         invincible = false;
         yield break;
-    }
-
-    /// <summary>
-    /// Called when the player first collides with an object. Handles collision with enemies.
-    /// </summary>
-    /// <param name="collider">The collider that the player collided with</param>
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-        if(enemy != null)
-        {
-            if(dashing)
-            {
-                enemy.Damage(50);
-            }
-            else if(!invincible)
-            {
-                Hit();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Called repeatedly when the player continues to collide with an object. Handles collision with enemies.
-    /// </summary>
-    /// <param name="collider">The collider that the player collided with</param>
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        Enemy enemy = collider.gameObject.GetComponent<Enemy>();
-        if(enemy != null && !dashing && !invincible)
-        {
-            Hit();
-        }
     }
 }

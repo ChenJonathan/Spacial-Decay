@@ -48,7 +48,7 @@ public partial class Enemy : DanmakuCollider
         Field = LevelController.Singleton.Field;
         Wave = LevelController.Singleton.Event.GetComponent<Wave>();
         Difficulty = Wave.Difficulty;
-        TagFilter = "Friendly";
+        TagFilter = "Untagged";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
         healthBar.transform.parent = transform;
@@ -112,11 +112,8 @@ public partial class Enemy : DanmakuCollider
     {
         Health -= damage;
 
-        if(damage != 0)
-        {
-            float healthProportion = (float)Health / MaxHealth;
-            healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
-        }
+        float healthProportion = (float)Health / MaxHealth;
+        healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
 
         if(Health <= 0)
         {
@@ -187,7 +184,6 @@ public partial class Enemy : DanmakuCollider
     /// <param name="info">Collision information</param>
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        Damage(danmaku.Damage);
         danmaku.Deactivate();
     }
 }

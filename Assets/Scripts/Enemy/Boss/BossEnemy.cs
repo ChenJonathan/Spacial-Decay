@@ -8,10 +8,12 @@ using System.Collections.Generic;
 public class BossEnemy : Enemy
 {
     public DanmakuPrefab BulletPrefab;
+    public DanmakuPrefab CirclePrefab;
     public DanmakuPrefab LaserPrefab;
     public Tower TowerPrefab;
 
     private FireBuilder fireDataBullet;
+    private FireBuilder fireDataCircle;
     private FireBuilder fireDataLaser;
 
     private List<Tower> towers;
@@ -24,9 +26,15 @@ public class BossEnemy : Enemy
     {
         fireDataBullet = new FireBuilder(BulletPrefab, Field);
         fireDataBullet.From(transform);
-        fireDataBullet.WithSpeed(12);
-        fireDataBullet.WithModifier(new CircularBurstModifier(45, 7, 0, 0));
+        fireDataBullet.WithSpeed(3);
+        fireDataBullet.WithAngularSpeed(45);
+        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(8, 12), 0, 0));
         fireDataBullet.WithController(new AccelerationController(3));
+
+        fireDataCircle = new FireBuilder(CirclePrefab, Field);
+        fireDataCircle.From(transform);
+        fireDataCircle.WithSpeed(12);
+        fireDataCircle.WithModifier(new CircularBurstModifier(45, 7, 0, 0));
 
         fireDataLaser = new FireBuilder(LaserPrefab, Field);
         fireDataLaser.From(transform);
@@ -90,9 +98,11 @@ public class BossEnemy : Enemy
         towers.Remove(tower);
         if(towers.Count == 0)
         {
-            fireDataBullet.WithSpeed(18);
+            fireDataCircle.WithSpeed(16);
             RotateSpeed = 16;
             enraged = true;
+
+            StartCoroutine(EnragedAttack());
         }
     }
 
@@ -110,10 +120,10 @@ public class BossEnemy : Enemy
                 direction = Random.Range(0, 2) * 2 - 1; // -1 or 1
                 for(int j = 0; j < 16; j++)
                 {
-                    fireDataBullet.Towards(position);
-                    fireDataBullet.WithRotation((12f * Mathf.Sqrt((16 - j) * (enraged ? 72 : 24)) - 80) * direction);
-                    fireDataBullet.Fire();
-                    yield return new WaitForSeconds(0.08f);
+                    fireDataCircle.Towards(position);
+                    fireDataCircle.WithRotation((12f * Mathf.Sqrt((16 - j) * (enraged ? 72 : 24)) - 80) * direction);
+                    fireDataCircle.Fire();
+                    yield return new WaitForSeconds(0.1f);
                 }
                 yield return new WaitForSeconds(0.5f);
             }
@@ -133,6 +143,15 @@ public class BossEnemy : Enemy
                 fireDataLaser.Fire();
                 yield return new WaitForSeconds(0.25f);
             }
+        }
+    }
+
+    protected IEnumerator EnragedAttack()
+    {
+        while(true)
+        {
+            fireDataBullet.Fire();
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

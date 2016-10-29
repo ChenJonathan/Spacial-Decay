@@ -14,7 +14,7 @@ public class DanmakuHitbox : DanmakuCollider
     public override void Awake()
     {
         base.Awake();
-        TagFilter = "Enemy|Laser";
+        TagFilter = "Bullet|Piercing";
         player = transform.GetComponentInParent<Player>();
     }
 
@@ -25,7 +25,7 @@ public class DanmakuHitbox : DanmakuCollider
     /// <param name="info">Information about the collision</param>
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        if(danmaku.Tag != "Laser")
+        if(danmaku.Tag != "Piercing")
             danmaku.Deactivate();
         if(!player.IsDashing && !player.IsInvincible)
         {

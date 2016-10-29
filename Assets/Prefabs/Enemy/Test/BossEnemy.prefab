@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
+    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
     - {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9, type: 2}
@@ -110,6 +111,7 @@ MonoBehaviour:
     serializedStrings:
       keys:
       - DanmakuPrefab BulletPrefab
+      - DanmakuPrefab CirclePrefab
       - DanmakuPrefab LaserPrefab
       - Tower TowerPrefab
       - Player Player
@@ -126,6 +128,7 @@ MonoBehaviour:
       - 0
       - 1
       - 2
+      - 3
       - null
       - null
       - null
@@ -134,7 +137,7 @@ MonoBehaviour:
       - 0
       - 8.0
       - false
-      - 3
+      - 4
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -152,7 +155,8 @@ MonoBehaviour:
   RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  BulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  BulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  CirclePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
   LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
   TowerPrefab: {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9,
     type: 2}
