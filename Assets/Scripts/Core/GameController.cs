@@ -65,6 +65,8 @@ public class GameController : Singleton<GameController>
     /// <param name="mode">How the scene was loaded</param>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
+        Time.timeScale = 1;
+
         if(scene.name.Equals("Level Select"))
         {
             // Re-enable previously unlocked levels

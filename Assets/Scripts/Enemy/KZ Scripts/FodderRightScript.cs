@@ -21,18 +21,13 @@ public class FodderRightScript : Enemy
 
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
-        if(!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN / (1 + Difficulty / 4);
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN / (1 + Difficulty / 4);
         }
     }
 
@@ -40,16 +35,12 @@ public class FodderRightScript : Enemy
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        timer -= Time.deltaTime;
+        if(timer <= 0)
         {
-            timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                Die();
-            }
-            Vector3 direction = new Vector3(1.0f, 0.0f);
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
+            Die();
         }
-
+        Vector3 direction = new Vector3(1.0f, 0.0f);
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
     }
 }

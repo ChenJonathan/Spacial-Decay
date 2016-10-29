@@ -44,18 +44,15 @@ public class SpiralBossScript : Enemy
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        if(!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
         {
-            if (!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
-            {
-                Vector3 direction = Vector3.zero - transform.position;
-                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                weaponized = true;
-            }
+            Vector3 direction = Vector3.zero - transform.position;
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            weaponized = true;
         }
     }
 

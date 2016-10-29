@@ -29,22 +29,17 @@ public class TempInvulnEnemy : Enemy
         invulnTime += Difficulty;
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
-        if (!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0)
+            if(!fireTowardsPlayer)
             {
-                if (!fireTowardsPlayer)
-                {
-                    fireData.Towards(direction);
-                }
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
+                fireData.Towards(direction);
             }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN;
         }
     }
 
@@ -52,47 +47,44 @@ public class TempInvulnEnemy : Enemy
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        if(invuln == 1)
         {
-            if (invuln == 1)
+            // While invulnerable, repeatedly fade sprite
+            invulnTime -= Time.fixedDeltaTime;
+            Renderer renderer = GetComponent<Renderer>();
+            Color color = renderer.material.color;
+            if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
             {
-                // While invulnerable, repeatedly fade sprite
-                invulnTime -= Time.fixedDeltaTime;
-                Renderer renderer = GetComponent<Renderer>();
-                Color color = renderer.material.color;
-                if (invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
-                {
-                    color.a = 1.01f - color.a;
-                    renderer.material.color = color;
-                }
-                else
-                {
-                    color.a = 1;
-                    renderer.material.color = color;
-                }                
-            }
-            if (invulnTime <= 0)
-            {
-                invuln = 2;            
-            }
-
-            if ((Mathf.Abs(transform.position.x) > 18) || (Mathf.Abs(transform.position.y) > 9))
-            {
-                direction = -1 * transform.position;
-            }
-
-            int velMult = 1; // Increase velocity if invulnerable
-            if (invuln == 1)
-            {
-                velMult = 2;
+                color.a = 1.01f - color.a;
+                renderer.material.color = color;
             }
             else
             {
-                velMult = 1;
+                color.a = 1;
+                renderer.material.color = color;
             }
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
-            SetRotation(direction);
         }
+        if(invulnTime <= 0)
+        {
+            invuln = 2;
+        }
+
+        if((Mathf.Abs(transform.position.x) > 18) || (Mathf.Abs(transform.position.y) > 9))
+        {
+            direction = -1 * transform.position;
+        }
+
+        int velMult = 1; // Increase velocity if invulnerable
+        if(invuln == 1)
+        {
+            velMult = 2;
+        }
+        else
+        {
+            velMult = 1;
+        }
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
+        SetRotation(direction);
     }
 
     public override void Damage(int damage)

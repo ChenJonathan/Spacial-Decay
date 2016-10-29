@@ -44,33 +44,26 @@ public class RegularCircleScript1 : Enemy
         }
     }
 
-    //Static shooting
-    public override void Update()
+    // Static shooting
+    public void Update()
     {
-        base.Update();
-
-        if (!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0 && timer > 2)
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0 && timer > 2)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN - (.66f * Difficulty);
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN - (.66f * Difficulty);
         }
     }
 
-    //STOP!
+    // STOP!
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (!LevelController.Singleton.Paused)
+
+        timer += Time.deltaTime;
+        if(timer > 1)
         {
-            timer += Time.deltaTime;
-            if (timer > 1)
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            }
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 }

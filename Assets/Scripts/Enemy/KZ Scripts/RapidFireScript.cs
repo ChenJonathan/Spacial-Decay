@@ -21,17 +21,12 @@ public class RapidFireScript : Enemy
         fireData.WithModifier(new RandomizeAngleModifier(360));
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
-        if(!LevelController.Singleton.Paused)
-        {   
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown < 0)
-            {
-                fireData.Fire();
-            }
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown < 0)
+        {
+            fireData.Fire();
         }
     }
 
@@ -39,18 +34,15 @@ public class RapidFireScript : Enemy
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        timer -= Time.deltaTime;
+        if(timer > 0)
         {
-            timer -= Time.deltaTime;
-            if (timer > 0)
-            {
-                Vector3 direction = new Vector3(-1.0f, 0.0f);
-                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
-            } else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f);
-            }
-            
+            Vector3 direction = new Vector3(-1.0f, 0.0f);
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f);
         }
     }
 }

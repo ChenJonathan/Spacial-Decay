@@ -3,27 +3,27 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class FighterEnemy : Enemy
+public class RapidFireAimScript : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
     private FireBuilder fireData;
-    private float fireCooldown = MAX_FIRE_COOLDOWN;
+    private float fireCooldown = 3f;
     private static readonly float MAX_FIRE_COOLDOWN = 1f;
+    private float timer = 2f;
 
-	public override void Start()
+    public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(6);
-        fireData.WithModifier(new CircularBurstModifier(100, 5, 0, 0));
-	}
-	
-	public void Update()
+        fireData.WithSpeed(3 + 3 * Difficulty);
+    }
+
+    public void Update()
     {
         fireCooldown -= Time.deltaTime;
-        if(fireCooldown <= 0)
+        if(fireCooldown < 0)
         {
             fireData.Fire();
             fireCooldown = MAX_FIRE_COOLDOWN;
@@ -34,11 +34,15 @@ public class FighterEnemy : Enemy
     {
         base.FixedUpdate();
 
-        Vector3 direction = Player.transform.position - transform.position;
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
-        if(direction.magnitude <= 5)
+        timer -= Time.deltaTime;
+        if(timer > 0)
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Vector3 direction = new Vector3(-1.0f, 0.0f);
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0.0f, 0.0f);
         }
     }
 }

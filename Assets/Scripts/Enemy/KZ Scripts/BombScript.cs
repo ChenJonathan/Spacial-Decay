@@ -46,46 +46,39 @@ public class BombScript : Enemy
         GetComponent<Rigidbody2D>().velocity = new Vector2(-30, 0);
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
-        if (!LevelController.Singleton.Paused)
+        time += Time.deltaTime;
+        while(warningList.Count > 0 && time >= warningList[0].Data.Time)
         {
-            time += Time.deltaTime;
-            while (warningList.Count > 0 && time >= warningList[0].Data.Time)
+            Wave.SpawnWarning(warningList[0]);
+            warningList.RemoveAt(0);
+        }
+        while(fireList.Count > 0 && time >= fireList[0].Time)
+        {
+            for(int i = 0; i < 20; i++)
             {
-                Wave.SpawnWarning(warningList[0]);
-                warningList.RemoveAt(0);
-            }
-            while (fireList.Count > 0 && time >= fireList[0].Time)
-            {   
-                for (int i = 0; i < 20; i++)
-                {   
-                    for (int j = 0; j < 5 + Difficulty * 5; j++)
-                    {
-                        fireData.WithSpeed(new DynamicInt(3, 6 + Difficulty));
-                        fireData.From(new Vector2(fireList[0].Location.x, fireList[0].Location.y));
-                        fireData.Towards(new Vector2(new DynamicInt(-100, 100), new DynamicInt(-100, 100)));
-                        fireData.Fire();
-                    }
+                for(int j = 0; j < 5 + Difficulty * 5; j++)
+                {
+                    fireData.WithSpeed(new DynamicInt(3, 6 + Difficulty));
+                    fireData.From(new Vector2(fireList[0].Location.x, fireList[0].Location.y));
+                    fireData.Towards(new Vector2(new DynamicInt(-100, 100), new DynamicInt(-100, 100)));
+                    fireData.Fire();
                 }
-                fireList.RemoveAt(0);
-                if (fireList.Count == 0)
-                    Destroy(gameObject, 8);
             }
+            fireList.RemoveAt(0);
+            if(fireList.Count == 0)
+                Destroy(gameObject, 8);
         }
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if(!LevelController.Singleton.Paused)
+
+        if(time > 6)
         {
-            if(time > 6)
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            }
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 }

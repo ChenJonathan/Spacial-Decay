@@ -25,18 +25,13 @@ public class DarkEnemy : Enemy
         SetRotation(0);
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-
-        if(!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            if(fireCooldown <= 0)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN;
         }
     }
 
@@ -44,18 +39,15 @@ public class DarkEnemy : Enemy
     {
         base.FixedUpdate();
 
-        if(!LevelController.Singleton.Paused)
+        if(transform.position.y <= -8)
         {
-            if(transform.position.y <= -8)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
-                SetRotation(0);
-            }
-            else if(transform.position.y >= 8)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-                SetRotation(180);
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
+            SetRotation(0);
+        }
+        else if(transform.position.y >= 8)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+            SetRotation(180);
         }
     }
 }

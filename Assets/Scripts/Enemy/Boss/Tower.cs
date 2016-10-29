@@ -26,10 +26,8 @@ public class Tower : Enemy
         fireData.WithController(new AccelerationController(3));
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-        
         fireCooldown -= Time.deltaTime;
         if(fireCooldown <= 0)
         {

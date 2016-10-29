@@ -64,9 +64,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float rotateSpeed = 18;
 
-    // Storage for player velocity when the level is paused
-    private Vector3 oldVelocity;
-
     // List of enemies hit during a dash - prevents the player from hitting enemies multiple times
     private List<Enemy> hitEnemies = new List<Enemy>();
 
@@ -131,107 +128,84 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        // Stores the player's velocity when the level is paused
-        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
-        {
-            oldVelocity = GetComponent<Rigidbody2D>().velocity;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        HandleInput();
 
-            // Cancel dash targeting on pause
-            selecting = false;
-            SetMoveTarget(field.WorldPoint(mousePos));
-            dashRenderer.enabled = false;
-        }
-        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
+        // General movement-related functions
+        if(moving)
         {
-            GetComponent<Rigidbody2D>().velocity = oldVelocity;
-            oldVelocity = Vector3.zero;
-        }
-
-        if(!LevelController.Singleton.Paused)
-        {
-            HandleInput();
-            
-            // General movement-related functions
-            if(moving)
+            targetRenderer.enabled = true;
+            moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
+            if(!moving)
             {
-                targetRenderer.enabled = true;
-                moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
-                if(!moving)
-                {
-                    // Player reached its target
-                    targetRenderer.enabled = false;
-                    rigidbody2d.velocity = Vector3.zero;
-                    dashing = false;
-                    hitEnemies.Clear();
-                }
-            }
-            else if(selecting)
-            {
-                targetRenderer.enabled = true;
-            }
-
-            // Handling the dash cooldown
-            if(dashes < maxDashes)
-            {
-                dashCooldown += Time.deltaTime;
-                if(dashCooldown >= MAX_DASH_COOLDOWN)
-                {
-                    dashes++;
-                    dashCooldown = 0;
-                    dashRenderer.SetColors(dashStartActive, dashEndActive);
-                    dashCounter.UpdateCounter(dashes);
-                }
+                // Player reached its target
+                targetRenderer.enabled = false;
+                rigidbody2d.velocity = Vector3.zero;
+                dashing = false;
+                hitEnemies.Clear();
             }
         }
-	}
+        else if(selecting)
+        {
+            targetRenderer.enabled = true;
+        }
+
+        // Handling the dash cooldown
+        if(dashes < maxDashes)
+        {
+            dashCooldown += Time.deltaTime;
+            if(dashCooldown >= MAX_DASH_COOLDOWN)
+            {
+                dashes++;
+                dashCooldown = 0;
+                dashRenderer.SetColors(dashStartActive, dashEndActive);
+                dashCounter.UpdateCounter(dashes);
+            }
+        }
+    }
 
     /// <summary>
     /// Called in fixed-time intervals. Handles movement, rotation, and collision detection.
     /// </summary>
     public void FixedUpdate()
     {
-        if(!LevelController.Singleton.Paused)
+        // Move and rotate towards the target
+        if(moving)
         {
-            // Move and rotate towards the target
-            if(moving)
-            {
-                rigidbody2d.velocity = ((Vector3)target - transform.position) * Time.fixedDeltaTime * (dashing ? dashSpeed : moveSpeed);
-                if(!selecting)
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                        Vector3.forward, (Vector3)target - transform.position), Time.fixedDeltaTime * rotateSpeed);
-                }
-            }
-
-            // Rotate to mouse if selecting
-            if(selecting)
+            rigidbody2d.velocity = ((Vector3)target - transform.position) * Time.fixedDeltaTime * (dashing ? dashSpeed : moveSpeed);
+            if(!selecting)
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                    Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+                    Vector3.forward, (Vector3)target - transform.position), Time.fixedDeltaTime * rotateSpeed);
             }
-            
-            // Collision detection
-            RaycastHit2D[] hitArray = Physics2D.RaycastAll(transform.position, rigidbody2d.velocity, rigidbody2d.velocity.magnitude * Time.fixedDeltaTime);
-            if(hitArray.Length > 0)
+        }
+
+        // Rotate to mouse if selecting
+        if(selecting)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
+                Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+        }
+
+        // Collision detection
+        RaycastHit2D[] hitArray = Physics2D.RaycastAll(transform.position, rigidbody2d.velocity, rigidbody2d.velocity.magnitude * Time.fixedDeltaTime);
+        if(hitArray.Length > 0)
+        {
+            foreach(RaycastHit2D hit in hitArray)
             {
-                foreach(RaycastHit2D hit in hitArray)
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if(enemy != null)
                 {
-                    Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
-                    if(enemy != null)
+                    if(dashing)
                     {
-                        if(dashing)
+                        if(!hitEnemies.Contains(enemy))
                         {
-                            if(!hitEnemies.Contains(enemy))
-                            {
-                                hitEnemies.Add(enemy);
-                                enemy.Damage(50);
-                            }
+                            hitEnemies.Add(enemy);
+                            enemy.Damage(50);
                         }
-                        else if(!invincible)
-                        {
-                            Hit();
-                        }
+                    }
+                    else if(!invincible)
+                    {
+                        Hit();
                     }
                 }
             }
@@ -254,6 +228,7 @@ public class Player : MonoBehaviour
             dashRenderer.SetPosition(0, transform.position);
             dashRenderer.SetPosition(1, field.WorldPoint(mousePos));
             dashRenderer.enabled = true;
+            LevelController.Singleton.TargetTimeScale = 0.5f;
         }
         else if(selecting)
         {
@@ -274,6 +249,7 @@ public class Player : MonoBehaviour
                 SetMoveTarget(field.WorldPoint(mousePos));
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
+                LevelController.Singleton.TargetTimeScale = 1;
             }
             else
             {
@@ -293,6 +269,7 @@ public class Player : MonoBehaviour
             // Cancel dash targeting
             selecting = false;
             dashRenderer.enabled = false;
+            LevelController.Singleton.TargetTimeScale = 1;
         }
     }
 
@@ -340,15 +317,12 @@ public class Player : MonoBehaviour
         float timer = 0;
         while(timer < time)
         {
-            if(!LevelController.Singleton.Paused)
+            if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
             {
-                if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
-                {
-                    color.a = 1.25f - color.a;
-                    renderer.material.color = color;
-                }
-                timer += Time.deltaTime;
+                color.a = 1.25f - color.a;
+                renderer.material.color = color;
             }
+            timer += Time.deltaTime;
             yield return null;
         }
         color.a = 1;
