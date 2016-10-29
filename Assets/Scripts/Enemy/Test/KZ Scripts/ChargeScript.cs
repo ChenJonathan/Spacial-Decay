@@ -92,7 +92,7 @@ public class ChargeScript : Enemy
                         yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
                     }
                     rigidbody2d.velocity = Vector2.zero;
-                    rigidbody2d.MoveRotation(90);
+                    rigidbody2d.MoveRotation(90f);
 
                     fireData.Facing(Vector2.down);
                     for (int j = 0; j < 1 + Difficulty; j++)
@@ -107,7 +107,7 @@ public class ChargeScript : Enemy
                         yield return new WaitForSeconds(0.5f / (Difficulty + 1f));
                     }
                     rigidbody2d.velocity = Vector2.zero;
-                    rigidbody2d.MoveRotation(270);
+                    rigidbody2d.MoveRotation(270f);
                 }
             }
         }
