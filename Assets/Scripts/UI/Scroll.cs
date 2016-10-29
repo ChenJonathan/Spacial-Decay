@@ -5,7 +5,10 @@
 /// </summary>
 public class Scroll : MonoBehaviour
 {
-    private readonly float CAMERA_SPEED = 2;
+    private float cameraSpeed = 0;
+
+    private readonly float CAMERA_ACCELERATION = 0.25f;
+    private readonly float CAMERA_SPEED_DECAY = 0.1f;
     private readonly float CAMERA_MAX_Y = 57.6269100001f;
 
     /// <summary>
@@ -20,20 +23,36 @@ public class Scroll : MonoBehaviour
     /// <summary>
     /// Called periodically. Shifts the camera based on mouse position.
     /// </summary>
-    public void Update()
+    public void FixedUpdate()
     {
-        // Scrolling
+        // Calculating new camera speed
         float border = Screen.height / 4;
-        float y = transform.position.y;
         if(Input.mousePosition.y > Screen.height - border)
         {
             float ratio = Mathf.InverseLerp(Screen.height - border, Screen.height, Input.mousePosition.y);
-            y = Mathf.Clamp(transform.position.y + ratio * ratio * CAMERA_SPEED, -CAMERA_MAX_Y, CAMERA_MAX_Y);
+            cameraSpeed += ratio * ratio * CAMERA_ACCELERATION;
         }
         else if(Input.mousePosition.y < border)
         {
             float ratio = Mathf.InverseLerp(border, 0, Input.mousePosition.y);
-            y = Mathf.Clamp(transform.position.y - ratio * ratio * CAMERA_SPEED, -CAMERA_MAX_Y, CAMERA_MAX_Y);
+            cameraSpeed -= ratio * ratio * CAMERA_ACCELERATION;
+        }
+        else
+        {
+            cameraSpeed = Mathf.Lerp(cameraSpeed, 0, CAMERA_SPEED_DECAY);
+        }
+
+        // Making sure camera stays in bounds
+        float y = transform.position.y + cameraSpeed;
+        if(y > CAMERA_MAX_Y)
+        {
+            y = CAMERA_MAX_Y;
+            cameraSpeed = 0;
+        }
+        else if(y < -CAMERA_MAX_Y)
+        {
+            y = -CAMERA_MAX_Y;
+            cameraSpeed = 0;
         }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }

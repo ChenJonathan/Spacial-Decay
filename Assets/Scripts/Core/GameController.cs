@@ -17,6 +17,8 @@ public class GameController : Singleton<GameController>
 
     private List<Level> unlockedLevels;
     private List<Level> newLevels;
+
+    private float cameraY = -57.62691f;
     
     /// <summary>
     /// Returns the only instance of the GameController.
@@ -53,7 +55,8 @@ public class GameController : Singleton<GameController>
     /// <param name="level">The level to load</param>
     public void LoadLevel(Level level)
     {
-        GameController.Singleton.CurrentLevel = level;
+        cameraY = GameObject.FindGameObjectWithTag("MainCamera").transform.position.y;
+        Singleton.CurrentLevel = level;
         newLevels.Remove(level);
         SceneManager.LoadScene(level.Scene);
     }
@@ -69,6 +72,10 @@ public class GameController : Singleton<GameController>
 
         if(scene.name.Equals("Level Select"))
         {
+            // Set camera position
+            GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            mainCamera.transform.position = new Vector3(0, cameraY, 0);
+
             // Re-enable previously unlocked levels
             foreach(Level level in unlockedLevels)
             {
