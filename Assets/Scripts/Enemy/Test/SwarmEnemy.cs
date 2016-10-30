@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using DanmakU;
 
 public class SwarmEnemy : Enemy
@@ -33,37 +32,34 @@ public class SwarmEnemy : Enemy
 	
 	public void Update()
     {
-        if(!LevelController.Singleton.Paused)
+        if(moveTimer <= 0)
         {
-            if(moveTimer <= 0)
-            {
-                rigidbody2d.velocity = Vector2.zero;
+            rigidbody2d.velocity = Vector2.zero;
 
-                fireCooldown -= Time.deltaTime;
-                if(fireCooldown <= 0)
+            fireCooldown -= Time.deltaTime;
+            if(fireCooldown <= 0)
+            {
+                if(fireCount < 100)
                 {
-                    if(fireCount < 100)
-                    {
-                        fireCount++;
-                        fireData.Fire();
-                        fireCooldown = MAX_FIRE_COOLDOWN;
-                    }
-                    else
-                    {
-                        moveTimer = 16;
-                        direction = -direction;
-                        rigidbody2d.velocity = new Vector2(direction, 0);
-                        transform.Rotate(Vector3.forward * 180);
-                    }
+                    fireCount++;
+                    fireData.Fire();
+                    fireCooldown = MAX_FIRE_COOLDOWN;
+                }
+                else
+                {
+                    moveTimer = 16;
+                    direction = -direction;
+                    rigidbody2d.velocity = new Vector2(direction, 0);
+                    transform.Rotate(Vector3.forward * 180);
                 }
             }
-            else
-            {
-                moveTimer -= Time.deltaTime;
-
-                if(moveTimer <= 0 && fireCount == 100)
-                    Die();
-            }
         }
-	}
+        else
+        {
+            moveTimer -= Time.deltaTime;
+
+            if(moveTimer <= 0 && fireCount == 100)
+                Die();
+        }
+    }
 }

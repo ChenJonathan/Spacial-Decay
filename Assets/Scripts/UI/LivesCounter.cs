@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using DanmakU;
-using System.Collections;
 
-public class LivesCounter : MonoBehaviour {
-
+/// <summary>
+/// A visual display for the player's remaining lives.
+/// </summary>
+public class LivesCounter : MonoBehaviour
+{
     [SerializeField]
     private GameObject heartPrefab;
     [SerializeField]
@@ -14,13 +15,16 @@ public class LivesCounter : MonoBehaviour {
     private float heartSize;
 
     [SerializeField]
-    private float gap = 6;
+    private float gap = 6; // Space between hearts
     [SerializeField]
-    private int maxDisplayCount = 5;
+    private int maxDisplayCount = 5; // Number of hearts that can be displayed - any more will result in a numerical display instead
 
     private GameObject[] livesCounter;
-    
-	void Start()
+
+    /// <summary>
+    /// Called on instantiation. Handles initialization.
+    /// </summary>
+    public void Start()
     {
         int maxLives = Player.maxLives;
         heartSize = heartPrefab.GetComponent<RectTransform>().sizeDelta.x;
@@ -47,8 +51,12 @@ public class LivesCounter : MonoBehaviour {
 
         UpdateCounter(maxLives);
 	}
-	
-	public void UpdateCounter(int lives)
+
+    /// <summary>
+    /// Updates the counter with a new number of player lives.
+    /// </summary>
+    /// <param name="lives">The player's number of remaining lives</param>
+    public void UpdateCounter(int lives)
     {
         lives = Mathf.Max(lives, 0);
         if(lives <= maxDisplayCount)

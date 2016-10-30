@@ -22,36 +22,32 @@ public class DarkEnemy : Enemy
         fireData.WithController(new AccelerationController(3));
 
         GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-        transform.RotateAround(transform.position, transform.forward, 180f);
+        SetRotation(0);
     }
 
     public void Update()
     {
-        if(!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            if(fireCooldown <= 0)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN;
         }
     }
 
     public override void FixedUpdate()
     {
-        if(!LevelController.Singleton.Paused)
+        base.FixedUpdate();
+
+        if(transform.position.y <= -8)
         {
-            if(transform.position.y <= -8)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
-                transform.RotateAround(transform.position, transform.forward, 180f);
-            }
-            else if(transform.position.y >= 8)
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
-                transform.RotateAround(transform.position, transform.forward, 180f);
-            }
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2);
+            SetRotation(0);
+        }
+        else if(transform.position.y >= 8)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2);
+            SetRotation(180);
         }
     }
 }

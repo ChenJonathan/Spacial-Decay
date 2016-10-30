@@ -22,29 +22,23 @@ public class FighterEnemy : Enemy
 	
 	public void Update()
     {
-        if(!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            if(fireCooldown <= 0)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN;
         }
-	}
+    }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if(!LevelController.Singleton.Paused)
+        Vector3 direction = Player.transform.position - transform.position;
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
+        if(direction.magnitude <= 5)
         {
-            Vector3 direction = Player.transform.position - transform.position;
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
-            if(direction.magnitude <= 5)
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            }
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 }

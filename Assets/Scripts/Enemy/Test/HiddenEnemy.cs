@@ -44,31 +44,28 @@ public class HiddenEnemy : Enemy
 	
 	public void Update()
     {
-        if(!LevelController.Singleton.Paused)
+        time += Time.deltaTime;
+        while(warningList.Count > 0 && time >= warningList[0].Data.Time)
         {
-            time += Time.deltaTime;
-            while(warningList.Count > 0 && time >= warningList[0].Data.Time)
-            {
-                Wave.SpawnWarning(warningList[0]);
-                warningList.RemoveAt(0);
-            }
-            while(fireList.Count > 0 && time >= fireList[0].Time)
-            {
-                for(int i = 0; i < 360; i += 5)
-                {
-                    for(int j = 0; j < 10; j++)
-                    {
-                        fireData.From(new Vector2(fireList[0].Location.x + Mathf.Cos((i + j) * Mathf.Deg2Rad) * (30 + j), 
-                                                  fireList[0].Location.y + Mathf.Sin((i + j) * Mathf.Deg2Rad) * (30 + j)));
-                        fireData.Towards(new Vector2(fireList[0].Location.x + Mathf.Cos((i + j + 90) * Mathf.Deg2Rad) * fireRadius,
-                                                     fireList[0].Location.y + Mathf.Sin((i + j + 90) * Mathf.Deg2Rad) * fireRadius));
-                        fireData.Fire();
-                    }
-                }
-                fireList.RemoveAt(0);
-                if(fireList.Count == 0)
-                    Destroy(gameObject, 5);
-            }
+            Wave.SpawnWarning(warningList[0]);
+            warningList.RemoveAt(0);
         }
-	}
+        while(fireList.Count > 0 && time >= fireList[0].Time)
+        {
+            for(int i = 0; i < 360; i += 5)
+            {
+                for(int j = 0; j < 10; j++)
+                {
+                    fireData.From(new Vector2(fireList[0].Location.x + Mathf.Cos((i + j) * Mathf.Deg2Rad) * (30 + j),
+                                              fireList[0].Location.y + Mathf.Sin((i + j) * Mathf.Deg2Rad) * (30 + j)));
+                    fireData.Towards(new Vector2(fireList[0].Location.x + Mathf.Cos((i + j + 90) * Mathf.Deg2Rad) * fireRadius,
+                                                 fireList[0].Location.y + Mathf.Sin((i + j + 90) * Mathf.Deg2Rad) * fireRadius));
+                    fireData.Fire();
+                }
+            }
+            fireList.RemoveAt(0);
+            if(fireList.Count == 0)
+                Destroy(gameObject, 5);
+        }
+    }
 }

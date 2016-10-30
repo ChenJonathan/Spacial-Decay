@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A sprite that warns the player of incoming enemies or bullets.
+/// </summary>
 public class Warning : MonoBehaviour
 {
     // Total duration of the warning, including fade-in / fade-out
@@ -9,6 +12,7 @@ public class Warning : MonoBehaviour
         get { return duration; }
         set { duration = value; }
     }
+
     // Amount of time the warning will spend fading in
     private float fadeInDuration;
     public float FadeInDuration
@@ -16,6 +20,7 @@ public class Warning : MonoBehaviour
         get { return fadeInDuration; }
         set { fadeInDuration = value; }
     }
+
     // Amount of time the warning will spend fading out
     private float fadeOutDuration;
     public float FadeOutDuration
@@ -24,9 +29,15 @@ public class Warning : MonoBehaviour
         set { fadeOutDuration = value; }
     }
 
+    // Renders the warning sprite
     private SpriteRenderer renderer2d;
+
+    // Time elapsed since the warning was instantiated
     private float time = 0;
 
+    /// <summary>
+    /// Called when the warning is instantiated. Handles initialization.
+    /// </summary>
     public virtual void Start()
     {
         renderer2d = GetComponent<SpriteRenderer>();
@@ -35,6 +46,11 @@ public class Warning : MonoBehaviour
         renderer2d.color = color;
     }
 
+    /// <summary>
+    /// Called periodically. Handles fading in, fading out, and destroying the warning when time is up.
+    /// </summary>
+    /// <param name="warning">The warning prefab to spawn</param>
+    /// <returns>The warning that was spawned</returns>
     public virtual void Update()
     {
         time += Time.deltaTime;
@@ -52,6 +68,5 @@ public class Warning : MonoBehaviour
             color.a = Mathf.Lerp(0, 1, time / fadeInDuration);
             renderer2d.color = color;
         }
-
     }
 }

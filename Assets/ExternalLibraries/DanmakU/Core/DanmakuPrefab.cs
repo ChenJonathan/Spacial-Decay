@@ -205,17 +205,11 @@ namespace DanmakU {
 		}
 
 		void Update() {
-			//runtimeRenderer.GetPropertyBlock(mpb);
-			//mpb.SetTexture("_MainTexture", cachedSprite.texture);
-			//runtimeRenderer.SetPropertyBlock(mpb);
-
 			danmakuCount = currentDanmaku.Count;
 			int count = runtimeSystem.particleCount;
 			if (danmakuCount > count) {
-				//Debug.Log("hello");
 				runtimeSystem.maxParticles = Mathf.NextPowerOfTwo(danmakuCount);
 				runtimeSystem.Emit(danmakuCount - count);
-				//Debug.Log(runtimeSystem.particleCount);
 				count = danmakuCount;
 			}
 			if (danmakuCount > particles.Length) {
@@ -232,12 +226,11 @@ namespace DanmakU {
 					if(done) {
 						Danmaku danmaku = enumerator.Current;
 						particles[i].position = danmaku.position;
-                        particles[i].size = danmaku.Scale;
-						//particles[i].axisOfRotation = forward;
+                        particles[i].startSize = danmaku.Scale;
 						particles[i].lifetime = 1000;
-						particles[i].color = danmaku.Color;
+						particles[i].startColor = danmaku.Color;
 					} else {
-						particles[i].size = 0f;
+						particles[i].startSize = 0f;
 						particles[i].lifetime = -1;
 					}
 				}
@@ -249,13 +242,13 @@ namespace DanmakU {
 						Danmaku danmaku = enumerator.Current;
 						particles[i].position = danmaku.position;
 						particles[i].rotation = danmaku.rotation;
-						particles[i].size = danmaku.Scale;
+						particles[i].startSize = danmaku.Scale;
 						particles[i].axisOfRotation = forward;
-						particles[i].color = danmaku.Color;
+						particles[i].startColor = danmaku.Color;
 						if(particles[i].lifetime <= 1)
 							particles[i].lifetime = 1000;
 					} else {
-						particles[i].size = 0f;
+						particles[i].startSize = 0f;
 						particles[i].lifetime = -1;
 					}
 				}
@@ -376,12 +369,9 @@ namespace DanmakU {
 
 			if (renderMesh != null) {
 
-				//Scale the mesh as necessary based on prefab's scale
-
 				Matrix4x4 transformMatrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, transform.localScale);
 				vertexes = renderMesh.vertices;
 				for(int i = 0; i < vertexes.Length; i++) {
-					//Debug.Log(vertexes[i]);
 					vertexes[i] = transformMatrix * vertexes[i];
 				}
 				renderMesh.vertices = vertexes;
@@ -389,10 +379,7 @@ namespace DanmakU {
 			}
 			
 			runtimeRenderer.mesh = renderMesh;
-
-			//singleRenderer.enabled = false;
-			//GetComponent<CircleCollider2D>().enabled = false;
-			//Disable all other components
+            
 			foreach (Behaviour comp in GetComponentsInChildren<Behaviour>()) {
 				if(comp != this) {
 					comp.enabled = false;
@@ -422,7 +409,7 @@ namespace DanmakU {
 			runtimeRenderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
 			runtimeRenderer.receiveShadows = false;
 			runtimeRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-			runtimeRenderer.useLightProbes = false;
+			runtimeRenderer.lightProbeUsage = UnityEngine.Rendering.LightProbeUsage.Off;
 
 			gameObject.hideFlags = HideFlags.HideInHierarchy;
 			runtimeSystem.gameObject.hideFlags = HideFlags.HideInHierarchy;
