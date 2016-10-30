@@ -29,3 +29,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Test.unity
   - enabled: 1
     path: Assets/Scenes/KZ Level 4.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 5.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 6.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 7.unity
+  - enabled: 1
+    path: Assets/Scenes/KZ Level 8.unity

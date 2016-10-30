@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Controls the level, calling events sequentially.
 /// </summary>
-public class LevelController : DanmakuGameController, IPausable
+public class LevelController : DanmakuGameController
 {
     // Field to spawn the bullets in
     [SerializeField]
@@ -44,26 +44,8 @@ public class LevelController : DanmakuGameController, IPausable
         get { return (LevelController)Instance; }
     }
 
-    private bool _paused;
-
-    /// <summary>
-    /// Returns whether or not the game is paused.
-    /// </summary>
-    /// <returns>Whether or not the game is paused</returns>
-    public bool Paused
-    {
-        get {
-            return _paused;
-        }
-        set {
-            if (value) {
-                Time.timeScale = 0;
-            } else {
-                Time.timeScale = 1;
-            }
-            _paused = value;
-        }
-    }
+    // Time scale constantly approaches this value
+    public float TargetTimeScale = 1;
 
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
@@ -87,19 +69,19 @@ public class LevelController : DanmakuGameController, IPausable
     }
 
     /// <summary>
-    /// Called periodically. Updates bullets.
+    /// Called periodically. Updates bullets and time scale.
     /// </summary>
     public override void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-            Paused = !Paused;
-        else if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+        base.Update();
+        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
 
-        if(!Paused)
-        {
-            base.Update();
-        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+            TargetTimeScale = TargetTimeScale == 0 ? 1 : 0;
+
+        // TODO Remove this
+        if(Input.GetKeyDown(KeyCode.Tab))
+            SceneManager.LoadScene("Level Select");
     }
 
     /// <summary>
@@ -125,6 +107,7 @@ public class LevelController : DanmakuGameController, IPausable
         }
         else
         {
+            TargetTimeScale = 1;
             StartEvent();
         }
     }

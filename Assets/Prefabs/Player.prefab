@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 454976}
   - 212: {fileID: 21217324}
-  - 58: {fileID: 5895962}
+  - 60: {fileID: 60000012772682418}
   - 50: {fileID: 5090954}
   - 114: {fileID: 11426350}
   m_Layer: 12
@@ -44,10 +44,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442014}
-  - 58: {fileID: 5873280}
-  - 114: {fileID: 11475046}
+  - 58: {fileID: 58000010901234842}
+  - 114: {fileID: 114000013569479906}
   m_Layer: 12
-  m_Name: DashHitbox
+  m_Name: DanmakuHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,34 +111,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &5873280
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154116}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.9
---- !u!58 &5895962
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134198}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.3
 --- !u!114 &11426350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,41 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9683316ec60e448b58b874d3702e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serializationData:
-    serializedObjects:
-    - {fileID: 148420, guid: 86c82ccd2da3b5442bc7c82a5d005f4f, type: 2}
-    serializedStrings:
-      keys:
-      - GameObject targetPrefab
-      - int maxLives
-      - int maxDashes
-      - float moveSpeed
-      - float dashSpeed
-      - float rotateSpeed
-      - Color dashStartActive
-      - Color dashEndActive
-      - Color dashStartInactive
-      - Color dashEndInactive
-      - string tagFilter
-      values:
-      - 0
-      - 10
-      - 3
-      - 360.0
-      - 450.0
-      - 18.0
-      - '{"r":1.0,"g":1.0,"b":1.0,"a":1.0}'
-      - '{"r":1.0,"g":1.0,"b":1.0,"a":0.196078434586525}'
-      - '{"r":1.0,"g":0.0,"b":0.0,"a":1.0}'
-      - '{"r":1.0,"g":0.0,"b":0.0,"a":0.196078434586525}'
-      - '""'
-  _serializerType:
-    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  _id: 8090
-  dbg: 0
-  _dirty: 0
-  tagFilter: 
   targetPrefab: {fileID: 148420, guid: 86c82ccd2da3b5442bc7c82a5d005f4f, type: 2}
   moveSpeed: 360
   dashSpeed: 450
@@ -193,17 +130,6 @@ MonoBehaviour:
   dashEndActive: {r: 1, g: 1, b: 1, a: 0.19607843}
   dashStartInactive: {r: 1, g: 0, b: 0, a: 1}
   dashEndInactive: {r: 1, g: 0, b: 0, a: 0.19607843}
---- !u!114 &11475046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0797d672670e6c147800a213464838d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &19861626
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -2086,3 +2012,115 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 134198}
   m_IsPrefabParent: 1
+--- !u!58 &58000010901234842
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154116}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
+--- !u!60 &60000012772682418
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134198}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -0.17, y: -0.47}
+      - {x: -0.16, y: -0.26}
+      - {x: -0.099999994, y: -0.21}
+      - {x: -0.049999997, y: -0.35}
+      - {x: 0.08, y: -0.32}
+      - {x: 0.099999994, y: -0.21}
+      - {x: 0.17, y: -0.25}
+      - {x: 0.16, y: -0.38}
+      - {x: 0.19, y: -0.62}
+      - {x: 0.28, y: -0.69}
+      - {x: 0.32999998, y: -0.59999996}
+      - {x: 0.35999998, y: -0.69}
+      - {x: 0.39999998, y: -0.71999997}
+      - {x: 0.48999998, y: -0.71999997}
+      - {x: 0.58, y: -0.51}
+      - {x: 0.58, y: -0.29999998}
+      - {x: 0.55, y: -0.22}
+      - {x: 0.5, y: -0.16}
+      - {x: 0.35999998, y: -0.099999994}
+      - {x: 0.35, y: 0}
+      - {x: 0.25, y: 0.37}
+      - {x: 0.16, y: 0.7}
+      - {x: 0.12, y: 0.76}
+      - {x: 0.089999996, y: 0.76}
+      - {x: 0.049999997, y: 0.74}
+      - {x: 0.04, y: 0.57}
+      - {x: 0.07, y: 0.35999998}
+      - {x: 0.04, y: 0.29999998}
+      - {x: -0.07, y: 0.35999998}
+      - {x: -0.04, y: 0.58}
+      - {x: -0.03, y: 0.75}
+      - {x: -0.089999996, y: 0.76}
+      - {x: -0.14, y: 0.76}
+      - {x: -0.17, y: 0.66999996}
+      - {x: -0.22, y: 0.48}
+      - {x: -0.34, y: 0}
+      - {x: -0.35, y: -0.099999994}
+      - {x: -0.51, y: -0.16}
+      - {x: -0.56, y: -0.21}
+      - {x: -0.58, y: -0.31}
+      - {x: -0.58, y: -0.48}
+      - {x: -0.53, y: -0.62}
+      - {x: -0.48, y: -0.71999997}
+      - {x: -0.41, y: -0.71999997}
+      - {x: -0.35999998, y: -0.69}
+      - {x: -0.24, y: -0.65999997}
+      - {x: -0.21, y: -0.61}
+    - - {x: -0.08, y: 0.12}
+      - {x: -0.08, y: 0.19}
+      - {x: -0.099999994, y: 0.14}
+      - {x: -0.099999994, y: -0.049999997}
+    - - {x: 0.099999994, y: -0.049999997}
+      - {x: 0.099999994, y: 0.14}
+      - {x: 0.08, y: 0.19999999}
+      - {x: 0.07, y: 0.17}
+      - {x: 0.08, y: 0.12}
+      - {x: 0.089999996, y: 0.11}
+      - {x: 0.099999994, y: 0.04}
+      - {x: 0.14, y: -0.01}
+--- !u!114 &114000013569479906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0797d672670e6c147800a213464838d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializationData:
+    serializedObjects: []
+    serializedStrings:
+      keys:
+      - string tagFilter
+      values:
+      - '"Bullet|Piercing"'
+  _serializerType:
+    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _id: -27808
+  dbg: 0
+  _dirty: 0
+  tagFilter: Bullet|Piercing
