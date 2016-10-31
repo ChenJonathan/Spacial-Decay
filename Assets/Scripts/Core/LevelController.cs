@@ -44,14 +44,25 @@ public class LevelController : DanmakuGameController, IPausable
         get { return (LevelController)Instance; }
     }
 
+    private bool _paused;
+
     /// <summary>
     /// Returns whether or not the game is paused.
     /// </summary>
     /// <returns>Whether or not the game is paused</returns>
     public bool Paused
     {
-        get;
-        set;
+        get {
+            return _paused;
+        }
+        set {
+            if (value) {
+                Time.timeScale = 0;
+            } else {
+                Time.timeScale = 1;
+            }
+            _paused = value;
+        }
     }
 
     /// <summary>

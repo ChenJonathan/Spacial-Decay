@@ -20,6 +20,8 @@ public partial class Enemy : DanmakuCollider
     public int MaxHealth;
     [HideInInspector]
     public int Health;
+    [HideInInspector]
+    public float RotateSpeed = 8;
 
     // Enemy rotation values
     [SerializeField]
@@ -98,7 +100,7 @@ public partial class Enemy : DanmakuCollider
             if(FacePlayer)
                 TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
             if(TargetRotation != null)
-                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 8);
+                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
         }
     }
 
@@ -110,8 +112,11 @@ public partial class Enemy : DanmakuCollider
     {
         Health -= damage;
 
-        float healthProportion = (float)Health / MaxHealth;
-        healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
+        if(damage != 0)
+        {
+            float healthProportion = (float)Health / MaxHealth;
+            healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
+        }
 
         if(Health <= 0)
         {
