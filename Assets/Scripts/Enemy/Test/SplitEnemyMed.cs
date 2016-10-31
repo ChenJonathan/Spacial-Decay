@@ -24,6 +24,7 @@ public class SplitEnemyMed : Enemy
     public override void Start()
     {
         direction = new Vector2(Random.Range(-20f, 20f), Random.Range(-10f, 10f)) - (Vector2)transform.position;
+        SetRotation(direction);
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         if (fireTowardsPlayer)
@@ -61,6 +62,8 @@ public class SplitEnemyMed : Enemy
 
     public override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(invuln)
         {
             // While invulnerable, repeatedly fade sprite
@@ -69,25 +72,20 @@ public class SplitEnemyMed : Enemy
             Color color = renderer.material.color;
             if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
             {
-                color.a = 1.01f - color.a;
+                color.a = 1.25f - color.a;
                 renderer.material.color = color;
             }
-            else
+
+            if(invulnTime <= 0)
             {
                 color.a = 1;
                 renderer.material.color = color;
+                invuln = false;
             }
-        }
-
-        if(invulnTime <= 0)
-        {
-            invuln = false;
         }
 
         if(startup)
         {
-            // direction = direction - (Vector2)transform.position;
-            SetRotation(direction);
             if(Mathf.Abs(transform.position.x) < 18 && Mathf.Abs(transform.position.y) < 9)
             {
                 startup = false;
@@ -100,13 +98,11 @@ public class SplitEnemyMed : Enemy
             if(Mathf.Abs(x) > 18)
             {
                 direction = new Vector2(GetComponent<Rigidbody2D>().velocity.x * -1, GetComponent<Rigidbody2D>().velocity.y);
+                SetRotation(direction);
             }
             else if(Mathf.Abs(y) > 9)
             {
                 direction = new Vector2(GetComponent<Rigidbody2D>().velocity.x, GetComponent<Rigidbody2D>().velocity.y * -1);
-            }
-            else
-            {
                 SetRotation(direction);
             }
         }

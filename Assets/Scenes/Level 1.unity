@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
+    - {fileID: 188780, guid: f49cd1a3e85d4d7458cfab009e5a9548, type: 2}
     serializedStrings:
       keys:
       - DanmakuField field
@@ -222,7 +222,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
+  - {fileID: 188780, guid: f49cd1a3e85d4d7458cfab009e5a9548, type: 2}
   TargetTimeScale: 1
 --- !u!4 &174129276
 Transform:
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 2
+  clipBoundary: 1
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []
