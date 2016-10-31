@@ -128,7 +128,17 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        HandleInput();
+        // Handle input if not paused
+        if(LevelController.Singleton.TargetTimeScale != 0)
+        {
+            HandleInput();
+        }
+        else
+        {
+            selecting = false;
+            SetMoveTarget(mousePos);
+            dashRenderer.enabled = false;
+        }
 
         // General movement-related functions
         if(moving)
@@ -217,16 +227,18 @@ public class Player : MonoBehaviour
     /// </summary>
     private void HandleInput()
     {
-        mousePos.x = Input.mousePosition.x / Screen.width;
-        mousePos.y = Input.mousePosition.y / Screen.height;
+        // Calculate mouse position in world coordinates
+        mousePos.x = (Input.mousePosition.x / Screen.width - LevelController.Singleton.ViewportRect.x) / LevelController.Singleton.ViewportRect.width;
+        mousePos.y = (Input.mousePosition.y / Screen.height - LevelController.Singleton.ViewportRect.y) / LevelController.Singleton.ViewportRect.height;
+        mousePos = field.WorldPoint(mousePos);
 
         if(Input.GetMouseButtonDown(0))
         {
             // Begin dash targeting
             selecting = true;
-            SetMoveTarget(field.WorldPoint(mousePos));
+            SetMoveTarget(mousePos);
             dashRenderer.SetPosition(0, transform.position);
-            dashRenderer.SetPosition(1, field.WorldPoint(mousePos));
+            dashRenderer.SetPosition(1, mousePos);
             dashRenderer.enabled = true;
             LevelController.Singleton.TargetTimeScale = 0.5f;
         }
@@ -238,7 +250,7 @@ public class Player : MonoBehaviour
                 // Begin dash
                 if(dashes > 0)
                 {
-                    SetDashTarget(field.WorldPoint(mousePos));
+                    SetDashTarget(mousePos);
                     dashes--;
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
@@ -246,22 +258,22 @@ public class Player : MonoBehaviour
 
                 // Disable dash selection
                 selecting = false;
-                SetMoveTarget(field.WorldPoint(mousePos));
+                SetMoveTarget(mousePos);
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
                 LevelController.Singleton.TargetTimeScale = 1;
             }
             else
             {
-                targetRenderer.transform.position = field.WorldPoint(mousePos);
+                targetRenderer.transform.position = mousePos;
                 dashRenderer.SetPosition(0, transform.position);
-                dashRenderer.SetPosition(1, field.WorldPoint(mousePos));
+                dashRenderer.SetPosition(1, mousePos);
             }
         }
         else if(!dashing)
         {
             // Normal movement targeting
-            SetMoveTarget(field.WorldPoint(mousePos));
+            SetMoveTarget(mousePos);
         }
 
         if(Input.GetMouseButtonDown(1))

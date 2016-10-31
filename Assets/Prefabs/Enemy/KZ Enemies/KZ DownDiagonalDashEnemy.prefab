@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11421606, guid: 5c676d59f8eea8e43bf342eb74d350af, type: 2}
+    - {fileID: 11463470, guid: 95ea02787a4c7e54280db3e073d8e829, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -125,6 +125,7 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
@@ -136,6 +137,7 @@ MonoBehaviour:
       - 0
       - 200
       - 0
+      - 8.0
       - true
       - 1
       - null
@@ -152,9 +154,10 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 200
   Health: 0
+  RotateSpeed: 8
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  bulletPrefab: {fileID: 11421606, guid: 5c676d59f8eea8e43bf342eb74d350af, type: 2}
+  bulletPrefab: {fileID: 11463470, guid: 95ea02787a4c7e54280db3e073d8e829, type: 2}
 --- !u!212 &212000012972523766
 SpriteRenderer:
   m_ObjectHideFlags: 1
