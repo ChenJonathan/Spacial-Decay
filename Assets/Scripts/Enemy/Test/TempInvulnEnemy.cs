@@ -54,27 +54,27 @@ public class TempInvulnEnemy : Enemy
             Color color = renderer.material.color;
             if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
             {
-                color.a = 1.01f - color.a;
+                color.a = 1.25f - color.a;
                 renderer.material.color = color;
             }
-            else
+
+            if(invulnTime <= 0)
             {
                 color.a = 1;
                 renderer.material.color = color;
+                invuln = 2;
             }
-        }
-        if(invulnTime <= 0)
-        {
-            invuln = 2;
         }
 
         if(Mathf.Abs(transform.position.x) > 18)
         {
             direction = new Vector2(-1 * transform.position.x, transform.position.y) - (Vector2)transform.position;
+            SetRotation(direction);
         }
         else if(Mathf.Abs(transform.position.y) > 9)
         {
             direction = new Vector2(transform.position.x, -1 * transform.position.y) - (Vector2)transform.position;
+            SetRotation(direction);
         }
 
         int velMult = 1; // Increase velocity if invulnerable
@@ -86,11 +86,7 @@ public class TempInvulnEnemy : Enemy
         {
             velMult = 1;
         }
-        if(direction.magnitude != 0)
-        {
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
-        }
-        SetRotation(direction);
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
     }
 
     public override void Damage(int damage)

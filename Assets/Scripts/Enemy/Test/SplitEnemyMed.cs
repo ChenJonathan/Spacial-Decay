@@ -25,6 +25,7 @@ public class SplitEnemyMed : Enemy
     {
         direction = new Vector2(Random.Range(-20f, 20f), Random.Range(-10f, 10f)) - (Vector2)transform.position;
         SetRotation(direction);
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (4 + Difficulty);
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         if (fireTowardsPlayer)
@@ -99,14 +100,15 @@ public class SplitEnemyMed : Enemy
             {
                 direction = new Vector2(GetComponent<Rigidbody2D>().velocity.x * -1, GetComponent<Rigidbody2D>().velocity.y);
                 SetRotation(direction);
+                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (4 + Difficulty);
             }
             else if(Mathf.Abs(y) > 9)
             {
                 direction = new Vector2(GetComponent<Rigidbody2D>().velocity.x, GetComponent<Rigidbody2D>().velocity.y * -1);
                 SetRotation(direction);
+                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (4 + Difficulty);
             }
         }
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (4 + Difficulty);
     }
 
     public override void Die()
