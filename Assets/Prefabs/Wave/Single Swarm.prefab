@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: SingleSwarm
+  m_Name: Single Swarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

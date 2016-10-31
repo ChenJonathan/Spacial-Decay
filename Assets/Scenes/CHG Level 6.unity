@@ -183,9 +183,10 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
-    - {fileID: 1000013141128222, guid: a00cb1825f0ce4df284a928420f32126, type: 2}
-    - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
+    - {fileID: 1000012781792588, guid: f0a656237875f4d308956a577f5686f3, type: 2}
+    - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
+    - {fileID: 188780, guid: e3b1034f9dfe246679bd27b16d4804eb, type: 2}
+    - {fileID: 188780, guid: b6e6e7de409ed4214965d9724ec16072, type: 2}
     serializedStrings:
       keys:
       - DanmakuField field
@@ -201,7 +202,7 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2,2,3,4]}'
+      - '{"$content":[2,3,4,5]}'
       - 1.0
       - true
       - 1000
@@ -224,10 +225,10 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
-  - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
-  - {fileID: 1000013141128222, guid: a00cb1825f0ce4df284a928420f32126, type: 2}
-  - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
+  - {fileID: 1000012781792588, guid: f0a656237875f4d308956a577f5686f3, type: 2}
+  - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
+  - {fileID: 188780, guid: e3b1034f9dfe246679bd27b16d4804eb, type: 2}
+  - {fileID: 188780, guid: b6e6e7de409ed4214965d9724ec16072, type: 2}
   TargetTimeScale: 1
 --- !u!4 &174129276
 Transform:
