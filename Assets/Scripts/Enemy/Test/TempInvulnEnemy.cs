@@ -9,23 +9,24 @@ public class TempInvulnEnemy : Enemy
 
     private FireBuilder fireData;
     private float fireCooldown = MAX_FIRE_COOLDOWN;
-    private static readonly float MAX_FIRE_COOLDOWN = 1f;
+    private static readonly float MAX_FIRE_COOLDOWN = 2f;
     public bool fireTowardsPlayer;
 
-    private int invuln = 0;
+    private int invuln = 0; // 0 -> not invulnerable, 1 -> invulnerable period, 2 -> invuln duration ended, cannot invuln again
     private float invulnTime = 3f;
-    private Vector2 direction = new Vector2(0,0);
+    private Vector2 direction = new Vector2(0, 0);
 
     public override void Start()
     {
+        // Spawn outside of X bounds if you want horizontal movement and outside of Y bounds if you want vertical movement
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         if (fireTowardsPlayer)
         {
             fireData.Towards(Player.transform);
         }
-        fireData.WithSpeed(4 + Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(10 * Difficulty, 1 + Difficulty, 0, 0));
+        fireData.WithSpeed(6 + Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(10 * Difficulty, 3 + Difficulty, 0, 0));
         invulnTime += Difficulty;
     }
 
@@ -36,17 +37,15 @@ public class TempInvulnEnemy : Enemy
         {
             if(!fireTowardsPlayer)
             {
-                fireData.Towards(direction);
+                fireData.Towards(direction + (Vector2)transform.position);
             }
             fireData.Fire();
-            fireCooldown = MAX_FIRE_COOLDOWN;
+            fireCooldown = MAX_FIRE_COOLDOWN - Difficulty / 2;
         }
     }
 
     public override void FixedUpdate()
     {
-        base.FixedUpdate();
-
         if(invuln == 1)
         {
             // While invulnerable, repeatedly fade sprite
@@ -69,9 +68,13 @@ public class TempInvulnEnemy : Enemy
             invuln = 2;
         }
 
-        if((Mathf.Abs(transform.position.x) > 18) || (Mathf.Abs(transform.position.y) > 9))
+        if(Mathf.Abs(transform.position.x) > 18)
         {
-            direction = -1 * transform.position;
+            direction = new Vector2(-1 * transform.position.x, transform.position.y) - (Vector2)transform.position;
+        }
+        else if(Mathf.Abs(transform.position.y) > 9)
+        {
+            direction = new Vector2(transform.position.x, -1 * transform.position.y) - (Vector2)transform.position;
         }
 
         int velMult = 1; // Increase velocity if invulnerable
@@ -83,7 +86,10 @@ public class TempInvulnEnemy : Enemy
         {
             velMult = 1;
         }
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
+        if(direction.magnitude != 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
+        }
         SetRotation(direction);
     }
 

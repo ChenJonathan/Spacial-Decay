@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21249720}
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
-  - 114: {fileID: 114000012107660802}
+  - 114: {fileID: 114000014027378070}
   m_Layer: 12
-  m_Name: TempInvulnEnemy
+  m_Name: SplitEnemySmall
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8979575a1c0b4d643a838a1bbde33c83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16ce78ee6b782c64bba4de0475304538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -271,7 +271,7 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175464}
   m_IsPrefabParent: 1
---- !u!114 &114000012107660802
+--- !u!114 &114000014027378070
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -279,12 +279,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0878bdce4bc50d4abbe6e8aa0047245, type: 3}
+  m_Script: {fileID: 11500000, guid: 1148761b4a026f1469f21285ad68b057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
+    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -296,27 +296,25 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
-      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
       values:
       - 0
-      - true
+      - false
       - null
       - null
       - null
       - 0
-      - 100
+      - 50
       - 0
-      - 8.0
       - false
       - 1
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -12056
+  _id: -24756
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -324,10 +322,9 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 100
+  MaxHealth: 50
   Health: 0
-  RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  bulletPrefab: {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
-  fireTowardsPlayer: 1
+  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  fireTowardsPlayer: 0
