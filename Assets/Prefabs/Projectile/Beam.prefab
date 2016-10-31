@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11442878}
   m_Layer: 14
   m_Name: Beam
-  m_TagString: Laser
+  m_TagString: Piercing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
