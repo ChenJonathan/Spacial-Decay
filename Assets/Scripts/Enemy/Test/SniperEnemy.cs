@@ -30,23 +30,20 @@ public class SniperEnemy : Enemy
 	
 	public void Update()
     {
-        if(!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+		if (fireCooldown <= fireDelay)
         {
-            fireCooldown -= Time.deltaTime;
-			if (fireCooldown <= fireDelay)
-            {
-                isShooting = true;
-            }
-            if(fireCooldown <= 0)
-            {
-                fireData.Fire();
-				fireCooldown = fireCooldownReset;
-            }
-			if (fireCooldown <= (fireCooldownReset - fireDelay) && fireCooldown > fireDelay)
-            {
-                isShooting = false;
-				hasAimed = false;
-            }
+            isShooting = true;
+        }
+        if(fireCooldown <= 0)
+        {
+            fireData.Fire();
+			fireCooldown = fireCooldownReset;
+        }
+		if (fireCooldown <= (fireCooldownReset - fireDelay) && fireCooldown > fireDelay)
+        {
+            isShooting = false;
+			hasAimed = false;
         }
 	}
 
@@ -54,7 +51,7 @@ public class SniperEnemy : Enemy
     {
         base.FixedUpdate();
 
-        if(!LevelController.Singleton.Paused && !isShooting)
+        if(!isShooting)
         {
             Vector3 direction = Player.transform.position - (transform.position);
             GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
@@ -64,7 +61,7 @@ public class SniperEnemy : Enemy
             }
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position), Time.fixedDeltaTime * 5);
         }
-        if (!LevelController.Singleton.Paused && isShooting)
+        if (isShooting)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
@@ -72,7 +69,6 @@ public class SniperEnemy : Enemy
 				Vector2 aim = (this.transform.position + this.transform.up);
 				fireData.Towards(aim);
 				fireCooldownReset = Random.Range(1.0f, MAX_FIRE_COOLDOWN);
-				Debug.Log (fireCooldown);
 				hasAimed = true;
         	}
     	}
