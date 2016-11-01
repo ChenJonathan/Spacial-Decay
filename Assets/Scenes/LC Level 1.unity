@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 2
+  clipBoundary: 1
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []
@@ -835,7 +835,7 @@ GameObject:
   - 92: {fileID: 1821701581}
   m_Layer: 8
   m_Name: Background Camera
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
