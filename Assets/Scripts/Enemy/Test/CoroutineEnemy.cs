@@ -28,24 +28,21 @@ public class CoroutineEnemy : Enemy
         for(int i = 0; i < 4; i++)
         {
             // Moving left
-            if (!LevelController.Singleton.Paused)
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(-5, 0);
+            yield return new WaitForSeconds(2);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for(int j = 0; j < 10; j++)
             {
-                FacePlayer = true;
-                rigidbody2d.velocity = new Vector2(-5, 0);
-                yield return new WaitForSeconds(2);
-
-                // Stop and face player
-                rigidbody2d.velocity = Vector2.zero;
-                fireData.Towards(Player.transform.position);
-                FacePlayer = false;
-
-                // Fire
+                fireData.Fire();
                 yield return new WaitForSeconds(0.2f);
-                for (int j = 0; j < 10; j++)
-                {
-                    fireData.Fire();
-                    yield return new WaitForSeconds(0.2f);
-                }
             }
         }
         Die();

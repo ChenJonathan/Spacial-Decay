@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Controls the level, calling events sequentially.
 /// </summary>
-public class LevelController : DanmakuGameController, IPausable
+public class LevelController : DanmakuGameController
 {
     // Field to spawn the bullets in
     [SerializeField]
@@ -34,6 +34,12 @@ public class LevelController : DanmakuGameController, IPausable
         get { return currentEvent; }
     }
     private int eventCount; // Current event number
+    
+    private Rect viewportRect; // Camera viewport dimensions required to maintain 16:9 aspect ratio
+    public Rect ViewportRect
+    {
+        get { return viewportRect; }
+    }
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -44,15 +50,8 @@ public class LevelController : DanmakuGameController, IPausable
         get { return (LevelController)Instance; }
     }
 
-    /// <summary>
-    /// Returns whether or not the game is paused.
-    /// </summary>
-    /// <returns>Whether or not the game is paused</returns>
-    public bool Paused
-    {
-        get;
-        set;
-    }
+    // Time scale constantly approaches this value
+    public float TargetTimeScale = 1;
 
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
@@ -60,7 +59,33 @@ public class LevelController : DanmakuGameController, IPausable
     public override void Awake()
     {
         base.Awake();
-        
+
+        // Calculate viewport
+        float scaleHeight = ((float)Screen.width / (float)Screen.height) / (16.0f / 9.0f);
+        if(scaleHeight < 1.0f)
+        {
+            viewportRect.width = 1.0f;
+            viewportRect.height = scaleHeight;
+            viewportRect.x = 0;
+            viewportRect.y = (1.0f - scaleHeight) / 2.0f;
+        }
+        else
+        {
+            float scaleWidth = 1.0f / scaleHeight;
+            viewportRect.width = scaleWidth;
+            viewportRect.height = 1.0f;
+            viewportRect.x = (1.0f - scaleWidth) / 2.0f;
+            viewportRect.y = 0;
+        }
+
+        // Update cameras
+        foreach(Camera camera in GameObject.FindObjectsOfType<Camera>())
+        {
+            if(!camera.tag.Equals("Background"))
+                camera.rect = viewportRect;
+        }
+
+        // Spawn player
         Vector2 spawnPos = Field.WorldPoint(Vector2.zero);
         player = (Player)Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         player.transform.parent = Field.transform;
@@ -76,19 +101,19 @@ public class LevelController : DanmakuGameController, IPausable
     }
 
     /// <summary>
-    /// Called periodically. Updates bullets.
+    /// Called periodically. Updates bullets and time scale.
     /// </summary>
     public override void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-            Paused = !Paused;
-        else if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+        base.Update();
+        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
 
-        if(!Paused)
-        {
-            base.Update();
-        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+            TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
+
+        // TODO Remove this
+        if(Input.GetKeyDown(KeyCode.Tab))
+            SceneManager.LoadScene("Level Select");
     }
 
     /// <summary>
@@ -114,6 +139,7 @@ public class LevelController : DanmakuGameController, IPausable
         }
         else
         {
+            TargetTimeScale = 1;
             StartEvent();
         }
     }
