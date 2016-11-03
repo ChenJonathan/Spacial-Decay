@@ -9,6 +9,8 @@ TagManager:
   - Counter
   - Map
   - Level
+  - Enemy
+  - Background
   layers:
   - Default
   - TransparentFX

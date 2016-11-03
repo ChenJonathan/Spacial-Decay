@@ -5,19 +5,19 @@
 /// </summary>
 public class Scroll : MonoBehaviour
 {
-    private float cameraSpeed = 0;
+    private float cameraSpeed;
+    private float cameraMaxY;
 
-    private readonly float CAMERA_ACCELERATION = 0.25f;
-    private readonly float CAMERA_SPEED_DECAY = 0.1f;
-    private readonly float CAMERA_MAX_Y = 57.6269100001f;
+    private readonly float CAMERA_ACCELERATION = 0.1f;
+    private readonly float CAMERA_SPEED_DECAY = 0.2f;
 
     /// <summary>
-    /// Initializes the camera variable.
+    /// Initializes camera values.
     /// </summary>
     public void Start()
     {
-        // Match background size
         GetComponent<Camera>().fieldOfView = 2.0f * Mathf.Atan(419.84f / GetComponent<Camera>().aspect / 400f) * Mathf.Rad2Deg;
+        cameraMaxY = 419.84f / 2f - 419.84f / GetComponent<Camera>().aspect / 2f;
     }
 
     /// <summary>
@@ -44,14 +44,14 @@ public class Scroll : MonoBehaviour
 
         // Making sure camera stays in bounds
         float y = transform.position.y + cameraSpeed;
-        if(y > CAMERA_MAX_Y)
+        if(y > cameraMaxY)
         {
-            y = CAMERA_MAX_Y;
+            y = cameraMaxY;
             cameraSpeed = 0;
         }
-        else if(y < -CAMERA_MAX_Y)
+        else if(y < -cameraMaxY)
         {
-            y = -CAMERA_MAX_Y;
+            y = -cameraMaxY;
             cameraSpeed = 0;
         }
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
