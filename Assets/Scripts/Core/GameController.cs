@@ -14,6 +14,10 @@ public class GameController : Singleton<GameController>
     [HideInInspector]
     public int Difficulty;
     public Probe ProbePrefab;
+    /// <summary> Prefab for lines between levels. </summary>
+    [SerializeField]
+    [Tooltip("Prefab for lines between levels.")]
+    private LineRenderer levelLinePrefab;
 
     private List<Level> unlockedLevels;
     private List<Level> newLevels;
@@ -43,6 +47,10 @@ public class GameController : Singleton<GameController>
             unlockedLevels = new List<Level>();
             unlockedLevels.Add(StartLevel);
             newLevels = new List<Level>();
+            Level[] allLevels = GetComponentsInChildren<Level>();
+            foreach (Level level in allLevels) {
+                level.gameObject.SetActive(false);
+            }
             StartLevel.gameObject.SetActive(true);
             StartLevel.Appear();
             SceneManager.sceneLoaded += OnLoad;
@@ -99,16 +107,20 @@ public class GameController : Singleton<GameController>
                     {
                         unlockedLevels.Add(level);
                         newLevels.Add(level);
-
-                        // Set line between the two levels
-                        level.GetComponent<LineRenderer>().SetPosition(0, CurrentLevel.transform.position);
-                        level.GetComponent<LineRenderer>().SetPosition(1, level.transform.position);
-
-                        // Send probe to new levels
-                        Probe clone = ((Probe)Instantiate(ProbePrefab, CurrentLevel.transform.position, Quaternion.identity));
-                        clone.SetDestination(level);
-                        clone.transform.parent = CurrentLevel.transform;
                     }
+
+                    // Set line between the two levels
+                    LineRenderer levelLine = GameObject.Instantiate(levelLinePrefab);
+                    levelLine.transform.parent = level.transform;
+                    levelLine.SetPosition(0, CurrentLevel.transform.position);
+                    levelLine.SetPosition(1, level.transform.position);
+                    levelLine.enabled = false;
+                    level.line = levelLine;
+
+                    // Send probe to new levels
+                    Probe clone = ((Probe)Instantiate(ProbePrefab, CurrentLevel.transform.position, Quaternion.identity));
+                    clone.SetDestination(level);
+                    clone.transform.parent = CurrentLevel.transform;
                 }
                 CurrentLevel = null;
             }

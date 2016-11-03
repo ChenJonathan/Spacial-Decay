@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013866476222}
   - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: KZ Wave 0-5.3
+  m_Name: Regular Circle Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,19 +54,15 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012584696834, guid: 63f0638aade15d442b54271814f7bd16, type: 2}
+  - Prefab: {fileID: 114000012963635658, guid: 5a08d02423de8ff4da87d96fd1a2bf85, type: 2}
     Data:
-    - Location: {x: -8, y: 18}
+    - Location: {x: 25, y: 6}
       Time: 3
-    - Location: {x: 8, y: 18}
+    - Location: {x: 25, y: -6}
       Time: 3
-    - Location: {x: -8, y: -18}
+    - Location: {x: -25, y: 6}
       Time: 3
-    - Location: {x: 8, y: -18}
-      Time: 3
-    - Location: {x: 27, y: 0}
-      Time: 3
-    - Location: {x: -27, y: 0}
+    - Location: {x: -25, y: -6}
       Time: 3
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -74,15 +70,11 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: -8, y: 8}
+    - Location: {x: 16, y: 6}
       Time: 0
-    - Location: {x: 8, y: 8}
+    - Location: {x: -16, y: -6}
       Time: 0
-    - Location: {x: -8, y: -8}
+    - Location: {x: 16, y: -6}
       Time: 0
-    - Location: {x: 8, y: -8}
-      Time: 0
-    - Location: {x: 16, y: 0}
-      Time: 0
-    - Location: {x: -16, y: 0}
+    - Location: {x: -16, y: 6}
       Time: 0
