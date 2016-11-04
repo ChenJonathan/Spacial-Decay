@@ -7,6 +7,7 @@ public class Tower : Enemy
 {
     public DanmakuPrefab BulletPrefab;
 
+    [HideInInspector]
     public BossEnemy Boss;
 
     private FireBuilder fireData;
@@ -15,7 +16,7 @@ public class Tower : Enemy
 
     public override void Start()
     {
-        TagFilter = "Friendly|Enemy";
+        TagFilter = "Bullet";
 
         fireData = new FireBuilder(BulletPrefab, Field);
         fireData.From(transform);
@@ -25,10 +26,8 @@ public class Tower : Enemy
         fireData.WithController(new AccelerationController(3));
     }
 
-    public override void Update()
+    public void Update()
     {
-        base.Update();
-        
         fireCooldown -= Time.deltaTime;
         if(fireCooldown <= 0)
         {

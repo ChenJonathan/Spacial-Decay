@@ -51,63 +51,56 @@ public class RegularLineScript1 : Enemy
         }
     }
 
-    //Static shooting
-    public override void Update()
+    // Static shooting
+    public void Update()
     {
-        base.Update();
-
-        if (!LevelController.Singleton.Paused)
+        fireCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0 && timer > 2)
         {
-            fireCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0 && timer > 2)
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN - (.49f * Difficulty);
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN - (.49f * Difficulty);
         }
     }
 
-    //Move around the edge
+    // Move around the edge
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        if (!LevelController.Singleton.Paused)
+
+        timer += Time.deltaTime;
+        if(timer > 1)
         {
-            timer += Time.deltaTime;
-            if (timer > 1)
+            if(transform.position.x > 16 && !up)
             {
-                if (transform.position.x > 16 && !up)
-                {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 + Difficulty);
-                    SetRotation(90);
-                    fireData.Facing(Vector2.up);
-                    up = true;
-                    down = false;
-                }
-                else if (transform.position.y >= 8 && !left)
-                {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(-2 - Difficulty, 0);
-                    SetRotation(180);
-                    fireData.Facing(Vector2.left);
-                    left = true;
-                    right = false;
-                }
-                else if (transform.position.x <= -16 && !down)
-                {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2 - Difficulty);
-                    SetRotation(270);
-                    fireData.Facing(Vector2.down);
-                    down = true;
-                    up = false;
-                }
-                else if (transform.position.y <= -8 && !right)
-                {
-                    GetComponent<Rigidbody2D>().velocity = new Vector2(2 + Difficulty, 0);
-                    SetRotation(0);
-                    fireData.Facing(Vector2.right);
-                    right = true;
-                    left = false;
-                }
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 + Difficulty);
+                SetRotation(90);
+                fireData.Facing(Vector2.up);
+                up = true;
+                down = false;
+            }
+            else if(transform.position.y >= 8 && !left)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-2 - Difficulty, 0);
+                SetRotation(180);
+                fireData.Facing(Vector2.left);
+                left = true;
+                right = false;
+            }
+            else if(transform.position.x <= -16 && !down)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2 - Difficulty);
+                SetRotation(270);
+                fireData.Facing(Vector2.down);
+                down = true;
+                up = false;
+            }
+            else if(transform.position.y <= -8 && !right)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(2 + Difficulty, 0);
+                SetRotation(0);
+                fireData.Facing(Vector2.right);
+                right = true;
+                left = false;
             }
         }
     }
