@@ -54,8 +54,12 @@ public class Probe : MonoBehaviour
                 {
                     yield return new WaitForSeconds(0.5f);
 
-                    level.gameObject.SetActive(true);
-                    level.Appear();
+                    if (level.gameObject.activeSelf) {
+                        level.LineAppear();
+                    } else {
+                        level.gameObject.SetActive(true);
+                        level.Appear();
+                    }
                     Destroy(gameObject);
                     yield break;
                 }

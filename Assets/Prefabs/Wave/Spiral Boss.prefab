@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013866476222}
   - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: KZ Wave 0-3
+  m_Name: Spiral Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,12 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearEnemiesOnEnd: 1
+  ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000013271819086, guid: 5959ed90b0e7e4b40b7101f1bb4c330b, type: 2}
-    Data:
-    - Location: {x: 20, y: 0}
-      Time: 3
-  - Prefab: {fileID: 114000013950007678, guid: 5f974452ca2652943b1a841a4d9a3e24, type: 2}
+  - Prefab: {fileID: 114000011459594978, guid: 5a122b30ddd02bf4b928c18d1dfdb8a7, type: 2}
     Data:
     - Location: {x: 20, y: 0}
       Time: 3
