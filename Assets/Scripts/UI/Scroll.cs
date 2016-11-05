@@ -18,6 +18,7 @@ public class Scroll : MonoBehaviour
     {
         GetComponent<Camera>().fieldOfView = 2.0f * Mathf.Atan(419.84f / GetComponent<Camera>().aspect / 400f) * Mathf.Rad2Deg;
         cameraMaxY = 419.84f / 2f - 419.84f / GetComponent<Camera>().aspect / 2f;
+        transform.position = new Vector3(transform.position.x, -cameraMaxY, transform.position.z);
     }
 
     /// <summary>
