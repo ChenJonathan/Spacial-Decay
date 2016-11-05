@@ -10,7 +10,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 237650b62cbc97e45b35cd599eca1554, type: 3}
   m_Name: BetterEditorPrefs
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   _serializationData:
     serializedObjects: []
     serializedStrings:
