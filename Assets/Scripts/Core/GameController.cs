@@ -9,17 +9,18 @@ using System.Collections.Generic;
 public class GameController : Singleton<GameController>
 {
     public Level StartLevel;
+    public Probe ProbePrefab;
     [HideInInspector]
     public Level CurrentLevel;
     [HideInInspector]
     public int Difficulty;
-    public Probe ProbePrefab;
 
     private List<Level> unlockedLevels;
     private List<Level> newLevels;
 
+    // Current camera y-position in level select
     private float cameraY = -57.62691f;
-    
+
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>
@@ -37,16 +38,18 @@ public class GameController : Singleton<GameController>
         base.Awake();
 
         // Destroyed instances stop here
-        if(Singleton == this)
+        if(Singleton != this)
         {
-            DontDestroyOnLoad(gameObject);
-            unlockedLevels = new List<Level>();
-            unlockedLevels.Add(StartLevel);
-            newLevels = new List<Level>();
-            StartLevel.gameObject.SetActive(true);
-            StartLevel.Appear();
-            SceneManager.sceneLoaded += OnLoad;
+            return;
         }
+        
+        DontDestroyOnLoad(gameObject);
+        unlockedLevels = new List<Level>();
+        unlockedLevels.Add(StartLevel);
+        newLevels = new List<Level>();
+        StartLevel.gameObject.SetActive(true);
+        StartLevel.Appear();
+        SceneManager.sceneLoaded += OnLoad;
     }
 
     /// <summary>

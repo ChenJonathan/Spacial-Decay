@@ -34,6 +34,12 @@ public class LevelController : DanmakuGameController
         get { return currentEvent; }
     }
     private int eventCount; // Current event number
+    
+    private Rect viewportRect; // Camera viewport dimensions required to maintain 16:9 aspect ratio
+    public Rect ViewportRect
+    {
+        get { return viewportRect; }
+    }
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -53,7 +59,33 @@ public class LevelController : DanmakuGameController
     public override void Awake()
     {
         base.Awake();
-        
+
+        // Calculate viewport
+        float scaleHeight = ((float)Screen.width / (float)Screen.height) / (16.0f / 9.0f);
+        if(scaleHeight < 1.0f)
+        {
+            viewportRect.width = 1.0f;
+            viewportRect.height = scaleHeight;
+            viewportRect.x = 0;
+            viewportRect.y = (1.0f - scaleHeight) / 2.0f;
+        }
+        else
+        {
+            float scaleWidth = 1.0f / scaleHeight;
+            viewportRect.width = scaleWidth;
+            viewportRect.height = 1.0f;
+            viewportRect.x = (1.0f - scaleWidth) / 2.0f;
+            viewportRect.y = 0;
+        }
+
+        // Update cameras
+        foreach(Camera camera in GameObject.FindObjectsOfType<Camera>())
+        {
+            if(!camera.tag.Equals("Background"))
+                camera.rect = viewportRect;
+        }
+
+        // Spawn player
         Vector2 spawnPos = Field.WorldPoint(Vector2.zero);
         player = (Player)Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         player.transform.parent = Field.transform;
@@ -77,7 +109,7 @@ public class LevelController : DanmakuGameController
         Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
 
         if(Input.GetKeyDown(KeyCode.Escape))
-            TargetTimeScale = TargetTimeScale == 0 ? 1 : 0;
+            TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
 
         // TODO Remove this
         if(Input.GetKeyDown(KeyCode.Tab))
