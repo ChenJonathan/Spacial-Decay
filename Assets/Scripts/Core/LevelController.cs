@@ -111,9 +111,12 @@ public class LevelController : DanmakuGameController
         if(Input.GetKeyDown(KeyCode.Escape))
             TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
 
-        // TODO Remove this
+        // TODO Remove these
         if(Input.GetKeyDown(KeyCode.Tab))
             SceneManager.LoadScene("Level Select");
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            EndEvent();
+        }
     }
 
     /// <summary>

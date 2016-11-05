@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Wave 0-2
+  m_Name: Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +40,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearEnemiesOnEnd: 0
+  ClearDanmakuOnEnd: 0
   EnemyChains:
   - Prefab: {fileID: 114000010179105062, guid: afb15c526336e464eaf6753fdc641482, type: 2}
     Data:
