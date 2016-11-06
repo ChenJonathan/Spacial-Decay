@@ -30,63 +30,56 @@ public class BorderEnemy : Enemy
 
     public void Update()
     {
-        base.Update();
-        if (!LevelController.Singleton.Paused && dieTime >= 0)
+        fireCooldown -= Time.deltaTime;
+        pauseCooldown -= Time.deltaTime;
+        if(fireCooldown <= 0 && pauseCooldown <= 0)
         {
-            fireCooldown -= Time.deltaTime;
-            pauseCooldown -= Time.deltaTime;
-            if (fireCooldown <= 0 && pauseCooldown <= 0)            
-            {
-                fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
-            }
+            fireData.Fire();
+            fireCooldown = MAX_FIRE_COOLDOWN;
+        }
 
-            if (pauseCooldown <= -1f)
-            {
-                pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
-            }
+        if(pauseCooldown <= -1f)
+        {
+            pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
         }
     }
 
     public override void FixedUpdate()
     {        
-        base.FixedUpdate();        
+        base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        dieTime -= Time.deltaTime;
+        if(dieTime >= 0)
         {
-            dieTime -= Time.deltaTime;
-            if (dieTime >= 0)
+            if(transform.position.y > 8) // Travel to quadrant 1
             {
-                if (transform.position.y > 8) // Travel to quadrant 1
-                {
-                    direction = new Vector3(20, 8, 0) - transform.position;                    
-                }
-                else if (transform.position.x < -20) // To quadrant 2
-                {
-                    direction = new Vector3(-20, 8, 0) - transform.position;                    
-                }
-                else if (transform.position.y < -8) // To quadrant 3
-                {
-                    direction = new Vector3(-20, -8, 0) - transform.position;                    
-                }
-                else if (transform.position.x > 20) // To quadrant 4
-                {
-                    direction = new Vector3(20, -8, 0) - transform.position;                    
-                }
+                direction = new Vector3(20, 8, 0) - transform.position;
             }
-            else
-            {               
-                if (dieTime <= -5f)
-                {
-                    Die();
-                }
-            }            
-                       
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 6;
-            vectorToTarget = direction;
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-            q = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 5);          
+            else if(transform.position.x < -20) // To quadrant 2
+            {
+                direction = new Vector3(-20, 8, 0) - transform.position;
+            }
+            else if(transform.position.y < -8) // To quadrant 3
+            {
+                direction = new Vector3(-20, -8, 0) - transform.position;
+            }
+            else if(transform.position.x > 20) // To quadrant 4
+            {
+                direction = new Vector3(20, -8, 0) - transform.position;
+            }
         }
+        else
+        {
+            if(dieTime <= -5f)
+            {
+                Die();
+            }
+        }
+
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 6;
+        vectorToTarget = direction;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+        q = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 5);
     }
 }        

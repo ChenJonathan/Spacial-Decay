@@ -51,32 +51,24 @@ public class BasicProgrammableEnemy : Enemy
         prevLoc = transform.position;
     }
 
-    public override void Update()
-    {
-        base.Update();
-    }
-
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
-        {                   
-            if (locations.Count == 0)
-            {
-                Die();
-            }
-            
-            if (time - prevTime >= locations[locCount].time)
-            {
-                prevTime = time;
-                Vector2 nextLoc = locations[locCount].loc;
-                Vector2 direction = nextLoc - prevLoc;
-                float speed = Vector3.Distance(nextLoc, prevLoc) / locations[locCount].time;
-                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * speed;
-                locCount++;
-            }
-            time += Time.fixedDeltaTime;
+        if(locations.Count == 0)
+        {
+            Die();
         }
+
+        if(time - prevTime >= locations[locCount].time)
+        {
+            prevTime = time;
+            Vector2 nextLoc = locations[locCount].loc;
+            Vector2 direction = nextLoc - prevLoc;
+            float speed = Vector3.Distance(nextLoc, prevLoc) / locations[locCount].time;
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * speed;
+            locCount++;
+        }
+        time += Time.fixedDeltaTime;
     }
 }

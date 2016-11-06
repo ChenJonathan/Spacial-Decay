@@ -183,16 +183,15 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 188780, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
     - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
     - {fileID: 1000013141128222, guid: a00cb1825f0ce4df284a928420f32126, type: 2}
     - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
     serializedStrings:
       keys:
-      - bool Paused
       - DanmakuField field
       - Player playerPrefab
       - List<GameObject> events
+      - float TargetTimeScale
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -200,10 +199,10 @@ MonoBehaviour:
       - bool keepBetweenScenes
       - bool destroyNewInstances
       values:
-      - false
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
+      - '{"$content":[2,2,3,4]}'
+      - 1.0
       - true
       - 1000
       - 100
@@ -225,10 +224,11 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 188780, guid: 645e44ed8b540dd4f9b14f44ba4c08d4, type: 2}
+  - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
   - {fileID: 1000010225391452, guid: 111b6091c791648d4aa0db4bb3af8e1e, type: 2}
   - {fileID: 1000013141128222, guid: a00cb1825f0ce4df284a928420f32126, type: 2}
   - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
+  TargetTimeScale: 1
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
