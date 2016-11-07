@@ -78,12 +78,12 @@ public class LaserTrapScript : Enemy
     {
         base.Damage(damage);
 
-        if (Health <= 800)
+        if (Health <= 400)
         {
             enraged = true;
         }
 
-        if (Health <= 400)
+        if (Health <= 200)
         {
             finalForm = true;
         }

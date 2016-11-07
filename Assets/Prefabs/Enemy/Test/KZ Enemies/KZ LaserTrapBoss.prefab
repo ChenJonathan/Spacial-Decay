@@ -141,7 +141,7 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 1200
+      - 600
       - 0
       - 8.0
       - true
@@ -158,7 +158,7 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 1200
+  MaxHealth: 600
   Health: 0
   RotateSpeed: 8
   FacePlayer: 1

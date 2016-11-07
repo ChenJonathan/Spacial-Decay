@@ -8,10 +8,12 @@ public class SpiralBossScript : Enemy
 {
     public DanmakuPrefab crossPrefab;
     public DanmakuPrefab circlePrefab;
+    public DanmakuPrefab enragedPrefab;
 
     private FireBuilder fireDataCross1;
     private FireBuilder fireDataCross2;
     private FireBuilder fireDataCircle;
+    private FireBuilder circleAttack;
     private bool still = false;
     private bool enraged = false;
     private bool weaponized = false;
@@ -32,8 +34,13 @@ public class SpiralBossScript : Enemy
 
         fireDataCircle = new FireBuilder(circlePrefab, Field);
         fireDataCircle.From(transform);
-        fireDataCircle.WithSpeed(5 + 2 * Difficulty);
-        fireDataCircle.Towards(new Vector2(new DynamicInt(-100, 100), new DynamicInt(-100, 100)));
+        fireDataCircle.WithSpeed(7 + 2 * Difficulty);
+        fireDataCircle.WithModifier(new RandomizeAngleModifier(360));
+
+        circleAttack = new FireBuilder(enragedPrefab, Field);
+        circleAttack.From(transform);
+        circleAttack.WithSpeed(5 + 2 * Difficulty);
+        circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20), 0, 0));
 
         SetRotation(90);
 
@@ -44,18 +51,15 @@ public class SpiralBossScript : Enemy
     {
         base.FixedUpdate();
 
-        if (!LevelController.Singleton.Paused)
+        if(!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
         {
-            if (!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
-            {
-                Vector3 direction = Vector3.zero - transform.position;
-                GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                weaponized = true;
-            }
+            Vector3 direction = Vector3.zero - transform.position;
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            weaponized = true;
         }
     }
 
@@ -76,15 +80,15 @@ public class SpiralBossScript : Enemy
 
     private IEnumerator Attack()
     {
-        int cross1x = 50 - 15 * Difficulty;
+        int cross1x = 30 - 5 * Difficulty;
         int cross1y = 0;
         int cross2x = 0;
-        int cross2y = 50 - 15 * Difficulty;
+        int cross2y = 30 - 5 * Difficulty;
         int change1x = -1;
         int change1y = 1;
         int change2x = -1;
         int change2y = -1;
-        int turnSpeed = 50 - 15 * Difficulty;
+        int turnSpeed = 30 - 5 * Difficulty;
         bool spedUp = false;
         while (true)
         {
@@ -140,15 +144,20 @@ public class SpiralBossScript : Enemy
                 fireDataCircle.Facing(new Vector2(new DynamicInt(-100, 100), new DynamicInt(-100, 100)));
                 fireDataCross1.Fire();
                 fireDataCross2.Fire();
+                fireDataCircle.Fire();
                 if (finalForm)
                 {
                     fireDataCircle.Fire();
                 }
-                
+                if (bulletCount % 10 == 0 && enraged)
+                {
+                    circleAttack.Fire();
+                }
                 cross1x += change1x;
                 cross1y += change1y;
                 cross2x += change2x;
                 cross2y += change2y;
+                bulletCount++;
                 yield return new WaitForSeconds(0.1f);
             }
             else

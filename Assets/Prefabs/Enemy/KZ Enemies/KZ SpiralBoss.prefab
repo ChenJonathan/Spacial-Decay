@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000011435917386}
   - 60: {fileID: 60000010419414456}
   - 50: {fileID: 50000013884412666}
-  - 114: {fileID: 114000011459594978}
+  - 114: {fileID: 114000010219955852}
   m_Layer: 12
   m_Name: KZ SpiralBoss
   m_TagString: Enemy
@@ -101,7 +101,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &114000011459594978
+--- !u!114 &114000010219955852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,20 +109,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012288515846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0de01f28e4fabd4ca82f999f77950cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 08b900f0b54f9a344a5fd17b897541fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-    - {fileID: 11421606, guid: 5c676d59f8eea8e43bf342eb74d350af, type: 2}
+    - {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab crossPrefab
       - DanmakuPrefab circlePrefab
-      - DanmakuPrefab finalAttack
+      - DanmakuPrefab enragedPrefab
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -141,7 +141,7 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 1200
+      - 600
       - 0
       - 8.0
       - false
@@ -150,7 +150,7 @@ MonoBehaviour:
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: 11210
+  _id: -4798
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -158,14 +158,14 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 1200
+  MaxHealth: 600
   Health: 0
   RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   crossPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   circlePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-  finalAttack: {fileID: 11421606, guid: 5c676d59f8eea8e43bf342eb74d350af, type: 2}
+  enragedPrefab: {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
 --- !u!212 &212000011435917386
 SpriteRenderer:
   m_ObjectHideFlags: 1
