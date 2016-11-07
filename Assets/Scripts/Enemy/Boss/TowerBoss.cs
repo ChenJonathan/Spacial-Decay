@@ -65,6 +65,7 @@ public class TowerBoss : Enemy
                 spawn.Prefab = TowerPrefab;
                 spawn.Data.Time = 0;
                 spawn.Data.Location = new Vector2(-5, 0);
+                spawn.Data.Parameters = new float[0];
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));
                 spawn.Data.Location = new Vector2(5, 0);
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));

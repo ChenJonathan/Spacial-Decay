@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class FodderDownScript : Enemy
+public class DiagonalDashScript : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -21,16 +21,19 @@ public class FodderDownScript : Enemy
         fireData.WithSpeed(6 + 2 * Difficulty);
         fireData.WithModifier(new CircularBurstModifier(100 + 40 * Difficulty, new DynamicInt(10 + 5 * Difficulty, 20 + 10 * Difficulty), 0, 0));
 
+        start *= (int) parameters[0];
+
         base.Start();
     }
 
     protected override IEnumerator Run()
     {
         do
-        {   
+        {
             // Down Left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-4 + start, -4 + start);
+            int baseSpeed = -4 * (int) parameters[0];
+            rigidbody2d.velocity = new Vector2(baseSpeed + start, baseSpeed + start);
             start = 0;
             yield return new WaitForSeconds(2);
 
@@ -49,7 +52,7 @@ public class FodderDownScript : Enemy
 
             //Up Left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-4, 4);
+            rigidbody2d.velocity = new Vector2(baseSpeed, -baseSpeed);
             yield return new WaitForSeconds(2);
 
             // Stop and face player
@@ -67,7 +70,7 @@ public class FodderDownScript : Enemy
 
             //Up Right
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(4, 4);
+            rigidbody2d.velocity = new Vector2(-baseSpeed, -baseSpeed);
             yield return new WaitForSeconds(2);
 
             // Stop and face player
@@ -85,7 +88,7 @@ public class FodderDownScript : Enemy
 
             //Down Right
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(4, -4);
+            rigidbody2d.velocity = new Vector2(-baseSpeed, baseSpeed);
             yield return new WaitForSeconds(2);
 
             // Stop and face player
