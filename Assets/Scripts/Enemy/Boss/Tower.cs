@@ -8,7 +8,7 @@ public class Tower : Enemy
     public DanmakuPrefab BulletPrefab;
 
     [HideInInspector]
-    public BossEnemy Boss;
+    public TowerBoss Boss;
 
     private FireBuilder fireData;
     private float fireCooldown = MAX_FIRE_COOLDOWN;
