@@ -104,33 +104,35 @@ public class GameController : Singleton<GameController>
 
                 if(UnlockedLevels.Contains(level.Scene))
                 {
-                    // Re-enable lines
-                    foreach(Level levelChild in level.Unlocks)
-                    {
-                        if(UnlockedLevels.Contains(levelChild.Scene) || level.Scene.Equals(CurrentLevel))
-                        {
-                            // Set line between the two levels
-                            LineRenderer levelLine = GameObject.Instantiate(levelLinePrefab);
-                            levelLine.transform.parent = level.transform;
-                            levelLine.SetPosition(0, level.transform.position);
-                            levelLine.SetPosition(1, levelChild.transform.position);
-                            
-                            // Send probe to new levels
-                            if(level.Scene.Equals(CurrentLevel))
-                            {
-                                levelLine.enabled = false;
-                                levelChild.line = levelLine;
-                                Probe clone = ((Probe)Instantiate(ProbePrefab, level.transform.position, Quaternion.identity));
-                                clone.SetDestination(levelChild);
-                                clone.transform.parent = level.transform;
-                            }
-                        }
-                    }
-
-                    // Highlight unplayed levels
                     if(NewLevels.Contains(level.Scene))
                     {
+                        // Highlight unplayed levels
                         level.Highlight();
+                    }
+                    else
+                    {
+                        // Re-enable lines
+                        foreach(Level levelChild in level.Unlocks)
+                        {
+                            if(UnlockedLevels.Contains(levelChild.Scene) || level.Scene.Equals(CurrentLevel))
+                            {
+                                // Set line between the two levels
+                                LineRenderer levelLine = GameObject.Instantiate(levelLinePrefab);
+                                levelLine.transform.parent = level.transform;
+                                levelLine.SetPosition(0, level.transform.position);
+                                levelLine.SetPosition(1, levelChild.transform.position);
+
+                                // Send probe to new levels
+                                if(!UnlockedLevels.Contains(levelChild.Scene))
+                                {
+                                    levelLine.enabled = false;
+                                    levelChild.line = levelLine;
+                                    Probe clone = ((Probe)Instantiate(ProbePrefab, level.transform.position, Quaternion.identity));
+                                    clone.SetDestination(levelChild);
+                                    clone.transform.parent = level.transform;
+                                }
+                            }
+                        }
                     }
                 }
                 else
