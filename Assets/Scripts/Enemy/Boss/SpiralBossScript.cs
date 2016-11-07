@@ -80,15 +80,15 @@ public class SpiralBossScript : Enemy
 
     private IEnumerator Attack()
     {
-        int cross1x = 30 - 5 * Difficulty;
+        int cross1x = 40 - 5 * Difficulty;
         int cross1y = 0;
         int cross2x = 0;
-        int cross2y = 30 - 5 * Difficulty;
+        int cross2y = 40 - 5 * Difficulty;
         int change1x = -1;
         int change1y = 1;
         int change2x = -1;
         int change2y = -1;
-        int turnSpeed = 30 - 5 * Difficulty;
+        int turnSpeed = 40 - 5 * Difficulty;
         bool spedUp = false;
         while (true)
         {
@@ -149,7 +149,7 @@ public class SpiralBossScript : Enemy
                 {
                     fireDataCircle.Fire();
                 }
-                if (bulletCount % 10 == 0 && enraged)
+                if (bulletCount % 20 == 0 && enraged)
                 {
                     circleAttack.Fire();
                 }

@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000011435917386}
   - 60: {fileID: 60000010419414456}
   - 50: {fileID: 50000013884412666}
-  - 114: {fileID: 114000010219955852}
+  - 114: {fileID: 114000013546761550}
   m_Layer: 12
   m_Name: KZ SpiralBoss
   m_TagString: Enemy
@@ -101,7 +101,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &114000010219955852
+--- !u!114 &114000013546761550
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -4798
+  _id: -34288
   dbg: 0
   _dirty: 0
   tagFilter: 
