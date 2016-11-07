@@ -17,9 +17,9 @@ public class SniperEnemy : Enemy
 	private bool hasAimed = false;
     private double previousRotation = 0.0;
 
-	public LineRenderer laser;
-	public Vector3 laserStart = new Vector3 (0, 0, 0);
-	public Vector3 laserEnd = new Vector3 (0, 50, 0);
+	private LineRenderer laser;
+	private Vector3 laserStart = new Vector3 (0, 0, 0);
+	private Vector3 laserEnd = new Vector3 (0, 50, 0);
 
 	public override void Start()
     {
@@ -30,7 +30,7 @@ public class SniperEnemy : Enemy
 		laser.material = new Material(Shader.Find("Particles/Additive"));
 		laser.SetColors (Color.red, Color.red);
 		laser.useWorldSpace = false;
-		//sets the aim in the direction the enemy if facing
+		// Sets the aim in the direction the enemy if facing
 
 		Vector2 aim = (this.transform.position + this.transform.right);
 

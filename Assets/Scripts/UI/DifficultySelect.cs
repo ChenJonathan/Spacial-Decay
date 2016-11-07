@@ -91,6 +91,6 @@ public class DifficultySelect : Singleton<DifficultySelect>
 
     public void StartLevel()
     {
-        GameController.Singleton.LoadLevel(level);
+        GameController.Singleton.LoadLevel(level.Scene);
     }
 }
