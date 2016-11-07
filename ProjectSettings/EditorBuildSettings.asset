@@ -8,44 +8,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Select.unity
   - enabled: 1
-    path: Assets/Scenes/Level 1.unity
-  - enabled: 1
-    path: Assets/Scenes/Level 2.unity
-  - enabled: 1
-    path: Assets/Scenes/Level 3.unity
-  - enabled: 1
-    path: Assets/Scenes/Level 4.unity
-  - enabled: 1
-    path: Assets/Scenes/Level 5.unity
-  - enabled: 1
-    path: Assets/Scenes/Level 6.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 1.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 2.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 3.unity
-  - enabled: 1
-    path: Assets/Scenes/Test.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 4.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 5.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 6.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 7.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 8.unity
-  - enabled: 1
     path: Assets/Scenes/Petal Easy.unity
   - enabled: 1
     path: Assets/Scenes/Walls.unity
   - enabled: 1
-    path: Assets/Scenes/CHG Level 3.unity
+    path: Assets/Scenes/Danger Circles.unity
   - enabled: 1
-    path: Assets/Scenes/CHG Level 4.unity
+    path: Assets/Scenes/Duelling Combos.unity
   - enabled: 1
-    path: Assets/Scenes/CHG Level 5.unity
+    path: Assets/Scenes/Explosions.unity
   - enabled: 1
-    path: Assets/Scenes/CHG Level 6.unity
+    path: Assets/Scenes/Spiral Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Strength in Numbers.unity
+  - enabled: 1
+    path: Assets/Scenes/Surrounded.unity
+  - enabled: 1
+    path: Assets/Scenes/Tower Boss.unity

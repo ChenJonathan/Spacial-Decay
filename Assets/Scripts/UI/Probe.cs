@@ -7,6 +7,8 @@ using UnityEngine;
 public class Probe : MonoBehaviour
 {
     private SpriteRenderer sprite;
+
+    private Level destination; // Destination of the probe
     private float totalDistance; // Total distance between start location and destination
 
     /// <summary>
@@ -23,15 +25,15 @@ public class Probe : MonoBehaviour
     /// <param name="level">The level object to travel towards</param>
     public void SetDestination(Level level)
     {
+        destination = level;
         totalDistance = (level.transform.position - transform.position).magnitude;
-        StartCoroutine(Travel(level));
+        StartCoroutine(Travel());
     }
 
     /// <summary>
     /// Coroutine to move the probe towards its destination.
     /// </summary>
-    /// <param name="warning">The level object to travel towards</param>
-    public IEnumerator Travel(Level level)
+    public IEnumerator Travel()
     {
         int direction = 1;
         Color color = sprite.color;
@@ -47,18 +49,21 @@ public class Probe : MonoBehaviour
 
             if(color.a <= 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, level.transform.position, totalDistance / 6);
+                transform.position = Vector3.MoveTowards(transform.position, destination.transform.position, totalDistance / 6);
                 direction = 1;
 
-                if(transform.position == level.transform.position)
+                if(transform.position == destination.transform.position)
                 {
                     yield return new WaitForSeconds(0.5f);
 
-                    if (level.gameObject.activeSelf) {
-                        level.LineAppear();
-                    } else {
-                        level.gameObject.SetActive(true);
-                        level.Appear();
+                    if(destination.gameObject.activeSelf)
+                    {
+                        destination.LineAppear();
+                    }
+                    else
+                    {
+                        destination.gameObject.SetActive(true);
+                        destination.Appear();
                     }
                     Destroy(gameObject);
                     yield break;
@@ -72,6 +77,17 @@ public class Probe : MonoBehaviour
             {
                 direction = -1;
             }
+        }
+    }
+    /// <summary>
+    /// Ensures that levels are added if the level select is exited early.
+    /// </summary>
+    public void OnDestroy()
+    {
+        if(destination != null && !GameController.Singleton.UnlockedLevels.Contains(destination.Scene))
+        {
+            GameController.Singleton.UnlockedLevels.Add(destination.Scene);
+            GameController.Singleton.NewLevels.Add(destination.Scene);
         }
     }
 }

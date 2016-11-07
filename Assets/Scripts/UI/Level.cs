@@ -77,7 +77,8 @@ public class Level : MonoBehaviour
             }
         }
 
-        Highlight();
+        if(!lineOnly)
+            Highlight();
     }
 
     /// <summary>
