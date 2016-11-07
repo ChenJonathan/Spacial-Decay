@@ -115,27 +115,38 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 0}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
+      - LineRenderer laser
+      - Vector3 laserStart
+      - Vector3 laserEnd
       - Player Player
       - DanmakuField Field
       - Wave Wave
+      - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
       values:
       - 0
+      - 1
+      - '{"x":0.0,"y":60.0,"z":0.0}'
+      - '{"x":0.0,"y":0.0,"z":0.0}'
       - null
       - null
       - null
+      - 0
       - 100
       - 0
+      - 8.0
       - false
-      - 1
+      - 2
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -147,11 +158,16 @@ MonoBehaviour:
   Player: {fileID: 0}
   Field: {fileID: 0}
   Wave: {fileID: 0}
+  Difficulty: 0
   MaxHealth: 100
   Health: 0
+  RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  laser: {fileID: 0}
+  laserStart: {x: 0, y: 60, z: 0}
+  laserEnd: {x: 0, y: 0, z: 0}
 --- !u!212 &212000011528531522
 SpriteRenderer:
   m_ObjectHideFlags: 1

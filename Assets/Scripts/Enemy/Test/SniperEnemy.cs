@@ -10,16 +10,28 @@ public class SniperEnemy : Enemy
     private FireBuilder fireData;
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 2.5f;
-	private float fireDelay = 0.2f;
+	private float fireDelay = 0.3f;
 	private float fireCooldownReset = MAX_FIRE_COOLDOWN;
 
     private bool isShooting = false;
 	private bool hasAimed = false;
     private double previousRotation = 0.0;
 
+	private LineRenderer laser;
+	private Vector3 laserStart = new Vector3 (0, 0, 0);
+	private Vector3 laserEnd = new Vector3 (0, 50, 0);
+
 	public override void Start()
     {
-		//sets the aim in the direction the enemy if facing
+		laser = gameObject.AddComponent<LineRenderer>();
+		laser.SetPosition (0, laserStart);
+		laser.SetPosition (1, laserEnd);
+		laser.SetWidth (0.05f, 0.05f);
+		laser.material = new Material(Shader.Find("Particles/Additive"));
+		laser.SetColors (Color.red, Color.red);
+		laser.useWorldSpace = false;
+		// Sets the aim in the direction the enemy if facing
+
 		Vector2 aim = (this.transform.position + this.transform.right);
 
         fireData = new FireBuilder(bulletPrefab, Field);
@@ -30,6 +42,7 @@ public class SniperEnemy : Enemy
 	
 	public void Update()
     {
+
         fireCooldown -= Time.deltaTime;
 		if (fireCooldown <= fireDelay)
         {
@@ -51,8 +64,12 @@ public class SniperEnemy : Enemy
     {
         base.FixedUpdate();
 
+		laserStart = this.transform.position;
+		laserEnd = laserStart + (this.transform.up * 5);
+
         if(!isShooting)
         {
+			laser.enabled = false;
             Vector3 direction = Player.transform.position - (transform.position);
             GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
             if(direction.magnitude <= 5)
@@ -63,6 +80,7 @@ public class SniperEnemy : Enemy
         }
         if (isShooting)
         {
+			laser.enabled = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
 			if (!hasAimed) {
