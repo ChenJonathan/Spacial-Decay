@@ -11,6 +11,8 @@ public class DiagonalDashScript : Enemy
     private Rigidbody2D rigidbody2d;
     private bool alive = true;
     private int start = -5;
+    /// <summary> Customizable multiplier for the enemy's velocity. </summary>
+    private int velocityMultiplier = 1;
 
     public override void Start()
     {
@@ -21,7 +23,10 @@ public class DiagonalDashScript : Enemy
         fireData.WithSpeed(6 + 2 * Difficulty);
         fireData.WithModifier(new CircularBurstModifier(100 + 40 * Difficulty, new DynamicInt(10 + 5 * Difficulty, 20 + 10 * Difficulty), 0, 0));
 
-        start *= (int) parameters[0];
+        if (parameters.Length > 0) {
+            velocityMultiplier = (int) parameters[0];
+        }
+        start *= velocityMultiplier;
 
         base.Start();
     }
@@ -32,7 +37,7 @@ public class DiagonalDashScript : Enemy
         {
             // Down Left
             FacePlayer = true;
-            int baseSpeed = -4 * (int) parameters[0];
+            int baseSpeed = -4 * velocityMultiplier;
             rigidbody2d.velocity = new Vector2(baseSpeed + start, baseSpeed + start);
             start = 0;
             yield return new WaitForSeconds(2);
