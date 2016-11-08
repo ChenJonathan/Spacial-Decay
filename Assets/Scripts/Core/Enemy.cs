@@ -35,6 +35,10 @@ public partial class Enemy : DanmakuCollider
     [SerializeField]
     private GameObject healthBarPrefab;
 
+    /// <summary> Parameters that can be used to modify the enemy's behavior. </summary>
+    [HideInInspector]
+    public float[] parameters;
+
     /// <summary>
     /// Called when the enemy is instantiated (before Start). Initializes the enemy.
     /// </summary>

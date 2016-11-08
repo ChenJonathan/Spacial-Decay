@@ -155,12 +155,14 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
-      - '{"$content":[{"Location":{"x":-12.0,"y":0.0},"Time":3.0},{"Location":{"x":12.0,"y":0.0},"Time":4.5},{"Location":{"x":-4.0,"y":-6.0},"Time":6.0},{"Location":{"x":0.0,"y":6.0},"Time":7.5},{"Location":{"x":4.0,"y":-6.0},"Time":9.0}]}'
+      - '{"$content":[{"Location":{"x":-12.0,"y":0.0},"Time":3.0,"Parameters":[]},{"Location":{"x":12.0,"y":0.0},"Time":4.5,"Parameters":[]},{"Location":{"x":-4.0,"y":-6.0},"Time":6.0,"Parameters":[]},{"Location":{"x":0.0,"y":6.0},"Time":7.5,"Parameters":[]},{"Location":{"x":4.0,"y":-6.0},"Time":9.0,"Parameters":[]}]}'
       - 30.0
       - 3.5
       - 1
@@ -173,8 +175,10 @@ MonoBehaviour:
       - 0
       - 100
       - 0
+      - 8.0
       - false
       - 2
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -189,20 +193,27 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 100
   Health: 0
+  RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   fireList:
   - Location: {x: -12, y: 0}
     Time: 3
+    Parameters: []
   - Location: {x: 12, y: 0}
     Time: 4.5
+    Parameters: []
   - Location: {x: -4, y: -6}
     Time: 6
+    Parameters: []
   - Location: {x: 0, y: 6}
     Time: 7.5
+    Parameters: []
   - Location: {x: 4, y: -6}
     Time: 9
+    Parameters: []
   fireSpeed: 30
   fireRadius: 3.5
   warningPrefab: {fileID: 114000011160122508, guid: 1a137b11a6c820049b3f34e459a87274,

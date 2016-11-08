@@ -58,46 +58,76 @@ MonoBehaviour:
     Data:
     - Location: {x: 20, y: -6}
       Time: 3
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 5
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 7
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 9
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 11
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 13
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 15
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 17
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 19
+      Parameters:
+      - -1
     - Location: {x: 20, y: -6}
       Time: 21
-  - Prefab: {fileID: 114000013179431626, guid: d3cfa9ceb558fdf4780160d01becb6a0, type: 2}
+      Parameters:
+      - -1
+  - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
     - Location: {x: -20, y: 6}
       Time: 3
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 5
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 7
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 9
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 11
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 13
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 15
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 17
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 19
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 21
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -106,5 +136,7 @@ MonoBehaviour:
     Data:
     - Location: {x: -16, y: 6}
       Time: 0
+      Parameters: []
     - Location: {x: 16, y: -6}
       Time: 0
+      Parameters: []
