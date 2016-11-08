@@ -4,24 +4,22 @@ using DanmakU;
 using DanmakU.Modifiers;
 using DanmakU.Controllers;
 
-public class RegularCircleScript1 : Enemy
+public class HitRunCircleScript1 : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
     private FireBuilder fireData;
-    private float fireCooldown = MAX_FIRE_COOLDOWN;
-    private static readonly float MAX_FIRE_COOLDOWN = 2f;
     private float timer = 0;
-    private int xVelocity = 0;
     private int yVelocity = 0;
+    private int xVelocity = 0;
 
     //Arrive on the scene
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.WithSpeed(3 + Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(10, 15), 0, 0));
+        fireData.WithSpeed(3 + 2 * Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20), 0, 0));
 
         if (transform.position.x > 18)
         {
@@ -45,28 +43,40 @@ public class RegularCircleScript1 : Enemy
         }
         SetRotation(new Vector2(xVelocity, yVelocity));
         GetComponent<Rigidbody2D>().velocity = new Vector2(xVelocity, yVelocity);
+        StartCoroutine(Attack());
     }
 
-    // Static shooting
-    public void Update()
+    //Shoot
+    private IEnumerator Attack()
     {
-        fireCooldown -= Time.deltaTime;
-        if(fireCooldown <= 0 && timer > 2)
+        while(true)
         {
-            fireData.Fire();
-            fireCooldown = MAX_FIRE_COOLDOWN - (.66f * Difficulty);
+            if (timer > 1.1 && timer < 2)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(1f);
+            }
+            yield return new WaitForSeconds(.1f);
         }
     }
-
-    // STOP!
+    // Die
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
         timer += Time.deltaTime;
-        if(timer > 1)
+        if (timer > 1 && timer < 2)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+        if (timer > 2)
+        {
+            SetRotation(new Vector2(-xVelocity, -yVelocity));
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-xVelocity, -yVelocity);
+        }
+        if (timer > 4)
+        {
+            Die();
         }
     }
 }

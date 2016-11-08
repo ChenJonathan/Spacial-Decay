@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013866476222}
   - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: Spiral Boss
+  m_Name: KZ Wave 0-7 (Boss)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,6 @@ MonoBehaviour:
     Data:
     - Location: {x: 20, y: 0}
       Time: 3
-      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -67,4 +66,3 @@ MonoBehaviour:
     Data:
     - Location: {x: 16, y: 0}
       Time: 0
-      Parameters: []
