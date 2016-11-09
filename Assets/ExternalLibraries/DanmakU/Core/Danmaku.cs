@@ -497,7 +497,7 @@ namespace DanmakU
                     }
                 }
             }
-            if(!is_active || (Field != null && !Field.bounds.Contains(position)))
+            if(!is_active || (Field != null && !Field.bounds.Contains(position) && Tag != "Laser"))
             {
                 DeactivateImmediate();
                 return;
