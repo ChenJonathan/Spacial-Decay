@@ -9,7 +9,6 @@ public class RapidFireScript : Enemy
 
     private FireBuilder fireData;
     private float fireCooldown = 3f;
-    private static readonly float MAX_FIRE_COOLDOWN = 1f;
     private float timer = 2f;
 
     public override void Start()

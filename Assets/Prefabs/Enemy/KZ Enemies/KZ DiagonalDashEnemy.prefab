@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
   m_Layer: 12
-  m_Name: KZ DownDiagonalDashEnemy
+  m_Name: KZ DiagonalDashEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
       - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -140,6 +141,7 @@ MonoBehaviour:
       - 8.0
       - true
       - 1
+      - '[]'
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -157,6 +159,7 @@ MonoBehaviour:
   RotateSpeed: 8
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11463470, guid: 95ea02787a4c7e54280db3e073d8e829, type: 2}
 --- !u!212 &212000012972523766
 SpriteRenderer:

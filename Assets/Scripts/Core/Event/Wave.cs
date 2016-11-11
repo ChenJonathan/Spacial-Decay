@@ -43,6 +43,7 @@ public class Wave : MonoBehaviour
     {
         public Vector2 Location;
         public float Time;
+        public float[] Parameters;
     }
 
     /// <summary>
@@ -108,6 +109,7 @@ public class Wave : MonoBehaviour
                 spawn.Prefab = chain.Prefab;
                 spawn.Data.Location = chain.Data[i].Location;
                 spawn.Data.Time = chain.Data[i].Time;
+                spawn.Data.Parameters = chain.Data[i].Parameters;
                 enemyQueue.Add(spawn);
             }
         }
@@ -125,6 +127,7 @@ public class Wave : MonoBehaviour
                 spawn.FadeOutDuration = chain.FadeOutDuration;
                 spawn.Data.Location = chain.Data[i].Location;
                 spawn.Data.Time = chain.Data[i].Time;
+                spawn.Data.Parameters = chain.Data[i].Parameters;
                 warningQueue.Add(spawn);
             }
         }
@@ -181,6 +184,7 @@ public class Wave : MonoBehaviour
     public Enemy SpawnEnemy(EnemyData enemy)
     {
         Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Data.Location, Quaternion.identity);
+        temp.parameters = enemy.Data.Parameters;
         temp.transform.parent = field.transform;
         enemies.Add(temp);
         return temp;
