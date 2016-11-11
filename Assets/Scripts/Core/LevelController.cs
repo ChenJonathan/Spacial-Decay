@@ -129,7 +129,7 @@ public class LevelController : DanmakuGameController
     }
 
     /// <summary>
-    /// Called when the current event is completed. Shows the wave completion message.
+    /// Called when the current event is completed.
     /// </summary>
     public void EndEvent()
     {

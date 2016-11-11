@@ -23,6 +23,14 @@ public partial class Enemy : DanmakuCollider
     [HideInInspector]
     public float RotateSpeed = 8;
 
+    // Whether the enemy is invincible or not
+    protected bool invincible = false;
+    public bool IsInvincible
+    {
+        get { return invincible; }
+    }
+    private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
+
     // Enemy rotation values
     [SerializeField]
     protected bool FacePlayer; // Enemy constantly rotates toward the player if true - overrides TargetRotation
@@ -102,6 +110,10 @@ public partial class Enemy : DanmakuCollider
         {
             Die();
         }
+        else
+        {
+            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+        }
     }
 
     /// <summary>
@@ -118,6 +130,31 @@ public partial class Enemy : DanmakuCollider
     public void OnDestroy()
     {
         Wave.UnregisterEnemy(this);
+    }
+
+    /// <summary>
+    /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
+    /// </summary>
+    private IEnumerator setInvincible(float time)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        Color color = renderer.material.color;
+        invincible = true;
+        float timer = 0;
+        while(timer < time)
+        {
+            if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
+            {
+                color.a = 1.25f - color.a;
+                renderer.material.color = color;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        color.a = 1;
+        renderer.material.color = color;
+        invincible = false;
+        yield break;
     }
 
     #region Rotation methods

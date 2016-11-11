@@ -11,9 +11,7 @@ public class TempInvulnEnemy : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 2f;
     public bool fireTowardsPlayer;
-
-    private int invuln = 0; // 0 -> not invulnerable, 1 -> invulnerable period, 2 -> invuln duration ended, cannot invuln again
-    private float invulnTime = 3f;
+    
     private Vector2 direction = new Vector2(0, 0);
 
     public override void Start()
@@ -27,7 +25,6 @@ public class TempInvulnEnemy : Enemy
         }
         fireData.WithSpeed(6 + Difficulty);
         fireData.WithModifier(new CircularBurstModifier(10 * Difficulty, 3 + Difficulty, 0, 0));
-        invulnTime += Difficulty;
     }
 
     public void Update()
@@ -46,26 +43,6 @@ public class TempInvulnEnemy : Enemy
 
     public override void FixedUpdate()
     {
-        if(invuln == 1)
-        {
-            // While invulnerable, repeatedly fade sprite
-            invulnTime -= Time.fixedDeltaTime;
-            Renderer renderer = GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
-            {
-                color.a = 1.25f - color.a;
-                renderer.material.color = color;
-            }
-
-            if(invulnTime <= 0)
-            {
-                color.a = 1;
-                renderer.material.color = color;
-                invuln = 2;
-            }
-        }
-
         if(Mathf.Abs(transform.position.x) > 18)
         {
             direction = new Vector2(-1 * transform.position.x, transform.position.y) - (Vector2)transform.position;
@@ -77,29 +54,6 @@ public class TempInvulnEnemy : Enemy
             SetRotation(direction);
         }
 
-        int velMult = 1; // Increase velocity if invulnerable
-        if(invuln == 1)
-        {
-            velMult = 2;
-        }
-        else
-        {
-            velMult = 1;
-        }
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * velMult;
-    }
-
-    public override void Damage(int damage)
-    {            
-        // Set invulnerable if health falls below half of max health
-        if (invuln == 1)
-        {
-            damage = 0;
-        }
-        base.Damage(damage);
-        if (invuln == 0 && Health <= MaxHealth / 2)
-        {
-            invuln = 1;
-        }
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty) * (invincible ? 2 + Difficulty : 1);
     }
 }
