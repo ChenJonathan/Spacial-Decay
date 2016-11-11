@@ -23,6 +23,10 @@ public partial class Enemy : DanmakuCollider
     [HideInInspector]
     public float RotateSpeed = 8;
 
+    private AudioSource audioSource;
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+
     // Whether the enemy is invincible or not
     protected bool invincible = false;
     public bool IsInvincible
@@ -64,6 +68,14 @@ public partial class Enemy : DanmakuCollider
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
 
         Health = MaxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.75f;
+
+        // TEMPORARY
+        // Assigns SFX from resources folder for simplcity
+        OnHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
+        OnDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
     }
 
     /// <summary>
@@ -110,10 +122,14 @@ public partial class Enemy : DanmakuCollider
 
             if(Health <= 0)
             {
+                audioSource.clip = OnHitAudio;
+                audioSource.Play();
                 Die();
             }
             else
             {
+                audioSource.clip = OnDeathAudio;
+                audioSource.Play();
                 StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
             }
         }

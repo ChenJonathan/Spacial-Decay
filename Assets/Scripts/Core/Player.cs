@@ -85,6 +85,13 @@ public class Player : MonoBehaviour
     // Cached mouse position for easy access
     private Vector2 mousePos = Vector2.zero;
 
+    private AudioSource audioSource;
+
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+    public AudioClip OnNewDashAudio;
+    public AudioClip OnDashAudio;
+
     /// <summary>
     /// Called when the player is instantiated (before Start). Handles player initialization.
     /// </summary>
@@ -104,6 +111,8 @@ public class Player : MonoBehaviour
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+
+        audioSource = GetComponent<AudioSource>();
 
         // Retrieves counter references
         foreach(GameObject counter in GameObject.FindGameObjectsWithTag("Counter"))
@@ -166,6 +175,8 @@ public class Player : MonoBehaviour
             if(dashCooldown >= MAX_DASH_COOLDOWN)
             {
                 dashes++;
+                audioSource.clip = OnNewDashAudio;
+                audioSource.Play();
                 dashCooldown = 0;
                 dashRenderer.SetColors(dashStartActive, dashEndActive);
                 dashCounter.UpdateCounter(dashes);
@@ -252,6 +263,8 @@ public class Player : MonoBehaviour
                 {
                     SetDashTarget(mousePos);
                     dashes--;
+                    audioSource.clip = OnDashAudio;
+                    audioSource.Play();
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
                 }
@@ -294,6 +307,11 @@ public class Player : MonoBehaviour
         livesCounter.UpdateCounter(lives);
         StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
         hitEffect.Play();
+        if (lives == 0)
+            audioSource.clip = OnDeathAudio;
+        else
+            audioSource.clip = OnHitAudio;
+        audioSource.Play();
     }
 
     /// <summary>
