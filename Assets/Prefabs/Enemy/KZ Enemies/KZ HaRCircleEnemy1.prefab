@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011930067556}
   - 114: {fileID: 114000010590808864}
   m_Layer: 12
-  m_Name: KZ HitandRunCircleEnemy1
+  m_Name: KZ HaRCircleEnemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

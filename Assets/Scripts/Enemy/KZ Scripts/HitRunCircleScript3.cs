@@ -4,7 +4,7 @@ using DanmakU;
 using DanmakU.Modifiers;
 using DanmakU.Controllers;
 
-public class HitRunCircleScript1 : Enemy
+public class HitRunCircleScript3 : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -18,28 +18,26 @@ public class HitRunCircleScript1 : Enemy
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.WithSpeed(3 + 2 * Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 3 * Difficulty, 0, 0));
+        fireData.WithSpeed(6 + 3 * Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(365, new DynamicInt(10, 15) + 3 * Difficulty, 0, 0));
+        fireData.WithController(new AccelerationController(-2 - 2 *Difficulty));
+        fireData.Towards(Player.transform);
 
         if (transform.position.x > 18)
         {
             xVelocity = -10;
-            fireData.Facing(Vector2.up);
         }
         if (transform.position.x <= -18)
         {
             xVelocity = 10;
-            fireData.Facing(Vector2.down);
         }
         if (transform.position.y >= 10)
         {
             yVelocity = -10;
-            fireData.Facing(Vector2.left);
         }
         if (transform.position.y <= -10)
         {
             yVelocity = 10;
-            fireData.Facing(Vector2.right);
         }
         SetRotation(new Vector2(xVelocity, yVelocity));
         GetComponent<Rigidbody2D>().velocity = new Vector2(xVelocity, yVelocity);
@@ -49,7 +47,7 @@ public class HitRunCircleScript1 : Enemy
     //Shoot
     private IEnumerator Attack()
     {
-        while(true)
+        while (true)
         {
             if (timer > 1.1 && timer < 2)
             {
@@ -74,7 +72,7 @@ public class HitRunCircleScript1 : Enemy
             SetRotation(new Vector2(-xVelocity, -yVelocity));
             GetComponent<Rigidbody2D>().velocity = new Vector2(-xVelocity, -yVelocity);
         }
-        if (timer > 4)
+        if (timer > 9)
         {
             Die();
         }

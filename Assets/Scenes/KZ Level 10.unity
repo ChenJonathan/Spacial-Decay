@@ -60,7 +60,7 @@ LightmapSettings:
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
-    m_CompAOExponent: 0
+    m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
@@ -69,7 +69,7 @@ LightmapSettings:
     m_DirectLightInLightProbes: 1
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 1024
+    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
   m_LightingDataAsset: {fileID: 0}
   m_RuntimeCPUUsage: 25
@@ -183,6 +183,8 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+    - {fileID: 1000013141128222, guid: 9ba577dea7001b848826fc02f720c58a, type: 2}
+    - {fileID: 1000013141128222, guid: 367f9adeba6f90f49b647ba0a989bf55, type: 2}
     - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
     serializedStrings:
       keys:
@@ -199,7 +201,7 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2]}'
+      - '{"$content":[2,3,4]}'
       - 1.0
       - true
       - 1000
@@ -222,6 +224,8 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
+  - {fileID: 1000013141128222, guid: 9ba577dea7001b848826fc02f720c58a, type: 2}
+  - {fileID: 1000013141128222, guid: 367f9adeba6f90f49b647ba0a989bf55, type: 2}
   - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
   TargetTimeScale: 1
 --- !u!4 &174129276
