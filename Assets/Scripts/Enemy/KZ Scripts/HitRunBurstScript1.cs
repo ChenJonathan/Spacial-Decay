@@ -4,7 +4,7 @@ using DanmakU;
 using DanmakU.Modifiers;
 using DanmakU.Controllers;
 
-public class HitRunCircleScript3 : Enemy
+public class HitRunBurstScript1 : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -12,15 +12,15 @@ public class HitRunCircleScript3 : Enemy
     private float timer = 0;
     private int yVelocity = 0;
     private int xVelocity = 0;
+    private int bullet = 0;
 
     //Arrive on the scene
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.WithSpeed(6 + 3 * Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(365, new DynamicInt(10, 15) + 3 * Difficulty, 0, 0));
-        fireData.WithController(new AccelerationController(-2 - 2 *Difficulty));
+        fireData.WithModifier(new RandomizeAngleModifier(25));
+        fireData.Towards(Player.transform);
 
         if (transform.position.x > 18)
         {
@@ -50,7 +50,11 @@ public class HitRunCircleScript3 : Enemy
         {
             if (timer > 1.1 && timer < 2)
             {
-                fireData.Fire();
+                for (int i = 0; i < 20 + 10 * Difficulty; i++)
+                {
+                    fireData.WithSpeed(new DynamicInt(2, 7) + Difficulty);
+                    fireData.Fire();
+                }
                 yield return new WaitForSeconds(1f);
             }
             yield return new WaitForSeconds(.1f);
@@ -71,9 +75,10 @@ public class HitRunCircleScript3 : Enemy
             SetRotation(new Vector2(-xVelocity, -yVelocity));
             GetComponent<Rigidbody2D>().velocity = new Vector2(-xVelocity, -yVelocity);
         }
-        if (timer > 9)
+        if (timer > 4)
         {
             Die();
         }
     }
 }
+
