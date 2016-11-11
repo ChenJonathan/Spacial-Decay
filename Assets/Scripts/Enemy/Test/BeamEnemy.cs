@@ -19,7 +19,7 @@ public class BeamEnemy : Enemy
         warningData = new FireBuilder(warningPrefab, Field);
         warningData.From(transform);
         warningData.WithSpeed(0);
-        warningData.WithController(new AutoDeactivateController(1.0f));
+        warningData.WithController(new AutoDeactivateController(1f));
         warningData.WithController(new EnemyDeathController(this));
         ColorChangeController colorController = new ColorChangeController();
         GradientAlphaKey[] gak = new GradientAlphaKey[2];
@@ -41,7 +41,7 @@ public class BeamEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(0);
-        fireData.WithController(new AutoDeactivateController(2.0f));
+        fireData.WithController(new AutoDeactivateController(2f));
         fireData.WithController(new EnemyDeathController(this));
 
         base.Start();
@@ -61,12 +61,13 @@ public class BeamEnemy : Enemy
             warningData.Towards(Player.transform.position);
             fireData.Towards(Player.transform.position);
             FacePlayer = false;
+            RotateTowards(Player.transform.position);
 
             // Fire
             warningData.Fire();
             yield return new WaitForSeconds(1f);
             fireData.Fire();
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(2f);
         }
         Die();
     }

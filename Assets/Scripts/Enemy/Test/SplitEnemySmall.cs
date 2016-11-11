@@ -16,9 +16,7 @@ public class SplitEnemySmall : Enemy
     public bool fireTowardsPlayer;
 
     private Vector2 direction;
-    private bool startup = true;
-    private bool invuln = true;
-    private float invulnTime = 2f;    
+    private bool startup = true;   
 
     public override void Start()
     {
@@ -64,26 +62,6 @@ public class SplitEnemySmall : Enemy
     {
         base.FixedUpdate();
 
-        if(invuln)
-        {
-            // While invulnerable, repeatedly fade sprite
-            invulnTime -= Time.fixedDeltaTime;
-            Renderer renderer = GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
-            {
-                color.a = 1.25f - color.a;
-                renderer.material.color = color;
-            }
-
-            if(invulnTime <= 0)
-            {
-                color.a = 1;
-                renderer.material.color = color;
-                invuln = false;
-            }
-        }
-
         if(startup)
         {
             if(Mathf.Abs(transform.position.x) < 18 && Mathf.Abs(transform.position.y) < 9)
@@ -108,14 +86,5 @@ public class SplitEnemySmall : Enemy
                 GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (6 + Difficulty);
             }
         }
-    }    
-
-    public override void Damage(int damage)
-    {
-        if (invuln)
-        {
-            damage = 0;
-        }
-        base.Damage(damage);
     }
 }
