@@ -25,3 +25,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Surrounded.unity
   - enabled: 1
     path: Assets/Scenes/Tower Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Laser Trap Boss.unity

@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013866476222}
   - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: Laser Trap Boss
+  m_Name: Hit and Run Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,9 +54,41 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012870944378, guid: 59a72ce560a9724458888ae4cb7268cc, type: 2}
+  - Prefab: {fileID: 114000010590808864, guid: eb589cbd1a0c65e4c94e5afcfbd253b5, type: 2}
     Data:
-    - Location: {x: 20, y: 0}
+    - Location: {x: 25, y: 0}
+      Time: 6
+      Parameters: []
+    - Location: {x: -25, y: 0}
+      Time: 7
+      Parameters: []
+    - Location: {x: 0, y: 17}
+      Time: 8
+      Parameters: []
+    - Location: {x: 0, y: -17}
+      Time: 9
+      Parameters: []
+    - Location: {x: 25, y: 17}
+      Time: 10
+      Parameters: []
+    - Location: {x: 25, y: -17}
+      Time: 11
+      Parameters: []
+    - Location: {x: -25, y: 17}
+      Time: 12
+      Parameters: []
+    - Location: {x: -25, y: -17}
+      Time: 13
+      Parameters: []
+  - Prefab: {fileID: 114000011381990354, guid: 5b695af170d95f541a4e9c721de723f3, type: 2}
+    Data:
+    - Location: {x: 20, y: 8}
+      Time: 3
+      Parameters: []
+    - Location: {x: -20, y: 0}
+      Time: 3
+      Parameters: []
+    - Location: {x: 20, y: -8}
       Time: 3
       Parameters: []
   WarningChains:
@@ -66,5 +98,35 @@ MonoBehaviour:
     FadeOutDuration: 1
     Data:
     - Location: {x: 16, y: 0}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 4
+      Parameters: []
+    - Location: {x: 16, y: 8}
+      Time: 5
+      Parameters: []
+    - Location: {x: 16, y: -8}
+      Time: 6
+      Parameters: []
+    - Location: {x: -16, y: 8}
+      Time: 7
+      Parameters: []
+    - Location: {x: -16, y: -8}
+      Time: 8
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 9
+      Parameters: []
+    - Location: {x: 0, y: -8}
+      Time: 10
+      Parameters: []
+    - Location: {x: 16, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: -8}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 0}
       Time: 0
       Parameters: []
