@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Splitter
+  m_Name: Border Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,20 +41,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ClearEnemiesOnEnd: 0
-  ClearDanmakuOnEnd: 0
+  ClearDanmakuOnEnd: 1
   EnemyChains:
-  - Prefab: {fileID: 114000012838358080, guid: 65a5f5f00b880874ca46568a100ffe9e, type: 2}
+  - Prefab: {fileID: 114000013064677850, guid: 7eb8367547ea05e4a9aea592643601ca, type: 2}
     Data:
-    - Location: {x: 25, y: 8}
+    - Location: {x: 25, y: 6}
       Time: 3
       Parameters: []
-  - Prefab: {fileID: 114000010195250524, guid: d98dc59106726ab4a96b9dbf861d85ba, type: 2}
-    Data:
-    - Location: {x: 25, y: 4}
-      Time: 8
+    - Location: {x: 25, y: -6}
+      Time: 3
       Parameters: []
-    - Location: {x: -25, y: -4}
-      Time: 8
+    - Location: {x: -25, y: 6}
+      Time: 3
+      Parameters: []
+    - Location: {x: -26, y: -6}
+      Time: 3
       Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -62,14 +63,11 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 8}
+    - Location: {x: -16, y: 0}
       Time: 0
       Parameters: []
-    - Location: {x: 16, y: 4}
-      Time: 5
-      Parameters: []
-    - Location: {x: -16, y: -4}
-      Time: 5
+    - Location: {x: 16, y: 0}
+      Time: 0
       Parameters: []
 --- !u!1001 &100100000
 Prefab:
@@ -79,33 +77,32 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: spawns.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[1].x
-      value: -5
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[1]
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: spawns.Array.data[0].Locations.Array.data[0].y
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[0]

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Splitter
+  m_Name: Splitter Med
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,18 +43,13 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012838358080, guid: 65a5f5f00b880874ca46568a100ffe9e, type: 2}
-    Data:
-    - Location: {x: 25, y: 8}
-      Time: 3
-      Parameters: []
   - Prefab: {fileID: 114000010195250524, guid: d98dc59106726ab4a96b9dbf861d85ba, type: 2}
     Data:
     - Location: {x: 25, y: 4}
-      Time: 8
+      Time: 3
       Parameters: []
     - Location: {x: -25, y: -4}
-      Time: 8
+      Time: 3
       Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -62,14 +57,11 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 8}
+    - Location: {x: 16, y: 4}
       Time: 0
       Parameters: []
-    - Location: {x: 16, y: 4}
-      Time: 5
-      Parameters: []
     - Location: {x: -16, y: -4}
-      Time: 5
+      Time: 0
       Parameters: []
 --- !u!1001 &100100000
 Prefab:

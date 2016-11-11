@@ -29,6 +29,11 @@ public class GameController : Singleton<GameController>
     private float cameraY;
     private float cameraMaxY;
 
+    /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
+    [SerializeField]
+    [Tooltip("Causes all levels to be unlocked at the start of the game.")]
+    private bool unlockAllLevels;
+
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>
@@ -60,11 +65,21 @@ public class GameController : Singleton<GameController>
         // Initialize levels
         DontDestroyOnLoad(gameObject);
         UnlockedLevels = new List<string>();
-        UnlockedLevels.Add(StartLevel);
         NewLevels = new List<string>();
-        Level startLevelObject = GetLevel(StartLevel);
-        startLevelObject.gameObject.SetActive(true);
-        startLevelObject.Appear();
+        if (unlockAllLevels)
+        {
+            foreach (Level level in GetAllLevels())
+            {
+                UnlockedLevels.Add(level.name);
+            }
+        }
+        else
+        {
+            UnlockedLevels.Add(StartLevel);
+            Level startLevelObject = GetLevel(StartLevel);
+            startLevelObject.gameObject.SetActive(true);
+            startLevelObject.Appear();
+        }
         SceneManager.sceneLoaded += OnLoad;
     }
 
@@ -97,7 +112,7 @@ public class GameController : Singleton<GameController>
             levelCamera.transform.position = new Vector3(0, cameraY, 0);
 
             // Process levels
-            foreach(Level level in GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>())
+            foreach(Level level in GetAllLevels())
             {
                 if(level.Scene.Equals(CurrentLevel))
                     NewLevels.Remove(CurrentLevel);
@@ -143,6 +158,14 @@ public class GameController : Singleton<GameController>
             }
             CurrentLevel = null;
         }
+    }
+
+    /// <summary>
+    /// Gets all levels in the game.
+    /// </summary>
+    /// <returns>All levels in the game.</returns>
+    private Level[] GetAllLevels() {
+        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>();
     }
 
     private Level GetLevel(string levelName)
