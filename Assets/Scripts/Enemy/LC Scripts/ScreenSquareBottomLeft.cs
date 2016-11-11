@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class BorderMovementScript : Enemy
+public class ScreenSquareBottomLeft : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -28,11 +28,11 @@ public class BorderMovementScript : Enemy
     {
         do
         {   
-            // Down Left
+            // Left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-4 + start, -4 + start);
+            rigidbody2d.velocity = new Vector2(-10 + start, 0);
             start = 0;
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(3);
 
             // Stop and face player
             rigidbody2d.velocity = Vector2.zero;
@@ -47,10 +47,10 @@ public class BorderMovementScript : Enemy
                 yield return new WaitForSeconds(0.2f);
             }
 
-            //Up Left
+            // Up
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-4, 4);
-            yield return new WaitForSeconds(2);
+            rigidbody2d.velocity = new Vector2(0, 6);
+            yield return new WaitForSeconds(3);
 
             // Stop and face player
             rigidbody2d.velocity = Vector2.zero;
@@ -65,10 +65,10 @@ public class BorderMovementScript : Enemy
                 yield return new WaitForSeconds(0.2f);
             }
 
-            //Up Right
+            // Right
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(4, 4);
-            yield return new WaitForSeconds(2);
+            rigidbody2d.velocity = new Vector2(10, 0);
+            yield return new WaitForSeconds(3);
 
             // Stop and face player
             rigidbody2d.velocity = Vector2.zero;
@@ -83,10 +83,10 @@ public class BorderMovementScript : Enemy
                 yield return new WaitForSeconds(0.2f);
             }
 
-            //Down Right
+            // Down
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(4, -4);
-            yield return new WaitForSeconds(2);
+            rigidbody2d.velocity = new Vector2(0, -6);
+            yield return new WaitForSeconds(3);
 
             // Stop and face player
             rigidbody2d.velocity = Vector2.zero;
