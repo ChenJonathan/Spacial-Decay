@@ -22,9 +22,9 @@ GameObject:
   - 212: {fileID: 212000010446381678}
   - 60: {fileID: 60000013471777564}
   - 50: {fileID: 50000011930067556}
-  - 114: {fileID: 114000012895352638}
+  - 114: {fileID: 114000012193479522}
   m_Layer: 12
-  m_Name: KZ HaRLineEnemy2
+  m_Name: KZ HaRBurstEnemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &114000012895352638
+--- !u!114 &114000012193479522
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,12 +109,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012550661892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a77b8146b880c49abf9e0aae566cbf, type: 3}
+  m_Script: {fileID: 11500000, guid: fa56383d112104c46b59cfc83a9a1351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -144,7 +144,7 @@ MonoBehaviour:
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -57462
+  _id: -2772
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -157,7 +157,7 @@ MonoBehaviour:
   RotateSpeed: 8
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
 --- !u!212 &212000010446381678
 SpriteRenderer:
   m_ObjectHideFlags: 1
