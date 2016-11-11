@@ -11,9 +11,9 @@ public class GameController : Singleton<GameController>
     public Probe ProbePrefab;
     public string StartLevel;
     [HideInInspector]
-    public string CurrentLevel;
+    public string CurrentLevel = "";
     [HideInInspector]
-    public int Difficulty;
+    public int Difficulty = 0;
 
     [HideInInspector]
     public List<string> UnlockedLevels;
@@ -66,9 +66,9 @@ public class GameController : Singleton<GameController>
         DontDestroyOnLoad(gameObject);
         UnlockedLevels = new List<string>();
         NewLevels = new List<string>();
-        if (unlockAllLevels)
+        if(unlockAllLevels)
         {
-            foreach (Level level in GetAllLevels())
+            foreach(Level level in GetAllLevels())
             {
                 UnlockedLevels.Add(level.name);
             }
@@ -161,13 +161,9 @@ public class GameController : Singleton<GameController>
     }
 
     /// <summary>
-    /// Gets all levels in the game.
+    /// Gets a level in the game.
     /// </summary>
-    /// <returns>All levels in the game.</returns>
-    private Level[] GetAllLevels() {
-        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>();
-    }
-
+    /// <returns>A level in the game.</returns>
     private Level GetLevel(string levelName)
     {
         GameObject levels = GameObject.FindGameObjectWithTag("Levels");
@@ -177,5 +173,13 @@ public class GameController : Singleton<GameController>
                 return level;
         }
         return null;
+    }
+
+    /// <summary>
+    /// Gets all levels in the game.
+    /// </summary>
+    /// <returns>All levels in the game.</returns>
+    private Level[] GetAllLevels() {
+        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>();
     }
 }
