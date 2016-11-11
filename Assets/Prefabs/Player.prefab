@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPrefab: {fileID: 148420, guid: 86c82ccd2da3b5442bc7c82a5d005f4f, type: 2}
-  moveSpeed: 360
-  dashSpeed: 450
+  moveSpeed: 480
+  dashSpeed: 720
   rotateSpeed: 18
   dashStartActive: {r: 1, g: 1, b: 1, a: 1}
   dashEndActive: {r: 1, g: 1, b: 1, a: 0.19607843}
