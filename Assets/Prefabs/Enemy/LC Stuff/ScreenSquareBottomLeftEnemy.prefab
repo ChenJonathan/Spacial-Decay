@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
   m_Layer: 12
-  m_Name: BorderLineEnemy
+  m_Name: ScreenSquareBottomLeftEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011287567202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac09e1da8d432f041a0cd66413eee040, type: 3}
+  m_Script: {fileID: 11500000, guid: df7293c8bee7b9d4b98f7f176a39d0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
