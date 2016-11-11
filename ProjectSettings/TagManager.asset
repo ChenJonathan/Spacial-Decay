@@ -8,7 +8,7 @@ TagManager:
   - Piercing
   - Counter
   - Map
-  - Level
+  - Levels
   - Enemy
   - Background
   layers:
