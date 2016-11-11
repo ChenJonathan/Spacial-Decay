@@ -204,7 +204,7 @@ namespace DanmakU {
 			currentDanmaku.Remove(danmaku);
 		}
 
-		void Update() {
+		internal void Update() {
 			danmakuCount = currentDanmaku.Count;
 			int count = runtimeSystem.particleCount;
 			if (danmakuCount > count) {
@@ -217,7 +217,6 @@ namespace DanmakU {
 			}
 
 			runtimeSystem.GetParticles(particles);
-			//Debug.Log(count2);
 			bool done;
 			IEnumerator<Danmaku> enumerator = currentDanmaku.GetEnumerator();
 			if (fixedAngle) {
