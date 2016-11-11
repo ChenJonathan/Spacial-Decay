@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: LC Wave 0-1
+  m_Name: Border Hug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,13 +45,19 @@ MonoBehaviour:
   EnemyChains:
   - Prefab: {fileID: 114000013064677850, guid: 7eb8367547ea05e4a9aea592643601ca, type: 2}
     Data:
-    - Location: {x: 25, y: 6}
+    - Location: {x: 31, y: -9}
       Time: 3
-    - Location: {x: 25, y: -6}
+  - Prefab: {fileID: 114000013064677850, guid: e05e56ed142683c49946ffa4e1a56be2, type: 2}
+    Data:
+    - Location: {x: 16, y: 24}
       Time: 3
-    - Location: {x: -25, y: 6}
+  - Prefab: {fileID: 114000013064677850, guid: 67cab67c9a7ff6446906f15cdc3ec2d9, type: 2}
+    Data:
+    - Location: {x: -15, y: -24}
       Time: 3
-    - Location: {x: -26, y: -6}
+  - Prefab: {fileID: 114000013064677850, guid: feb6568e301a73649a9683a1107928fb, type: 2}
+    Data:
+    - Location: {x: -30, y: 9}
       Time: 3
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -59,9 +65,13 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: -16, y: 0}
+    - Location: {x: -16, y: 8}
       Time: 0
-    - Location: {x: 16, y: 0}
+    - Location: {x: 16, y: 8}
+      Time: 0
+    - Location: {x: 16, y: -8}
+      Time: 0
+    - Location: {x: -16, y: -8}
       Time: 0
 --- !u!1001 &100100000
 Prefab:
