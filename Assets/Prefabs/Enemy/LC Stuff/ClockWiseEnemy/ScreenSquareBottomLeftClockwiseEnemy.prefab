@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
   m_Layer: 12
-  m_Name: ScreenSquareTopRightEnemy
+  m_Name: ScreenSquareBottomLeftClockwiseEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011287567202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da363f999de52bf4e82b4043d5c6a1e3, type: 3}
+  m_Script: {fileID: 11500000, guid: df7293c8bee7b9d4b98f7f176a39d0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
@@ -118,34 +118,36 @@ MonoBehaviour:
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
-      - DanmakuPrefab bulletPrefab
-      - Player Player
-      - DanmakuField Field
-      - Wave Wave
-      - int Difficulty
-      - int MaxHealth
-      - int Health
-      - float RotateSpeed
-      - bool FacePlayer
-      - GameObject healthBarPrefab
-      - string tagFilter
+      - 44616e6d616b755072656661622062756c6c6574507265666162
+      - 506c6179657220506c61796572
+      - 44616e6d616b754669656c64204669656c64
+      - 576176652057617665
+      - 696e7420446966666963756c7479
+      - 696e74204d61784865616c7468
+      - 696e74204865616c7468
+      - 666c6f617420526f746174655370656564
+      - 626f6f6c2046616365506c61796572
+      - 47616d654f626a656374206865616c7468426172507265666162
+      - 666c6f61745b5d20706172616d6574657273
+      - 737472696e672074616746696c746572
       values:
-      - 0
-      - null
-      - null
-      - null
-      - 0
-      - 100
-      - 0
-      - 8.0
-      - true
-      - 1
-      - null
+      - 30
+      - 6e756c6c
+      - 6e756c6c
+      - 6e756c6c
+      - 30
+      - 313030
+      - 30
+      - 382e30
+      - 74727565
+      - 31
+      - 6e756c6c
+      - 6e756c6c
   _serializerType:
-    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    _name: 566578652e52756e74696d652e53657269616c697a6174696f6e2e46756c6c53657269616c697a65724261636b656e642c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c
   _id: 10236
   dbg: 0
+  _delayDeserialize: 0
   _dirty: 0
   tagFilter: 
   Player: {fileID: 0}
@@ -155,9 +157,17 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 0
   RotateSpeed: 8
+  invincible: 0
   FacePlayer: 1
+  TargetRotation: {x: 0, y: 0, z: 0, w: 0}
+  healthBar: {fileID: 0}
+  healthBarSize: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  rigidbody2d: {fileID: 0}
+  alive: 1
+  start: -5
 --- !u!212 &212000012972523766
 SpriteRenderer:
   m_ObjectHideFlags: 1

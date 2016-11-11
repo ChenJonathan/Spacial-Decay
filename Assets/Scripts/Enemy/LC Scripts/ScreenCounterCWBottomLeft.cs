@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class ScreenSquareTopLeft : Enemy
+public class ScreenCounterCWBottomLeft : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -27,10 +27,10 @@ public class ScreenSquareTopLeft : Enemy
     protected override IEnumerator Run()
     {
         do
-        {   
-            // Up
+        {
+            // Down
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(0, 6 + Mathf.Abs(start));
+            rigidbody2d.velocity = new Vector2(0, -6 + start);
             start = 0;
             yield return new WaitForSeconds(3);
 
@@ -65,9 +65,9 @@ public class ScreenSquareTopLeft : Enemy
                 yield return new WaitForSeconds(0.2f);
             }
 
-            // Down
+            // Up
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(0, -6);
+            rigidbody2d.velocity = new Vector2(0, 6);
             yield return new WaitForSeconds(3);
 
             // Stop and face player
@@ -85,7 +85,8 @@ public class ScreenSquareTopLeft : Enemy
 
             // Left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-10, 0);
+            rigidbody2d.velocity = new Vector2(-10 + start, 0);
+            start = 0;
             yield return new WaitForSeconds(3);
 
             // Stop and face player

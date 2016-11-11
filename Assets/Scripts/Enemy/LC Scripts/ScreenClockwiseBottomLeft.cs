@@ -3,7 +3,7 @@ using System.Collections;
 using DanmakU;
 using DanmakU.Modifiers;
 
-public class ScreenSquareTopRight : Enemy
+public class ScreenClockwiseBottomLeft : Enemy
 {
     public DanmakuPrefab bulletPrefab;
 
@@ -27,46 +27,10 @@ public class ScreenSquareTopRight : Enemy
     protected override IEnumerator Run()
     {
         do
-        {
-            // Right
-            FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(10 + Mathf.Abs(start), 0);
-            start = 0;
-            yield return new WaitForSeconds(3);
-
-            // Stop and face player
-            rigidbody2d.velocity = Vector2.zero;
-            fireData.Towards(Player.transform.position);
-            FacePlayer = false;
-
-            // Fire
-            yield return new WaitForSeconds(0.2f);
-            for (int j = 0; j < 3; j++)
-            {
-                fireData.Fire();
-                yield return new WaitForSeconds(0.2f);
-            }
-
-            // Down
-            FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(0, -6);
-            yield return new WaitForSeconds(3);
-
-            // Stop and face player
-            rigidbody2d.velocity = Vector2.zero;
-            fireData.Towards(Player.transform.position);
-            FacePlayer = false;
-
-            // Fire
-            yield return new WaitForSeconds(0.2f);
-            for (int j = 0; j < 3; j++)
-            {
-                fireData.Fire();
-                yield return new WaitForSeconds(0.2f);
-            }
+        {   
             // Left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-10, 0);
+            rigidbody2d.velocity = new Vector2(-10 + start, 0);
             start = 0;
             yield return new WaitForSeconds(3);
 
@@ -101,7 +65,41 @@ public class ScreenSquareTopRight : Enemy
                 yield return new WaitForSeconds(0.2f);
             }
 
-            
+            // Right
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(10, 0);
+            yield return new WaitForSeconds(3);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            // Down
+            FacePlayer = true;
+            rigidbody2d.velocity = new Vector2(0, -6);
+            yield return new WaitForSeconds(3);
+
+            // Stop and face player
+            rigidbody2d.velocity = Vector2.zero;
+            fireData.Towards(Player.transform.position);
+            FacePlayer = false;
+
+            // Fire
+            yield return new WaitForSeconds(0.2f);
+            for (int j = 0; j < 3; j++)
+            {
+                fireData.Fire();
+                yield return new WaitForSeconds(0.2f);
+            }
         } while (alive);
         Die();
     }

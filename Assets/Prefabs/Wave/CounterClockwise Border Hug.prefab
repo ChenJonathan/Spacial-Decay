@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Border Hug
+  m_Name: CounterClockwise Border Hug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,22 +43,26 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 1
   EnemyChains:
-  - Prefab: {fileID: 114000013064677850, guid: 7eb8367547ea05e4a9aea592643601ca, type: 2}
+  - Prefab: {fileID: 114000013064677850, guid: a73465059c8879c42ba3ecc5a0abfedd, type: 2}
     Data:
-    - Location: {x: 31, y: -9}
+    - Location: {x: -14, y: 24}
       Time: 3
-  - Prefab: {fileID: 114000013064677850, guid: e05e56ed142683c49946ffa4e1a56be2, type: 2}
+      Parameters: []
+  - Prefab: {fileID: 114000013064677850, guid: a883447e414f59c4096600886f41dc3c, type: 2}
     Data:
-    - Location: {x: 16, y: 24}
+    - Location: {x: -30, y: -9}
       Time: 3
-  - Prefab: {fileID: 114000013064677850, guid: 67cab67c9a7ff6446906f15cdc3ec2d9, type: 2}
+      Parameters: []
+  - Prefab: {fileID: 114000013064677850, guid: 2252c40e9f2bbd04ebb1304ee62d91fd, type: 2}
     Data:
-    - Location: {x: -15, y: -24}
+    - Location: {x: 30, y: 9}
       Time: 3
-  - Prefab: {fileID: 114000013064677850, guid: feb6568e301a73649a9683a1107928fb, type: 2}
+      Parameters: []
+  - Prefab: {fileID: 114000013064677850, guid: 38e3eab43a3b45f4fbd9ac56c3f84abf, type: 2}
     Data:
-    - Location: {x: -30, y: 9}
+    - Location: {x: 14, y: -24}
       Time: 3
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -67,12 +71,16 @@ MonoBehaviour:
     Data:
     - Location: {x: -16, y: 8}
       Time: 0
+      Parameters: []
     - Location: {x: 16, y: 8}
       Time: 0
+      Parameters: []
     - Location: {x: 16, y: -8}
       Time: 0
+      Parameters: []
     - Location: {x: -16, y: -8}
       Time: 0
+      Parameters: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
