@@ -377,6 +377,10 @@ namespace DanmakU {
 				renderMesh.vertices = vertexes;
 				renderMesh.Optimize();
 			}
+
+            // Hacky fix for lasers disappearing when center is off screen (by enlargening the bounds to cover the size of the laser)
+            if (Tag == "Laser")
+                renderMesh.bounds = new Bounds(Vector3.zero, new Vector3(1, colliderSize.y * 2, 1)); 
 			
 			runtimeRenderer.mesh = renderMesh;
             

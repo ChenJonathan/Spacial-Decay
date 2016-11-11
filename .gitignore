@@ -28,3 +28,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/ExternalLibraries/DanmakU/Plugins/Editor/Vexe/ScriptableAssets/BetterEditorPrefs.asset
+Assets/Scenes/Test Levels/Test.unity

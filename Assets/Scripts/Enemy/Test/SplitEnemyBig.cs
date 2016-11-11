@@ -95,6 +95,7 @@ public class SplitEnemyBig : Enemy
         spawn.Prefab = enemyPrefab;
         spawn.Data.Location = transform.position;
         spawn.Data.Time = 0;
+        spawn.Data.Parameters = new float[0];
         Wave.SpawnEnemy(spawn);
         Wave.SpawnEnemy(spawn); 
                             

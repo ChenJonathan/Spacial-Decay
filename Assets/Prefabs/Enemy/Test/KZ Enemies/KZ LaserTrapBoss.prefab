@@ -1,44 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &175464
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000012213791962}
+  m_IsPrefabParent: 1
+--- !u!1 &1000012213791962
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 458768}
-  - 212: {fileID: 21249720}
-  - 60: {fileID: 6009790}
-  - 50: {fileID: 5060920}
-  - 114: {fileID: 114000012123848514}
+  - 4: {fileID: 4000012355065254}
+  - 212: {fileID: 212000013092042232}
+  - 60: {fileID: 60000012601199284}
+  - 50: {fileID: 50000010789068374}
+  - 114: {fileID: 114000012870944378}
   m_Layer: 12
-  m_Name: HiddenEnemy Circle Combo
+  m_Name: KZ LaserTrapBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &458768
+--- !u!4 &4000012355065254
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175464}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213791962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5060920
+--- !u!50 &50000010789068374
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175464}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213791962}
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -49,12 +60,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &6009790
+--- !u!60 &60000012601199284
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175464}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213791962}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -90,12 +101,77 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!212 &21249720
+--- !u!114 &114000012870944378
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213791962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4aba4fbd8349b4d86095894f53e78e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serializationData:
+    serializedObjects:
+    - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
+    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    serializedStrings:
+      keys:
+      - DanmakuPrefab laserPrefab
+      - DanmakuPrefab petalPrefab
+      - DanmakuPrefab circlePrefab
+      - Player Player
+      - DanmakuField Field
+      - Wave Wave
+      - int Difficulty
+      - int MaxHealth
+      - int Health
+      - float RotateSpeed
+      - bool FacePlayer
+      - GameObject healthBarPrefab
+      - string tagFilter
+      values:
+      - 0
+      - 1
+      - 2
+      - null
+      - null
+      - null
+      - 0
+      - 600
+      - 0
+      - 8.0
+      - true
+      - 3
+      - null
+  _serializerType:
+    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  _id: 10418
+  dbg: 0
+  _dirty: 0
+  tagFilter: 
+  Player: {fileID: 0}
+  Field: {fileID: 0}
+  Wave: {fileID: 0}
+  Difficulty: 0
+  MaxHealth: 600
+  Health: 0
+  RotateSpeed: 8
+  FacePlayer: 1
+  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  laserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+  petalPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  circlePrefab: {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
+--- !u!212 &212000013092042232
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175464}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012213791962}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -119,99 +195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9f56ec3fcff3f7f4cb69a053fe8ee4ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4055b7b4106d1174dbc2b3e5dc69e94a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &114000012123848514
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d7ac43b3bb73344b979253b5a47f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _serializationData:
-    serializedObjects:
-    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
-    - {fileID: 114000011160122508, guid: 1a137b11a6c820049b3f34e459a87274, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-    serializedStrings:
-      keys:
-      - DanmakuPrefab bulletPrefab
-      - List<SpawnData> fireList
-      - float fireSpeed
-      - float fireRadius
-      - Warning warningPrefab
-      - float warningDuration
-      - float warningFadeInDuration
-      - float warningFadeOutDuration
-      - Player Player
-      - DanmakuField Field
-      - Wave Wave
-      - int Difficulty
-      - int MaxHealth
-      - int Health
-      - float RotateSpeed
-      - bool FacePlayer
-      - GameObject healthBarPrefab
-      - string tagFilter
-      values:
-      - 0
-      - '{"$content":[{"Location":{"x":0.0,"y":0.0},"Time":3.0},{"Location":{"x":-15.0,"y":-7.0},"Time":6.0},{"Location":{"x":-10.0,"y":5.0},"Time":9.0},{"Location":{"x":14.0,"y":-7.0},"Time":12.0},{"Location":{"x":-15.0,"y":-7.0},"Time":15.0},{"Location":{"x":0.0,"y":0.0},"Time":18.0}]}'
-      - 30.0
-      - 3.5
-      - 1
-      - 2.0
-      - 1.0
-      - 1.0
-      - null
-      - null
-      - null
-      - 0
-      - 100
-      - 0
-      - 8.0
-      - false
-      - 2
-      - null
-  _serializerType:
-    _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  _id: -33788
-  dbg: 0
-  _dirty: 0
-  tagFilter: 
-  Player: {fileID: 0}
-  Field: {fileID: 0}
-  Wave: {fileID: 0}
-  Difficulty: 0
-  MaxHealth: 100
-  Health: 0
-  RotateSpeed: 8
-  FacePlayer: 0
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
-  fireList:
-  - Location: {x: 0, y: 0}
-    Time: 3
-  - Location: {x: -15, y: -7}
-    Time: 6
-  - Location: {x: -10, y: 5}
-    Time: 9
-  - Location: {x: 14, y: -7}
-    Time: 12
-  - Location: {x: -15, y: -7}
-    Time: 15
-  - Location: {x: 0, y: 0}
-    Time: 18
-  fireSpeed: 30
-  fireRadius: 3.5
-  warningPrefab: {fileID: 114000011160122508, guid: 1a137b11a6c820049b3f34e459a87274,
-    type: 2}
-  warningDuration: 2
-  warningFadeInDuration: 1
-  warningFadeOutDuration: 1

@@ -20,6 +20,17 @@ public class HiddenEnemy : Enemy
 
 	public override void Start()
     {
+        if (parameters.Length >= 3) {
+            fireList.Clear();
+            for (int i = 0; i + 2 < parameters.Length; i += 3) {
+                Wave.SpawnData spawnData;
+                spawnData.Location = new Vector2(parameters[i], parameters[i + 1]);
+                spawnData.Time = parameters[i + 2];
+                spawnData.Parameters = new float[0];
+                fireList.Add(spawnData);
+            }
+        }
+
         fireList.Sort((a, b) => (int)(a.Time * 100 - b.Time * 100));
 
         fireData = new FireBuilder(bulletPrefab, Field);
