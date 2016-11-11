@@ -24,7 +24,7 @@ public class GameController : Singleton<GameController>
     [SerializeField]
     [Tooltip("Prefab for lines between levels.")]
     private LineRenderer levelLinePrefab;
-
+    
     // Current camera y-position and max y-position in level select
     private float cameraY;
     private float cameraMaxY;
@@ -33,7 +33,7 @@ public class GameController : Singleton<GameController>
     [SerializeField]
     [Tooltip("Causes all levels to be unlocked at the start of the game.")]
     private bool unlockAllLevels;
-
+    
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>
@@ -56,11 +56,13 @@ public class GameController : Singleton<GameController>
             return;
         }
 
-        // Set camera position
-        Camera levelCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        levelCamera.fieldOfView = 2.0f * Mathf.Atan(419.84f / levelCamera.aspect / 400f) * Mathf.Rad2Deg;
-        cameraMaxY = levelCamera.GetComponent<Scroll>().CameraMaxY = 419.84f / 2f - 419.84f / levelCamera.aspect / 2f;
-        cameraY = -cameraMaxY;
+        // Set camera and camera FOV
+
+        Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam.fieldOfView = 2.0f * Mathf.Atan(419.84f / cam.aspect / 400f) * Mathf.Rad2Deg;
+
+        //cameraMaxY = levelCamera.GetComponent<Scroll>().CameraMaxY = 419.84f / 2f - 419.84f / levelCamera.aspect / 2f;
+        //cameraY = -cameraMaxY;
 
         // Initialize levels
         DontDestroyOnLoad(gameObject);
@@ -89,7 +91,6 @@ public class GameController : Singleton<GameController>
     /// <param name="level">The level to load</param>
     public void LoadLevel(string level)
     {
-        cameraY = GameObject.FindGameObjectWithTag("MainCamera").transform.position.y;
         Singleton.CurrentLevel = level;
         NewLevels.Remove(level);
         SceneManager.LoadScene(level);
@@ -106,10 +107,35 @@ public class GameController : Singleton<GameController>
 
         if(scene.name.Equals("Level Select"))
         {
-            // Set camera position
-            Camera levelCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-            levelCamera.GetComponent<Scroll>().CameraMaxY = cameraMaxY;
-            levelCamera.transform.position = new Vector3(0, cameraY, 0);
+            // Set camera position and bounds
+
+            List<string> newLevels = new List<string>();
+            foreach (string level in UnlockedLevels)
+            {
+                newLevels.Add(level);
+                if (CurrentLevel != "")
+                    foreach (Level levelChild in GameObject.Find(level).GetComponent<Level>().Unlocks)
+                        newLevels.Add(levelChild.Scene);
+            }
+
+            float minY = Mathf.Infinity;
+            float maxY = -Mathf.Infinity;
+            float curY = 0;
+            foreach (string levelName in newLevels)
+            {
+                float y = GameObject.Find(levelName).transform.position.y;
+                if (y < minY)
+                    minY = y;
+                if (y > maxY)
+                    maxY = y;
+                if (levelName.Equals(CurrentLevel))
+                    curY = y;
+            }
+
+            Scroll camScroll = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Scroll>();
+            camScroll.CameraMinY = minY;
+            camScroll.CameraMaxY = maxY;
+            camScroll.ScrollTo(curY);
 
             // Process levels
             foreach(Level level in GetAllLevels())
