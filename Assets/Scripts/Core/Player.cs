@@ -232,7 +232,7 @@ public class Player : MonoBehaviour
         mousePos.y = (Input.mousePosition.y / Screen.height - LevelController.Singleton.ViewportRect.y) / LevelController.Singleton.ViewportRect.height;
         mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !dashing)
         {
             // Begin dash targeting
             selecting = true;

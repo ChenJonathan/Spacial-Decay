@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000012248874722}
   - 114: {fileID: 114000011238766288}
   m_Layer: 12
-  m_Name: KamiKazeEnemy
+  m_Name: KZ KamiKazeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
@@ -136,6 +137,7 @@ MonoBehaviour:
       - 0
       - 50
       - 0
+      - 8.0
       - true
       - 1
       - null
@@ -152,6 +154,7 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 50
   Health: 0
+  RotateSpeed: 8
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
@@ -185,6 +188,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 032eb0c42750bca4784028348e47ea4a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
