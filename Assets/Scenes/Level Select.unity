@@ -3413,7 +3413,7 @@ MonoBehaviour:
       - bool destroyNewInstances
       values:
       - 0
-      - '"Petal Easy"'
+      - '"Tower Boss"'
       - '""'
       - 0
       - '{"$content":[]}'
@@ -3432,7 +3432,7 @@ MonoBehaviour:
   destroyNewInstances: 1
   ProbePrefab: {fileID: 114000012380606636, guid: e9a0778b8befe1e47b917ff1334b3e89,
     type: 2}
-  StartLevel: Petal Easy
+  StartLevel: Tower Boss
   CurrentLevel: 
   Difficulty: 0
   UnlockedLevels: []
