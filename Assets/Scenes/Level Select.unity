@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraSpeed: 0
-  CameraMinY: -500
+  CameraMinY: 0
   CameraMaxY: 500
 --- !u!82 &1637573700
 AudioSource:
