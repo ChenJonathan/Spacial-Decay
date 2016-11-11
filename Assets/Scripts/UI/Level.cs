@@ -19,6 +19,10 @@ public class Level : MonoBehaviour
 
     public Sprite[] sprites;                        // Sprites to use for the level select
 
+    private AudioSource audioSource;
+    public AudioClip onHoverAudio;
+    public AudioClip onClickAudio;
+
     [HideInInspector]
     public LineRenderer line;                       // Indicates the level that unlocked this level
 
@@ -55,11 +59,13 @@ public class Level : MonoBehaviour
         
         ordinalText = transform.Find("Center/OrdinalText").GetComponent<Text>();
         ordinalText.text = transform.GetSiblingIndex().ToString();
-
+        
         newText = transform.Find("Center/NewText").GetComponent<Text>();
 
         center.transform.localScale = Vector3.zero;
         details.transform.localScale = Vector3.zero;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -139,6 +145,8 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
+        audioSource.clip = onHoverAudio;
+        audioSource.Play();
     }
 
     /// <summary>
@@ -179,6 +187,10 @@ public class Level : MonoBehaviour
         expandTarg = 1;
 
         if (Input.GetMouseButtonDown(0))
+        {
+            audioSource.clip = onClickAudio;
+            audioSource.Play();
             GameController.Singleton.LoadLevel(Scene);
+        }
     }
 }
