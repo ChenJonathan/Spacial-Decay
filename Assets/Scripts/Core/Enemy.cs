@@ -101,18 +101,21 @@ public partial class Enemy : DanmakuCollider
     /// <param name="damage">The amount of damage to deal</param>
     public virtual void Damage(int damage)
     {
-        Health -= damage;
-
-        float healthProportion = (float)Health / MaxHealth;
-        healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
-
-        if(Health <= 0)
+        if(!invincible)
         {
-            Die();
-        }
-        else
-        {
-            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+            Health -= damage;
+
+            float healthProportion = (float)Health / MaxHealth;
+            healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
+
+            if(Health <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+            }
         }
     }
 
