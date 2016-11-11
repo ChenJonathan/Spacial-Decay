@@ -22,9 +22,9 @@ GameObject:
   - 212: {fileID: 212000010446381678}
   - 60: {fileID: 60000013471777564}
   - 50: {fileID: 50000011930067556}
-  - 114: {fileID: 114000010590808864}
+  - 114: {fileID: 114000012617817328}
   m_Layer: 12
-  m_Name: KZ HitandRunCircleEnemy1
+  m_Name: KZ HaRCircleEnemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &114000010590808864
+--- !u!114 &114000012617817328
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,13 +109,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012550661892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cc3c69ff7c3e84e9402fc5d1539c71, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bd7f6a712c81b74a9e1b8f1adddfd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
     - {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    - {fileID: 180408, guid: d8697b0c315850d4cbdf3c1a5b58521c, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
@@ -138,13 +138,13 @@ MonoBehaviour:
       - 50
       - 0
       - 8.0
-      - false
+      - true
       - 1
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -2190
+  _id: -5568
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -155,8 +155,8 @@ MonoBehaviour:
   MaxHealth: 50
   Health: 0
   RotateSpeed: 8
-  FacePlayer: 0
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  FacePlayer: 1
+  healthBarPrefab: {fileID: 180408, guid: d8697b0c315850d4cbdf3c1a5b58521c, type: 2}
   bulletPrefab: {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
 --- !u!212 &212000010446381678
 SpriteRenderer:
