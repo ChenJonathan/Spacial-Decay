@@ -4,44 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Level Select.unity
-  - enabled: 1
-    path: Assets/Scenes/Petal Easy.unity
-  - enabled: 1
-    path: Assets/Scenes/Walls.unity
-  - enabled: 1
-    path: Assets/Scenes/Danger Circles.unity
-  - enabled: 1
-    path: Assets/Scenes/Duelling Combos.unity
-  - enabled: 1
-    path: Assets/Scenes/Explosions.unity
-  - enabled: 1
-    path: Assets/Scenes/Spiral Boss.unity
-  - enabled: 1
-    path: Assets/Scenes/Strength in Numbers.unity
-  - enabled: 1
-    path: Assets/Scenes/Surrounded.unity
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/KZ Level 3.unity
-  - enabled: 1
-    path: Assets/Scenes/Test.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 4.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 5.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 6.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 7.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 8.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 9.unity
-  - enabled: 1
-    path: Assets/Scenes/KZ Level 10.unity
-=======
-    path: Assets/Scenes/Tower Boss.unity
->>>>>>> refs/remotes/origin/master
+  m_Scenes: []
