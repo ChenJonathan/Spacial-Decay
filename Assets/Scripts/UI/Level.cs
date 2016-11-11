@@ -11,10 +11,13 @@ public class Level : MonoBehaviour
     public string Scene;                            // Name of the corresponding scene
     public List<Level> Unlocks;                     // List of levels to unlock once this level is completed
 
-    private Image image;                            // A reference to the level image
+    private Image details;                          // A reference to the level's details
+    private Image center;                           // A reference to the level's center image
+    private Text titleText;                         // A reference to the level's title text
     private Text ordinalText;                       // A reference to the level's ordinal text
 
-    public Sprite[] sprites;
+    public Sprite[] sprites;                        // Sprites to use for the level select
+
     [HideInInspector]
     public LineRenderer line;                       // Indicates the level that unlocked this level
     private ParticleSystem highlightEffect;         // Indicates a newly unlocked level
@@ -31,23 +34,23 @@ public class Level : MonoBehaviour
 
     float expand = 0f;
     float expandTarg = 0f;
-    float expandDrag = 0.25f;
+    float expandDrag = 0.5f;
 
     /// <summary>
     /// Called when the object is instantiated. Handles initialization.
     /// </summary>
     public void Awake()
     {
-        image = transform.Find("UIElements/Image").GetComponent<Image>();
-        ordinalText = transform.Find("UIElements/Image/OrdinalText").GetComponent<Text>();
-        highlightEffect = transform.Find("HighlightEffect").GetComponent<ParticleSystem>();
-        image.
+        details = transform.Find("Details").GetComponent<Image>();
+        center = transform.Find("Center").GetComponent<Image>();
+
+        titleText = transform.Find("Details/TitleText").GetComponent<Text>();
+        titleText.text = gameObject.name;
+        
+        ordinalText = transform.Find("Center/OrdinalText").GetComponent<Text>();
         ordinalText.text = transform.GetSiblingIndex().ToString();
 
-        highlightEffect.startColor = image.color;
-        if (Scene == "") {
-            Scene = gameObject.name;
-        }
+        highlightEffect = transform.Find("HighlightEffect").GetComponent<ParticleSystem>();
     }
 
     /// <summary>
@@ -72,31 +75,37 @@ public class Level : MonoBehaviour
     /// <param name="duration">How long the object should take to appear</param>
     private IEnumerator Appear(float duration, bool lineOnly = false)
     {
-        Color color = image.color;
+        Color color = Color.white;
         color.a = 0;
-        /*if (!lineOnly) {
-            image.color = color;
-        }*/
+
+        if (!lineOnly) {
+            details.color = color;
+            titleText.color = color;
+            center.color = color;
+            ordinalText.color = color;
+        }
         if (line != null) {
             line.SetColors(color, color);
             line.enabled = true;
         }
 
-        for(int i = 1; i <= 100; i++)
+        for (int i = 0; i < 100; i++)
         {
-            yield return new WaitForSeconds(duration / 100);
-
-            // Increase alpha
+            yield return new WaitForSeconds(duration / 100.0f);
             color.a = i / 100.0f;
-            /*if (!lineOnly) {
-                image.color = color;
-            }*/
+
+            if (!lineOnly) {
+                details.color = color;
+                titleText.color = color;
+                center.color = color;
+                ordinalText.color = color;
+            }
             if (line != null) {
                 line.SetColors(color, color);
             }
         }
 
-        if(!lineOnly)
+        if (!lineOnly)
             Highlight();
     }
 
@@ -118,10 +127,12 @@ public class Level : MonoBehaviour
         scale += (scaleTarg - scale) * scaleDrag;
         expand += (expandTarg - expand) * expandDrag;
 
+        center.sprite = sprites[(int) expandTarg];
+        center.transform.localScale = Vector3.one * scale;
+        details.transform.localScale = Vector3.one * scale * expand;
+
         scaleTarg = scaleTargWhenDefault;
         expandTarg = 0;
-
-        image.transform.parent.localScale = Vector3.one * scale;
     }
 
     /// <summary>
@@ -132,13 +143,13 @@ public class Level : MonoBehaviour
         scaleTarg = scaleTargWhenHovered;
         expandTarg = 1;
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             GameController.Singleton.LoadLevel(Scene);
-            if (!DifficultySelect.Instance.gameObject.activeSelf || DifficultySelect.Instance.Level != this)
+            /*if (!DifficultySelect.Instance.gameObject.activeSelf || DifficultySelect.Instance.Level != this)
                 DifficultySelect.Instance.Activate(this);
             else
-                DifficultySelect.Instance.Deactivate();
+                DifficultySelect.Instance.Deactivate();*/
         }
     }
 }
