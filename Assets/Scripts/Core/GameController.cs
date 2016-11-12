@@ -13,7 +13,7 @@ public class GameController : Singleton<GameController>
     [HideInInspector]
     public string CurrentLevel = "";
     [HideInInspector]
-    public int Difficulty = 0;
+    public int Difficulty = 2;
 
     [HideInInspector]
     public List<string> UnlockedLevels;

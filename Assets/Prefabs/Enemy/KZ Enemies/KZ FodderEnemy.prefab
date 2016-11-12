@@ -125,8 +125,10 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -136,8 +138,10 @@ MonoBehaviour:
       - 0
       - 50
       - 0
-      - true
+      - 8.0
+      - false
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -152,8 +156,10 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 50
   Health: 0
-  FacePlayer: 1
+  RotateSpeed: 8
+  FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
 --- !u!212 &212000011474666678
 SpriteRenderer:
@@ -184,7 +190,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a278fa2547c98dd4093949664a70324a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10aeae1a79b5efa49b8a9be4fc68a145, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
