@@ -12,6 +12,9 @@ public class FodderScript : Enemy
     private static readonly float MAX_FIRE_COOLDOWN = 1f;
     private float timer = 15f;
 
+    /// <summary> Multiplier for the enemy's horizontal speed. </summary>
+    private float speedMultiplier = 1;
+
     public override void Start()
     {
         fireData = new FireBuilder(bulletPrefab, Field);
@@ -19,6 +22,9 @@ public class FodderScript : Enemy
         fireData.Towards(Player.transform);
         fireData.WithSpeed(5 + Difficulty * 2);
 
+        if (parameters.Length > 0) {
+            speedMultiplier = parameters[0];
+        }
     }
 
     public void Update()
@@ -40,7 +46,7 @@ public class FodderScript : Enemy
         {
             Die();
         }
-        Vector3 direction = new Vector3(-1.0f, 0.0f);
+        Vector3 direction = new Vector3(speedMultiplier, 0.0f);
         GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
     }
 }

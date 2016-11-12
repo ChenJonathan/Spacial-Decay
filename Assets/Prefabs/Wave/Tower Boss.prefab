@@ -47,6 +47,7 @@ MonoBehaviour:
     Data:
     - Location: {x: 0, y: 15}
       Time: 5
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 5
@@ -55,6 +56,7 @@ MonoBehaviour:
     Data:
     - Location: {x: 0, y: 9}
       Time: 0
+      Parameters: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

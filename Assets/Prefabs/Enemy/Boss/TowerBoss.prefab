@@ -107,6 +107,7 @@ MonoBehaviour:
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
     - {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9, type: 2}
+    - {fileID: 114000011160122508, guid: 609727b06f728a447a5c4a3ef28c7cb3, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -114,6 +115,7 @@ MonoBehaviour:
       - DanmakuPrefab CirclePrefab
       - DanmakuPrefab LaserPrefab
       - Tower TowerPrefab
+      - Warning WarningPrefab
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -123,12 +125,14 @@ MonoBehaviour:
       - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
       - 1
       - 2
       - 3
+      - 4
       - null
       - null
       - null
@@ -137,7 +141,8 @@ MonoBehaviour:
       - 0
       - 8.0
       - false
-      - 4
+      - 5
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -155,10 +160,13 @@ MonoBehaviour:
   RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   BulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   CirclePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
   LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
   TowerPrefab: {fileID: 114000012665843988, guid: 0a0b84f529677694f946668a642005a9,
+    type: 2}
+  WarningPrefab: {fileID: 114000011160122508, guid: 609727b06f728a447a5c4a3ef28c7cb3,
     type: 2}
 --- !u!212 &21249720
 SpriteRenderer:

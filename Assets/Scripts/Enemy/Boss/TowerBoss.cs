@@ -10,7 +10,9 @@ public class TowerBoss : Enemy
     public DanmakuPrefab BulletPrefab;
     public DanmakuPrefab CirclePrefab;
     public DanmakuPrefab LaserPrefab;
+
     public Tower TowerPrefab;
+    public Warning WarningPrefab;
 
     private FireBuilder fireDataBullet;
     private FireBuilder fireDataCircle;
@@ -26,9 +28,9 @@ public class TowerBoss : Enemy
     {
         fireDataBullet = new FireBuilder(BulletPrefab, Field);
         fireDataBullet.From(transform);
-        fireDataBullet.WithSpeed(3);
+        fireDataBullet.WithSpeed(2);
         fireDataBullet.WithAngularSpeed(45);
-        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(8, 12), 0, 0));
+        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(6, 8), 0, 0));
         fireDataBullet.WithController(new AccelerationController(3));
 
         fireDataCircle = new FireBuilder(CirclePrefab, Field);
@@ -42,6 +44,22 @@ public class TowerBoss : Enemy
         fireDataLaser.WithRotation(transform);
         fireDataLaser.WithController(new AutoDeactivateController(0.25f));
 
+        Wave.WarningData warning;
+        warning.Prefab = WarningPrefab;
+        warning.Duration = 3;
+        warning.FadeInDuration = 1;
+        warning.FadeOutDuration = 1;
+        warning.Data.Time = Wave.CurrentTime + 2;
+        warning.Data.Parameters = new float[0];
+        warning.Data.Location = new Vector2(-4 - Difficulty, 3 + Difficulty / 2);
+        Wave.SpawnWarning(warning);
+        warning.Data.Location = new Vector2(4 + Difficulty, 3 + Difficulty / 2);
+        Wave.SpawnWarning(warning);
+        warning.Data.Location = new Vector2(-4 - Difficulty, -3 - Difficulty / 2);
+        Wave.SpawnWarning(warning);
+        warning.Data.Location = new Vector2(4 + Difficulty, -3 - Difficulty / 2);
+        Wave.SpawnWarning(warning);
+        
         towers = new List<Tower>();
 
         SetRotation(180);
@@ -64,13 +82,14 @@ public class TowerBoss : Enemy
                 Wave.EnemyData spawn;
                 spawn.Prefab = TowerPrefab;
                 spawn.Data.Time = 0;
-                spawn.Data.Location = new Vector2(-5, 0);
+                spawn.Data.Parameters = new float[0];
+                spawn.Data.Location = new Vector2(-4 - Difficulty, 3 + Difficulty / 2);
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));
-                spawn.Data.Location = new Vector2(5, 0);
+                spawn.Data.Location = new Vector2(4 + Difficulty, 3 + Difficulty / 2);
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));
-                spawn.Data.Location = new Vector2(0, -5);
+                spawn.Data.Location = new Vector2(-4 - Difficulty, -3 - Difficulty / 2);
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));
-                spawn.Data.Location = new Vector2(0, 5);
+                spawn.Data.Location = new Vector2(4 + Difficulty, -3 - Difficulty / 2);
                 towers.Add((Tower)Wave.SpawnEnemy(spawn));
 
                 foreach(Tower tower in towers)
@@ -128,20 +147,26 @@ public class TowerBoss : Enemy
                 yield return new WaitForSeconds(0.5f);
             }
 
-            if(!enraged)
-                yield return new WaitForSeconds(1);
-
-            for(int i = 0; i < (enraged ? 5 : 3); i++)
+            if(towers.Count <= 2)
             {
-                stillRotation = false;
-                FacePlayer = true;
-                yield return new WaitForSeconds((enraged ? 0.25f : 0.5f));
+                if(!enraged)
+                {
+                    FacePlayer = true;
+                    yield return new WaitForSeconds(1);
+                }
 
-                stillRotation = true;
-                FacePlayer = false;
-                TargetRotation = transform.rotation;
-                fireDataLaser.Fire();
-                yield return new WaitForSeconds(0.25f);
+                for(int i = 0; i < (enraged ? 5 : 3); i++)
+                {
+                    stillRotation = false;
+                    FacePlayer = true;
+                    yield return new WaitForSeconds(1);
+
+                    stillRotation = true;
+                    FacePlayer = false;
+                    TargetRotation = transform.rotation;
+                    fireDataLaser.Fire();
+                    yield return new WaitForSeconds((enraged ? 0.25f : 0.5f));
+                }
             }
         }
     }
