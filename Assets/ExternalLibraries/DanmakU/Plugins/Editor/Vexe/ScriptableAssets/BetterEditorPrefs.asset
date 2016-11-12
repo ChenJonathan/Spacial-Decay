@@ -26,7 +26,7 @@ MonoBehaviour:
       - '{}'
       - '{}'
       - '{"$content":[{"Key":-908185250,"Value":false},{"Key":-907922680,"Value":false},{"Key":-912940278,"Value":false},{"Key":-909487684,"Value":false},{"Key":-908043084,"Value":false},{"Key":-907947170,"Value":true},{"Key":-236339312,"Value":true},{"Key":-907824472,"Value":false},{"Key":-908785224,"Value":false},{"Key":-908436784,"Value":false},{"Key":-909624146,"Value":false}]}'
-      - '{"$content":[{"Key":-686369844,"Value":{"x":14.0,"y":597.0,"z":0.0}},{"Key":-686273930,"Value":{"x":14.0,"y":134.0,"z":0.0}},{"Key":-687111984,"Value":{"x":14.0,"y":622.0,"z":0.0}},{"Key":-686763544,"Value":{"x":14.0,"y":597.0,"z":0.0}}]}'
+      - '{"$content":[{"Key":-686369844,"Value":{"x":14.0,"y":597.0,"z":0.0}},{"Key":-686273930,"Value":{"x":14.0,"y":134.0,"z":0.0}},{"Key":-687111984,"Value":{"x":14.0,"y":622.0,"z":0.0}},{"Key":-686763544,"Value":{"x":14.0,"y":597.0,"z":0.0}},{"Key":-687950906,"Value":{"x":14.0,"y":581.0,"z":0.0}}]}'
       - '{}'
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,

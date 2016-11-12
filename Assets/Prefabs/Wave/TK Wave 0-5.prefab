@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: TK Wave 0-1
+  m_Name: TK Wave 0-5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,18 +43,16 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000011813409250, guid: 8090580e38a0df648a1d06070f2fea58, type: 2}
+  - Prefab: {fileID: 114000011813409250, guid: f148e3c286901574abe1d9b491548fa6, type: 2}
     Data:
     - Location: {x: 0, y: -12}
       Time: 3
     - Location: {x: 0, y: 12}
-      Time: 3
-  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
-    Data:
-    - Location: {x: -20, y: 0}
-      Time: 3
-    - Location: {x: 20, y: 0}
-      Time: 3
+      Time: 4
+    - Location: {x: 0, y: 12}
+      Time: 5
+    - Location: {x: 0, y: 12}
+      Time: 6
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3

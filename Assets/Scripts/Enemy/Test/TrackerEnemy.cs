@@ -17,7 +17,7 @@ public class TrackerEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(10+4*Difficulty);
+        fireData.WithSpeed(5+3*Difficulty);
         HomingController HomingController = new HomingController();
         HomingController.Target = Player.transform;
         fireData.WithController(HomingController);

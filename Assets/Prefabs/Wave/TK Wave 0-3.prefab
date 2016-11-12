@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: TK Wave 0-1
+  m_Name: TK Wave 0-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
       Time: 3
     - Location: {x: 0, y: 12}
       Time: 3
-  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+  - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
     Data:
     - Location: {x: -20, y: 0}
       Time: 3
