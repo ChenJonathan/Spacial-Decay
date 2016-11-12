@@ -134,7 +134,7 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// When the mouse first hovers over this level
+    /// When the mouse first hovers over this level.
     /// </summary>
     private void OnMouseEnter()
     {
@@ -145,12 +145,13 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
+
         audioSource.clip = onHoverAudio;
         audioSource.Play();
     }
 
     /// <summary>
-    /// A whole bunch of procedural animations
+    /// A whole bunch of procedural animations.
     /// </summary>
     void Update()
     {

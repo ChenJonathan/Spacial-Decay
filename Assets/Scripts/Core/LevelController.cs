@@ -53,6 +53,10 @@ public class LevelController : DanmakuGameController
     // Time scale constantly approaches this value
     public float TargetTimeScale = 1;
 
+    // Total time
+    [HideInInspector]
+    public float LevelTime = 0;
+
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
     /// </summary>
@@ -107,13 +111,14 @@ public class LevelController : DanmakuGameController
     {
         base.Update();
         Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        LevelTime += Time.deltaTime;
 
         if(Input.GetKeyDown(KeyCode.Escape))
             TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
 
         // TODO Remove these
         if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+            GameController.Singleton.LoadLevelSelect(true, LevelTime);
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             EndEvent();
         }
@@ -138,7 +143,7 @@ public class LevelController : DanmakuGameController
 
         if(eventCount == events.Count)
         {
-            SceneManager.LoadScene("Level Select");
+            GameController.Singleton.LoadLevelSelect(true, LevelTime);
         }
         else
         {
