@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
+    - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
     - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
     serializedStrings:
       keys:
@@ -223,7 +223,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
+  - {fileID: 1000013141128222, guid: 2ef57748bc6ae1c4d8daa8b1474383cd, type: 2}
   - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
   TargetTimeScale: 1
 --- !u!4 &174129276

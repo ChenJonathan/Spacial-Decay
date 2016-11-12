@@ -115,10 +115,12 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
+      - DanmakuPrefab initializeCharge
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -132,6 +134,7 @@ MonoBehaviour:
       - string tagFilter
       values:
       - 0
+      - 1
       - null
       - null
       - null
@@ -140,7 +143,7 @@ MonoBehaviour:
       - 0
       - 8.0
       - false
-      - 1
+      - 2
       - null
       - null
   _serializerType:
@@ -161,6 +164,7 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  initializeCharge: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
 --- !u!212 &212000014116371400
 SpriteRenderer:
   m_ObjectHideFlags: 1
