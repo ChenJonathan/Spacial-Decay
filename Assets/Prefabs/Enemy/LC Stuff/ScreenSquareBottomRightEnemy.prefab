@@ -23,7 +23,7 @@ GameObject:
   - 60: {fileID: 60000012508267392}
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: ScreenSquareBottomRightEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -126,8 +126,11 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -138,8 +141,11 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
+      - null
+      - null
       - true
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -155,8 +161,11 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
 --- !u!212 &212000012972523766
 SpriteRenderer:
@@ -186,7 +195,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d33325fee59274345b3a15df5dfeccf9, type: 3}
   m_Color: {r: 0.98039216, g: 0.39215687, b: 0.39215687, a: 1}
   m_FlipX: 0

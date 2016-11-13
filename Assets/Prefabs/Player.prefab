@@ -13,7 +13,7 @@ GameObject:
   - 50: {fileID: 5090954}
   - 114: {fileID: 11426350}
   - 82: {fileID: 82000013440151292}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 4: {fileID: 423932}
   - 198: {fileID: 19861626}
   - 199: {fileID: 19950068}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 4: {fileID: 442014}
   - 58: {fileID: 58000010901234842}
   - 114: {fileID: 114000013569479906}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: DanmakuHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

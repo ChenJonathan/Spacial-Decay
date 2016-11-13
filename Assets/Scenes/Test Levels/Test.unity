@@ -183,13 +183,14 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
+    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     serializedStrings:
       keys:
       - DanmakuField field
       - Player playerPrefab
       - List<GameObject> events
       - float TargetTimeScale
+      - float LevelTime
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -201,6 +202,7 @@ MonoBehaviour:
       - 1
       - '{"$content":[2]}'
       - 1.0
+      - 0.0
       - true
       - 1000
       - 100
@@ -222,8 +224,9 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000013141128222, guid: 4d21504b62a6a0e4e86d06267de7d0e6, type: 2}
+  - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
   TargetTimeScale: 1
+  LevelTime: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0

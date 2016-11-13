@@ -85,14 +85,14 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// Coroutine to make the object appear. Also highlights the object with a particle effect afterwards.
+    /// Coroutine to make the object appear.
     /// </summary>
     /// <param name="duration">How long the object should take to appear</param>
     private IEnumerator Appear(float duration, bool lineOnly = false)
     {
         Color color = Color.white;
         color.a = 0;
-
+        
         if (!lineOnly) {
             details.color = color;
             titleText.color = color;
@@ -125,7 +125,7 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts the particle effect to indicate that the level is newly unlocked.
+    /// Marks the level as a new level.
     /// </summary>
     public void Highlight()
     {
@@ -134,26 +134,9 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// When the mouse first hovers over this level.
-    /// </summary>
-    private void OnMouseEnter()
-    {
-        scale = scaleWhenFirstHovered;
-        
-        if (nTextTarg == 1)
-        {
-            nText = 1.25f;
-            nTextCol = Color.yellow;
-        }
-
-        audioSource.clip = onHoverAudio;
-        audioSource.Play();
-    }
-
-    /// <summary>
     /// A whole bunch of procedural animations.
     /// </summary>
-    void Update()
+    public void Update()
     {
         scale += (scaleTarg - scale) * scaleDrag;
         expand += (expandTarg - expand) * expandDrag;
@@ -177,6 +160,23 @@ public class Level : MonoBehaviour
 
         scaleTarg = scaleTargWhenDefault;
         expandTarg = 0;
+    }
+
+    /// <summary>
+    /// When the mouse first hovers over this level.
+    /// </summary>
+    private void OnMouseEnter()
+    {
+        scale = scaleWhenFirstHovered;
+
+        if(nTextTarg == 1)
+        {
+            nText = 1.25f;
+            nTextCol = Color.yellow;
+        }
+
+        audioSource.clip = onHoverAudio;
+        audioSource.Play();
     }
 
     /// <summary>

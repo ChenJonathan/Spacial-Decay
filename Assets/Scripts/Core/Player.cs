@@ -305,12 +305,21 @@ public class Player : MonoBehaviour
     {
         lives--;
         livesCounter.UpdateCounter(lives);
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
         hitEffect.Play();
-        if (lives == 0)
+        if(lives == 0)
+        {
+            if(FindObjectOfType<DialogueLevelEnd>() == null)
+                Instantiate(LevelController.Singleton.LevelFailedMessage);
+
             audioSource.clip = OnDeathAudio;
+        }
         else
+        {
+            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
             audioSource.clip = OnHitAudio;
+        }
         audioSource.Play();
     }
 
