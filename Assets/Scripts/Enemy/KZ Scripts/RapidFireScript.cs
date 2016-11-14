@@ -6,10 +6,13 @@ using DanmakU.Modifiers;
 public class RapidFireScript : Enemy
 {
     public DanmakuPrefab bulletPrefab;
+    public DanmakuPrefab aimPrefab;
 
     private FireBuilder fireData;
+    private FireBuilder aimData;
     private float fireCooldown = 3f;
     private float timer = 2f;
+    private int bullets = 0;
 
     public override void Start()
     {
@@ -18,6 +21,11 @@ public class RapidFireScript : Enemy
         fireData.Towards(Player.transform);
         fireData.WithSpeed(6 + 2 * Difficulty);
         fireData.WithModifier(new RandomizeAngleModifier(360));
+
+        aimData = new FireBuilder(aimPrefab, Field);
+        aimData.From(transform);
+        aimData.Towards(Player.transform);
+        aimData.WithSpeed(3 + 3 * Difficulty);
     }
 
     public void Update()
@@ -26,6 +34,12 @@ public class RapidFireScript : Enemy
         if(fireCooldown < 0)
         {
             fireData.Fire();
+            if (bullets % 30 == 0)
+            {
+                aimData.Fire();
+            }
+            fireCooldown = .001f - .0003f * Difficulty;
+            bullets++;
         }
     }
 

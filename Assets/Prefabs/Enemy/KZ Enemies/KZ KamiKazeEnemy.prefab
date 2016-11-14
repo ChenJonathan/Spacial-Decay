@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+    - {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -166,7 +166,7 @@ MonoBehaviour:
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
-  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  bulletPrefab: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
 --- !u!212 &212000012038156486
 SpriteRenderer:
   m_ObjectHideFlags: 1
