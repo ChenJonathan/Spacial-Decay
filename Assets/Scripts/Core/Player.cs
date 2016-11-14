@@ -290,8 +290,11 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Hit()
     {
-        lives--;
-        livesCounter.UpdateCounter(lives);
+        if (!LevelController.Singleton.permanentInvincible)
+        {
+            lives--;
+            livesCounter.UpdateCounter(lives);
+        }
         StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
         hitEffect.Play();
     }

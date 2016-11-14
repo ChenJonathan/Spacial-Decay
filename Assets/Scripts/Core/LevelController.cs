@@ -53,6 +53,11 @@ public class LevelController : DanmakuGameController
     // Time scale constantly approaches this value
     public float TargetTimeScale = 1;
 
+    /// <summary> Makes the player invincible permanently. </summary>
+    [SerializeField]
+    [Tooltip("Makes the player invincible permanently.")]
+    public bool permanentInvincible;
+
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
     /// </summary>
