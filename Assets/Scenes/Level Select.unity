@@ -3208,9 +3208,9 @@ MonoBehaviour:
       - string StartLevel
       - string CurrentLevel
       - int Difficulty
+      - List<string> UnlockedLevels
+      - List<string> NewLevels
       - LineRenderer levelLinePrefab
-      - List<string> unlockedLevels
-      - List<string> newLevels
       - bool keepBetweenScenes
       - bool destroyNewInstances
       values:
@@ -3218,9 +3218,9 @@ MonoBehaviour:
       - '"Petal Easy"'
       - '""'
       - 0
+      - '{"$content":[]}'
+      - '{"$content":[]}'
       - 1
-      - '{"$content":["Petal Easy"]}'
-      - '{"$content":["Petal Easy"]}'
       - true
       - true
   _serializerType:
@@ -3236,12 +3236,10 @@ MonoBehaviour:
   StartLevel: Petal Easy
   CurrentLevel: 
   Difficulty: 0
+  UnlockedLevels: []
+  NewLevels: []
   levelLinePrefab: {fileID: 120000013798751376, guid: efbcd8ba825b84db88a78765668cec1a,
     type: 2}
-  unlockedLevels:
-  - Petal Easy
-  newLevels:
-  - Petal Easy
 --- !u!1001 &1859286580
 Prefab:
   m_ObjectHideFlags: 0
