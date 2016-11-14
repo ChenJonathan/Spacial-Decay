@@ -636,7 +636,6 @@ namespace DanmakU
         {
             to_deactivate = false;
             runtime.Add(this);
-            runtime.Update();
             if(!is_active && OnActivate != null)
                 OnActivate(this);
             is_active = true;
@@ -670,7 +669,6 @@ namespace DanmakU
             controllerCheck = false;
             Damage = 0;
             runtime.Remove(this);
-            runtime.Update();
             CollisionCheck = true;
             is_active = false;
             danmakuPool.Return(this);
