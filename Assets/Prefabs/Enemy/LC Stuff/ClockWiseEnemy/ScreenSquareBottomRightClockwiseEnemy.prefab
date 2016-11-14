@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
   m_Layer: 0
-  m_Name: ScreenSquareBottomRightEnemy
+  m_Name: ScreenSquareBottomRightClockwiseEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,8 +145,8 @@ MonoBehaviour:
       - null
       - true
       - 1
-      - null
-      - null
+      - '[]'
+      - '""'
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -195,7 +195,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d33325fee59274345b3a15df5dfeccf9, type: 3}
   m_Color: {r: 0.98039216, g: 0.39215687, b: 0.39215687, a: 1}
   m_FlipX: 0
