@@ -56,7 +56,7 @@ MonoBehaviour:
   EnemyChains:
   - Prefab: {fileID: 114000013546761550, guid: 5a122b30ddd02bf4b928c18d1dfdb8a7, type: 2}
     Data:
-    - Location: {x: 20, y: 0}
+    - Location: {x: 24, y: 0}
       Time: 3
       Parameters: []
   WarningChains:
