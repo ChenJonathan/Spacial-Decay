@@ -11,8 +11,6 @@ public class ShieldBoss : Enemy
     public DanmakuPrefab CirclePrefab;
     public DanmakuPrefab LaserPrefab;
     public Shield Shield;
-    public SniperTurretTower turretPrefab;
-    private List<SniperTurretTower> turrets;  
 
     private FireBuilder fireDataBullet;
     private FireBuilder fireDataCircle;
@@ -22,12 +20,6 @@ public class ShieldBoss : Enemy
 
     private bool stillMovement = false;
     private bool stillRotation = false;
-    private Vector3 direction;
-    private Vector3 dest;
-    private float prepTime = 3f;
-    private bool dashing = false;
-    private Vector3[] spawnPos = new Vector3[3];
-    int spawnCount = 0;
 
 	public override void Start()
     {
@@ -57,40 +49,21 @@ public class ShieldBoss : Enemy
         rightShield.transform.parent = transform;
         rightShield.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 90);
 
-        direction = Vector3.zero - transform.position;
-        dest = Vector3.zero;
-        turrets = new List<SniperTurretTower>();        
         SetRotation(180);
-        Dash();
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (dashing) // Start moving after its pause time has ended
-        {
-            prepTime -= Time.fixedDeltaTime;            
-            if (prepTime <= 0)
-            {
-                stillMovement = false;
-                stillRotation = false;
-                dashing = false;
-            }            
-        }       
         if(!stillMovement && !stillRotation)
-        {           
-            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 20;
-            if (spawnCount < 3 && Vector3.Distance(transform.position, spawnPos[spawnCount]) < 0.5)
-            {
-                // Spawn a turret when the boss reaches a turret spawn location
-                spawnTurret(turretPrefab);
-                spawnCount++;
-            }
-            if (Vector3.Distance(transform.position, dest) < 0.5)
+        {
+            Vector3 direction = Vector3.zero - transform.position;
+            GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
+
+            if(Vector3.Distance(transform.position, Vector3.zero) < 0.1)
             {
                 stillMovement = true;
-                dashing = false;
 
                 StartCoroutine(AttackTargeted());
                 StartCoroutine(AttackCircular());
@@ -105,26 +78,7 @@ public class ShieldBoss : Enemy
     public override void Damage(int damage)
     {
         if(!leftShield.IsActive() && !rightShield.IsActive())
-            base.Damage(damage);       
-    }
-
-    protected void spawnTurret(Enemy turretPrefab)
-    {
-        Wave.EnemyData spawn;
-        spawn.Prefab = turretPrefab;
-        spawn.Data.Time = 0;
-        spawn.Data.Location = (Vector2)transform.position;
-        turrets.Add((SniperTurretTower)Wave.SpawnEnemy(spawn));
-        turrets[turrets.Count - 1].sBoss = this;
-    }
-
-    public void UnregisterTower(SniperTurretTower turret)
-    {        
-        turrets.Remove(turret);
-        if (turrets.Count == 0)
-        {                       
-            Dash();            
-        }
+            base.Damage(damage);
     }
 
     protected IEnumerator AttackTargeted()
@@ -171,42 +125,5 @@ public class ShieldBoss : Enemy
             fireDataBullet.Fire();
             yield return new WaitForSeconds(0.5f);
         }
-    }
-
-    protected void Dash()
-    {
-        System.Random rnd = new System.Random(); // Generate a random new position
-        int newX = rnd.Next(-1, 2) * 12;
-        int newY = rnd.Next(-1, 2) * 6;
-        dest = new Vector3(newX, newY);
-        while (Vector3.Distance(transform.position, dest) < 14) // Makes sure it dashes far away
-        {
-            newX = rnd.Next(-1, 2) * 12;
-            newY = rnd.Next(-1, 2) * 6;
-            dest = new Vector3(newX, newY);
-        }       
-        direction = dest - transform.position;
-
-        // Set spawn positions of turrets
-        spawnPos[0] = transform.position;
-        spawnPos[1] = new Vector3((dest.x - transform.position.x) / 3 + transform.position.x, (dest.y - transform.position.y) / 3 + transform.position.y);
-        spawnPos[2] = new Vector3((dest.x - transform.position.x) * 2 / 3 + transform.position.x, (dest.y - transform.position.y) * 2 / 3 + transform.position.y);
-        spawnCount = 0;
-
-        StopAllCoroutines();
-
-        prepTime = 2f; // Pause before dashing
-        FacePlayer = false;
-        SetRotation(direction);
-        dashing = true;
-    }
-
-    public override void Die()
-    {
-        foreach (SniperTurretTower turret in turrets)
-        {
-            turret.Die();
-        }
-        base.Die();
     }
 }

@@ -600,7 +600,6 @@ MonoBehaviour:
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
     - {fileID: 114000011417533484, guid: 6d190a9fe4983824988cb8e780cdce0a, type: 2}
-    - {fileID: 114000010221861702, guid: 5ec454d6669073044856ae1a78f04104, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -608,7 +607,6 @@ MonoBehaviour:
       - DanmakuPrefab CirclePrefab
       - DanmakuPrefab LaserPrefab
       - Shield Shield
-      - SniperTurretTower turretPrefab
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -627,7 +625,6 @@ MonoBehaviour:
       - 1
       - 2
       - 3
-      - 4
       - null
       - null
       - null
@@ -638,7 +635,7 @@ MonoBehaviour:
       - null
       - null
       - false
-      - 5
+      - 4
       - null
       - null
   _serializerType:
@@ -664,5 +661,3 @@ MonoBehaviour:
   CirclePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
   LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
   Shield: {fileID: 114000011417533484, guid: 6d190a9fe4983824988cb8e780cdce0a, type: 2}
-  turretPrefab: {fileID: 114000010221861702, guid: 5ec454d6669073044856ae1a78f04104,
-    type: 2}
