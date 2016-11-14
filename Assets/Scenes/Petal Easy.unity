@@ -187,12 +187,19 @@ MonoBehaviour:
     - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
     - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
     - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
+    - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
+    - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
-      - bool Paused
       - DanmakuField field
       - Player playerPrefab
       - List<GameObject> events
+      - GameObject LevelCompleteMessage
+      - GameObject LevelFailedMessage
+      - MessagePauseMenu PauseMenu
+      - float LevelTime
+      - float TargetTimeScale
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -200,10 +207,14 @@ MonoBehaviour:
       - bool keepBetweenScenes
       - bool destroyNewInstances
       values:
-      - false
       - 0
       - 1
       - '{"$content":[2,3,4,5]}'
+      - 6
+      - 7
+      - 8
+      - 0.0
+      - 1.0
       - true
       - 1000
       - 100
@@ -229,6 +240,14 @@ MonoBehaviour:
   - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
   - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
   - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+  LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
+    type: 2}
+  LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
+    type: 2}
+  PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
+    type: 2}
+  LevelTime: 0
+  TargetTimeScale: 1
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0

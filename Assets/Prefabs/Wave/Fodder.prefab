@@ -51,82 +51,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
   - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
-    - Location: {x: 20, y: 7}
+    - Location: {x: 20, y: -6}
       Time: 3
       Parameters:
       - -1
-    - Location: {x: 20, y: 4}
-      Time: 4
-      Parameters:
-      - -1
-    - Location: {x: 20, y: -5}
+    - Location: {x: 20, y: -6}
       Time: 5
       Parameters:
       - -1
-    - Location: {x: 20, y: 7}
-      Time: 6
-      Parameters:
-      - -1
-    - Location: {x: 20, y: -3}
+    - Location: {x: 20, y: -6}
       Time: 7
-      Parameters:
-      - -1
-    - Location: {x: 20, y: 5}
-      Time: 8
       Parameters:
       - -1
     - Location: {x: 20, y: -6}
       Time: 9
       Parameters:
       - -1
-    - Location: {x: 20, y: 1}
-      Time: 10
-      Parameters:
-      - -1
-    - Location: {x: 20, y: 4}
+    - Location: {x: 20, y: -6}
       Time: 11
       Parameters:
       - -1
-    - Location: {x: 20, y: -1}
-      Time: 12
+    - Location: {x: 20, y: -6}
+      Time: 13
+      Parameters:
+      - -1
+    - Location: {x: 20, y: -6}
+      Time: 15
+      Parameters:
+      - -1
+    - Location: {x: 20, y: -6}
+      Time: 17
+      Parameters:
+      - -1
+    - Location: {x: 20, y: -6}
+      Time: 19
+      Parameters:
+      - -1
+    - Location: {x: 20, y: -6}
+      Time: 21
       Parameters:
       - -1
   - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
-    - Location: {x: -20, y: 5}
+    - Location: {x: -20, y: 6}
       Time: 3
       Parameters: []
-    - Location: {x: -20, y: 1}
-      Time: 4
-      Parameters: []
-    - Location: {x: -20, y: -4}
+    - Location: {x: -20, y: 6}
       Time: 5
-      Parameters: []
-    - Location: {x: -20, y: 5}
-      Time: 6
       Parameters: []
     - Location: {x: -20, y: 6}
       Time: 7
       Parameters: []
-    - Location: {x: -20, y: -3}
-      Time: 8
-      Parameters: []
-    - Location: {x: -20, y: -2}
+    - Location: {x: -20, y: 6}
       Time: 9
       Parameters: []
-    - Location: {x: -20, y: 5}
-      Time: 10
-      Parameters: []
-    - Location: {x: -20, y: -3}
+    - Location: {x: -20, y: 6}
       Time: 11
       Parameters: []
-    - Location: {x: -20, y: -6}
-      Time: 12
+    - Location: {x: -20, y: 6}
+      Time: 13
+      Parameters: []
+    - Location: {x: -20, y: 6}
+      Time: 15
+      Parameters: []
+    - Location: {x: -20, y: 6}
+      Time: 17
+      Parameters: []
+    - Location: {x: -20, y: 6}
+      Time: 19
+      Parameters: []
+    - Location: {x: -20, y: 6}
+      Time: 21
       Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
@@ -134,33 +134,9 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: -16, y: 8}
+    - Location: {x: -16, y: 6}
       Time: 0
       Parameters: []
-    - Location: {x: -16, y: 4}
-      Time: 0
-      Parameters: []
-    - Location: {x: -16, y: 0}
-      Time: 0
-      Parameters: []
-    - Location: {x: -16, y: -4}
-      Time: 0
-      Parameters: []
-    - Location: {x: -16, y: -8}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: 8}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: 4}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: 0}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: -4}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: -8}
+    - Location: {x: 16, y: -6}
       Time: 0
       Parameters: []
