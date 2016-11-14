@@ -84,10 +84,11 @@ public class Probe : MonoBehaviour
     /// </summary>
     public void OnDestroy()
     {
-        if(destination != null && !GameController.Singleton.UnlockedLevels.Contains(destination.Scene))
+        if(destination != null && !GameController.Singleton.Levels[destination.Scene].Unlocked)
         {
-            GameController.Singleton.UnlockedLevels.Add(destination.Scene);
-            GameController.Singleton.NewLevels.Add(destination.Scene);
+            GameController.LevelData levelData = GameController.Singleton.Levels[destination.Scene];
+            levelData.Unlocked = true;
+            GameController.Singleton.Levels[destination.Scene] = levelData;
         }
     }
 }

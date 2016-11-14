@@ -15,13 +15,16 @@ public class Level : MonoBehaviour
     private Image center;                           // A reference to the level's center image
     private Text titleText;                         // A reference to the level's title text
     private Text ordinalText;                       // A reference to the level's ordinal text
+    private Text newText;                           // A reference to the level's "NEW!" text
 
     public Sprite[] sprites;                        // Sprites to use for the level select
 
+    private AudioSource audioSource;
+    public AudioClip onHoverAudio;
+    public AudioClip onClickAudio;
+
     [HideInInspector]
     public LineRenderer line;                       // Indicates the level that unlocked this level
-    private ParticleSystem highlightEffect;         // Indicates a newly unlocked level
-    private const float APPEAR_DURATION = 0.5f;     // The amount of time taken for a level to fade in.
 
     // Variables that control the look of the UI elements.
 
@@ -31,10 +34,17 @@ public class Level : MonoBehaviour
     private readonly float scaleWhenFirstHovered = 1.3f;
     private readonly float scaleTargWhenDefault = 1.0f;
     private readonly float scaleTargWhenHovered = 1.15f;
+    
+    float expand = 0f;
+    float expandTarg = 0f;
+    float expandDrag = 0.33f;
 
-    private float expand = 0f;
-    private float expandTarg = 0f;
-    private float expandDrag = 0.5f;
+    float nText = 0;
+    float nTextTarg = 0;
+    float nTextVel = 0;
+    float nTextAccel = 0.1f;
+    float nTextDrag = 0.9f;
+    Color nTextCol = Color.yellow;
 
     /// <summary>
     /// Called when the object is instantiated. Handles initialization.
@@ -49,8 +59,13 @@ public class Level : MonoBehaviour
         
         ordinalText = transform.Find("Center/OrdinalText").GetComponent<Text>();
         ordinalText.text = transform.GetSiblingIndex().ToString();
+        
+        newText = transform.Find("Center/NewText").GetComponent<Text>();
 
-        highlightEffect = transform.Find("HighlightEffect").GetComponent<ParticleSystem>();
+        center.transform.localScale = Vector3.zero;
+        details.transform.localScale = Vector3.zero;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -58,7 +73,7 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Appear()
     {
-        StartCoroutine(Appear(APPEAR_DURATION));
+        StartCoroutine(Appear(0.5f));
     }
 
     /// <summary>
@@ -66,7 +81,7 @@ public class Level : MonoBehaviour
     /// </summary>
     public void LineAppear()
     {
-        StartCoroutine(Appear(APPEAR_DURATION, true));
+        StartCoroutine(Appear(0.5f, true));
     }
 
     /// <summary>
@@ -89,10 +104,10 @@ public class Level : MonoBehaviour
             line.enabled = true;
         }
 
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 30; i++)
         {
-            yield return new WaitForSeconds(duration / 100.0f);
-            color.a = i / 100.0f;
+            yield return new WaitForSeconds(duration / 30.0f);
+            color.a = Mathf.Pow(i / 30.0f, 0.25f);
 
             if (!lineOnly) {
                 details.color = color;
@@ -114,22 +129,51 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Highlight()
     {
-        highlightEffect.Play();
+        nTextTarg = 1;
+        nTextCol = Color.yellow;
     }
 
+    /// <summary>
+    /// When the mouse first hovers over this level.
+    /// </summary>
     private void OnMouseEnter()
     {
         scale = scaleWhenFirstHovered;
+        
+        if (nTextTarg == 1)
+        {
+            nText = 1.25f;
+            nTextCol = Color.yellow;
+        }
+
+        audioSource.clip = onHoverAudio;
+        audioSource.Play();
     }
 
+    /// <summary>
+    /// A whole bunch of procedural animations.
+    /// </summary>
     void Update()
     {
         scale += (scaleTarg - scale) * scaleDrag;
         expand += (expandTarg - expand) * expandDrag;
+        nTextVel += (nTextTarg - nText) * nTextAccel;
+        nTextVel *= nTextDrag;
+        nText += nTextVel;
+        nTextCol = Color.Lerp(nTextCol, Color.white, 0.05f);
+
+        if (expandTarg == 0 && nTextTarg == 1 && (Time.time % 3) < 0.05f)
+        {
+            nText = 1.25f;
+            nTextCol = Color.yellow;
+        }
 
         center.sprite = sprites[(int) expandTarg];
         center.transform.localScale = Vector3.one * scale;
         details.transform.localScale = Vector3.one * scale * expand;
+        details.transform.localRotation = Quaternion.Euler(0, 0, (1 - expand) * 10);
+        newText.transform.localScale = Vector3.one * 0.01f * nText;
+        newText.color = nTextCol;
 
         scaleTarg = scaleTargWhenDefault;
         expandTarg = 0;
@@ -145,6 +189,8 @@ public class Level : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            audioSource.clip = onClickAudio;
+            audioSource.Play();
             GameController.Singleton.LoadLevel(Scene);
         }
     }

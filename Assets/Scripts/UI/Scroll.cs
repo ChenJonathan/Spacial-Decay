@@ -7,11 +7,11 @@ public class Scroll : MonoBehaviour
 {
     [HideInInspector]
     public float CameraSpeed;
-    [HideInInspector]
+    public float CameraMinY;
     public float CameraMaxY;
 
-    public readonly float CAMERA_ACCELERATION = 0.1f;
-    public readonly float CAMERA_SPEED_DECAY = 0.2f;
+    public readonly float CAMERA_ACCELERATION = 0.3f;
+    public readonly float CAMERA_SPEED_DECAY = 0.9f;
 
     /// <summary>
     /// Called periodically. Shifts the camera based on mouse position.
@@ -19,34 +19,41 @@ public class Scroll : MonoBehaviour
     public void FixedUpdate()
     {
         // Calculating new camera speed
+
         float border = Screen.height / 4;
-        if(Input.mousePosition.y > Screen.height - border)
+        if (Input.mousePosition.y > Screen.height - border)
         {
             float ratio = Mathf.InverseLerp(Screen.height - border, Screen.height, Input.mousePosition.y);
             CameraSpeed += ratio * ratio * CAMERA_ACCELERATION;
         }
-        else if(Input.mousePosition.y < border)
+
+        else if (Input.mousePosition.y < border)
         {
             float ratio = Mathf.InverseLerp(border, 0, Input.mousePosition.y);
             CameraSpeed -= ratio * ratio * CAMERA_ACCELERATION;
         }
-        else
-        {
-            CameraSpeed = Mathf.Lerp(CameraSpeed, 0, CAMERA_SPEED_DECAY);
-        }
 
-        // Making sure camera stays in bounds
-        float y = transform.position.y + CameraSpeed;
-        if(y > CameraMaxY)
+        CameraSpeed *= CAMERA_SPEED_DECAY;
+
+        // Scroll the view
+
+        ScrollTo(transform.position.y + CameraSpeed);
+    }
+
+    public void ScrollTo(float y)
+    {
+        if (y > CameraMaxY)
         {
             y = CameraMaxY;
             CameraSpeed = 0;
         }
-        else if(y < -CameraMaxY)
+
+        else if (y < CameraMinY)
         {
-            y = -CameraMaxY;
+            y = CameraMinY;
             CameraSpeed = 0;
         }
+
         transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }
