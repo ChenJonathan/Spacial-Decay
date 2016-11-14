@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// A dialogue that appears and disappears. Subclasses should provide control flow.
 /// </summary>
-public abstract class Dialogue : MonoBehaviour
+public abstract class Message : MonoBehaviour
 {
     public SpriteRenderer Fade;
     public SpriteRenderer Background;

@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// A dialogue that is displayed when the level is paused.
 /// </summary>
-public class DialoguePauseMenu : Dialogue
+public class MessagePauseMenu : Message
 {
     public SpriteRenderer Resume;
     public SpriteRenderer Exit;

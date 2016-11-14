@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// A dialogue that is displayed when the level ends, either as a victory or a loss.
 /// </summary>
-public class DialogueLevelEnd : Dialogue
+public class MessageLevelEnd : Message
 {
     public float Duration;
     public bool Victory;
@@ -20,7 +20,7 @@ public class DialogueLevelEnd : Dialogue
 
         // Ensure that game is not paused
         LevelController.Singleton.Paused = false;
-        yield return new WaitUntil(() => FindObjectOfType<DialoguePauseMenu>() == null);
+        yield return new WaitUntil(() => FindObjectOfType<MessagePauseMenu>() == null);
         LevelController.Singleton.TargetTimeScale = 0f;
 
         yield return StartCoroutine(Appear());

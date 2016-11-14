@@ -183,10 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: cf8ac4130e6274de7bb6e6fa5da6dd43, type: 2}
-    - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-    - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-    - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+    - {fileID: 1000012781792588, guid: 4b47e72b961f7fe4e80f22672c8df293, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
@@ -209,10 +206,10 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
-      - 7
-      - 8
+      - '{"$content":[2]}'
+      - 3
+      - 4
+      - 5
       - 0.0
       - 1.0
       - true
@@ -236,10 +233,7 @@ MonoBehaviour:
   field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   events:
-  - {fileID: 1000013141128222, guid: cf8ac4130e6274de7bb6e6fa5da6dd43, type: 2}
-  - {fileID: 188780, guid: 6e95b603b264b1b4dbf6f1f3add5d03c, type: 2}
-  - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-  - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
+  - {fileID: 1000012781792588, guid: 4b47e72b961f7fe4e80f22672c8df293, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}
   LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,

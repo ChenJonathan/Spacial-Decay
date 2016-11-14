@@ -337,7 +337,7 @@ public class Player : MonoBehaviour
         hitEffect.Play();
         if(lives == 0)
         {
-            if(FindObjectOfType<DialogueLevelEnd>() == null)
+            if(FindObjectOfType<MessageLevelEnd>() == null)
                 Instantiate(LevelController.Singleton.LevelFailedMessage);
 
             audioSource.clip = OnDeathAudio;

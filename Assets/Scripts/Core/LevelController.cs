@@ -78,8 +78,8 @@ public class LevelController : DanmakuGameController, IPausable
         }
     }
 
-    public DialoguePauseMenu PauseMenu;
-    private DialoguePauseMenu pauseMenuRuntime;
+    public MessagePauseMenu PauseMenu;
+    private MessagePauseMenu pauseMenuRuntime;
 
     // Total time
     [HideInInspector]
@@ -148,7 +148,7 @@ public class LevelController : DanmakuGameController, IPausable
         Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
         if(Time.timeScale == 0f && Paused && pauseMenuRuntime == null)
             pauseMenuRuntime = Instantiate(PauseMenu);
-        if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Dialogue>() == null)
+        if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
             Paused = true;
 
         // TODO Remove these
@@ -178,7 +178,7 @@ public class LevelController : DanmakuGameController, IPausable
 
         if(eventCount == events.Count)
         {
-            if(FindObjectOfType<DialogueLevelEnd>() == null)
+            if(FindObjectOfType<MessageLevelEnd>() == null)
                 Instantiate(LevelCompleteMessage);
         }
         else

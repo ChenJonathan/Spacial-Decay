@@ -33,9 +33,9 @@ public class PauseMenuButton : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && GetComponent<SpriteRenderer>().color.a >= 0.5f)
         {
             if(ContinueLevel)
-                transform.parent.GetComponent<DialoguePauseMenu>().SetResume();
+                transform.parent.GetComponent<MessagePauseMenu>().SetResume();
             else
-                transform.parent.GetComponent<DialoguePauseMenu>().SetExit();
+                transform.parent.GetComponent<MessagePauseMenu>().SetExit();
         }
     }
 }
