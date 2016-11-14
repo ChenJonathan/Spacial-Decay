@@ -12,6 +12,8 @@ public class BeamEnemy : Enemy
     private FireBuilder warningData;
     private Rigidbody2D rigidbody2d;
 
+    private Danmaku currentBeam;
+
     public override void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -66,9 +68,19 @@ public class BeamEnemy : Enemy
             // Fire
             warningData.Fire();
             yield return new WaitForSeconds(1f);
-            fireData.Fire();
+            currentBeam = fireData.Fire();
             yield return new WaitForSeconds(2f);
         }
         Die();
+    }
+
+    /// <summary>
+    /// Updates the position of the beam if the enemy moves.
+    /// </summary>
+    private void FixedUpdate() {
+        if (currentBeam != null && currentBeam.IsActive) {
+            currentBeam.position = transform.position;
+        }
+        base.FixedUpdate();
     }
 }
