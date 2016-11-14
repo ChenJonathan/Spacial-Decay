@@ -12,6 +12,8 @@ public class RegularCircleScript1 : Enemy
     private float fireCooldown = MAX_FIRE_COOLDOWN;
     private static readonly float MAX_FIRE_COOLDOWN = 2f;
     private float timer = 0;
+    private int xVelocity = 0;
+    private int yVelocity = 0;
 
     //Arrive on the scene
     public override void Start()
@@ -21,27 +23,28 @@ public class RegularCircleScript1 : Enemy
         fireData.WithSpeed(3 + Difficulty);
         fireData.WithModifier(new CircularBurstModifier(220, new DynamicInt(10, 15), 0, 0));
 
-        if(transform.position.x > 18)
+        if (transform.position.x > 18)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
-            SetRotation(90);
+            xVelocity = -10;
             fireData.Facing(Vector2.up);
-        } else if(transform.position.x <= -18)
+        }
+        if (transform.position.x <= -18)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
-            SetRotation(270);
+            xVelocity = 10;
             fireData.Facing(Vector2.down);
-        } else if(transform.position.y >= 10)
+        }
+        if (transform.position.y >= 10)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
-            SetRotation(180);
+            yVelocity = -10;
             fireData.Facing(Vector2.left);
-        } else if(transform.position.y <= -10)
+        }
+        if (transform.position.y <= -10)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
-            SetRotation(0);
+            yVelocity = 10;
             fireData.Facing(Vector2.right);
         }
+        SetRotation(new Vector2(xVelocity, yVelocity));
+        GetComponent<Rigidbody2D>().velocity = new Vector2(xVelocity, yVelocity);
     }
 
     // Static shooting

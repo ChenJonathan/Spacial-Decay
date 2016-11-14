@@ -22,8 +22,8 @@ GameObject:
   - 212: {fileID: 212000011435917386}
   - 60: {fileID: 60000010419414456}
   - 50: {fileID: 50000013884412666}
-  - 114: {fileID: 114000011459594978}
-  m_Layer: 12
+  - 114: {fileID: 114000013546761550}
+  m_Layer: 0
   m_Name: KZ SpiralBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ PolygonCollider2D:
       - {x: -0.04, y: -0.825}
       - {x: 0.089999996, y: -0.875}
       - {x: 0.12, y: -0.905}
---- !u!114 &114000011459594978
+--- !u!114 &114000013546761550
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,43 +109,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012288515846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0de01f28e4fabd4ca82f999f77950cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 08b900f0b54f9a344a5fd17b897541fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+    - {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab crossPrefab
       - DanmakuPrefab circlePrefab
+      - DanmakuPrefab enragedPrefab
       - Player Player
       - DanmakuField Field
       - Wave Wave
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
       - 1
+      - 2
       - null
       - null
       - null
       - 0
       - 600
       - 0
+      - 8.0
+      - null
+      - null
       - false
-      - 2
+      - 3
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: 11210
+  _id: -34288
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -155,10 +166,15 @@ MonoBehaviour:
   Difficulty: 0
   MaxHealth: 600
   Health: 0
+  RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   crossPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   circlePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  enragedPrefab: {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
 --- !u!212 &212000011435917386
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -187,7 +203,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4055b7b4106d1174dbc2b3e5dc69e94a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -40,13 +40,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
   - Prefab: {fileID: 114000012123848514, guid: 94fd3e3fc41ef264ca9ece5d5ab53fa4, type: 2}
     Data:
     - Location: {x: 0, y: 15}
       Time: 0
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 0}
     Duration: 0

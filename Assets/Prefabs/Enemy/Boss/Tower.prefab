@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000012665843988}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Tower
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 16ce78ee6b782c64bba4de0475304538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
     serializedStrings:
       keys:
       - DanmakuPrefab BulletPrefab
-      - BossEnemy Boss
+      - TowerBoss Boss
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -298,8 +298,11 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -308,11 +311,14 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 100
+      - 200
       - 0
       - 8.0
+      - null
+      - null
       - false
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -325,10 +331,13 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 100
+  MaxHealth: 200
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   BulletPrefab: {fileID: 11442878, guid: bf191685777693a49b04b28f2fe11fc3, type: 2}
   Boss: {fileID: 0}

@@ -51,51 +51,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000013179431626, guid: d3cfa9ceb558fdf4780160d01becb6a0, type: 2}
+  - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
     - Location: {x: -20, y: -6}
       Time: 3
+      Parameters: []
     - Location: {x: -20, y: -6}
       Time: 5
+      Parameters: []
     - Location: {x: -20, y: -6}
       Time: 7
+      Parameters: []
     - Location: {x: -20, y: -6}
       Time: 9
+      Parameters: []
     - Location: {x: -20, y: -6}
       Time: 11
+      Parameters: []
     - Location: {x: -20, y: -6}
       Time: 13
-  - Prefab: {fileID: 114000013179431626, guid: d3cfa9ceb558fdf4780160d01becb6a0, type: 2}
+      Parameters: []
+  - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
     Data:
     - Location: {x: -20, y: 6}
       Time: 3
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 5
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 7
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 9
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 11
+      Parameters: []
     - Location: {x: -20, y: 6}
       Time: 13
+      Parameters: []
   - Prefab: {fileID: 114000013815621762, guid: 0d2c23c12901d5e4699d1d238077ba02, type: 2}
     Data:
     - Location: {x: 20, y: 2}
       Time: 3
+      Parameters: []
     - Location: {x: 20, y: 2}
       Time: 9
+      Parameters: []
     - Location: {x: 20, y: -2}
       Time: 3
+      Parameters: []
     - Location: {x: 20, y: -2}
       Time: 9
+      Parameters: []
     - Location: {x: 20, y: 2}
       Time: 6
+      Parameters: []
     - Location: {x: 20, y: -2}
       Time: 6
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -104,9 +122,13 @@ MonoBehaviour:
     Data:
     - Location: {x: -16, y: 6}
       Time: 0
+      Parameters: []
     - Location: {x: -16, y: -6}
       Time: 0
+      Parameters: []
     - Location: {x: 16, y: 2}
       Time: 0
+      Parameters: []
     - Location: {x: 16, y: -2}
       Time: 0
+      Parameters: []

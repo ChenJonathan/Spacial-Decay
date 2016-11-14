@@ -23,6 +23,18 @@ public partial class Enemy : DanmakuCollider
     [HideInInspector]
     public float RotateSpeed = 8;
 
+    private AudioSource audioSource;
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+
+    // Whether the enemy is invincible or not
+    protected bool invincible = false;
+    public bool IsInvincible
+    {
+        get { return invincible; }
+    }
+    private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
+
     // Enemy rotation values
     [SerializeField]
     protected bool FacePlayer; // Enemy constantly rotates toward the player if true - overrides TargetRotation
@@ -34,6 +46,10 @@ public partial class Enemy : DanmakuCollider
     
     [SerializeField]
     private GameObject healthBarPrefab;
+
+    /// <summary> Parameters that can be used to modify the enemy's behavior. </summary>
+    [HideInInspector]
+    public float[] parameters;
 
     /// <summary>
     /// Called when the enemy is instantiated (before Start). Initializes the enemy.
@@ -52,6 +68,14 @@ public partial class Enemy : DanmakuCollider
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
 
         Health = MaxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.75f;
+
+        // TEMPORARY
+        // Assigns SFX from resources folder for simplcity
+        OnHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
+        OnDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
     }
 
     /// <summary>
@@ -89,14 +113,25 @@ public partial class Enemy : DanmakuCollider
     /// <param name="damage">The amount of damage to deal</param>
     public virtual void Damage(int damage)
     {
-        Health -= damage;
-
-        float healthProportion = (float)Health / MaxHealth;
-        healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
-
-        if(Health <= 0)
+        if(!invincible)
         {
-            Die();
+            Health -= damage;
+
+            float healthProportion = (float)Health / MaxHealth;
+            healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
+
+            if(Health <= 0)
+            {
+                audioSource.clip = OnHitAudio;
+                audioSource.Play();
+                Die();
+            }
+            else
+            {
+                audioSource.clip = OnDeathAudio;
+                audioSource.Play();
+                StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+            }
         }
     }
 
@@ -114,6 +149,31 @@ public partial class Enemy : DanmakuCollider
     public void OnDestroy()
     {
         Wave.UnregisterEnemy(this);
+    }
+
+    /// <summary>
+    /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
+    /// </summary>
+    private IEnumerator setInvincible(float time)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        Color color = renderer.material.color;
+        invincible = true;
+        float timer = 0;
+        while(timer < time)
+        {
+            if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
+            {
+                color.a = 1.25f - color.a;
+                renderer.material.color = color;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        color.a = 1;
+        renderer.material.color = color;
+        invincible = false;
+        yield break;
     }
 
     #region Rotation methods
