@@ -1,0 +1,25 @@
+    protected override IEnumerator Run() {
+        //Circular movement, moves down, circles <cycles> times, then moves off screen to the left
+        Vector3 center = transform.position - new Vector3(0, radius, 0);
+        float timePassed = 0;
+        float radians = Mathf.PI / 2.0f; //init at top of circle
+        float time = 0;
+        StartCoroutine (Attack());
+        rigidbody2d.velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(1);
+        rigidbody2d.velocity = new Vector2(0, 0);
+        for (int cycles = 0; cycles < 3; cycles++) {
+            timePassed = 0;
+            while (timePassed < period) {
+                time = Time.deltaTime;
+                radians += time * (2 * Mathf.PI) / period;
+                transform.position = center + new Vector3 (radius * Mathf.Cos(radians), radius*Mathf.Sin(radians), 0);
+                //center -= new Vector3 (0, 5 * time, 0);
+                yield return new WaitForSeconds(0.01f);
+                timePassed += time;
+            }
+        }
+        rigidbody2d.velocity = new Vector2(-10, 0);
+        yield return new WaitForSeconds (2);
+        Die();
+    }

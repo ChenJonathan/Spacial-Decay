@@ -34,6 +34,15 @@ public class LevelController : DanmakuGameController, IPausable
         get { return currentEvent; }
     }
     private int eventCount; // Current event number
+    
+    private Rect viewportRect; // Camera viewport dimensions required to maintain 16:9 aspect ratio
+    public Rect ViewportRect
+    {
+        get { return viewportRect; }
+    }
+
+    public GameObject LevelCompleteMessage;
+    public GameObject LevelFailedMessage;
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -44,15 +53,41 @@ public class LevelController : DanmakuGameController, IPausable
         get { return (LevelController)Instance; }
     }
 
-    /// <summary>
-    /// Returns whether or not the game is paused.
-    /// </summary>
-    /// <returns>Whether or not the game is paused</returns>
+    // Whether the game is paused or not
+    private bool paused;
+    [HideInInspector]
     public bool Paused
     {
-        get;
-        set;
+        get
+        {
+            return paused;
+        }
+        set
+        {
+            paused = value;
+            if(paused)
+            {
+                Cursor.visible = true;
+                TargetTimeScale = 0;
+            }
+            else
+            {
+                Cursor.visible = false;
+                TargetTimeScale = 1;
+            }
+        }
     }
+
+    public MessagePauseMenu PauseMenu;
+    private MessagePauseMenu pauseMenuRuntime;
+
+    // Total time
+    [HideInInspector]
+    public float LevelTime = 0;
+
+    // Time scale constantly approaches this value
+    [HideInInspector]
+    public float TargetTimeScale = 1;
 
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
@@ -60,7 +95,33 @@ public class LevelController : DanmakuGameController, IPausable
     public override void Awake()
     {
         base.Awake();
-        
+
+        // Calculate viewport
+        float scaleHeight = ((float)Screen.width / (float)Screen.height) / (16.0f / 9.0f);
+        if(scaleHeight < 1.0f)
+        {
+            viewportRect.width = 1.0f;
+            viewportRect.height = scaleHeight;
+            viewportRect.x = 0;
+            viewportRect.y = (1.0f - scaleHeight) / 2.0f;
+        }
+        else
+        {
+            float scaleWidth = 1.0f / scaleHeight;
+            viewportRect.width = scaleWidth;
+            viewportRect.height = 1.0f;
+            viewportRect.x = (1.0f - scaleWidth) / 2.0f;
+            viewportRect.y = 0;
+        }
+
+        // Update cameras
+        foreach(Camera camera in GameObject.FindObjectsOfType<Camera>())
+        {
+            if(!camera.tag.Equals("Background"))
+                camera.rect = viewportRect;
+        }
+
+        // Spawn player
         Vector2 spawnPos = Field.WorldPoint(Vector2.zero);
         player = (Player)Instantiate(playerPrefab, spawnPos, Quaternion.identity);
         player.transform.parent = Field.transform;
@@ -76,18 +137,25 @@ public class LevelController : DanmakuGameController, IPausable
     }
 
     /// <summary>
-    /// Called periodically. Updates bullets.
+    /// Called periodically. Updates bullets and time scale.
     /// </summary>
     public override void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-            Paused = !Paused;
-        else if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+        base.Update();
+        LevelTime += Time.deltaTime;
 
-        if(!Paused)
-        {
-            base.Update();
+        // Pausing things
+        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        if(Time.timeScale == 0f && Paused && pauseMenuRuntime == null)
+            pauseMenuRuntime = Instantiate(PauseMenu);
+        if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
+            Paused = true;
+
+        // TODO Remove these
+        if(Input.GetKeyDown(KeyCode.Tab))
+            GameController.Singleton.LoadLevelSelect(true, LevelTime);
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            EndEvent();
         }
     }
 
@@ -101,7 +169,7 @@ public class LevelController : DanmakuGameController, IPausable
     }
 
     /// <summary>
-    /// Called when the current event is completed. Shows the wave completion message.
+    /// Called when the current event is completed.
     /// </summary>
     public void EndEvent()
     {
@@ -110,10 +178,12 @@ public class LevelController : DanmakuGameController, IPausable
 
         if(eventCount == events.Count)
         {
-            SceneManager.LoadScene("Level Select");
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelCompleteMessage);
         }
         else
         {
+            TargetTimeScale = 1;
             StartEvent();
         }
     }

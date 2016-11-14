@@ -23,7 +23,8 @@ public class CoroutineEnemy : Enemy
 	}
 
     protected override IEnumerator Run()
-    {
+    {   
+
         for(int i = 0; i < 4; i++)
         {
             // Moving left

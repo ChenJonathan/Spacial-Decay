@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using DanmakU;
+using System.Collections.Generic;
 
 /// <summary>
 /// The player. Follows the mouse cursor and performs a dash when left click is held and released.
 /// </summary>
-public class Player : DanmakuCollider
+public class Player : MonoBehaviour
 {
     // Visual indicator that shows where the enemy is headed
     [SerializeField]
@@ -63,8 +64,8 @@ public class Player : DanmakuCollider
     [SerializeField]
     private float rotateSpeed = 18;
 
-    // Storage for player velocity when the level is paused
-    private Vector3 oldVelocity;
+    // List of enemies hit during a dash - prevents the player from hitting enemies multiple times
+    private List<Enemy> hitEnemies = new List<Enemy>();
 
     // Dash selection line colors
     [SerializeField]
@@ -79,19 +80,30 @@ public class Player : DanmakuCollider
     private Vector2 target; // Location that the enemy is moving towards
     private SpriteRenderer targetRenderer; // Renders the movement target
     private LineRenderer dashRenderer; // Renders the dash selection line
+    private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
+    private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
+
+    private float currentAlphaHitbox = 0f;
+    private float currentAlphaWings = 0f;
+    private float targetAlphaHitbox = 0f;
+    private float targetAlphaWings = 0f;
 
     // Cached mouse position for easy access
     private Vector2 mousePos = Vector2.zero;
 
+    private AudioSource audioSource;
+
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+    public AudioClip OnNewDashAudio;
+    public AudioClip OnDashAudio;
+
     /// <summary>
     /// Called when the player is instantiated (before Start). Handles player initialization.
     /// </summary>
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
-        TagFilter = "Enemy|Laser";
-
         // Retrieve references
         field = LevelController.Singleton.Field;
         collider2d = GetComponent<Collider2D>();
@@ -106,6 +118,10 @@ public class Player : DanmakuCollider
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+        hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
+        wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
 
         // Retrieves counter references
         foreach(GameObject counter in GameObject.FindGameObjectsWithTag("Counter"))
@@ -130,85 +146,117 @@ public class Player : DanmakuCollider
     /// </summary>
     public void Update()
     {
-        // Stores the player's velocity when the level is paused
-        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
-        {
-            oldVelocity = GetComponent<Rigidbody2D>().velocity;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-
-            // Cancel dash targeting on pause
-            selecting = false;
-            SetMoveTarget(field.WorldPoint(mousePos));
-            dashRenderer.enabled = false;
-        }
-        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
-        {
-            GetComponent<Rigidbody2D>().velocity = oldVelocity;
-            oldVelocity = Vector3.zero;
-        }
-
-        if(!LevelController.Singleton.Paused)
+        // Handle input if not paused / pausing
+        if(LevelController.Singleton.TargetTimeScale != 0)
         {
             HandleInput();
-            
-            // General movement-related functions
-            if(moving)
-            {
-                targetRenderer.enabled = true;
-                moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
-                if(!moving)
-                {
-                    // Player reached its target
-                    targetRenderer.enabled = false;
-                    dashing = false;
-                    rigidbody2d.velocity = Vector3.zero;
-                }
-            }
-            else if(selecting)
-            {
-                targetRenderer.enabled = true;
-            }
+        }
+        else
+        {
+            selecting = false;
+            SetMoveTarget(mousePos);
+            dashRenderer.enabled = false;
+        }
 
-            // Handling the dash cooldown
-            if(dashes < maxDashes)
+        // General movement-related functions
+        if(moving)
+        {
+            targetRenderer.enabled = true;
+            moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
+            if(!moving)
             {
-                dashCooldown += Time.deltaTime;
-                if(dashCooldown >= MAX_DASH_COOLDOWN)
+                // Player reached its target
+                targetRenderer.enabled = false;
+                rigidbody2d.velocity = Vector3.zero;
+                if(dashing)
                 {
-                    dashes++;
-                    dashCooldown = 0;
-                    dashRenderer.SetColors(dashStartActive, dashEndActive);
-                    dashCounter.UpdateCounter(dashes);
+                    dashing = false;
+                    hitEnemies.Clear();
                 }
             }
         }
-	}
+        else if(selecting)
+        {
+            targetRenderer.enabled = true;
+        }
+
+        // Handling the dash cooldown
+        if(dashes < maxDashes)
+        {
+            dashCooldown += Time.deltaTime;
+            if(dashCooldown >= MAX_DASH_COOLDOWN)
+            {
+                dashes++;
+                audioSource.clip = OnNewDashAudio;
+                audioSource.Play();
+                dashCooldown = 0;
+                dashRenderer.SetColors(dashStartActive, dashEndActive);
+                dashCounter.UpdateCounter(dashes);
+            }
+        }
+    }
 
     /// <summary>
-    /// Called in fixed-time intervals. Handles movement and rotation.
+    /// Called in fixed-time intervals. Handles movement, rotation, and collision detection.
     /// </summary>
     public void FixedUpdate()
     {
-        if(!LevelController.Singleton.Paused)
+        // Move and rotate towards the target
+        if(moving)
         {
-            // Move and rotate towards the target
-            if(moving)
-            {
-                rigidbody2d.velocity = ((Vector3)target - transform.position) * Time.fixedDeltaTime * (dashing ? dashSpeed : moveSpeed);
-                if(!selecting)
-                {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                        Vector3.forward, (Vector3)target - transform.position), Time.fixedDeltaTime * rotateSpeed);
-                }
-            }
-
-            // Rotate to mouse if selecting
-            if(selecting)
+            rigidbody2d.velocity = ((Vector3)target - transform.position) * Time.fixedDeltaTime * (dashing ? dashSpeed : moveSpeed);
+            if(!selecting)
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                    Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+                    Vector3.forward, (Vector3)target - transform.position), Time.fixedDeltaTime * rotateSpeed);
             }
         }
+
+        // Rotate to mouse if selecting
+        if(selecting)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
+                Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+        }
+
+        // Collision detection
+        RaycastHit2D[] hitArray = Physics2D.RaycastAll(transform.position, rigidbody2d.velocity, rigidbody2d.velocity.magnitude * Time.fixedDeltaTime);
+        if(hitArray.Length > 0)
+        {
+            foreach(RaycastHit2D hit in hitArray)
+            {
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+                if(enemy != null)
+                {
+                    if(dashing)
+                    {
+                        if(!hitEnemies.Contains(enemy))
+                        {
+                            hitEnemies.Add(enemy);
+                            enemy.Damage(50);
+                        }
+                    }
+                    else if(!invincible)
+                    {
+                        Hit();
+                    }
+                }
+            }
+        }
+
+        // Update hitbox alpha
+        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
+        Color temp = hitboxGlowRenderer.color;
+        temp.a = currentAlphaHitbox;
+        hitboxGlowRenderer.color = temp;
+        if(currentAlphaHitbox == targetAlphaHitbox)
+            targetAlphaHitbox = 1 - targetAlphaHitbox;
+
+        // Update wings alpha
+        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime / 2);
+        temp = wingsGlowRenderer.color;
+        temp.a = currentAlphaWings;
+        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -216,17 +264,20 @@ public class Player : DanmakuCollider
     /// </summary>
     private void HandleInput()
     {
-        mousePos.x = Input.mousePosition.x / Screen.width;
-        mousePos.y = Input.mousePosition.y / Screen.height;
+        // Calculate mouse position in world coordinates
+        mousePos.x = (Input.mousePosition.x / Screen.width - LevelController.Singleton.ViewportRect.x) / LevelController.Singleton.ViewportRect.width;
+        mousePos.y = (Input.mousePosition.y / Screen.height - LevelController.Singleton.ViewportRect.y) / LevelController.Singleton.ViewportRect.height;
+        mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !dashing)
         {
             // Begin dash targeting
             selecting = true;
-            SetMoveTarget(field.WorldPoint(mousePos));
+            SetMoveTarget(mousePos);
             dashRenderer.SetPosition(0, transform.position);
-            dashRenderer.SetPosition(1, field.WorldPoint(mousePos));
+            dashRenderer.SetPosition(1, mousePos);
             dashRenderer.enabled = true;
+            LevelController.Singleton.TargetTimeScale = 0.5f;
         }
         else if(selecting)
         {
@@ -236,29 +287,34 @@ public class Player : DanmakuCollider
                 // Begin dash
                 if(dashes > 0)
                 {
-                    SetDashTarget(field.WorldPoint(mousePos));
+                    SetDashTarget(mousePos);
                     dashes--;
+
+                    currentAlphaWings = 1f;
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+                    audioSource.clip = OnDashAudio;
+                    audioSource.Play();
                 }
 
                 // Disable dash selection
                 selecting = false;
-                SetMoveTarget(field.WorldPoint(mousePos));
+                SetMoveTarget(mousePos);
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
+                LevelController.Singleton.TargetTimeScale = 1;
             }
             else
             {
-                targetRenderer.transform.position = field.WorldPoint(mousePos);
+                targetRenderer.transform.position = mousePos;
                 dashRenderer.SetPosition(0, transform.position);
-                dashRenderer.SetPosition(1, field.WorldPoint(mousePos));
+                dashRenderer.SetPosition(1, mousePos);
             }
         }
         else if(!dashing)
         {
             // Normal movement targeting
-            SetMoveTarget(field.WorldPoint(mousePos));
+            SetMoveTarget(mousePos);
         }
 
         if(Input.GetMouseButtonDown(1))
@@ -266,6 +322,7 @@ public class Player : DanmakuCollider
             // Cancel dash targeting
             selecting = false;
             dashRenderer.enabled = false;
+            LevelController.Singleton.TargetTimeScale = 1;
         }
     }
 
@@ -276,8 +333,22 @@ public class Player : DanmakuCollider
     {
         lives--;
         livesCounter.UpdateCounter(lives);
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
         hitEffect.Play();
+        if(lives == 0)
+        {
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelController.Singleton.LevelFailedMessage);
+
+            audioSource.clip = OnDeathAudio;
+        }
+        else
+        {
+            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
+            audioSource.clip = OnHitAudio;
+        }
+        audioSource.Play();
     }
 
     /// <summary>
@@ -313,35 +384,17 @@ public class Player : DanmakuCollider
         float timer = 0;
         while(timer < time)
         {
-            if(!LevelController.Singleton.Paused)
+            if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
             {
-                if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
-                {
-                    color.a = 1.25f - color.a;
-                    renderer.material.color = color;
-                }
-                timer += Time.deltaTime;
+                color.a = 1.25f - color.a;
+                renderer.material.color = color;
             }
+            timer += Time.deltaTime;
             yield return null;
         }
         color.a = 1;
         renderer.material.color = color;
         invincible = false;
         yield break;
-    }
-
-    /// <summary>
-    /// Called when the player collides with a bullet.
-    /// </summary>
-    /// <param name="danmaku">The bullet that the player collided with</param>
-    /// <param name="info">Information about the collision</param>
-    protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
-    {
-        if (danmaku.Tag != "Laser")
-            danmaku.Deactivate();
-        if(!dashing && !invincible)
-        {
-            Hit();
-        }
     }
 }

@@ -2,22 +2,50 @@
 using DanmakU;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// The overarching controller class that stores data about completed levels.
 /// </summary>
 public class GameController : Singleton<GameController>
 {
-    public Level StartLevel;
-    [HideInInspector]
-    public Level CurrentLevel;
-    [HideInInspector]
-    public int Difficulty;
-    public Probe ProbePrefab;
+    public string StartLevel;
 
-    private List<Level> unlockedLevels;
-    private List<Level> newLevels;
+    [HideInInspector]
+    public string CurrentLevel = "";
+    [HideInInspector]
+    public int Difficulty = 0;
+
+    public struct LevelData
+    {
+        public bool Unlocked;
+        public bool Complete;
+        public Difficulty BestDifficulty;
+        public float BestTime;
+    }
     
+    [HideInInspector]
+    public Dictionary<string, LevelData> Levels;
+
+    /// <summary> Prefab for lines between levels. </summary>
+    [SerializeField]
+    [Tooltip("Prefab for lines between levels.")]
+    private LineRenderer LevelLinePrefab;
+    /// <summary> Prefab for indicator that moves to unlocked levels. </summary>
+    [SerializeField]
+    [Tooltip("Prefab for indicator that moves to unlocked levels.")]
+    private Probe ProbePrefab;
+
+    // Current camera y-position and max y-position in level select
+    private float cameraY;
+    private float cameraMaxY;
+
+    /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
+    [SerializeField]
+    [Tooltip("Causes all levels to be unlocked at the start of the game.")]
+    private bool unlockAllLevels;
+
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>
@@ -35,15 +63,75 @@ public class GameController : Singleton<GameController>
         base.Awake();
 
         // Destroyed instances stop here
-        if(Singleton == this)
+        if(Singleton != this)
+            return;
+
+        // Set camera and camera FOV
+        Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam.fieldOfView = 2.0f * Mathf.Atan(419.84f / cam.aspect / 400f) * Mathf.Rad2Deg;
+        //cameraMaxY = levelCamera.GetComponent<Scroll>().CameraMaxY = 419.84f / 2f - 419.84f / levelCamera.aspect / 2f;
+        //cameraY = -cameraMaxY;
+
+        // Initialize levels
+        Levels = new Dictionary<string, LevelData>();
+        foreach(Level level in GetAllLevels())
         {
-            DontDestroyOnLoad(gameObject);
-            unlockedLevels = new List<Level>();
-            unlockedLevels.Add(StartLevel);
-            newLevels = new List<Level>();
-            StartLevel.gameObject.SetActive(true);
-            StartLevel.Appear();
-            SceneManager.sceneLoaded += OnLoad;
+            Levels[level.name] = new LevelData();
+            if(unlockAllLevels)
+            {
+                LevelData levelData = Levels[level.name];
+                levelData.Unlocked = true;
+                Levels[level.name] = levelData;
+            }
+        }
+        if(!unlockAllLevels)
+        {
+            LevelData levelData = Levels[StartLevel];
+            levelData.Unlocked = true;
+            Levels[StartLevel] = levelData;
+        }
+        SceneManager.sceneLoaded += OnLoad;
+    }
+
+    /// <summary>
+    /// Prevents coroutine from starting before start level fields are initialized.
+    /// </summary>
+    public void Start()
+    {
+        if(!unlockAllLevels)
+        {
+            Level startLevelObject = GetLevel(StartLevel);
+            startLevelObject.gameObject.SetActive(true);
+            startLevelObject.Appear();
+        }
+    }
+    
+    /// <summary>
+    /// TODO Remove this
+    /// </summary>
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            foreach(Level level in GetAllLevels())
+            {
+                LevelData levelData = Levels[level.name];
+                levelData.Unlocked = true;
+                levelData.Complete = true;
+                Levels[level.name] = levelData;
+            }
+            SceneManager.LoadScene("Level Select");
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            foreach(Level level in GetAllLevels())
+            {
+                Levels[level.name] = new LevelData();
+            }
+            LevelData levelData = Levels[StartLevel];
+            levelData.Unlocked = true;
+            Levels[StartLevel] = levelData;
+            SceneManager.LoadScene("Level Select");
         }
     }
 
@@ -51,11 +139,25 @@ public class GameController : Singleton<GameController>
     /// Called by Level objects to load a specific level.
     /// </summary>
     /// <param name="level">The level to load</param>
-    public void LoadLevel(Level level)
+    public void LoadLevel(string level)
     {
-        GameController.Singleton.CurrentLevel = level;
-        newLevels.Remove(level);
-        SceneManager.LoadScene(level.Scene);
+        Singleton.CurrentLevel = level;
+        SceneManager.LoadScene(level);
+    }
+
+    /// <summary>
+    /// Called by the LevelController to return to the level select.
+    /// </summary>
+    /// <param name="levelData">Information about the completed level</param>
+    public void LoadLevelSelect(bool victory, float time = 0)
+    {
+        LevelData levelData = new LevelData();
+        levelData.Unlocked = true;
+        levelData.Complete = victory;
+        levelData.BestDifficulty = (Difficulty)Difficulty;
+        levelData.BestTime = time;
+        Levels[CurrentLevel] = levelData;
+        SceneManager.LoadScene("Level Select");
     }
 
     /// <summary>
@@ -65,52 +167,116 @@ public class GameController : Singleton<GameController>
     /// <param name="mode">How the scene was loaded</param>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+
         if(scene.name.Equals("Level Select"))
         {
-            // Re-enable previously unlocked levels
-            foreach(Level level in unlockedLevels)
-            {
-                level.gameObject.SetActive(true);
-                foreach(Probe probe in level.GetComponentsInChildren<Probe>())
-                    Destroy(probe.gameObject);
-            }
+            Cursor.visible = true;
 
-            // Highlight unplayed levels
-            foreach(Level level in newLevels)
+            // Set camera position and bounds
+            float minY = Mathf.Infinity;
+            float maxY = -Mathf.Infinity;
+            float curY = 0;
+            Queue<Level> visibleLevels = new Queue<Level>();
+            visibleLevels.Enqueue(GetLevel(StartLevel));
+            while(visibleLevels.Count > 0)
             {
-                level.Highlight();
-            }
-
-            // Unlock new levels
-            if(CurrentLevel != null)
-            {
-                foreach(Level level in CurrentLevel.Unlocks)
+                Level level = visibleLevels.Dequeue();
+                float y = level.transform.position.y;
+                if(y < minY)
+                    minY = y;
+                if(y > maxY)
+                    maxY = y;
+                if(level.Scene.Equals(CurrentLevel))
+                    curY = y;
+                if(CurrentLevel != "")
                 {
-                    if(!unlockedLevels.Contains(level))
+                    foreach(Level levelChild in level.Unlocks)
                     {
-                        unlockedLevels.Add(level);
-                        newLevels.Add(level);
-
-                        // Set line between the two levels
-                        level.GetComponent<LineRenderer>().SetPosition(0, CurrentLevel.transform.position);
-                        level.GetComponent<LineRenderer>().SetPosition(1, level.transform.position);
-
-                        // Send probe to new levels
-                        Probe clone = ((Probe)Instantiate(ProbePrefab, CurrentLevel.transform.position, Quaternion.identity));
-                        clone.SetDestination(level);
-                        clone.transform.parent = CurrentLevel.transform;
+                        if(Levels[levelChild.Scene].Unlocked || level.Scene.Equals(CurrentLevel))
+                            visibleLevels.Enqueue(levelChild);
                     }
                 }
-                CurrentLevel = null;
             }
-        }
-        else
-        {
-            // Disable unlocked levels
-            foreach(Level level in unlockedLevels)
+            Scroll camScroll = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Scroll>();
+            camScroll.CameraMinY = minY;
+            camScroll.CameraMaxY = maxY;
+            camScroll.ScrollTo(curY);
+
+            // Process levels
+            foreach(Level level in GetAllLevels())
             {
-                level.gameObject.SetActive(false);
+                if(Levels[level.Scene].Unlocked)
+                {
+                    if(!Levels[level.Scene].Complete)
+                    {
+                        // Highlight unplayed levels
+                        level.Highlight();
+                    }
+                    else
+                    {
+                        // Set values
+                        if(Levels[level.Scene].Complete)
+                        {
+                            Text details = level.transform.Find("Details/DetailText").GetComponent<Text>();
+                            details.text = "Best Difficulty\n<color=#ffff00ff>" + Levels[level.Scene].BestDifficulty.ToString()
+                                     + "</color>\nBest Time\n<color=#ffff00ff>" + Levels[level.Scene].BestTime.ToString("F2") + " seconds</color>";
+                        }
+
+                        // Re-enable lines
+                        foreach(Level levelChild in level.Unlocks)
+                        {
+                            if(Levels[levelChild.Scene].Unlocked || level.Scene.Equals(CurrentLevel))
+                            {
+                                // Set line between the two levels
+                                LineRenderer levelLine = GameObject.Instantiate(LevelLinePrefab);
+                                levelLine.transform.parent = level.transform;
+                                levelLine.SetPosition(0, level.transform.position);
+                                levelLine.SetPosition(1, levelChild.transform.position);
+
+                                // Send probe to new levels
+                                if(!(Levels[levelChild.Scene].Unlocked))
+                                {
+                                    levelLine.enabled = false;
+                                    levelChild.line = levelLine;
+                                    Probe clone = ((Probe)Instantiate(ProbePrefab, level.transform.position, Quaternion.identity));
+                                    clone.SetDestination(levelChild);
+                                    clone.transform.parent = level.transform;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Disable locked levels
+                    level.gameObject.SetActive(false);
+                }
             }
+            CurrentLevel = null;
         }
+    }
+
+    /// <summary>
+    /// Gets a level in the game.
+    /// </summary>
+    /// <returns>A level in the game.</returns>
+    private Level GetLevel(string levelName)
+    {
+        foreach(Level level in GetAllLevels())
+        {
+            if(level.Scene.Equals(levelName))
+                return level;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Gets all levels in the game.
+    /// </summary>
+    /// <returns>All levels in the game.</returns>
+    private Level[] GetAllLevels() {
+        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>(true);
     }
 }

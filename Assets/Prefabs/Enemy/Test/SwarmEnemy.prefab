@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,25 +96,33 @@ MonoBehaviour:
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
-      - List<AttackBehavior> attackBehaviors
-      - List<MovementBehavior> movementBehaviors
       - Player Player
       - DanmakuField Field
+      - Wave Wave
+      - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
-      - '{"$content":[]}'
-      - '{"$content":[]}'
       - null
       - null
+      - null
+      - 0
       - 50
       - 0
+      - 8.0
+      - null
+      - null
       - false
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -122,14 +131,18 @@ MonoBehaviour:
   dbg: 0
   _dirty: 0
   tagFilter: 
-  attackBehaviors: []
-  movementBehaviors: []
   Player: {fileID: 0}
   Field: {fileID: 0}
+  Wave: {fileID: 0}
+  Difficulty: 0
   MaxHealth: 50
   Health: 0
+  RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
 --- !u!212 &21211816
 SpriteRenderer:
@@ -140,23 +153,26 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_ReflectionProbeUsage: 0
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 032eb0c42750bca4784028348e47ea4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

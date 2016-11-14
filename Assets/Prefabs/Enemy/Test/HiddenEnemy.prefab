@@ -4,7 +4,7 @@
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 458768}
@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000012123848514}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: HiddenEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -23,7 +23,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -37,7 +37,7 @@ Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175464}
   m_UseAutoMass: 0
   m_Mass: 1
@@ -53,7 +53,7 @@ Rigidbody2D:
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_Density: 1
@@ -94,7 +94,7 @@ PolygonCollider2D:
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_CastShadows: 0
@@ -118,164 +118,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9f56ec3fcff3f7f4cb69a053fe8ee4ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedObjects.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: fireRate
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[7]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: tagFilter
-      value: Friendly
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[3]
-      value: true
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: fireTargetPrefab
-      value: 
-      objectReference: {fileID: 190474, guid: 8d3d7bfa3fbc59c43bb76875b3035098, type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[4]
-      value: true
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: moveTargetPrefab
-      value: 
-      objectReference: {fileID: 101710, guid: 86c82ccd2da3b5442bc7c82a5d005f4f, type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 11475746, guid: cf2028e7f9cea8542a329e926e952ef9,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 11426396, guid: 2eac2216e280476408c01d7d9ab89145,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[2]
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[0]
-      value: '{"$content":[0]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: maxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[5]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[6]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: HealthBar
-      value: 
-      objectReference: {fileID: 167222, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[8]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: damageGUIPrefab
-      value: 
-      objectReference: {fileID: 103538, guid: b0cf55af6b69c8f4ca18aa93ea4778ba, type: 2}
-    - target: {fileID: 0}
-      propertyPath: healthBarPrefab
-      value: 
-      objectReference: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedStrings.values.Array.data[1]
-      value: '{"$content":[1]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: MaxHealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: FacePlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: attackBehaviors.Array.data[0]
-      value: 
-      objectReference: {fileID: 11475746, guid: cf2028e7f9cea8542a329e926e952ef9,
-        type: 2}
-    - target: {fileID: 0}
-      propertyPath: _serializationData.serializedObjects.Array.data[2]
-      value: 
-      objectReference: {fileID: 103538, guid: b0cf55af6b69c8f4ca18aa93ea4778ba, type: 2}
-    - target: {fileID: 0}
-      propertyPath: movementBehaviors.Array.data[0]
-      value: 
-      objectReference: {fileID: 11426396, guid: 2eac2216e280476408c01d7d9ab89145,
-        type: 2}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 175464}
-  m_IsPrefabParent: 1
 --- !u!114 &114000012123848514
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175464}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -300,14 +152,19 @@ MonoBehaviour:
       - Player Player
       - DanmakuField Field
       - Wave Wave
+      - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
-      - '{"$content":[{"Location":{"x":-12.0,"y":0.0},"Time":3.0},{"Location":{"x":12.0,"y":0.0},"Time":4.5},{"Location":{"x":-4.0,"y":-6.0},"Time":6.0},{"Location":{"x":0.0,"y":6.0},"Time":7.5},{"Location":{"x":4.0,"y":-6.0},"Time":9.0}]}'
+      - '{"$content":[{"Location":{"x":-12.0,"y":0.0},"Time":3.0,"Parameters":[]},{"Location":{"x":12.0,"y":0.0},"Time":4.5,"Parameters":[]},{"Location":{"x":-4.0,"y":-6.0},"Time":6.0,"Parameters":[]},{"Location":{"x":0.0,"y":6.0},"Time":7.5,"Parameters":[]},{"Location":{"x":4.0,"y":-6.0},"Time":9.0,"Parameters":[]}]}'
       - 30.0
       - 3.5
       - 1
@@ -317,10 +174,15 @@ MonoBehaviour:
       - null
       - null
       - null
+      - 0
       - 100
       - 0
+      - 8.0
+      - null
+      - null
       - false
       - 2
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -332,22 +194,32 @@ MonoBehaviour:
   Player: {fileID: 0}
   Field: {fileID: 0}
   Wave: {fileID: 0}
+  Difficulty: 0
   MaxHealth: 100
   Health: 0
+  RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   fireList:
   - Location: {x: -12, y: 0}
     Time: 3
+    Parameters: []
   - Location: {x: 12, y: 0}
     Time: 4.5
+    Parameters: []
   - Location: {x: -4, y: -6}
     Time: 6
+    Parameters: []
   - Location: {x: 0, y: 6}
     Time: 7.5
+    Parameters: []
   - Location: {x: 4, y: -6}
     Time: 9
+    Parameters: []
   fireSpeed: 30
   fireRadius: 3.5
   warningPrefab: {fileID: 114000011160122508, guid: 1a137b11a6c820049b3f34e459a87274,

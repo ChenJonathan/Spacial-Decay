@@ -20,14 +20,25 @@ public partial class Enemy : DanmakuCollider
     public int MaxHealth;
     [HideInInspector]
     public int Health;
+    [HideInInspector]
+    public float RotateSpeed = 8;
+
+    private AudioSource audioSource;
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+
+    // Whether the enemy is invincible or not
+    protected bool invincible = false;
+    public bool IsInvincible
+    {
+        get { return invincible; }
+    }
+    private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
 
     // Enemy rotation values
     [SerializeField]
     protected bool FacePlayer; // Enemy constantly rotates toward the player if true - overrides TargetRotation
     protected Quaternion TargetRotation; // Enemy constantly rotates toward this rotation if it is not null
-
-    // Storage for enemy velocity when the level is paused
-    private Vector3 oldVelocity;
 
     // Enemy health bar reference and size
     private GameObject healthBar;
@@ -35,6 +46,10 @@ public partial class Enemy : DanmakuCollider
     
     [SerializeField]
     private GameObject healthBarPrefab;
+
+    /// <summary> Parameters that can be used to modify the enemy's behavior. </summary>
+    [HideInInspector]
+    public float[] parameters;
 
     /// <summary>
     /// Called when the enemy is instantiated (before Start). Initializes the enemy.
@@ -46,13 +61,21 @@ public partial class Enemy : DanmakuCollider
         Field = LevelController.Singleton.Field;
         Wave = LevelController.Singleton.Event.GetComponent<Wave>();
         Difficulty = Wave.Difficulty;
-        TagFilter = "Friendly";
+        TagFilter = "Untagged";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
         healthBar.transform.parent = transform;
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
 
         Health = MaxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.75f;
+
+        // TEMPORARY
+        // Assigns SFX from resources folder for simplcity
+        OnHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
+        OnDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
     }
 
     /// <summary>
@@ -71,21 +94,6 @@ public partial class Enemy : DanmakuCollider
         return null;
     }
 
-    public virtual void Update()
-    {
-        // Stores the enemy's velocity when the level is paused
-        if(LevelController.Singleton.Paused && oldVelocity == Vector3.zero)
-        {
-            oldVelocity = GetComponent<Rigidbody2D>().velocity;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-        }
-        else if(!LevelController.Singleton.Paused && oldVelocity != Vector3.zero)
-        {
-            GetComponent<Rigidbody2D>().velocity = oldVelocity;
-            oldVelocity = Vector3.zero;
-        }
-    }
-
     /// <summary>
     /// Called in fixed-time intervals. Updates the enemy rotation and handles other physics-related functions.
     /// </summary>
@@ -93,13 +101,10 @@ public partial class Enemy : DanmakuCollider
     /// <returns>The warning that was spawned</returns>
     public virtual void FixedUpdate()
     {
-        if(!LevelController.Singleton.Paused)
-        {
-            if(FacePlayer)
-                TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
-            if(TargetRotation != null)
-                transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * 8);
-        }
+        if(FacePlayer)
+            TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
+        if(TargetRotation != null)
+            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
     }
 
     /// <summary>
@@ -108,14 +113,25 @@ public partial class Enemy : DanmakuCollider
     /// <param name="damage">The amount of damage to deal</param>
     public virtual void Damage(int damage)
     {
-        Health -= damage;
-
-        float healthProportion = (float)Health / MaxHealth;
-        healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
-
-        if(Health <= 0)
+        if(!invincible)
         {
-            Die();
+            Health -= damage;
+
+            float healthProportion = (float)Health / MaxHealth;
+            healthBar.GetComponentInChildren<HealthIndicator>().Activate(healthProportion);
+
+            if(Health <= 0)
+            {
+                audioSource.clip = OnHitAudio;
+                audioSource.Play();
+                Die();
+            }
+            else
+            {
+                audioSource.clip = OnDeathAudio;
+                audioSource.Play();
+                StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+            }
         }
     }
 
@@ -133,6 +149,31 @@ public partial class Enemy : DanmakuCollider
     public void OnDestroy()
     {
         Wave.UnregisterEnemy(this);
+    }
+
+    /// <summary>
+    /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
+    /// </summary>
+    private IEnumerator setInvincible(float time)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        Color color = renderer.material.color;
+        invincible = true;
+        float timer = 0;
+        while(timer < time)
+        {
+            if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
+            {
+                color.a = 1.25f - color.a;
+                renderer.material.color = color;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        color.a = 1;
+        renderer.material.color = color;
+        invincible = false;
+        yield break;
     }
 
     #region Rotation methods
@@ -182,7 +223,6 @@ public partial class Enemy : DanmakuCollider
     /// <param name="info">Collision information</param>
     protected override void DanmakuCollision(Danmaku danmaku, RaycastHit2D info)
     {
-        Damage(danmaku.Damage);
         danmaku.Deactivate();
     }
 }

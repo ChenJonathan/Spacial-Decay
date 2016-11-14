@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DanmakU;
 
 /// <summary>
-/// A fragment of a level. Contains lists of enemies and warnings to spawn.
+/// A fragment of a level. Contains lists of enemies and warnings to spawn. Ends when all enemies are spawned and defeated.
 /// </summary>
 public class Wave : MonoBehaviour
 {
@@ -16,20 +16,24 @@ public class Wave : MonoBehaviour
     public List<WarningChain> WarningChains;
 
     // Queues to spawn objects sorted by time
-    private List<EnemyData> enemyQueue;
-    private List<WarningData> warningQueue;
+    protected List<EnemyData> enemyQueue;
+    protected List<WarningData> warningQueue;
 
     // Active enemies
-    private List<Enemy> enemies;
+    protected List<Enemy> enemies;
 
     // The field that the bullets are spawned in
-    private DanmakuField field;
+    protected DanmakuField field;
 
     // Time elapsed since the start of the wave
-    private float time;
+    protected float time;
+    public float CurrentTime
+    {
+        get { return time; }
+    }
 
     // Difficulty of the wave, from 0 to 2
-    private int difficulty;
+    protected int difficulty;
     public int Difficulty
     {
         get { return difficulty; }
@@ -43,6 +47,7 @@ public class Wave : MonoBehaviour
     {
         public Vector2 Location;
         public float Time;
+        public float[] Parameters;
     }
 
     /// <summary>
@@ -91,9 +96,10 @@ public class Wave : MonoBehaviour
         public List<SpawnData> Data;
     }
 
-    public void Start()
+    public virtual void Start()
     {
         field = ((LevelController)LevelController.Instance).Field;
+        Camera camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         enemyQueue = new List<EnemyData>();
         warningQueue = new List<WarningData>();
         enemies = new List<Enemy>();
@@ -107,6 +113,7 @@ public class Wave : MonoBehaviour
                 spawn.Prefab = chain.Prefab;
                 spawn.Data.Location = chain.Data[i].Location;
                 spawn.Data.Time = chain.Data[i].Time;
+                spawn.Data.Parameters = chain.Data[i].Parameters;
                 enemyQueue.Add(spawn);
             }
         }
@@ -124,6 +131,7 @@ public class Wave : MonoBehaviour
                 spawn.FadeOutDuration = chain.FadeOutDuration;
                 spawn.Data.Location = chain.Data[i].Location;
                 spawn.Data.Time = chain.Data[i].Time;
+                spawn.Data.Parameters = chain.Data[i].Parameters;
                 warningQueue.Add(spawn);
             }
         }
@@ -133,7 +141,7 @@ public class Wave : MonoBehaviour
         difficulty = GameController.Singleton.Difficulty;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         time += Time.deltaTime;
         if(enemyQueue.Count == 0)
@@ -150,14 +158,17 @@ public class Wave : MonoBehaviour
                 SpawnEnemy(enemyQueue[0]);
                 enemyQueue.RemoveAt(0);
             }
-            while(warningQueue.Count > 0 && time >= warningQueue[0].Data.Time)
-            {
-                SpawnWarning(warningQueue[0]);
-                warningQueue.RemoveAt(0);
-            }
+        }
+        while(warningQueue.Count > 0 && time >= warningQueue[0].Data.Time)
+        {
+            SpawnWarning(warningQueue[0]);
+            warningQueue.RemoveAt(0);
         }
     }
 
+    /// <summary>
+    /// Ends the wave.
+    /// </summary>
     public void End()
     {
         if(ClearEnemiesOnEnd)
@@ -176,10 +187,20 @@ public class Wave : MonoBehaviour
     /// <returns>The enemy that was spawned</returns>
     public Enemy SpawnEnemy(EnemyData enemy)
     {
-        Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Data.Location, Quaternion.identity);
-        temp.transform.parent = field.transform;
-        enemies.Add(temp);
-        return temp;
+        if(time < enemy.Data.Time)
+        {
+            enemyQueue.Add(enemy);
+            enemyQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
+            return null;
+        }
+        else
+        {
+            Enemy temp = (Enemy)Instantiate(enemy.Prefab, enemy.Data.Location, Quaternion.identity);
+            temp.parameters = enemy.Data.Parameters;
+            temp.transform.parent = field.transform;
+            enemies.Add(temp);
+            return temp;
+        }
     }
 
     /// <summary>
@@ -189,12 +210,21 @@ public class Wave : MonoBehaviour
     /// <returns>The warning that was spawned</returns>
     public Warning SpawnWarning(WarningData warning)
     {
-        Warning temp = (Warning)Instantiate(warning.Prefab, warning.Data.Location, Quaternion.identity);
-        temp.Duration = warning.Duration;
-        temp.FadeInDuration = warning.FadeInDuration;
-        temp.FadeOutDuration = warning.FadeOutDuration;
-        temp.transform.parent = field.transform;
-        return temp;
+        if(time < warning.Data.Time)
+        {
+            warningQueue.Add(warning);
+            warningQueue.Sort((a, b) => (int)(a.Data.Time * 100 - b.Data.Time * 100));
+            return null;
+        }
+        else
+        {
+            Warning temp = (Warning)Instantiate(warning.Prefab, warning.Data.Location, Quaternion.identity);
+            temp.Duration = warning.Duration;
+            temp.FadeInDuration = warning.FadeInDuration;
+            temp.FadeOutDuration = warning.FadeOutDuration;
+            temp.transform.parent = field.transform;
+            return temp;
+        }
     }
 
     /// <summary>

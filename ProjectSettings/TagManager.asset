@@ -4,11 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Friendly
-  - Enemy
+  - Bullet
+  - Piercing
   - Counter
   - Map
-  - Level
+  - Levels
+  - Enemy
+  - Background
   layers:
   - Default
   - TransparentFX

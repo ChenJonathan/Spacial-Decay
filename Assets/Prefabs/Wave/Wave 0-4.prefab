@@ -40,18 +40,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClearEnemiesOnEnd: 0
+  ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0, type: 2}
+  - Prefab: {fileID: 114000010179105062, guid: afb15c526336e464eaf6753fdc641482, type: 2}
     Data:
-    - Location: {x: 0, y: 15}
-      Time: 5
+    - Location: {x: 0, y: -12}
+      Time: 3
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
-    Duration: 5
-    FadeInDuration: 2
-    FadeOutDuration: 2
+    Duration: 3
+    FadeInDuration: 1
+    FadeOutDuration: 1
     Data:
-    - Location: {x: 0, y: 9}
+    - Location: {x: 0, y: -9}
       Time: 0
 --- !u!1001 &100100000
 Prefab:
@@ -71,7 +73,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0,
+      objectReference: {fileID: 11442184, guid: afb15c526336e464eaf6753fdc641482,
         type: 2}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
@@ -87,7 +89,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].y
-      value: 15
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[0]
