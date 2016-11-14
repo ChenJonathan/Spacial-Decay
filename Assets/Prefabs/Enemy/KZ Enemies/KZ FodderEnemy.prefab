@@ -143,7 +143,7 @@ MonoBehaviour:
       - 8.0
       - null
       - null
-      - true
+      - false
       - 1
       - null
       - null
@@ -163,7 +163,7 @@ MonoBehaviour:
   RotateSpeed: 8
   OnHitAudio: {fileID: 0}
   OnDeathAudio: {fileID: 0}
-  FacePlayer: 1
+  FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
