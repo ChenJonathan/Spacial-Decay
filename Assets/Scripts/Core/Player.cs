@@ -80,10 +80,24 @@ public class Player : MonoBehaviour
     private Vector2 target; // Location that the enemy is moving towards
     private SpriteRenderer targetRenderer; // Renders the movement target
     private LineRenderer dashRenderer; // Renders the dash selection line
+    private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
+    private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
+
+    private float currentAlphaHitbox = 0f;
+    private float currentAlphaWings = 0f;
+    private float targetAlphaHitbox = 0f;
+    private float targetAlphaWings = 0f;
 
     // Cached mouse position for easy access
     private Vector2 mousePos = Vector2.zero;
+
+    private AudioSource audioSource;
+
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+    public AudioClip OnNewDashAudio;
+    public AudioClip OnDashAudio;
 
     /// <summary>
     /// Called when the player is instantiated (before Start). Handles player initialization.
@@ -104,6 +118,10 @@ public class Player : MonoBehaviour
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+        hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
+        wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
 
         // Retrieves counter references
         foreach(GameObject counter in GameObject.FindGameObjectsWithTag("Counter"))
@@ -128,7 +146,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        // Handle input if not paused
+        // Handle input if not paused / pausing
         if(LevelController.Singleton.TargetTimeScale != 0)
         {
             HandleInput();
@@ -150,8 +168,11 @@ public class Player : MonoBehaviour
                 // Player reached its target
                 targetRenderer.enabled = false;
                 rigidbody2d.velocity = Vector3.zero;
-                dashing = false;
-                hitEnemies.Clear();
+                if(dashing)
+                {
+                    dashing = false;
+                    hitEnemies.Clear();
+                }
             }
         }
         else if(selecting)
@@ -166,6 +187,8 @@ public class Player : MonoBehaviour
             if(dashCooldown >= MAX_DASH_COOLDOWN)
             {
                 dashes++;
+                audioSource.clip = OnNewDashAudio;
+                audioSource.Play();
                 dashCooldown = 0;
                 dashRenderer.SetColors(dashStartActive, dashEndActive);
                 dashCounter.UpdateCounter(dashes);
@@ -220,6 +243,20 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        // Update hitbox alpha
+        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
+        Color temp = hitboxGlowRenderer.color;
+        temp.a = currentAlphaHitbox;
+        hitboxGlowRenderer.color = temp;
+        if(currentAlphaHitbox == targetAlphaHitbox)
+            targetAlphaHitbox = 1 - targetAlphaHitbox;
+
+        // Update wings alpha
+        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime / 2);
+        temp = wingsGlowRenderer.color;
+        temp.a = currentAlphaWings;
+        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -252,8 +289,12 @@ public class Player : MonoBehaviour
                 {
                     SetDashTarget(mousePos);
                     dashes--;
+
+                    currentAlphaWings = 1f;
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+                    audioSource.clip = OnDashAudio;
+                    audioSource.Play();
                 }
 
                 // Disable dash selection
@@ -295,8 +336,22 @@ public class Player : MonoBehaviour
             lives--;
             livesCounter.UpdateCounter(lives);
         }
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
         hitEffect.Play();
+        if(lives == 0)
+        {
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelController.Singleton.LevelFailedMessage);
+
+            audioSource.clip = OnDeathAudio;
+        }
+        else
+        {
+            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+
+            audioSource.clip = OnHitAudio;
+        }
+        audioSource.Play();
     }
 
     /// <summary>

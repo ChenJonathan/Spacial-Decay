@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 60000011265811116}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000012397316020}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: ShieldBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4e6c1dabeeae86b48b0399fc97ef5ba8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -600,6 +600,7 @@ MonoBehaviour:
     - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
     - {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
     - {fileID: 114000011417533484, guid: 6d190a9fe4983824988cb8e780cdce0a, type: 2}
+    - {fileID: 114000010221861702, guid: 5ec454d6669073044856ae1a78f04104, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -607,6 +608,7 @@ MonoBehaviour:
       - DanmakuPrefab CirclePrefab
       - DanmakuPrefab LaserPrefab
       - Shield Shield
+      - SniperTurretTower turretPrefab
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -614,14 +616,18 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
       - 1
       - 2
       - 3
+      - 4
       - null
       - null
       - null
@@ -629,8 +635,11 @@ MonoBehaviour:
       - 500
       - 0
       - 8.0
+      - null
+      - null
       - false
-      - 4
+      - 5
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -646,9 +655,14 @@ MonoBehaviour:
   MaxHealth: 500
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   BulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   CirclePrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
   LaserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
   Shield: {fileID: 114000011417533484, guid: 6d190a9fe4983824988cb8e780cdce0a, type: 2}
+  turretPrefab: {fileID: 114000010221861702, guid: 5ec454d6669073044856ae1a78f04104,
+    type: 2}

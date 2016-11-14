@@ -23,7 +23,7 @@ GameObject:
   - 60: {fileID: 60000011634629356}
   - 50: {fileID: 50000012248874722}
   - 114: {fileID: 114000011238766288}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: KZ KamiKazeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -126,8 +126,11 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -138,8 +141,11 @@ MonoBehaviour:
       - 50
       - 0
       - 8.0
+      - null
+      - null
       - true
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -155,8 +161,11 @@ MonoBehaviour:
   MaxHealth: 50
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
 --- !u!212 &212000012038156486
 SpriteRenderer:
@@ -186,7 +195,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 032eb0c42750bca4784028348e47ea4a, type: 3}
   m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_FlipX: 0

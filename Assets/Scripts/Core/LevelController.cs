@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Controls the level, calling events sequentially.
 /// </summary>
-public class LevelController : DanmakuGameController
+public class LevelController : DanmakuGameController, IPausable
 {
     // Field to spawn the bullets in
     [SerializeField]
@@ -41,6 +41,9 @@ public class LevelController : DanmakuGameController
         get { return viewportRect; }
     }
 
+    public GameObject LevelCompleteMessage;
+    public GameObject LevelFailedMessage;
+
     /// <summary>
     /// Returns the only instance of the LevelController.
     /// </summary>
@@ -50,7 +53,40 @@ public class LevelController : DanmakuGameController
         get { return (LevelController)Instance; }
     }
 
+    // Whether the game is paused or not
+    private bool paused;
+    [HideInInspector]
+    public bool Paused
+    {
+        get
+        {
+            return paused;
+        }
+        set
+        {
+            paused = value;
+            if(paused)
+            {
+                Cursor.visible = true;
+                TargetTimeScale = 0;
+            }
+            else
+            {
+                Cursor.visible = false;
+                TargetTimeScale = 1;
+            }
+        }
+    }
+
+    public MessagePauseMenu PauseMenu;
+    private MessagePauseMenu pauseMenuRuntime;
+
+    // Total time
+    [HideInInspector]
+    public float LevelTime = 0;
+
     // Time scale constantly approaches this value
+    [HideInInspector]
     public float TargetTimeScale = 1;
 
     /// <summary> Makes the player invincible permanently. </summary>
@@ -111,14 +147,18 @@ public class LevelController : DanmakuGameController
     public override void Update()
     {
         base.Update();
-        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        LevelTime += Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-            TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
+        // Pausing things
+        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        if(Time.timeScale == 0f && Paused && pauseMenuRuntime == null)
+            pauseMenuRuntime = Instantiate(PauseMenu);
+        if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
+            Paused = true;
 
         // TODO Remove these
         if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+            GameController.Singleton.LoadLevelSelect(true, LevelTime);
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             EndEvent();
         }
@@ -143,7 +183,8 @@ public class LevelController : DanmakuGameController
 
         if(eventCount == events.Count)
         {
-            SceneManager.LoadScene("Level Select");
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelCompleteMessage);
         }
         else
         {

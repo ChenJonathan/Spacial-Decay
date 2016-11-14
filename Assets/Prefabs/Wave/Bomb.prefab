@@ -58,4 +58,5 @@ MonoBehaviour:
     Data:
     - Location: {x: 25, y: 16}
       Time: 0
+      Parameters: []
   WarningChains: []
