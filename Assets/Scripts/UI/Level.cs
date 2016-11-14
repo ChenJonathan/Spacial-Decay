@@ -51,16 +51,16 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Awake()
     {
-        details = transform.Find("Details").GetComponent<Image>();
-        center = transform.Find("Center").GetComponent<Image>();
+        details = transform.FindChild("Details").GetComponent<Image>();
+        center = transform.FindChild("Center").GetComponent<Image>();
 
-        titleText = transform.Find("Details/TitleText").GetComponent<Text>();
+        titleText = transform.FindChild("Details/TitleText").GetComponent<Text>();
         titleText.text = gameObject.name;
         
-        ordinalText = transform.Find("Center/OrdinalText").GetComponent<Text>();
+        ordinalText = transform.FindChild("Center/OrdinalText").GetComponent<Text>();
         ordinalText.text = transform.GetSiblingIndex().ToString();
         
-        newText = transform.Find("Center/NewText").GetComponent<Text>();
+        newText = transform.FindChild("Center/NewText").GetComponent<Text>();
 
         center.transform.localScale = Vector3.zero;
         details.transform.localScale = Vector3.zero;

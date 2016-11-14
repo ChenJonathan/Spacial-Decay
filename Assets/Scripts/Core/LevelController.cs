@@ -66,9 +66,15 @@ public class LevelController : DanmakuGameController, IPausable
         {
             paused = value;
             if(paused)
+            {
+                Cursor.visible = true;
                 TargetTimeScale = 0;
+            }
             else
+            {
+                Cursor.visible = false;
                 TargetTimeScale = 1;
+            }
         }
     }
 

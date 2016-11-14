@@ -168,9 +168,12 @@ public class GameController : Singleton<GameController>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
+        Cursor.visible = false;
 
         if(scene.name.Equals("Level Select"))
         {
+            Cursor.visible = true;
+
             // Set camera position and bounds
             float minY = Mathf.Infinity;
             float maxY = -Mathf.Infinity;

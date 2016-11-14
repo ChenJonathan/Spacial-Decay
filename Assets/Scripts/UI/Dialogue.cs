@@ -27,10 +27,8 @@ public abstract class Dialogue : MonoBehaviour
     protected virtual IEnumerator Appear()
     {
         Vector3 backgroundScale = new Vector3(0, 0.05f, 1);
-        Background.transform.localScale = Vector3.zero;
-
-        Color fadeColor = Fade.color = new Color(Fade.color.r, Fade.color.g, Fade.color.b, 0f);
-        Color textColor = Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, 0f);
+        Color fadeColor = Fade.color;
+        Color textColor = Text.color;
 
         for(float x = backgroundScale.x; x <= 1f; x = Mathf.Lerp(x, 1.01f, 0.1f))
         {
