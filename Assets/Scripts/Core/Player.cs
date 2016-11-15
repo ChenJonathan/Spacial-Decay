@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_SPAWN));
+        StartCoroutine(SetInvincible(INVINCIBILITY_ON_SPAWN));
     }
 
     /// <summary>
@@ -344,7 +344,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+            StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
 
             audioSource.clip = OnHitAudio;
         }
@@ -376,7 +376,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Coroutine to make the player invincible for some time. Also handles the flashing effect.
     /// </summary>
-    private IEnumerator setInvincible(float time)
+    private IEnumerator SetInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;

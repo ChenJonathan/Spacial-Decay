@@ -33,6 +33,7 @@ public partial class Enemy : DanmakuCollider
     {
         get { return invincible; }
     }
+    private static readonly float INVINCIBILITY_ON_SPAWN = 2; // Invinciblity time after the enemy is instantiated
     private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
 
     // Enemy rotation values
@@ -76,6 +77,9 @@ public partial class Enemy : DanmakuCollider
         // Assigns SFX from resources folder for simplcity
         OnHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
         OnDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
+
+        // TODO Move to Start and make all subclasses call base.Start
+        StartCoroutine(SetInvincible(INVINCIBILITY_ON_SPAWN));
     }
 
     /// <summary>
@@ -130,7 +134,7 @@ public partial class Enemy : DanmakuCollider
             {
                 audioSource.clip = OnDeathAudio;
                 audioSource.Play();
-                StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+                StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
             }
         }
     }
@@ -154,7 +158,7 @@ public partial class Enemy : DanmakuCollider
     /// <summary>
     /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
     /// </summary>
-    private IEnumerator setInvincible(float time)
+    protected IEnumerator SetInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;

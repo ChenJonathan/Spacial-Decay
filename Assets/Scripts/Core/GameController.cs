@@ -151,12 +151,15 @@ public class GameController : Singleton<GameController>
     /// <param name="levelData">Information about the completed level</param>
     public void LoadLevelSelect(bool victory, float time = 0)
     {
-        LevelData levelData = new LevelData();
-        levelData.Unlocked = true;
-        levelData.Complete = victory;
-        levelData.BestDifficulty = (Difficulty)Difficulty;
-        levelData.BestTime = time;
-        Levels[CurrentLevel] = levelData;
+        if(victory)
+        {
+            LevelData levelData = new LevelData();
+            levelData.Unlocked = true;
+            levelData.Complete = true;
+            levelData.BestDifficulty = (Difficulty)Mathf.Max(Difficulty, (int)Levels[CurrentLevel].BestDifficulty);
+            levelData.BestTime = Mathf.Min(time, Levels[CurrentLevel].BestTime);
+            Levels[CurrentLevel] = levelData;
+        }
         SceneManager.LoadScene("Level Select");
     }
 
