@@ -45,7 +45,6 @@ public class Transmission : MonoBehaviour
     /// <summary>
     /// Coroutine to the message display a speaker.
     /// </summary>
-    /// <param name="duration">Time in seconds for the message to be shown</param>
     public virtual IEnumerator ShowSpeaker(string speaker)
     {
         Color speakerColor = Speaker.color;
@@ -53,7 +52,7 @@ public class Transmission : MonoBehaviour
         {
             while(speakerColor.a != 0)
             {
-                speakerColor.a = Mathf.MoveTowards(speakerColor.a, 0, Time.deltaTime);
+                speakerColor.a = Mathf.MoveTowards(speakerColor.a, 0, Time.deltaTime * 1.5f);
                 Speaker.color = speakerColor;
                 yield return null;
             }
@@ -61,7 +60,7 @@ public class Transmission : MonoBehaviour
         Speaker.text = speaker;
         while(speakerColor.a != 1)
         {
-            speakerColor.a = Mathf.MoveTowards(speakerColor.a, 1, Time.deltaTime);
+            speakerColor.a = Mathf.MoveTowards(speakerColor.a, 1, Time.deltaTime * 2f);
             Speaker.color = speakerColor;
             yield return null;
         }
@@ -72,19 +71,23 @@ public class Transmission : MonoBehaviour
     /// </summary>
     /// <param name="content">The message content</param>
     /// <param name="delay">Time in seconds for a letter to be shown</param>
-    public virtual IEnumerator ShowContent(string content, float delay)
+    /// <param name="pause">Whether or not to prompt the user to press space after the message ends</param>
+    public virtual IEnumerator ShowContent(string content, float delay, bool pause = true)
     {
         int index = 0;
         float time = 0;
-        Continue.color = new Color(1, 1, 1, 0);
+        yield return null;
         while(index < content.Length)
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 index = content.Length;
+                Content.text = content.Substring(0, index);
+                yield return StartCoroutine(ShowContinue());
             }
             else
             {
+                yield return null;
                 time += Time.deltaTime;
                 while(time > delay)
                 {
@@ -92,7 +95,8 @@ public class Transmission : MonoBehaviour
                     index = (index == content.Length) ? content.Length : index + 1;
                 }
                 Content.text = content.Substring(0, index);
-                yield return null;
+                if(index == content.Length && pause)
+                    yield return StartCoroutine(ShowContinue());
             }
         }
     }
@@ -100,11 +104,11 @@ public class Transmission : MonoBehaviour
     /// <summary>
     /// Coroutine to make the continue text show.
     /// </summary>
-    /// <param name="duration">Time in seconds for the message to be shown</param>
     public virtual IEnumerator ShowContinue()
     {
         float targetAlpha = 1f;
         Color continueColor = Continue.color = new Color(1, 1, 1, 0);
+        yield return null;
         while(!Input.GetKeyDown(KeyCode.Space))
         {
             continueColor.a = Mathf.MoveTowards(continueColor.a, targetAlpha, Time.deltaTime);
@@ -113,5 +117,6 @@ public class Transmission : MonoBehaviour
                 targetAlpha = 1 - targetAlpha;
             yield return null;
         }
+        Continue.color = new Color(1, 1, 1, 0);
     }
 }
