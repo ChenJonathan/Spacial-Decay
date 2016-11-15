@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
   - Prefab: {fileID: 114000013064677850, guid: a109618ca4908774a8ff88f9aac65fd7, type: 2}

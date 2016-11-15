@@ -4,4 +4,34 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level Select.unity
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+  - enabled: 1
+    path: Assets/Scenes/Petal Easy.unity
+  - enabled: 1
+    path: Assets/Scenes/Walls.unity
+  - enabled: 1
+    path: Assets/Scenes/Danger Circles.unity
+  - enabled: 1
+    path: Assets/Scenes/Duelling Combos.unity
+  - enabled: 1
+    path: Assets/Scenes/Explosions.unity
+  - enabled: 1
+    path: Assets/Scenes/Spiral Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Strength in Numbers.unity
+  - enabled: 1
+    path: Assets/Scenes/Surrounded.unity
+  - enabled: 1
+    path: Assets/Scenes/Tower Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Laser Trap Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Divide and Conquer.unity
+  - enabled: 1
+    path: Assets/Scenes/Hit and Run.unity
+  - enabled: 0
+    path: Assets/Scenes/KZ Level 10.unity

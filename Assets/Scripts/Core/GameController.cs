@@ -3,6 +3,7 @@ using DanmakU;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// The overarching controller class that stores data about completed levels.
@@ -20,8 +21,8 @@ public class GameController : Singleton<GameController>
     {
         public bool Unlocked;
         public bool Complete;
-        public Difficulty DifficultyBeaten;
-        public float TimeBeaten;
+        public Difficulty BestDifficulty;
+        public float BestTime;
     }
     
     [HideInInspector]
@@ -44,7 +45,7 @@ public class GameController : Singleton<GameController>
     [SerializeField]
     [Tooltip("Causes all levels to be unlocked at the start of the game.")]
     private bool unlockAllLevels;
-    
+
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>
@@ -63,9 +64,7 @@ public class GameController : Singleton<GameController>
 
         // Destroyed instances stop here
         if(Singleton != this)
-        {
             return;
-        }
 
         // Set camera and camera FOV
         Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -74,7 +73,6 @@ public class GameController : Singleton<GameController>
         //cameraY = -cameraMaxY;
 
         // Initialize levels
-        DontDestroyOnLoad(gameObject);
         Levels = new Dictionary<string, LevelData>();
         foreach(Level level in GetAllLevels())
         {
@@ -91,11 +89,50 @@ public class GameController : Singleton<GameController>
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
             Levels[StartLevel] = levelData;
+        }
+        SceneManager.sceneLoaded += OnLoad;
+    }
+
+    /// <summary>
+    /// Prevents coroutine from starting before start level fields are initialized.
+    /// </summary>
+    public void Start()
+    {
+        if(!unlockAllLevels)
+        {
             Level startLevelObject = GetLevel(StartLevel);
             startLevelObject.gameObject.SetActive(true);
             startLevelObject.Appear();
         }
-        SceneManager.sceneLoaded += OnLoad;
+    }
+    
+    /// <summary>
+    /// TODO Remove this
+    /// </summary>
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            foreach(Level level in GetAllLevels())
+            {
+                LevelData levelData = Levels[level.name];
+                levelData.Unlocked = true;
+                levelData.Complete = true;
+                Levels[level.name] = levelData;
+            }
+            SceneManager.LoadScene("Level Select");
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            foreach(Level level in GetAllLevels())
+            {
+                Levels[level.name] = new LevelData();
+            }
+            LevelData levelData = Levels[StartLevel];
+            levelData.Unlocked = true;
+            Levels[StartLevel] = levelData;
+            SceneManager.LoadScene("Level Select");
+        }
     }
 
     /// <summary>
@@ -114,12 +151,15 @@ public class GameController : Singleton<GameController>
     /// <param name="levelData">Information about the completed level</param>
     public void LoadLevelSelect(bool victory, float time = 0)
     {
-        LevelData levelData = new LevelData();
-        levelData.Unlocked = true;
-        levelData.Complete = victory;
-        levelData.DifficultyBeaten = (Difficulty)Difficulty;
-        levelData.TimeBeaten = time;
-        Levels[CurrentLevel] = levelData;
+        if(victory)
+        {
+            LevelData levelData = new LevelData();
+            levelData.Unlocked = true;
+            levelData.Complete = true;
+            levelData.BestDifficulty = (Difficulty)Mathf.Max(Difficulty, (int)Levels[CurrentLevel].BestDifficulty);
+            levelData.BestTime = Mathf.Min(time, Levels[CurrentLevel].BestTime);
+            Levels[CurrentLevel] = levelData;
+        }
         SceneManager.LoadScene("Level Select");
     }
 
@@ -131,9 +171,12 @@ public class GameController : Singleton<GameController>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
+        Cursor.visible = false;
 
         if(scene.name.Equals("Level Select"))
         {
+            Cursor.visible = true;
+
             // Set camera position and bounds
             float minY = Mathf.Infinity;
             float maxY = -Mathf.Infinity;
@@ -159,7 +202,6 @@ public class GameController : Singleton<GameController>
                     }
                 }
             }
-
             Scroll camScroll = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Scroll>();
             camScroll.CameraMinY = minY;
             camScroll.CameraMaxY = maxY;
@@ -181,8 +223,8 @@ public class GameController : Singleton<GameController>
                         if(Levels[level.Scene].Complete)
                         {
                             Text details = level.transform.Find("Details/DetailText").GetComponent<Text>();
-                            details.text = "Difficulty Beaten\n<color=#ffff00ff>" + Levels[level.Scene].DifficultyBeaten.ToString()
-                                     + "</color>\nTime Beaten\n<color=#ffff00ff>" + Levels[level.Scene].TimeBeaten.ToString("F2") + " seconds</color>";
+                            details.text = "Best Difficulty\n<color=#ffff00ff>" + Levels[level.Scene].BestDifficulty.ToString()
+                                     + "</color>\nBest Time\n<color=#ffff00ff>" + Levels[level.Scene].BestTime.ToString("F2") + " seconds</color>";
                         }
 
                         // Re-enable lines
@@ -225,8 +267,7 @@ public class GameController : Singleton<GameController>
     /// <returns>A level in the game.</returns>
     private Level GetLevel(string levelName)
     {
-        GameObject levels = GameObject.FindGameObjectWithTag("Levels");
-        foreach(Level level in levels.GetComponentsInChildren<Level>())
+        foreach(Level level in GetAllLevels())
         {
             if(level.Scene.Equals(levelName))
                 return level;
@@ -239,6 +280,6 @@ public class GameController : Singleton<GameController>
     /// </summary>
     /// <returns>All levels in the game.</returns>
     private Level[] GetAllLevels() {
-        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>();
+        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>(true);
     }
 }
