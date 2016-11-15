@@ -331,7 +331,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Hit()
     {
-        if (!LevelController.Singleton.permanentInvincible)
+        if (!LevelController.Singleton.PermanentInvincible)
         {
             lives--;
             livesCounter.UpdateCounter(lives);

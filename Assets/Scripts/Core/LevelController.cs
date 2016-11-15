@@ -8,14 +8,6 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : DanmakuGameController, IPausable
 {
-    // Field to spawn the bullets in
-    [SerializeField]
-    private DanmakuField field;
-    public DanmakuField Field
-    {
-        get { return field; }
-    }
-
     // The player prefab to be instantiated
     [SerializeField]
     private Player playerPrefab;
@@ -25,15 +17,23 @@ public class LevelController : DanmakuGameController, IPausable
         get { return player; }
     }
 
+    // Field to spawn the bullets in
+    [SerializeField]
+    private DanmakuField field;
+    public DanmakuField Field
+    {
+        get { return field; }
+    }
+
     // List of events in order
     [SerializeField]
-    private List<GameObject> events;
-    private GameObject currentEvent; // Current wave
+    protected List<GameObject> events;
+    protected GameObject currentEvent; // Current event
     public GameObject Event
     {
         get { return currentEvent; }
     }
-    private int eventCount; // Current event number
+    private int eventCount = 0; // Current event number
     
     private Rect viewportRect; // Camera viewport dimensions required to maintain 16:9 aspect ratio
     public Rect ViewportRect
@@ -92,7 +92,7 @@ public class LevelController : DanmakuGameController, IPausable
     /// <summary> Makes the player invincible permanently. </summary>
     [SerializeField]
     [Tooltip("Makes the player invincible permanently.")]
-    public bool permanentInvincible;
+    public bool PermanentInvincible;
 
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
@@ -137,7 +137,6 @@ public class LevelController : DanmakuGameController, IPausable
     /// </summary>
     public void Start()
     {
-        eventCount = 0;
         StartEvent();
     }
 
@@ -167,7 +166,7 @@ public class LevelController : DanmakuGameController, IPausable
     /// <summary>
     /// Instantiates the current event.
     /// </summary>
-    public void StartEvent()
+    public virtual void StartEvent()
     {
         currentEvent = Instantiate(events[eventCount]);
         currentEvent.transform.SetParent(transform);
@@ -176,7 +175,7 @@ public class LevelController : DanmakuGameController, IPausable
     /// <summary>
     /// Called when the current event is completed.
     /// </summary>
-    public void EndEvent()
+    public virtual void EndEvent()
     {
         Destroy(currentEvent.gameObject);
         eventCount++;
@@ -188,7 +187,6 @@ public class LevelController : DanmakuGameController, IPausable
         }
         else
         {
-            TargetTimeScale = 1;
             StartEvent();
         }
     }

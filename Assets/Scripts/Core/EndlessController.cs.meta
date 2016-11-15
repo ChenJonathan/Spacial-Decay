@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 31b55ecbe56db864b8db8535b6077830
-timeCreated: 1479199594
+guid: b88b9e18216033144af0303975ad27aa
+timeCreated: 1479199617
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -12,6 +12,8 @@ MonoImporter:
   - LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
       type: 2}
   - PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
+      type: 2}
+  - TransmissionPrefab: {fileID: 114000013485787570, guid: 0a09326e824453c40ae502d1ae17da65,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

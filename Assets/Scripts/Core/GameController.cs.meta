@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 676488584f4d8964cbf968753a14a922
-timeCreated: 1472414453
+timeCreated: 1479199528
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - LevelLinePrefab: {fileID: 120000013798751376, guid: efbcd8ba825b84db88a78765668cec1a,
+      type: 2}
+  - ProbePrefab: {fileID: 114000012380606636, guid: e9a0778b8befe1e47b917ff1334b3e89,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

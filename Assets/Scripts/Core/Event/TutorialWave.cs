@@ -16,7 +16,7 @@ public class TutorialWave : Wave
     public override void Start()
     {
         base.Start();
-
+        transmission = Instantiate(TransmissionPrefab);
         StartCoroutine(Run());
     }
 
@@ -27,8 +27,6 @@ public class TutorialWave : Wave
 
     private IEnumerator Run()
     {
-        transmission = Instantiate(TransmissionPrefab);
-
         // Introduction
         yield return StartCoroutine(transmission.Appear());
         yield return StartCoroutine(transmission.ShowSpeaker("???"));
