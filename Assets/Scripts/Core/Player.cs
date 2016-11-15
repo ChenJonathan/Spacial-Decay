@@ -379,7 +379,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Coroutine to make the player invincible for some time. Also handles the flashing effect.
     /// </summary>
-    private IEnumerator SetInvincible(float time)
+    public IEnumerator SetInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;

@@ -33,7 +33,7 @@ public partial class Enemy : DanmakuCollider
     {
         get { return invincible; }
     }
-    private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
+    protected static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
 
     // Enemy rotation values
     [SerializeField]
@@ -154,7 +154,7 @@ public partial class Enemy : DanmakuCollider
     /// <summary>
     /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
     /// </summary>
-    protected IEnumerator SetInvincible(float time)
+    public IEnumerator SetInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;
