@@ -331,8 +331,11 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Hit()
     {
-        lives--;
-        livesCounter.UpdateCounter(lives);
+        if (!LevelController.Singleton.permanentInvincible)
+        {
+            lives--;
+            livesCounter.UpdateCounter(lives);
+        }
 
         hitEffect.Play();
         if(lives == 0)

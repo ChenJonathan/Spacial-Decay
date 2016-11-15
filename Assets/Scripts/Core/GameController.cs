@@ -42,8 +42,6 @@ public class GameController : Singleton<GameController>
     private float cameraMaxY;
 
     /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
-    [SerializeField]
-    [Tooltip("Causes all levels to be unlocked at the start of the game.")]
     private bool unlockAllLevels;
 
     /// <summary>

@@ -481,7 +481,8 @@ namespace DanmakU {
 
 		#endregion
 
-		public void Fire () {
+		public Danmaku Fire () {
+            Danmaku danmaku = null;
 			Vector2 actualPosition = Position;
 			DynamicFloat actualRotation = Rotation;
 
@@ -504,11 +505,11 @@ namespace DanmakU {
 			Rotation = actualRotation;
 
 			if(modifiers.Count <= 0) {
-				data.Fire();
+				danmaku = data.Fire();
 			} else if(modifiers.Count == 1) {
 				DanmakuModifier singleModifier = modifiers[0];
 				if(singleModifier == null)
-					data.Fire(); 
+                    danmaku = data.Fire(); 
 				else
 					singleModifier.Fire(data);
 		    } else {
@@ -527,9 +528,9 @@ namespace DanmakU {
 				}
 				
 				if(initial != null)
-					initial.Fire(data);
+                    initial.Fire(data);
 				else
-					data.Fire();
+                    danmaku = data.Fire();
 				
 				for(int i = 0; i < oldSubModifiers.Length; i++) {
 					current = modifiers[i];
@@ -540,6 +541,7 @@ namespace DanmakU {
 			
 			data.Position = tempPos;
 			data.Rotation = tempRotation;
+            return danmaku;
 		}
 	}
 }

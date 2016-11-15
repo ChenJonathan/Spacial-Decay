@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: TK Wave 0-5
+  m_Name: Warp Squad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,12 +47,16 @@ MonoBehaviour:
     Data:
     - Location: {x: 0, y: -12}
       Time: 3
+      Parameters: []
     - Location: {x: 0, y: 12}
-      Time: 4
+      Time: 3
+      Parameters: []
     - Location: {x: 0, y: 12}
-      Time: 5
+      Time: 3
+      Parameters: []
     - Location: {x: 0, y: 12}
-      Time: 6
+      Time: 3
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -61,6 +65,7 @@ MonoBehaviour:
     Data:
     - Location: {x: 0, y: -9}
       Time: 0
+      Parameters: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -66,6 +66,11 @@ public class Level : MonoBehaviour
         details.transform.localScale = Vector3.zero;
 
         audioSource = GetComponent<AudioSource>();
+
+        if (Scene == "")
+        {
+            Scene = gameObject.name;
+        }
     }
 
     /// <summary>
