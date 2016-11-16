@@ -12,6 +12,7 @@ public class BeamEnemy : Enemy
     private FireBuilder warningData;
     private Rigidbody2D rigidbody2d;
 
+    private Danmaku currentWarning;
     private Danmaku currentBeam;
 
     public override void Start()
@@ -21,7 +22,7 @@ public class BeamEnemy : Enemy
         warningData = new FireBuilder(warningPrefab, Field);
         warningData.From(transform);
         warningData.WithSpeed(0);
-        warningData.WithController(new AutoDeactivateController(1f));
+        //warningData.WithController(new AutoDeactivateController(1f));
         warningData.WithController(new EnemyDeathController(this));
         ColorChangeController colorController = new ColorChangeController();
         GradientAlphaKey[] gak = new GradientAlphaKey[2];
@@ -43,7 +44,7 @@ public class BeamEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(0);
-        fireData.WithController(new AutoDeactivateController(2f));
+        //fireData.WithController(new AutoDeactivateController(2f));
         fireData.WithController(new EnemyDeathController(this));
 
         base.Start();
@@ -66,10 +67,12 @@ public class BeamEnemy : Enemy
             RotateTowards(Player.transform.position);
 
             // Fire
-            warningData.Fire();
+            currentWarning = warningData.Fire();
             yield return new WaitForSeconds(1f);
+            currentWarning.DeactivateImmediate();
             currentBeam = fireData.Fire();
             yield return new WaitForSeconds(2f);
+            currentBeam.Deactivate();
         }
         Die();
     }
@@ -78,6 +81,9 @@ public class BeamEnemy : Enemy
     /// Updates the position of the beam if the enemy moves.
     /// </summary>
     private void FixedUpdate() {
+        if (currentWarning != null && currentWarning.IsActive) {
+            currentWarning.position = transform.position;
+        }
         if (currentBeam != null && currentBeam.IsActive) {
             currentBeam.position = transform.position;
         }
