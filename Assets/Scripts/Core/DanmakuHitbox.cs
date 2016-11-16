@@ -28,8 +28,6 @@ public class DanmakuHitbox : DanmakuCollider
         if(danmaku.Tag != "Piercing")
             danmaku.Deactivate();
         if(!player.IsDashing && !player.IsInvincible)
-        {
             player.Hit();
-        }
     }
 }

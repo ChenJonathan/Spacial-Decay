@@ -51,16 +51,16 @@ public class Level : MonoBehaviour
     /// </summary>
     public void Awake()
     {
-        details = transform.Find("Details").GetComponent<Image>();
-        center = transform.Find("Center").GetComponent<Image>();
+        details = transform.FindChild("Details").GetComponent<Image>();
+        center = transform.FindChild("Center").GetComponent<Image>();
 
-        titleText = transform.Find("Details/TitleText").GetComponent<Text>();
+        titleText = transform.FindChild("Details/TitleText").GetComponent<Text>();
         titleText.text = gameObject.name;
         
-        ordinalText = transform.Find("Center/OrdinalText").GetComponent<Text>();
+        ordinalText = transform.FindChild("Center/OrdinalText").GetComponent<Text>();
         ordinalText.text = transform.GetSiblingIndex().ToString();
         
-        newText = transform.Find("Center/NewText").GetComponent<Text>();
+        newText = transform.FindChild("Center/NewText").GetComponent<Text>();
 
         center.transform.localScale = Vector3.zero;
         details.transform.localScale = Vector3.zero;
@@ -85,14 +85,14 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// Coroutine to make the object appear. Also highlights the object with a particle effect afterwards.
+    /// Coroutine to make the object appear.
     /// </summary>
     /// <param name="duration">How long the object should take to appear</param>
     private IEnumerator Appear(float duration, bool lineOnly = false)
     {
         Color color = Color.white;
         color.a = 0;
-
+        
         if (!lineOnly) {
             details.color = color;
             titleText.color = color;
@@ -125,7 +125,7 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// Starts the particle effect to indicate that the level is newly unlocked.
+    /// Marks the level as a new level.
     /// </summary>
     public void Highlight()
     {
@@ -134,25 +134,9 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
-    /// When the mouse first hovers over this level
+    /// A whole bunch of procedural animations.
     /// </summary>
-    private void OnMouseEnter()
-    {
-        scale = scaleWhenFirstHovered;
-        
-        if (nTextTarg == 1)
-        {
-            nText = 1.25f;
-            nTextCol = Color.yellow;
-        }
-        audioSource.clip = onHoverAudio;
-        audioSource.Play();
-    }
-
-    /// <summary>
-    /// A whole bunch of procedural animations
-    /// </summary>
-    void Update()
+    public void Update()
     {
         scale += (scaleTarg - scale) * scaleDrag;
         expand += (expandTarg - expand) * expandDrag;
@@ -179,6 +163,22 @@ public class Level : MonoBehaviour
     }
 
     /// <summary>
+    /// When the mouse first hovers over this level.
+    /// </summary>
+    private void OnMouseEnter()
+    {
+        scale = scaleWhenFirstHovered;
+
+        if(nTextTarg == 1)
+        {
+            nText = 1.25f;
+            nTextCol = Color.yellow;
+        }
+        
+        audioSource.PlayOneShot(onHoverAudio);
+    }
+
+    /// <summary>
     /// Called when the mouse is on top of the object. Starts the corresponding level on click.
     /// </summary>
     private void OnMouseOver()
@@ -188,9 +188,25 @@ public class Level : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            audioSource.clip = onClickAudio;
-            audioSource.Play();
-            GameController.Singleton.LoadLevel(Scene);
+            StartCoroutine(LoadLevel());
         }
+    }
+
+    private IEnumerator LoadLevel()
+    {
+        AudioSource.PlayClipAtPoint(onClickAudio, Camera.main.transform.position);
+        float start = 1.0F;
+        float end = 0.0F;
+        float i = 0.0F;
+        float step = 1.0F / onClickAudio.length;
+
+        while (i <= 1.0F)
+        {
+            i += step * Time.deltaTime;
+            Camera.main.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
+            yield return new WaitForSeconds(step * Time.deltaTime);
+        }
+        // yield return new WaitForSeconds(onClickAudio.length);
+        GameController.Singleton.LoadLevel(Scene);
     }
 }

@@ -10,7 +10,7 @@ public class Scroll : MonoBehaviour
     public float CameraMinY;
     public float CameraMaxY;
 
-    public readonly float CAMERA_ACCELERATION = 0.4f;
+    public readonly float CAMERA_ACCELERATION = 0.3f;
     public readonly float CAMERA_SPEED_DECAY = 0.9f;
 
     /// <summary>
