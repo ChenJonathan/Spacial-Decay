@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     private DashCounter dashCounter;
     
     // Player life values
-    private int lives = maxLives;
+    private int lives = MAX_LIVES;
     public int Lives
     {
         get { return lives; }
     }
-    public static int maxLives = 5;
+    public static readonly int MAX_LIVES = 8;
 
     // Whether the player is moving or not
     private bool moving;
@@ -258,7 +258,6 @@ public class Player : MonoBehaviour
             targetAlphaHitbox = 1 - targetAlphaHitbox;
 
         // Update wings alpha
-        Debug.Log(currentAlphaWings);
         currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime * deltaAlphaWings);
         temp = wingsGlowRenderer.color;
         temp.a = currentAlphaWings * spriteRenderer.color.a;
