@@ -53,7 +53,7 @@ public class SpiralBossScript : Enemy
         circleAttack = new FireBuilder(enragedPrefab, Field);
         circleAttack.From(transform);
         circleAttack.WithSpeed(5 + 2 * Difficulty);
-        circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20), 0, 0));
+        circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 2 * Difficulty, 0, 0));
 
         SetRotation(90);
 
@@ -80,33 +80,33 @@ public class SpiralBossScript : Enemy
     {
         base.Damage(damage);
 
-        if (Health <= 100)
+        if (Health <= 150)
         {
             finalForm = true;
             enraged = true;
         }
-        else if (Health <= 200)
+        else if (Health <= 300)
         {
             enraged = true;
             finalForm = false;
         }
-        else if (Health <= 300)
+        else if (Health <= 450)
         {
             phase = 2;
             enraged = false;
             finalForm = false;
         }
-        else if (Health <= 400)
+        else if (Health <= 600)
         {
             enraged = true;
             finalForm = true;
         }
-        else if (Health <= 500)
+        else if (Health <= 750)
         {
             enraged = true;
             finalForm = false;
         }
-        else if (Health <= 600)
+        else if (Health <= 900)
         {
             enraged = false;
             finalForm = false;
@@ -144,6 +144,10 @@ public class SpiralBossScript : Enemy
                     case 2:
                         if (weaponized)
                         {
+                            fireDataCross1.WithSpeed(6 + Difficulty);
+                            fireDataCross2.WithSpeed(6 + Difficulty);
+                            fireDataCross3.WithSpeed(6 + Difficulty);
+                            fireDataCross4.WithSpeed(6 + Difficulty);
                             if (rotator >= 100)
                             {
                                 rotateAccelerator = -1;
@@ -154,14 +158,20 @@ public class SpiralBossScript : Enemy
                             }
                             rotator += rotateAccelerator;
                             rotate += rotator;
-                            if (bulletCount % 20 == 0 && enraged)
+                            if (bulletCount % 20 == 0)
                             {
                                 circleAttack.Fire();
+                            }
+                            if (enraged)
+                            {
+
                             }
                             if (finalForm)
                             {
                                 fireDataCross3.WithRotation(rotate + 45);
                                 fireDataCross4.WithRotation(rotate - 45);
+                                fireDataCross3.Fire();
+                                fireDataCross4.Fire();
                             }
                         }
                         break;
