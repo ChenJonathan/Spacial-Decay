@@ -96,8 +96,10 @@ public class SplitEnemyMed : Enemy
         spawn.Data.Location = transform.position;
         spawn.Data.Time = 0;
         spawn.Data.Parameters = new float[0];
-        Wave.SpawnEnemy(spawn);
-        Wave.SpawnEnemy(spawn);
+        Enemy temp = Wave.SpawnEnemy(spawn);
+        temp.StartCoroutine(temp.SetInvincible(INVINCIBILITY_ON_HIT));
+        temp = Wave.SpawnEnemy(spawn);
+        temp.StartCoroutine(temp.SetInvincible(INVINCIBILITY_ON_HIT));
         base.Die();
     }
 }

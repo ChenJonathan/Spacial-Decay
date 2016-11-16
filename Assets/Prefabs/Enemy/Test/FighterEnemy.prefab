@@ -285,6 +285,7 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 0}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -311,10 +312,17 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
+<<<<<<< HEAD
       - null
       - null
       - true
+=======
+>>>>>>> refs/remotes/origin/master
       - 1
+      - 1
+      - true
+      - 2
+      - null
       - null
       - null
   _serializerType:
