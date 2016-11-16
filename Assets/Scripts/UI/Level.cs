@@ -179,9 +179,8 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
-
-        audioSource.clip = onHoverAudio;
-        audioSource.Play();
+        
+        audioSource.PlayOneShot(onHoverAudio);
     }
 
     /// <summary>
@@ -194,9 +193,25 @@ public class Level : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            audioSource.clip = onClickAudio;
-            audioSource.Play();
-            GameController.Singleton.LoadLevel(Scene);
+            StartCoroutine(LoadLevel());
         }
+    }
+
+    private IEnumerator LoadLevel()
+    {
+        AudioSource.PlayClipAtPoint(onClickAudio, Camera.main.transform.position);
+        float start = 1.0F;
+        float end = 0.0F;
+        float i = 0.0F;
+        float step = 1.0F / onClickAudio.length;
+
+        while (i <= 1.0F)
+        {
+            i += step * Time.deltaTime;
+            Camera.main.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
+            yield return new WaitForSeconds(step * Time.deltaTime);
+        }
+        // yield return new WaitForSeconds(onClickAudio.length);
+        GameController.Singleton.LoadLevel(Scene);
     }
 }
