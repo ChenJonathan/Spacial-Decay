@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000011894440532}
   - 60: {fileID: 60000011397490950}
   - 50: {fileID: 50000013399299038}
-  - 114: {fileID: 114000013271819086}
+  - 114: {fileID: 114000011603388086}
   m_Layer: 0
   m_Name: KZ RapidFireEnemy
   m_TagString: Enemy
@@ -160,7 +160,7 @@ PolygonCollider2D:
       - {x: 0.445, y: -0.63}
       - {x: 0.45499998, y: -0.63}
       - {x: 0.505, y: -0.45999998}
---- !u!114 &114000013271819086
+--- !u!114 &114000011603388086
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -172,9 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
-    serializedObjects:
-    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    serializedObjects: []
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
@@ -193,25 +191,25 @@ MonoBehaviour:
       - float[] parameters
       - string tagFilter
       values:
+      - null
+      - null
+      - null
+      - null
+      - null
       - 0
-      - null
-      - null
-      - null
-      - null
       - 0
-      - 250
       - 0
       - 8.0
       - null
       - null
-      - true
-      - 1
+      - false
+      - null
       - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -18592
+  _id: -48256
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -219,15 +217,15 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 250
+  MaxHealth: 0
   Health: 0
   RotateSpeed: 8
   OnHitAudio: {fileID: 0}
   OnDeathAudio: {fileID: 0}
-  FacePlayer: 1
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  FacePlayer: 0
+  healthBarPrefab: {fileID: 0}
   parameters: []
-  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  bulletPrefab: {fileID: 0}
   circleShot: {fileID: 0}
 --- !u!212 &212000011894440532
 SpriteRenderer:

@@ -58,23 +58,14 @@ public class LevelController : DanmakuGameController, IPausable
     [HideInInspector]
     public bool Paused
     {
-        get
-        {
-            return paused;
-        }
+        get { return paused; }
         set
         {
             paused = value;
             if(paused)
-            {
-                Cursor.visible = true;
                 TargetTimeScale = 0;
-            }
             else
-            {
-                Cursor.visible = false;
                 TargetTimeScale = 1;
-            }
         }
     }
 

@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000012613949318}
   - 60: {fileID: 60000013110247228}
   - 50: {fileID: 50000011714970002}
-  - 114: {fileID: 114000013950007678}
+  - 114: {fileID: 114000010055633302}
   m_Layer: 0
   m_Name: KZ RapidFireAimEnemy
   m_TagString: Enemy
@@ -160,7 +160,7 @@ PolygonCollider2D:
       - {x: 0.445, y: -0.63}
       - {x: 0.45499998, y: -0.63}
       - {x: 0.505, y: -0.45999998}
---- !u!114 &114000013950007678
+--- !u!114 &114000010055633302
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -168,16 +168,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012803464252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881c844bdf3066f48b6066a68565605f, type: 3}
+  m_Script: {fileID: 11500000, guid: ed7714deaeb8c534487382de9a53ea4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
-    serializedObjects:
-    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    serializedObjects: []
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
+      - DanmakuPrefab circleShot
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -192,24 +191,25 @@ MonoBehaviour:
       - float[] parameters
       - string tagFilter
       values:
+      - null
+      - null
+      - null
+      - null
+      - null
       - 0
-      - null
-      - null
-      - null
       - 0
-      - 250
       - 0
       - 8.0
       - null
       - null
-      - true
-      - 1
+      - false
+      - null
       - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -95412
+  _id: -45432
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -217,15 +217,16 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 250
+  MaxHealth: 0
   Health: 0
   RotateSpeed: 8
   OnHitAudio: {fileID: 0}
   OnDeathAudio: {fileID: 0}
-  FacePlayer: 1
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  FacePlayer: 0
+  healthBarPrefab: {fileID: 0}
   parameters: []
-  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  bulletPrefab: {fileID: 0}
+  circleShot: {fileID: 0}
 --- !u!212 &212000012613949318
 SpriteRenderer:
   m_ObjectHideFlags: 1
