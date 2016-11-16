@@ -80,10 +80,7 @@ public class Player : MonoBehaviour
     private Vector2 target; // Location that the enemy is moving towards
     private SpriteRenderer targetRenderer; // Renders the movement target
     private LineRenderer dashRenderer; // Renders the dash selection line
-<<<<<<< HEAD
-=======
     private SpriteRenderer spriteRenderer; // Renders the ship
->>>>>>> refs/remotes/origin/master
     private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
     private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
@@ -92,10 +89,7 @@ public class Player : MonoBehaviour
     private float currentAlphaWings = 0f;
     private float targetAlphaHitbox = 0f;
     private float targetAlphaWings = 0f;
-<<<<<<< HEAD
-=======
     private float deltaAlphaWings = 0f; // Speed at which the wing alpha value moves towards its target
->>>>>>> refs/remotes/origin/master
 
     // Cached mouse position for easy access
     private Vector2 mousePos = Vector2.zero;
@@ -126,10 +120,7 @@ public class Player : MonoBehaviour
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
-<<<<<<< HEAD
-=======
         spriteRenderer = GetComponent<SpriteRenderer>();
->>>>>>> refs/remotes/origin/master
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
 
@@ -184,11 +175,8 @@ public class Player : MonoBehaviour
                 {
                     dashing = false;
                     hitEnemies.Clear();
-<<<<<<< HEAD
-=======
                     targetAlphaWings = 0f;
                     deltaAlphaWings = 1f;
->>>>>>> refs/remotes/origin/master
                 }
             }
         }
@@ -264,25 +252,15 @@ public class Player : MonoBehaviour
         // Update hitbox alpha
         currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
         Color temp = hitboxGlowRenderer.color;
-<<<<<<< HEAD
-        temp.a = currentAlphaHitbox;
-=======
         temp.a = currentAlphaHitbox * spriteRenderer.color.a;
->>>>>>> refs/remotes/origin/master
         hitboxGlowRenderer.color = temp;
         if(currentAlphaHitbox == targetAlphaHitbox)
             targetAlphaHitbox = 1 - targetAlphaHitbox;
 
         // Update wings alpha
-<<<<<<< HEAD
-        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime / 2);
-        temp = wingsGlowRenderer.color;
-        temp.a = currentAlphaWings;
-=======
         currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime * deltaAlphaWings);
         temp = wingsGlowRenderer.color;
         temp.a = currentAlphaWings * spriteRenderer.color.a;
->>>>>>> refs/remotes/origin/master
         wingsGlowRenderer.color = temp;
     }
 
@@ -318,12 +296,7 @@ public class Player : MonoBehaviour
                 {
                     SetDashTarget(mousePos);
                     dashes--;
-<<<<<<< HEAD
-
-                    currentAlphaWings = 1f;
-=======
                     
->>>>>>> refs/remotes/origin/master
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
                     audioSource.clip = OnDashAudio;
@@ -366,16 +339,11 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Hit()
     {
-<<<<<<< HEAD
-        lives--;
-        livesCounter.UpdateCounter(lives);
-=======
         if (!LevelController.Singleton.PermanentInvincible)
         {
             lives--;
             livesCounter.UpdateCounter(lives);
         }
->>>>>>> refs/remotes/origin/master
 
         hitEffect.Play();
         if(lives == 0)
@@ -387,11 +355,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-<<<<<<< HEAD
-            StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
-=======
             StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
->>>>>>> refs/remotes/origin/master
 
             audioSource.clip = OnHitAudio;
         }

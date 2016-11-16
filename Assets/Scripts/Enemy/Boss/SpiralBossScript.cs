@@ -12,8 +12,6 @@ public class SpiralBossScript : Enemy
 
     private FireBuilder fireDataCross1;
     private FireBuilder fireDataCross2;
-    private FireBuilder fireDataCross3;
-    private FireBuilder fireDataCross4;
     private FireBuilder fireDataCircle;
     private FireBuilder circleAttack;
     private bool still = false;
@@ -35,16 +33,6 @@ public class SpiralBossScript : Enemy
         fireDataCross2.WithSpeed(12);
         fireDataCross2.WithModifier(new CircularBurstModifier(180, 2, 0, 0));
 
-        fireDataCross3 = new FireBuilder(crossPrefab, Field);
-        fireDataCross3.From(transform);
-        fireDataCross3.WithSpeed(12);
-        fireDataCross3.WithModifier(new CircularBurstModifier(180, 2, 0, 0));
-
-        fireDataCross4 = new FireBuilder(crossPrefab, Field);
-        fireDataCross4.From(transform);
-        fireDataCross4.WithSpeed(12);
-        fireDataCross4.WithModifier(new CircularBurstModifier(180, 2, 0, 0));
-
         fireDataCircle = new FireBuilder(circlePrefab, Field);
         fireDataCircle.From(transform);
         fireDataCircle.WithSpeed(7 + 2 * Difficulty);
@@ -53,7 +41,7 @@ public class SpiralBossScript : Enemy
         circleAttack = new FireBuilder(enragedPrefab, Field);
         circleAttack.From(transform);
         circleAttack.WithSpeed(5 + 2 * Difficulty);
-        circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 2 * Difficulty, 0, 0));
+        circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20), 0, 0));
 
         SetRotation(90);
 
@@ -64,7 +52,7 @@ public class SpiralBossScript : Enemy
     {
         base.FixedUpdate();
 
-        if (!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
+        if(!still && Vector3.Distance(transform.position, Vector3.zero) > 0.1)
         {
             Vector3 direction = Vector3.zero - transform.position;
             GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 10;
@@ -80,112 +68,106 @@ public class SpiralBossScript : Enemy
     {
         base.Damage(damage);
 
-        if (Health <= 150)
+        if (Health <= 400)
+        {
+            enraged = true;
+        }
+
+        if (Health <= 200)
         {
             finalForm = true;
-            enraged = true;
-        }
-        else if (Health <= 300)
-        {
-            enraged = true;
-            finalForm = false;
-        }
-        else if (Health <= 450)
-        {
-            phase = 2;
-            enraged = false;
-            finalForm = false;
-        }
-        else if (Health <= 600)
-        {
-            enraged = true;
-            finalForm = true;
-        }
-        else if (Health <= 750)
-        {
-            enraged = true;
-            finalForm = false;
-        }
-        else if (Health <= 900)
-        {
-            enraged = false;
-            finalForm = false;
-            phase = 1;
         }
     }
 
     private IEnumerator Attack()
     {
+        int cross1x = 40 - 5 * Difficulty;
+        int cross1y = 0;
+        int cross2x = 0;
+        int cross2y = 40 - 5 * Difficulty;
+        int change1x = -1;
+        int change1y = 1;
+        int change2x = -1;
+        int change2y = -1;
+        int turnSpeed = 40 - 5 * Difficulty;
         int rotate = 0;
         int rotator = 2 + Difficulty;
-        int rotateAccelerator = 1;
+        bool spedUp = false;
         while (true)
         {
-            if (weaponized)
+            switch (phase)
             {
-                switch (phase)
-                {
-                    case 1:
+                case 1:
+                    if (weaponized)
+                    {
+                        /*
+                        if (cross1x >= turnSpeed)
+                        {
+                            change1x = -1;
+                        }
+                        else if (cross1x <= -turnSpeed)
+                        {
+                            change1x = 1;
+                        }
+
+                        if (cross1y >= turnSpeed)
+                        {
+                            change1y = -1;
+                        }
+                        else if (cross1y <= -turnSpeed)
+                        {
+                            change1y = 1;
+                        }
+
+                        if (cross2x >= turnSpeed)
+                        {
+                            change2x = -1;
+                        }
+                        else if (cross2x <= -turnSpeed)
+                        {
+                            change2x = 1;
+                        }
+
+                        if (cross2y >= turnSpeed)
+                        {
+                            change2y = -1;
+                        }
+                        else if (cross2y <= -turnSpeed)
+                        {
+                            change2y = 1;
+                        } */
                         if (enraged)
                         {
                             rotator = 4 + Difficulty;
                         }
+                        fireDataCross1.WithRotation(rotate);
+                        fireDataCross2.WithRotation(rotate + 90);
+                        fireDataCross1.Fire();
+                        fireDataCross2.Fire();
+                        fireDataCircle.Fire();
                         if (finalForm)
                         {
                             fireDataCircle.Fire();
                         }
-                        fireDataCircle.Fire();
                         if (bulletCount % 20 == 0 && enraged)
                         {
                             circleAttack.Fire();
                         }
+                        cross1x += change1x;
+                        cross1y += change1y;
+                        cross2x += change2x;
+                        cross2y += change2y;
                         rotate += rotator;
-                        break;
-                    case 2:
-                        if (weaponized)
-                        {
-                            fireDataCross1.WithSpeed(6 + Difficulty);
-                            fireDataCross2.WithSpeed(6 + Difficulty);
-                            fireDataCross3.WithSpeed(6 + Difficulty);
-                            fireDataCross4.WithSpeed(6 + Difficulty);
-                            if (rotator >= 100)
-                            {
-                                rotateAccelerator = -1;
-                            }
-                            if (rotator <= -100)
-                            {
-                                rotateAccelerator = 1;
-                            }
-                            rotator += rotateAccelerator;
-                            rotate += rotator;
-                            if (bulletCount % 20 == 0)
-                            {
-                                circleAttack.Fire();
-                            }
-                            if (enraged)
-                            {
-
-                            }
-                            if (finalForm)
-                            {
-                                fireDataCross3.WithRotation(rotate + 45);
-                                fireDataCross4.WithRotation(rotate - 45);
-                                fireDataCross3.Fire();
-                                fireDataCross4.Fire();
-                            }
-                        }
-                        break;
-                }
-                fireDataCross1.WithRotation(rotate);
-                fireDataCross2.WithRotation(rotate + 90);
-                fireDataCross1.Fire();
-                fireDataCross2.Fire();
-                bulletCount++;
-                yield return new WaitForSeconds(0.1f);
-            }
-            else
-            {
-                yield return new WaitForSeconds(1f);
+                        bulletCount++;
+                        yield return new WaitForSeconds(0.1f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(1f);
+                    }
+                    break;
+                case 2:
+                    break;
             }
         }
     }

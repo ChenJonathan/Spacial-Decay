@@ -22,11 +22,7 @@ GameObject:
   - 212: {fileID: 212000011894440532}
   - 60: {fileID: 60000011397490950}
   - 50: {fileID: 50000013399299038}
-<<<<<<< HEAD
-  - 114: {fileID: 114000013271819086}
-=======
   - 114: {fileID: 114000011603388086}
->>>>>>> refs/remotes/origin/master
   m_Layer: 0
   m_Name: KZ RapidFireEnemy
   m_TagString: Enemy
@@ -180,7 +176,7 @@ MonoBehaviour:
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
-      - DanmakuPrefab aimPrefab
+      - DanmakuPrefab circleShot
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -206,13 +202,8 @@ MonoBehaviour:
       - 8.0
       - null
       - null
-<<<<<<< HEAD
-      - true
-      - 2
-=======
       - false
       - null
->>>>>>> refs/remotes/origin/master
       - null
       - null
   _serializerType:
@@ -231,19 +222,11 @@ MonoBehaviour:
   RotateSpeed: 8
   OnHitAudio: {fileID: 0}
   OnDeathAudio: {fileID: 0}
-<<<<<<< HEAD
-  FacePlayer: 1
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
-  parameters: []
-  bulletPrefab: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
-  aimPrefab: {fileID: 11481656, guid: d9cfd0e005ae47240b5642f6b9008881, type: 2}
-=======
   FacePlayer: 0
   healthBarPrefab: {fileID: 0}
   parameters: []
   bulletPrefab: {fileID: 0}
   circleShot: {fileID: 0}
->>>>>>> refs/remotes/origin/master
 --- !u!212 &212000011894440532
 SpriteRenderer:
   m_ObjectHideFlags: 1

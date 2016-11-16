@@ -149,14 +149,6 @@ public class GameController : Singleton<GameController>
     /// <param name="levelData">Information about the completed level</param>
     public void LoadLevelSelect(bool victory, float time = 0)
     {
-<<<<<<< HEAD
-        LevelData levelData = new LevelData();
-        levelData.Unlocked = true;
-        levelData.Complete = victory;
-        levelData.BestDifficulty = (Difficulty)Difficulty;
-        levelData.BestTime = time;
-        Levels[CurrentLevel] = levelData;
-=======
         if(victory)
         {
             LevelData levelData = new LevelData();
@@ -166,7 +158,6 @@ public class GameController : Singleton<GameController>
             levelData.BestTime = Mathf.Min(time, Levels[CurrentLevel].BestTime);
             Levels[CurrentLevel] = levelData;
         }
->>>>>>> refs/remotes/origin/master
         SceneManager.LoadScene("Level Select");
     }
 
@@ -178,12 +169,9 @@ public class GameController : Singleton<GameController>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
-        Cursor.visible = false;
 
         if(scene.name.Equals("Level Select"))
         {
-            Cursor.visible = true;
-
             // Set camera position and bounds
             float minY = Mathf.Infinity;
             float maxY = -Mathf.Infinity;

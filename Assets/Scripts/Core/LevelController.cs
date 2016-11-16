@@ -58,33 +58,14 @@ public class LevelController : DanmakuGameController, IPausable
     [HideInInspector]
     public bool Paused
     {
-<<<<<<< HEAD
-        get
-        {
-            return paused;
-        }
-=======
         get { return paused; }
->>>>>>> refs/remotes/origin/master
         set
         {
             paused = value;
             if(paused)
-<<<<<<< HEAD
-            {
-                Cursor.visible = true;
-                TargetTimeScale = 0;
-            }
-            else
-            {
-                Cursor.visible = false;
-                TargetTimeScale = 1;
-            }
-=======
                 TargetTimeScale = 0;
             else
                 TargetTimeScale = 1;
->>>>>>> refs/remotes/origin/master
         }
     }
 
@@ -99,14 +80,11 @@ public class LevelController : DanmakuGameController, IPausable
     [HideInInspector]
     public float TargetTimeScale = 1;
 
-<<<<<<< HEAD
-=======
     /// <summary> Makes the player invincible permanently. </summary>
     [SerializeField]
     [Tooltip("Makes the player invincible permanently.")]
     public bool PermanentInvincible;
 
->>>>>>> refs/remotes/origin/master
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
     /// </summary>

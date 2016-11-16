@@ -179,14 +179,8 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
-<<<<<<< HEAD
-
-        audioSource.clip = onHoverAudio;
-        audioSource.Play();
-=======
         
         audioSource.PlayOneShot(onHoverAudio);
->>>>>>> refs/remotes/origin/master
     }
 
     /// <summary>

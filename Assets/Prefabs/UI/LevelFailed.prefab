@@ -68,10 +68,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012840215978}
   - 114: {fileID: 114000011397276812}
-<<<<<<< HEAD
-=======
   - 82: {fileID: 82000014050640450}
->>>>>>> refs/remotes/origin/master
   m_Layer: 0
   m_Name: LevelFailed
   m_TagString: Untagged
@@ -134,8 +131,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4000012840215978}
   m_RootOrder: 1
-<<<<<<< HEAD
-=======
 --- !u!82 &82000014050640450
 AudioSource:
   m_ObjectHideFlags: 1
@@ -210,7 +205,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
->>>>>>> refs/remotes/origin/master
 --- !u!114 &114000011397276812
 MonoBehaviour:
   m_ObjectHideFlags: 1

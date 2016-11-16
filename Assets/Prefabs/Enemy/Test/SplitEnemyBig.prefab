@@ -383,17 +383,10 @@ MonoBehaviour:
       - 200
       - 0
       - 8.0
-<<<<<<< HEAD
-      - null
-      - null
-      - false
-=======
       - 2
->>>>>>> refs/remotes/origin/master
       - 2
       - false
       - 3
-      - null
       - null
       - null
   _serializerType:

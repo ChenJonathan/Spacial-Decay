@@ -8,21 +8,15 @@ using System.Collections;
 public class TutorialWave : Wave
 {
     public Transmission TransmissionPrefab;
-<<<<<<< HEAD
-=======
     public Warning WarningPrefab;
     public Enemy EnemyPrefab;
->>>>>>> refs/remotes/origin/master
 
     private Transmission transmission;
 
     public override void Start()
     {
-<<<<<<< HEAD
-=======
         base.Start();
         transmission = Instantiate(TransmissionPrefab);
->>>>>>> refs/remotes/origin/master
         StartCoroutine(Run());
     }
 
@@ -33,25 +27,6 @@ public class TutorialWave : Wave
 
     private IEnumerator Run()
     {
-<<<<<<< HEAD
-        transmission = Instantiate(TransmissionPrefab);
-
-        // Introduction
-        yield return StartCoroutine(transmission.Appear());
-        yield return StartCoroutine(transmission.ShowSpeaker("???"));
-        yield return new WaitForSeconds(2f);
-        yield return StartCoroutine(transmission.ShowContent("Welcome, pilot.", 0.1f));
-        yield return StartCoroutine(transmission.ShowContinue());
-        yield return new WaitForSeconds(1f);
-
-        // Move to location
-
-        // Hitbox explanation
-
-        // Incoming bullets
-
-        // Dash mechanic explanation
-=======
         // Introduction
         yield return StartCoroutine(transmission.Appear());
         yield return StartCoroutine(transmission.ShowSpeaker("???"));
@@ -80,7 +55,6 @@ public class TutorialWave : Wave
         // Incoming bullets
 
         // Dash mechanic explanation - Dash charges and canceling
->>>>>>> refs/remotes/origin/master
 
         // Incoming enemies
 
