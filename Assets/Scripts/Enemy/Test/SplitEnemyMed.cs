@@ -17,8 +17,6 @@ public class SplitEnemyMed : Enemy
 
     private Vector2 direction;
     private bool startup = true;    
-    private bool invuln = true;
-    private float invulnTime = 2f;
     public Enemy enemyPrefab;
 
     public override void Start()
@@ -65,26 +63,6 @@ public class SplitEnemyMed : Enemy
     {
         base.FixedUpdate();
 
-        if(invuln)
-        {
-            // While invulnerable, repeatedly fade sprite
-            invulnTime -= Time.fixedDeltaTime;
-            Renderer renderer = GetComponent<Renderer>();
-            Color color = renderer.material.color;
-            if(invulnTime % 0.05f > (invulnTime + Time.fixedDeltaTime) % 0.05f)
-            {
-                color.a = 1.25f - color.a;
-                renderer.material.color = color;
-            }
-
-            if(invulnTime <= 0)
-            {
-                color.a = 1;
-                renderer.material.color = color;
-                invuln = false;
-            }
-        }
-
         if(startup)
         {
             if(Mathf.Abs(transform.position.x) < 18 && Mathf.Abs(transform.position.y) < 9)
@@ -121,14 +99,5 @@ public class SplitEnemyMed : Enemy
         Wave.SpawnEnemy(spawn);
         Wave.SpawnEnemy(spawn);
         base.Die();
-    }
-
-    public override void Damage(int damage)
-    {        
-        if (invuln)
-        {
-            damage = 0;
-        }
-        base.Damage(damage);        
     }
 }

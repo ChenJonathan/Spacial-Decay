@@ -54,16 +54,20 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 0
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012963635658, guid: 5a08d02423de8ff4da87d96fd1a2bf85, type: 2}
+  - Prefab: {fileID: 114000011556286432, guid: 5a08d02423de8ff4da87d96fd1a2bf85, type: 2}
     Data:
     - Location: {x: -8, y: 17}
       Time: 3
+      Parameters: []
     - Location: {x: 8, y: 12}
       Time: 3
+      Parameters: []
     - Location: {x: -10, y: -12}
       Time: 3
+      Parameters: []
     - Location: {x: 10, y: -17}
       Time: 3
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -72,9 +76,13 @@ MonoBehaviour:
     Data:
     - Location: {x: -8, y: 8}
       Time: 0
+      Parameters: []
     - Location: {x: 8, y: 8}
       Time: 0
+      Parameters: []
     - Location: {x: -10, y: -8}
       Time: 0
+      Parameters: []
     - Location: {x: 10, y: -8}
       Time: 0
+      Parameters: []

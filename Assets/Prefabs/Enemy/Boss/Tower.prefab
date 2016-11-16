@@ -290,7 +290,7 @@ MonoBehaviour:
     serializedStrings:
       keys:
       - DanmakuPrefab BulletPrefab
-      - BossEnemy Boss
+      - TowerBoss Boss
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -300,6 +300,7 @@ MonoBehaviour:
       - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -308,11 +309,12 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 100
+      - 200
       - 0
       - 8.0
       - false
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -325,10 +327,11 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 100
+  MaxHealth: 200
   Health: 0
   RotateSpeed: 8
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   BulletPrefab: {fileID: 11442878, guid: bf191685777693a49b04b28f2fe11fc3, type: 2}
   Boss: {fileID: 0}

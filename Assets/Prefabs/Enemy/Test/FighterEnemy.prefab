@@ -59,7 +59,7 @@ PolygonCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
@@ -292,8 +292,10 @@ MonoBehaviour:
       - Player Player
       - DanmakuField Field
       - Wave Wave
+      - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
       - bool FacePlayer
       - GameObject healthBarPrefab
       - string tagFilter
@@ -302,8 +304,10 @@ MonoBehaviour:
       - null
       - null
       - null
+      - 0
       - 100
       - 0
+      - 8.0
       - true
       - 1
       - null
@@ -317,8 +321,10 @@ MonoBehaviour:
   Player: {fileID: 0}
   Field: {fileID: 0}
   Wave: {fileID: 0}
+  Difficulty: 0
   MaxHealth: 100
   Health: 0
+  RotateSpeed: 8
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
