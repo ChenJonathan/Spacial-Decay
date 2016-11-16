@@ -134,9 +134,9 @@ MonoBehaviour:
   dashStartInactive: {r: 1, g: 0, b: 0, a: 1}
   dashEndInactive: {r: 1, g: 0, b: 0, a: 0.19607843}
   OnHitAudio: {fileID: 8300000, guid: aabc4f151d8fa7c44b890417c79bcc42, type: 3}
-  OnDeathAudio: {fileID: 8300000, guid: deef37e0789f9cc48b83b07b85a6914b, type: 3}
-  OnNewDashAudio: {fileID: 8300000, guid: 88c83812ab14a9a48af6380f6df315e5, type: 3}
-  OnDashAudio: {fileID: 8300000, guid: a46b2ef4f520ec842a612a873741258e, type: 3}
+  OnDeathAudio: {fileID: 8300000, guid: e9a25ce158ea33144a4715ac920e7472, type: 3}
+  OnNewDashAudio: {fileID: 8300000, guid: 9eef13f290735d64998925955e42de51, type: 3}
+  OnDashAudio: {fileID: 8300000, guid: 7cb88653167e8a147ba967fe005d24dd, type: 3}
 --- !u!198 &19861626
 ParticleSystem:
   m_ObjectHideFlags: 1
