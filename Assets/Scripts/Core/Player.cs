@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     // Counters to display information
     private LivesCounter livesCounter;
-    private DashCounter dashCounter;
+    public DashCounter dashCounter;
     
     // Player life values
     private int lives = MAX_LIVES;
