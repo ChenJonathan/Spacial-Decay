@@ -24,7 +24,7 @@ GameObject:
   - 50: {fileID: 50000011030945718}
   - 114: {fileID: 114000013064677850}
   m_Layer: 0
-  m_Name: KZ DiagonalDashEnemy
+  m_Name: DiagonalDashEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,8 +158,9 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -173,6 +174,7 @@ MonoBehaviour:
       - 150
       - 0
       - 8.0
+      - null
       - null
       - null
       - true
@@ -193,8 +195,9 @@ MonoBehaviour:
   MaxHealth: 150
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []

@@ -285,7 +285,6 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
-    - {fileID: 0}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -297,8 +296,9 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -312,10 +312,11 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
-      - 1
-      - 1
+      - null
+      - null
+      - null
       - true
-      - 2
+      - 1
       - null
       - null
   _serializerType:
@@ -332,8 +333,9 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
