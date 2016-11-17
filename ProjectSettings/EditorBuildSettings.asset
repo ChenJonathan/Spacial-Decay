@@ -8,28 +8,30 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Select.unity
   - enabled: 1
-    path: Assets/Scenes/Petal Easy.unity
+    path: Assets/Scenes/Tutorial.unity
   - enabled: 1
-    path: Assets/Scenes/Walls.unity
+    path: Assets/Scenes/Endless.unity
   - enabled: 1
-    path: Assets/Scenes/Danger Circles.unity
+    path: Assets/Scenes/Levels/Danger Circles.unity
   - enabled: 1
-    path: Assets/Scenes/Duelling Combos.unity
+    path: Assets/Scenes/Levels/Divide and Conquer.unity
   - enabled: 1
-    path: Assets/Scenes/Explosions.unity
+    path: Assets/Scenes/Levels/Duelling Combos.unity
   - enabled: 1
-    path: Assets/Scenes/Spiral Boss.unity
+    path: Assets/Scenes/Levels/Explosions.unity
   - enabled: 1
-    path: Assets/Scenes/Strength in Numbers.unity
+    path: Assets/Scenes/Levels/Hit and Run.unity
   - enabled: 1
-    path: Assets/Scenes/Surrounded.unity
+    path: Assets/Scenes/Levels/Laser Trap Boss.unity
   - enabled: 1
-    path: Assets/Scenes/Tower Boss.unity
+    path: Assets/Scenes/Levels/Petal Easy.unity
   - enabled: 1
-    path: Assets/Scenes/Laser Trap Boss.unity
+    path: Assets/Scenes/Levels/Spiral Boss.unity
   - enabled: 1
-    path: Assets/Scenes/Divide and Conquer.unity
+    path: Assets/Scenes/Levels/Strength in Numbers.unity
   - enabled: 1
-    path: Assets/Scenes/Hit and Run.unity
+    path: Assets/Scenes/Levels/Surrounded.unity
   - enabled: 1
-    path: Assets/Scenes/KZ Level 10.unity
+    path: Assets/Scenes/Levels/Tower Boss.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels/Walls.unity

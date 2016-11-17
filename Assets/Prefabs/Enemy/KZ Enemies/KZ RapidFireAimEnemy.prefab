@@ -22,7 +22,7 @@ GameObject:
   - 212: {fileID: 212000012613949318}
   - 60: {fileID: 60000013110247228}
   - 50: {fileID: 50000011714970002}
-  - 114: {fileID: 114000013950007678}
+  - 114: {fileID: 114000010055633302}
   m_Layer: 0
   m_Name: KZ RapidFireAimEnemy
   m_TagString: Enemy
@@ -74,34 +74,93 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.26999998, y: -0.905}
-      - {x: 0.32, y: -0.84499997}
-      - {x: 0.55, y: -0.505}
-      - {x: 0.55, y: -0.265}
-      - {x: 0.39, y: -0.16499999}
-      - {x: 0.26, y: -0.015}
-      - {x: 0.19, y: 0.195}
-      - {x: 0.14999999, y: 0.45499998}
-      - {x: 0.089999996, y: 0.505}
-      - {x: 0.089999996, y: 0.59499997}
-      - {x: 0.08, y: 0.825}
-      - {x: 0.03, y: 0.97499996}
-      - {x: -0.04, y: 0.97499996}
-      - {x: -0.08, y: 0.815}
-      - {x: -0.089999996, y: 0.59499997}
-      - {x: -0.14, y: 0.445}
-      - {x: -0.24, y: 0.044999998}
-      - {x: -0.32, y: -0.085}
-      - {x: -0.39, y: -0.175}
-      - {x: -0.55, y: -0.275}
-      - {x: -0.55, y: -0.515}
-      - {x: -0.29999998, y: -0.875}
-      - {x: -0.26, y: -0.905}
-      - {x: -0.11, y: -0.905}
-      - {x: -0.04, y: -0.825}
-      - {x: 0.089999996, y: -0.875}
-      - {x: 0.12, y: -0.905}
---- !u!114 &114000013950007678
+    - - {x: 0.545, y: -0.29}
+      - {x: 0.565, y: -0.17}
+      - {x: 0.565, y: -0.049999997}
+      - {x: 0.555, y: 0.13}
+      - {x: 0.465, y: 0.48999998}
+      - {x: 0.42499998, y: 0.78}
+      - {x: 0.355, y: 0.93}
+      - {x: 0.24499999, y: 1.0699999}
+      - {x: 0.16499999, y: 1.1}
+      - {x: 0.055, y: 1.13}
+      - {x: 0.015, y: 1.1}
+      - {x: 0.035, y: 1.05}
+      - {x: 0.125, y: 0.98999995}
+      - {x: 0.16499999, y: 0.90999997}
+      - {x: 0.16499999, y: 0.81}
+      - {x: 0.105, y: 0.97999996}
+      - {x: 0.074999996, y: 1.01}
+      - {x: 0.044999998, y: 1.01}
+      - {x: 0.024999999, y: 1}
+      - {x: 0.015, y: 0.96999997}
+      - {x: 0.015, y: 0.74}
+      - {x: -0.015, y: 0.96999997}
+      - {x: -0.044999998, y: 1.01}
+      - {x: -0.074999996, y: 1.01}
+      - {x: -0.095, y: 1}
+      - {x: -0.16499999, y: 0.82}
+      - {x: -0.155, y: 0.94}
+      - {x: -0.095, y: 1.01}
+      - {x: -0.005, y: 1.09}
+      - {x: -0.024999999, y: 1.12}
+      - {x: -0.055, y: 1.13}
+      - {x: -0.074999996, y: 1.13}
+      - {x: -0.21499999, y: 1.09}
+      - {x: -0.315, y: 0.97999996}
+      - {x: -0.39499998, y: 0.88}
+      - {x: -0.445, y: 0.75}
+      - {x: -0.465, y: 0.48999998}
+      - {x: -0.555, y: 0.12}
+      - {x: -0.565, y: -0.07}
+      - {x: -0.565, y: -0.17999999}
+      - {x: -0.545, y: -0.34}
+      - {x: -0.505, y: -0.47}
+      - {x: -0.42499998, y: -0.76}
+      - {x: -0.39499998, y: -1.14}
+      - {x: -0.33499998, y: -1.16}
+      - {x: -0.325, y: -1.16}
+      - {x: -0.315, y: -1.13}
+      - {x: -0.315, y: -0.93}
+      - {x: -0.33499998, y: -0.7}
+      - {x: -0.39499998, y: -0.45}
+      - {x: -0.415, y: -0.26999998}
+      - {x: -0.405, y: -0.22}
+      - {x: -0.355, y: -0.47}
+      - {x: -0.355, y: -0.59}
+      - {x: -0.345, y: -0.63}
+      - {x: -0.265, y: -0.59999996}
+      - {x: -0.21499999, y: -0.56}
+      - {x: -0.175, y: -0.47}
+      - {x: -0.114999995, y: -0.42999998}
+      - {x: -0.085, y: -0.62}
+      - {x: -0.055, y: -0.78}
+      - {x: -0.044999998, y: -1.11}
+      - {x: 0.015, y: -1.14}
+      - {x: 0.035, y: -1.1}
+      - {x: 0.044999998, y: -0.95}
+      - {x: 0.055, y: -0.77}
+      - {x: 0.085, y: -0.62}
+      - {x: 0.13499999, y: -0.35999998}
+      - {x: 0.21499999, y: -0.56}
+      - {x: 0.305, y: -0.61}
+      - {x: 0.33499998, y: -0.61}
+      - {x: 0.355, y: -0.59}
+      - {x: 0.345, y: -0.55}
+      - {x: 0.345, y: -0.45999998}
+      - {x: 0.405, y: -0.21}
+      - {x: 0.405, y: -0.39999998}
+      - {x: 0.36499998, y: -0.55}
+      - {x: 0.33499998, y: -0.65}
+      - {x: 0.315, y: -0.90999997}
+      - {x: 0.315, y: -1.14}
+      - {x: 0.325, y: -1.16}
+      - {x: 0.36499998, y: -1.16}
+      - {x: 0.39499998, y: -1.15}
+      - {x: 0.445, y: -0.63}
+      - {x: 0.45499998, y: -0.63}
+      - {x: 0.505, y: -0.45999998}
+--- !u!114 &114000010055633302
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -109,16 +168,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012803464252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881c844bdf3066f48b6066a68565605f, type: 3}
+  m_Script: {fileID: 11500000, guid: ed7714deaeb8c534487382de9a53ea4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
-    - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+    - {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
+    - {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
+      - DanmakuPrefab circleShot
       - Player Player
       - DanmakuField Field
       - Wave Wave
@@ -126,31 +186,34 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
       - string tagFilter
       values:
       - 0
+      - 1
       - null
       - null
       - null
       - 0
-      - 250
+      - 0
       - 0
       - 8.0
       - null
       - null
-      - true
-      - 1
+      - null
+      - false
+      - null
       - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  _id: -95412
+  _id: -45432
   dbg: 0
   _dirty: 0
   tagFilter: 
@@ -158,15 +221,17 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 250
+  MaxHealth: 0
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
-  FacePlayer: 1
-  healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
+  FacePlayer: 0
+  healthBarPrefab: {fileID: 0}
   parameters: []
-  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
+  bulletPrefab: {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
+  circleShot: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
 --- !u!212 &212000012613949318
 SpriteRenderer:
   m_ObjectHideFlags: 1

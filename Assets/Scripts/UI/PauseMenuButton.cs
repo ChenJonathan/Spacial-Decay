@@ -13,7 +13,16 @@ public class PauseMenuButton : MonoBehaviour
     private readonly float scaleWhenFirstHovered = 1.3f;
     private readonly float scaleTargWhenDefault = 1.0f;
     private readonly float scaleTargWhenHovered = 1.15f;
-    
+
+    public AudioClip onHoverEffect;
+    public AudioClip onClickEffect;
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         scale += (scaleTarg - scale) * scaleDrag;
@@ -23,6 +32,7 @@ public class PauseMenuButton : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        audioSource.PlayOneShot(onHoverEffect);
         scale = scaleWhenFirstHovered;
     }
 
@@ -32,7 +42,8 @@ public class PauseMenuButton : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0) && GetComponent<SpriteRenderer>().color.a >= 0.5f)
         {
-            if(ContinueLevel)
+            audioSource.PlayOneShot(onClickEffect);
+            if (ContinueLevel)
                 transform.parent.GetComponent<MessagePauseMenu>().SetResume();
             else
                 transform.parent.GetComponent<MessagePauseMenu>().SetExit();

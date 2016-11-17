@@ -57,3 +57,7 @@ MonoBehaviour:
   WarningChains: []
   TransmissionPrefab: {fileID: 114000013485787570, guid: 0a09326e824453c40ae502d1ae17da65,
     type: 2}
+  WarningPrefab: {fileID: 114000011160122508, guid: 25610111fc7263b429707a18701a5035,
+    type: 2}
+  EnemyPrefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671,
+    type: 2}

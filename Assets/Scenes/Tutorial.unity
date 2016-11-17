@@ -181,22 +181,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+    - {fileID: 1205748683}
     - {fileID: 1000012781792588, guid: 4b47e72b961f7fe4e80f22672c8df293, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
       - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -212,6 +213,7 @@ MonoBehaviour:
       - 5
       - 0.0
       - 1.0
+      - false
       - true
       - 1000
       - 100
@@ -230,8 +232,8 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
   - {fileID: 1000012781792588, guid: 4b47e72b961f7fe4e80f22672c8df293, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
@@ -242,6 +244,7 @@ MonoBehaviour:
     type: 2}
   LevelTime: 0
   TargetTimeScale: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -772,6 +775,7 @@ GameObject:
   - 20: {fileID: 1480303253}
   - 92: {fileID: 1480303252}
   - 81: {fileID: 1480303250}
+  - 82: {fileID: 1480303251}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -786,6 +790,80 @@ AudioListener:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1480303249}
   m_Enabled: 1
+--- !u!82 &1480303251
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1480303249}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 0baee5de2b2dffb4fbe25a6170961cb4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!92 &1480303252
 Behaviour:
   m_ObjectHideFlags: 0

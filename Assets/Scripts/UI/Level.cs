@@ -20,11 +20,15 @@ public class Level : MonoBehaviour
     public Sprite[] sprites;                        // Sprites to use for the level select
 
     private AudioSource audioSource;
-    public AudioClip onHoverAudio;
-    public AudioClip onClickAudio;
+    [SerializeField]
+    private AudioClip onHoverAudio;
+    [SerializeField]
+    private AudioClip onClickAudio;
 
     [HideInInspector]
     public LineRenderer line;                       // Indicates the level that unlocked this level
+
+    public static bool Clickable = true;            // Indicates that levels are clickable;
 
     // Variables that control the look of the UI elements.
 
@@ -68,9 +72,7 @@ public class Level : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         if (Scene == "")
-        {
             Scene = gameObject.name;
-        }
     }
 
     /// <summary>
@@ -179,9 +181,8 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
-
-        audioSource.clip = onHoverAudio;
-        audioSource.Play();
+        
+        audioSource.PlayOneShot(onHoverAudio);
     }
 
     /// <summary>
@@ -191,12 +192,28 @@ public class Level : MonoBehaviour
     {
         scaleTarg = scaleTargWhenHovered;
         expandTarg = 1;
-
-        if (Input.GetMouseButtonDown(0))
+        
+        if (Input.GetMouseButtonDown(0) && Clickable)
         {
-            audioSource.clip = onClickAudio;
-            audioSource.Play();
-            GameController.Singleton.LoadLevel(Scene);
+            Clickable = false;
+            StartCoroutine(LoadLevel());
         }
+    }
+
+    private IEnumerator LoadLevel()
+    {
+        AudioSource.PlayClipAtPoint(onClickAudio, Camera.main.transform.position);
+        float start = 1.0F;
+        float end = 0.0F;
+        float i = 0.0F;
+        float step = 1.0F / onClickAudio.length;
+
+        while (i <= 1.0F)
+        {
+            i += step * Time.deltaTime;
+            Camera.main.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
+            yield return new WaitForSeconds(step * Time.deltaTime);
+        }
+        GameController.Singleton.LoadLevel(Scene);
     }
 }

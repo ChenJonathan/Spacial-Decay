@@ -181,22 +181,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 188780, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
-    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
-    - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
-    - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
+    - {fileID: 1205748683}
+    - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
+    - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
+    - {fileID: 0}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
-      - DialoguePauseMenu PauseMenu
+      - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -206,12 +206,13 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2]}'
-      - 3
+      - '{"$content":[2,3]}'
       - 4
-      - 5
+      - 4
+      - null
       - 0.0
       - 1.0
+      - false
       - true
       - 1000
       - 100
@@ -230,18 +231,17 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
-  - {fileID: 188780, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
-  LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
-    type: 2}
-  LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
-    type: 2}
-  PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
-    type: 2}
+  - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
+  - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
+  LevelCompleteMessage: {fileID: 0}
+  LevelFailedMessage: {fileID: 0}
+  PauseMenu: {fileID: 0}
   LevelTime: 0
   TargetTimeScale: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 1
+  clipBoundary: 2
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []
@@ -840,6 +840,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1001 &1625992822
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 446412, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1821701579
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +895,7 @@ GameObject:
   - 92: {fileID: 1821701581}
   m_Layer: 8
   m_Name: Background Camera
-  m_TagString: Background
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

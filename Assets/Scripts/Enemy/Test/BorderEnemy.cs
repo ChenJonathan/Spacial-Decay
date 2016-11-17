@@ -23,7 +23,7 @@ public class BorderEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(6);
+        fireData.WithSpeed(6 + Difficulty);
         fireData.WithModifier(new CircularBurstModifier(30, 3 + Difficulty, 0, 0));
         pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
     }

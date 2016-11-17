@@ -20,8 +20,8 @@ public class WarpEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(4);
-        fireData.WithModifier(new CircularBurstModifier(100, 5, 0, 0));
+        fireData.WithSpeed(4 + 2 * Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(100, new DynamicInt(4, 6) + Difficulty, 0, 0));
 	}
 	
 	public void Update()

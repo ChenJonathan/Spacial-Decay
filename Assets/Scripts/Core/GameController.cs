@@ -13,7 +13,7 @@ public class GameController : Singleton<GameController>
     public string StartLevel;
 
     [HideInInspector]
-    public string CurrentLevel = "";
+    public string CurrentLevel = null;
     [HideInInspector]
     public int Difficulty = 0;
 
@@ -118,6 +118,7 @@ public class GameController : Singleton<GameController>
                 levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
+            CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
         }
         if(Input.GetKeyDown(KeyCode.P))
@@ -149,12 +150,15 @@ public class GameController : Singleton<GameController>
     /// <param name="levelData">Information about the completed level</param>
     public void LoadLevelSelect(bool victory, float time = 0)
     {
-        LevelData levelData = new LevelData();
-        levelData.Unlocked = true;
-        levelData.Complete = victory;
-        levelData.BestDifficulty = (Difficulty)Difficulty;
-        levelData.BestTime = time;
-        Levels[CurrentLevel] = levelData;
+        if(victory)
+        {
+            LevelData levelData = new LevelData();
+            levelData.Unlocked = true;
+            levelData.Complete = true;
+            levelData.BestDifficulty = (Difficulty)Mathf.Max(Difficulty, (int)Levels[CurrentLevel].BestDifficulty);
+            levelData.BestTime = Mathf.Min(time, Levels[CurrentLevel].BestTime);
+            Levels[CurrentLevel] = levelData;
+        }
         SceneManager.LoadScene("Level Select");
     }
 
@@ -166,12 +170,9 @@ public class GameController : Singleton<GameController>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
-        Cursor.visible = false;
 
         if(scene.name.Equals("Level Select"))
         {
-            Cursor.visible = true;
-
             // Set camera position and bounds
             float minY = Mathf.Infinity;
             float maxY = -Mathf.Infinity;
@@ -188,7 +189,7 @@ public class GameController : Singleton<GameController>
                     maxY = y;
                 if(level.Scene.Equals(CurrentLevel))
                     curY = y;
-                if(CurrentLevel != "")
+                if(CurrentLevel != null)
                 {
                     foreach(Level levelChild in level.Unlocks)
                     {
@@ -253,6 +254,7 @@ public class GameController : Singleton<GameController>
                 }
             }
             CurrentLevel = null;
+            Level.Clickable = true;
         }
     }
 
