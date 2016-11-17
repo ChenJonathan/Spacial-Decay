@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// A conversation message that appears on the bottom of the screen.
@@ -13,11 +14,17 @@ public class Transmission : MonoBehaviour
     public Text Content;
     public Text Continue;
 
+    private AudioSource audioSource;
+    public AudioClip onDialogueAudio;
+    public AudioClip onContinueAudio;
+
     /// <summary>
     /// Coroutine to display the message.
     /// </summary>
     public virtual IEnumerator Appear()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = onDialogueAudio;
         Color color = Background.color = Portrait.color = Speaker.color = Content.color = Continue.color = new Color(1, 1, 1, 0);
         for(float a = color.a; a <= 1f; a += 0.02f)
         {
@@ -77,6 +84,9 @@ public class Transmission : MonoBehaviour
         int index = 0;
         float time = 0;
         yield return null;
+
+        Regex longStop = new Regex(@"[.;:?!]");
+        Regex shortStop = new Regex(@",()");
         while(index < content.Length)
         {
             if(Input.GetKeyDown(KeyCode.Space))
@@ -93,9 +103,18 @@ public class Transmission : MonoBehaviour
                 {
                     time -= delay;
                     index = (index == content.Length) ? content.Length : index + 1;
+                    if (index % 2 == 0)
+                        audioSource.Play();
                 }
                 Content.text = content.Substring(0, index);
-                if(index == content.Length && pause)
+
+                // Pause for punctuation
+                if (index < content.Length && index > 0 && longStop.IsMatch(content[index - 1].ToString()))
+                    yield return new WaitForSeconds(0.1f);
+                else if (index < content.Length && index > 0 && shortStop.IsMatch(content[index - 1].ToString()))
+                    yield return new WaitForSeconds(0.025f);
+
+                if (index == content.Length && pause)
                     yield return StartCoroutine(ShowContinue());
             }
         }
@@ -117,6 +136,7 @@ public class Transmission : MonoBehaviour
                 targetAlpha = 1 - targetAlpha;
             yield return null;
         }
+        audioSource.PlayOneShot(onContinueAudio);
         Continue.color = new Color(1, 1, 1, 0);
     }
 }
