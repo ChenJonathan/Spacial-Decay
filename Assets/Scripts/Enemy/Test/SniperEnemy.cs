@@ -86,7 +86,7 @@ public class SniperEnemy : Enemy
 			if (!hasAimed) {
 				Vector2 aim = (this.transform.position + this.transform.up);
 				fireData.Towards(aim);
-				fireCooldownReset = Random.Range(1.0f, MAX_FIRE_COOLDOWN);
+				fireCooldownReset = Random.Range(1.0f, MAX_FIRE_COOLDOWN - (0.75f * Difficulty));
 				hasAimed = true;
         	}
     	}
