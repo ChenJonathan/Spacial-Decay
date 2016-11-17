@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 2
+  clipBoundary: 1
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []

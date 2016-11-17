@@ -105,6 +105,7 @@ public class SplitEnemyMed : Enemy
         temp.StartCoroutine(temp.SetInvincible(INVINCIBILITY_ON_HIT));
         temp = Wave.SpawnEnemy(spawn);
         temp.StartCoroutine(temp.SetInvincible(INVINCIBILITY_ON_HIT));
+
         base.Die();
     }
 }

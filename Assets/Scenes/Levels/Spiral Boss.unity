@@ -181,22 +181,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+    - {fileID: 1205748683}
     - {fileID: 1000013141128222, guid: 7f9d7514f3cd39f4a8f58cb79d3af6ce, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
-      - DialoguePauseMenu PauseMenu
+      - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -212,6 +213,7 @@ MonoBehaviour:
       - 5
       - 0.0
       - 1.0
+      - false
       - true
       - 1000
       - 100
@@ -230,8 +232,8 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
   - {fileID: 1000013141128222, guid: 7f9d7514f3cd39f4a8f58cb79d3af6ce, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
@@ -242,6 +244,7 @@ MonoBehaviour:
     type: 2}
   LevelTime: 0
   TargetTimeScale: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -577,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 2
+  clipBoundary: 1
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []
@@ -644,6 +647,8 @@ MonoBehaviour:
   orbActivePrefab: {fileID: 180408, guid: 2f95e36be91fe2a46a03c14f6a0573ef, type: 2}
   orbInactivePrefab: {fileID: 180408, guid: e019f87c30190ae4c91447d24eac0113, type: 2}
   gap: 6
+  orbsCounterActive: []
+  orbsCounterInactive: []
 --- !u!114 &1417255041
 MonoBehaviour:
   m_ObjectHideFlags: 0

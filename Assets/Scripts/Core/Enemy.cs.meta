@@ -1,10 +1,19 @@
 fileFormatVersion: 2
 guid: 172931dc1cca90647886ed95704896a9
-timeCreated: 1465003457
+timeCreated: 1479418401
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Player: {instanceID: 0}
+  - Field: {instanceID: 0}
+  - Wave: {instanceID: 0}
+  - onHitAudio: {instanceID: 0}
+  - onDeathAudio: {instanceID: 0}
+  - onFireAudio: {instanceID: 0}
+  - explosion: {fileID: 114000010643696468, guid: 0369580fd012b7d4895e8796b4a190ac,
+      type: 2}
+  - healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

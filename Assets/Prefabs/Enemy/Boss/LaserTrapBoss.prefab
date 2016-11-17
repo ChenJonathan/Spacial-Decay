@@ -139,6 +139,7 @@ MonoBehaviour:
     - {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
     - {fileID: 11442878, guid: fd1b1dcd956c33f41a9b7f1cb043d259, type: 2}
     - {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
+    - {fileID: 114000010643696468, guid: 0369580fd012b7d4895e8796b4a190ac, type: 2}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -157,6 +158,7 @@ MonoBehaviour:
       - AudioClip onHitAudio
       - AudioClip onDeathAudio
       - AudioClip onFireAudio
+      - Warning explosion
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -177,8 +179,9 @@ MonoBehaviour:
       - null
       - null
       - null
-      - true
       - 5
+      - true
+      - 6
       - null
       - null
   _serializerType:
@@ -198,6 +201,8 @@ MonoBehaviour:
   onHitAudio: {fileID: 0}
   onDeathAudio: {fileID: 0}
   onFireAudio: {fileID: 0}
+  explosion: {fileID: 114000010643696468, guid: 0369580fd012b7d4895e8796b4a190ac,
+    type: 2}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
