@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1498c21bf41ed1440a109bd6b7e82058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   _serializationData:
     serializedObjects:
     - {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
@@ -141,7 +141,7 @@ MonoBehaviour:
   _id: -52306
   dbg: 0
   _dirty: 0
-  tagFilter: 
+  tagFilter:
   Player: {fileID: 0}
   Field: {fileID: 0}
   Wave: {fileID: 0}
@@ -154,11 +154,7 @@ MonoBehaviour:
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
-<<<<<<< HEAD:Assets/Prefabs/Enemy/KZ Enemies/KZ KamiKazeEnemy.prefab
   bulletPrefab: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
-=======
-  bulletPrefab: {fileID: 11442878, guid: 9a88579d14f174b43b2b57340305cc92, type: 2}
->>>>>>> refs/remotes/origin/master:Assets/Prefabs/Enemy/Test/KZ Enemies/KZ KamiKazeEnemy.prefab
 --- !u!212 &212000012038156486
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -173,7 +169,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_SubsetIndices:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}

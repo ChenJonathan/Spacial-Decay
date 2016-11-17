@@ -13,9 +13,9 @@ public class GameController : Singleton<GameController>
     public string StartLevel;
 
     [HideInInspector]
-    public string CurrentLevel = "";
+    public string CurrentLevel = null;
     [HideInInspector]
-    public int Difficulty = 2;
+    public int Difficulty = 0;
 
     public struct LevelData
     {
@@ -118,6 +118,7 @@ public class GameController : Singleton<GameController>
                 levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
+            CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
         }
         if(Input.GetKeyDown(KeyCode.P))
@@ -188,7 +189,7 @@ public class GameController : Singleton<GameController>
                     maxY = y;
                 if(level.Scene.Equals(CurrentLevel))
                     curY = y;
-                if(CurrentLevel != "")
+                if(CurrentLevel != null)
                 {
                     foreach(Level levelChild in level.Unlocks)
                     {
@@ -253,6 +254,7 @@ public class GameController : Singleton<GameController>
                 }
             }
             CurrentLevel = null;
+            Level.Clickable = true;
         }
     }
 

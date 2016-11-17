@@ -1,2 +1,0 @@
-The size of each individual sprite is 20 x 53. 
-
