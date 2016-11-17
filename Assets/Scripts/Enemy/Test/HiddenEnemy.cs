@@ -34,7 +34,7 @@ public class HiddenEnemy : Enemy
         fireList.Sort((a, b) => (int)(a.Time * 100 - b.Time * 100));
 
         fireData = new FireBuilder(bulletPrefab, Field);
-        fireData.WithSpeed(fireSpeed);
+        fireData.WithSpeed(fireSpeed + 7.5f * Difficulty);
 
         warningList = new List<Wave.WarningData>();
         foreach(Wave.SpawnData spawn in fireList)
@@ -56,12 +56,12 @@ public class HiddenEnemy : Enemy
 	public void Update()
     {
         time += Time.deltaTime;
-        while(warningList.Count > 0 && time >= warningList[0].Data.Time)
+        while(warningList.Count > 0 && time >= warningList[0].Data.Time - (1.5 - (.75f * Difficulty)))
         {
             Wave.SpawnWarning(warningList[0]);
             warningList.RemoveAt(0);
         }
-        while(fireList.Count > 0 && time >= fireList[0].Time)
+        while(fireList.Count > 0 && time >= fireList[0].Time - (.75f * Difficulty))
         {
             for(int i = 0; i < 360; i += 5)
             {

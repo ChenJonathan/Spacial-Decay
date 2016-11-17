@@ -201,13 +201,13 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 0
+      - 200
       - 0
       - 8.0
       - null
       - null
       - null
-      - false
+      - true
       - 2
       - null
       - null
@@ -222,13 +222,13 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 0
+  MaxHealth: 200
   Health: 0
   RotateSpeed: 8
   onHitAudio: {fileID: 0}
   onDeathAudio: {fileID: 0}
   onFireAudio: {fileID: 0}
-  FacePlayer: 0
+  FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
   bulletPrefab: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}

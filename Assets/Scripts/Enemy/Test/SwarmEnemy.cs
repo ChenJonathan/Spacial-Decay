@@ -23,7 +23,7 @@ public class SwarmEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(new Vector2(0, transform.position.y));
-        fireData.WithSpeed(3);
+        fireData.WithSpeed(3 + Difficulty);
         fireData.WithRotation(-30, 30);
 
         rigidbody2d = GetComponent<Rigidbody2D>();
