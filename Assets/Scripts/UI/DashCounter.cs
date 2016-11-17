@@ -16,8 +16,8 @@ public class DashCounter : MonoBehaviour
     [SerializeField]
     private float gap = 6; // Space between orbs
 
-    private GameObject[] orbsCounterActive;
-    private GameObject[] orbsCounterInactive;
+    public GameObject[] orbsCounterActive;
+    public GameObject[] orbsCounterInactive;
 
     /// <summary>
     /// Called on instantiation. Handles initialization.
