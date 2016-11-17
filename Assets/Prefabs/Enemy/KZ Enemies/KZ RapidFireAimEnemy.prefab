@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializationData:
-    serializedObjects: []
+    serializedObjects:
+    - {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
+    - {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
     serializedStrings:
       keys:
       - DanmakuPrefab bulletPrefab
@@ -184,15 +186,16 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
       - string tagFilter
       values:
-      - null
-      - null
+      - 0
+      - 1
       - null
       - null
       - null
@@ -200,6 +203,7 @@ MonoBehaviour:
       - 0
       - 0
       - 8.0
+      - null
       - null
       - null
       - false
@@ -220,13 +224,14 @@ MonoBehaviour:
   MaxHealth: 0
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 0}
   parameters: []
-  bulletPrefab: {fileID: 0}
-  circleShot: {fileID: 0}
+  bulletPrefab: {fileID: 11484354, guid: 791a3252bc9d85b44b07fc5535d689a2, type: 2}
+  circleShot: {fileID: 11481656, guid: 0bf62bb1ae7482544a31a4b0ac7efb1d, type: 2}
 --- !u!212 &212000012613949318
 SpriteRenderer:
   m_ObjectHideFlags: 1

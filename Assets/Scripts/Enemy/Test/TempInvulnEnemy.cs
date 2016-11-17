@@ -30,7 +30,7 @@ public class TempInvulnEnemy : Enemy
     public void Update()
     {
         fireCooldown -= Time.deltaTime;
-        if(fireCooldown <= 0)
+        if(fireCooldown <= 0 && !invincible)
         {
             if(!fireTowardsPlayer)
             {
