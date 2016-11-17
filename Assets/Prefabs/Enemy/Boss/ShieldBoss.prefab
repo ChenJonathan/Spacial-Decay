@@ -616,8 +616,10 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
+      - Warning explosion
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -635,6 +637,8 @@ MonoBehaviour:
       - 500
       - 0
       - 8.0
+      - null
+      - null
       - null
       - null
       - false
@@ -655,8 +659,10 @@ MonoBehaviour:
   MaxHealth: 500
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
+  explosion: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
