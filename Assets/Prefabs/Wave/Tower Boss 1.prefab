@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Shield Boss
+  m_Name: Tower Boss 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012397316020, guid: a4ea868f574e98c40a5c54c966d91504, type: 2}
+  - Prefab: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0, type: 2}
     Data:
     - Location: {x: 0, y: 15}
       Time: 5
