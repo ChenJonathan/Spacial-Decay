@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     private DashCounter dashCounter;
     
     // Player life values
-    private int lives = maxLives;
+    private int lives = MAX_LIVES;
     public int Lives
     {
         get { return lives; }
     }
-    public static int maxLives = 5;
+    public static readonly int MAX_LIVES = 8;
 
     // Whether the player is moving or not
     private bool moving;
@@ -80,10 +80,26 @@ public class Player : MonoBehaviour
     private Vector2 target; // Location that the enemy is moving towards
     private SpriteRenderer targetRenderer; // Renders the movement target
     private LineRenderer dashRenderer; // Renders the dash selection line
+    private SpriteRenderer spriteRenderer; // Renders the ship
+    private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
+    private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
+
+    private float currentAlphaHitbox = 0f;
+    private float currentAlphaWings = 0f;
+    private float targetAlphaHitbox = 0f;
+    private float targetAlphaWings = 0f;
+    private float deltaAlphaWings = 0f; // Speed at which the wing alpha value moves towards its target
 
     // Cached mouse position for easy access
     private Vector2 mousePos = Vector2.zero;
+
+    private AudioSource audioSource;
+
+    public AudioClip OnHitAudio;
+    public AudioClip OnDeathAudio;
+    public AudioClip OnNewDashAudio;
+    public AudioClip OnDashAudio;
 
     /// <summary>
     /// Called when the player is instantiated (before Start). Handles player initialization.
@@ -104,6 +120,11 @@ public class Player : MonoBehaviour
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
+        wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
 
         // Retrieves counter references
         foreach(GameObject counter in GameObject.FindGameObjectsWithTag("Counter"))
@@ -120,7 +141,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_SPAWN));
+        StartCoroutine(SetInvincible(INVINCIBILITY_ON_SPAWN));
     }
 
     /// <summary>
@@ -128,7 +149,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Update()
     {
-        // Handle input if not paused
+        // Handle input if not paused / pausing
         if(LevelController.Singleton.TargetTimeScale != 0)
         {
             HandleInput();
@@ -150,8 +171,13 @@ public class Player : MonoBehaviour
                 // Player reached its target
                 targetRenderer.enabled = false;
                 rigidbody2d.velocity = Vector3.zero;
-                dashing = false;
-                hitEnemies.Clear();
+                if(dashing)
+                {
+                    dashing = false;
+                    hitEnemies.Clear();
+                    targetAlphaWings = 0f;
+                    deltaAlphaWings = 1f;
+                }
             }
         }
         else if(selecting)
@@ -166,6 +192,8 @@ public class Player : MonoBehaviour
             if(dashCooldown >= MAX_DASH_COOLDOWN)
             {
                 dashes++;
+                audioSource.clip = OnNewDashAudio;
+                audioSource.Play();
                 dashCooldown = 0;
                 dashRenderer.SetColors(dashStartActive, dashEndActive);
                 dashCounter.UpdateCounter(dashes);
@@ -220,6 +248,20 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
+        // Update hitbox alpha
+        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
+        Color temp = hitboxGlowRenderer.color;
+        temp.a = currentAlphaHitbox * spriteRenderer.color.a;
+        hitboxGlowRenderer.color = temp;
+        if(currentAlphaHitbox == targetAlphaHitbox)
+            targetAlphaHitbox = 1 - targetAlphaHitbox;
+
+        // Update wings alpha
+        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime * deltaAlphaWings);
+        temp = wingsGlowRenderer.color;
+        temp.a = currentAlphaWings * spriteRenderer.color.a;
+        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -237,6 +279,8 @@ public class Player : MonoBehaviour
             // Begin dash targeting
             selecting = true;
             SetMoveTarget(mousePos);
+            targetAlphaWings = 1f;
+            deltaAlphaWings = 3f;
             dashRenderer.SetPosition(0, transform.position);
             dashRenderer.SetPosition(1, mousePos);
             dashRenderer.enabled = true;
@@ -252,8 +296,11 @@ public class Player : MonoBehaviour
                 {
                     SetDashTarget(mousePos);
                     dashes--;
+                    
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+                    audioSource.clip = OnDashAudio;
+                    audioSource.Play();
                 }
 
                 // Disable dash selection
@@ -280,6 +327,8 @@ public class Player : MonoBehaviour
         {
             // Cancel dash targeting
             selecting = false;
+            targetAlphaWings = 0f;
+            deltaAlphaWings = 3f;
             dashRenderer.enabled = false;
             LevelController.Singleton.TargetTimeScale = 1;
         }
@@ -290,10 +339,27 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Hit()
     {
-        lives--;
-        livesCounter.UpdateCounter(lives);
-        StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+        if (!LevelController.Singleton.PermanentInvincible)
+        {
+            lives--;
+            livesCounter.UpdateCounter(lives);
+        }
+
         hitEffect.Play();
+        if(lives == 0)
+        {
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelController.Singleton.LevelFailedMessage);
+
+            audioSource.clip = OnDeathAudio;
+        }
+        else
+        {
+            StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
+
+            audioSource.clip = OnHitAudio;
+        }
+        audioSource.Play();
     }
 
     /// <summary>
@@ -321,10 +387,9 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Coroutine to make the player invincible for some time. Also handles the flashing effect.
     /// </summary>
-    private IEnumerator setInvincible(float time)
+    public IEnumerator SetInvincible(float time)
     {
-        Renderer renderer = GetComponent<Renderer>();
-        Color color = renderer.material.color;
+        Color color = spriteRenderer.color;
         invincible = true;
         float timer = 0;
         while(timer < time)
@@ -332,13 +397,13 @@ public class Player : MonoBehaviour
             if(timer % 0.05f > (timer + Time.deltaTime) % 0.05f)
             {
                 color.a = 1.25f - color.a;
-                renderer.material.color = color;
+                spriteRenderer.color = color;
             }
             timer += Time.deltaTime;
             yield return null;
         }
         color.a = 1;
-        renderer.material.color = color;
+        spriteRenderer.color = color;
         invincible = false;
         yield break;
     }

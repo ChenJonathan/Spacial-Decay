@@ -19,7 +19,7 @@ public class HitRunCircleScript1 : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(3 + 2 * Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20), 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 3 * Difficulty, 0, 0));
 
         if (transform.position.x > 18)
         {

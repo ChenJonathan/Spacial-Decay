@@ -6,16 +6,8 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Controls the level, calling events sequentially.
 /// </summary>
-public class LevelController : DanmakuGameController
+public class LevelController : DanmakuGameController, IPausable
 {
-    // Field to spawn the bullets in
-    [SerializeField]
-    private DanmakuField field;
-    public DanmakuField Field
-    {
-        get { return field; }
-    }
-
     // The player prefab to be instantiated
     [SerializeField]
     private Player playerPrefab;
@@ -25,21 +17,32 @@ public class LevelController : DanmakuGameController
         get { return player; }
     }
 
+    // Field to spawn the bullets in
+    [SerializeField]
+    private DanmakuField field;
+    public DanmakuField Field
+    {
+        get { return field; }
+    }
+
     // List of events in order
     [SerializeField]
-    private List<GameObject> events;
-    private GameObject currentEvent; // Current wave
+    protected List<GameObject> events;
+    protected GameObject currentEvent; // Current event
     public GameObject Event
     {
         get { return currentEvent; }
     }
-    private int eventCount; // Current event number
+    private int eventCount = 0; // Current event number
     
     private Rect viewportRect; // Camera viewport dimensions required to maintain 16:9 aspect ratio
     public Rect ViewportRect
     {
         get { return viewportRect; }
     }
+
+    public GameObject LevelCompleteMessage;
+    public GameObject LevelFailedMessage;
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -50,8 +53,37 @@ public class LevelController : DanmakuGameController
         get { return (LevelController)Instance; }
     }
 
+    // Whether the game is paused or not
+    private bool paused;
+    [HideInInspector]
+    public bool Paused
+    {
+        get { return paused; }
+        set
+        {
+            paused = value;
+            if(paused)
+                TargetTimeScale = 0;
+            else
+                TargetTimeScale = 1;
+        }
+    }
+
+    public MessagePauseMenu PauseMenu;
+    private MessagePauseMenu pauseMenuRuntime;
+
+    // Total time
+    [HideInInspector]
+    public float LevelTime = 0;
+
     // Time scale constantly approaches this value
+    [HideInInspector]
     public float TargetTimeScale = 1;
+
+    /// <summary> Makes the player invincible permanently. </summary>
+    [SerializeField]
+    [Tooltip("Makes the player invincible permanently.")]
+    public bool PermanentInvincible;
 
     /// <summary>
     /// Called when the LevelController is instantiated (before Start). Instantiates the player.
@@ -96,7 +128,6 @@ public class LevelController : DanmakuGameController
     /// </summary>
     public void Start()
     {
-        eventCount = 0;
         StartEvent();
     }
 
@@ -106,14 +137,18 @@ public class LevelController : DanmakuGameController
     public override void Update()
     {
         base.Update();
-        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        LevelTime += Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-            TargetTimeScale = Time.timeScale == 0 ? 1 : 0;
+        // Pausing things
+        Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
+        if(Time.timeScale == 0f && Paused && pauseMenuRuntime == null)
+            pauseMenuRuntime = Instantiate(PauseMenu);
+        if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
+            Paused = true;
 
         // TODO Remove these
         if(Input.GetKeyDown(KeyCode.Tab))
-            SceneManager.LoadScene("Level Select");
+            GameController.Singleton.LoadLevelSelect(true, LevelTime);
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             EndEvent();
         }
@@ -122,7 +157,7 @@ public class LevelController : DanmakuGameController
     /// <summary>
     /// Instantiates the current event.
     /// </summary>
-    public void StartEvent()
+    public virtual void StartEvent()
     {
         currentEvent = Instantiate(events[eventCount]);
         currentEvent.transform.SetParent(transform);
@@ -131,18 +166,18 @@ public class LevelController : DanmakuGameController
     /// <summary>
     /// Called when the current event is completed.
     /// </summary>
-    public void EndEvent()
+    public virtual void EndEvent()
     {
         Destroy(currentEvent.gameObject);
         eventCount++;
 
         if(eventCount == events.Count)
         {
-            SceneManager.LoadScene("Level Select");
+            if(FindObjectOfType<MessageLevelEnd>() == null)
+                Instantiate(LevelCompleteMessage);
         }
         else
         {
-            TargetTimeScale = 1;
             StartEvent();
         }
     }

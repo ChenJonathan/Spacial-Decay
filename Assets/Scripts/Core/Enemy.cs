@@ -23,13 +23,18 @@ public partial class Enemy : DanmakuCollider
     [HideInInspector]
     public float RotateSpeed = 8;
 
+    protected AudioSource audioSource;
+    public AudioClip onHitAudio;
+    public AudioClip onDeathAudio;
+    public AudioClip onFireAudio;
+
     // Whether the enemy is invincible or not
     protected bool invincible = false;
     public bool IsInvincible
     {
         get { return invincible; }
     }
-    private static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
+    protected static readonly float INVINCIBILITY_ON_HIT = 2; // Invincibility time after the enemy is hit
 
     // Enemy rotation values
     [SerializeField]
@@ -64,6 +69,17 @@ public partial class Enemy : DanmakuCollider
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
 
         Health = MaxHealth;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.75f;
+
+        // Assigns SFX from resources folder if not customized
+        if(!onHitAudio)
+            onHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
+        if(!onDeathAudio)
+            onDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
+        if(!onFireAudio)
+            onFireAudio = Resources.Load<AudioClip>("SFX/Default_Fire");
     }
 
     /// <summary>
@@ -110,11 +126,14 @@ public partial class Enemy : DanmakuCollider
 
             if(Health <= 0)
             {
+                AudioSource.PlayClipAtPoint(onDeathAudio, Camera.main.transform.position);
                 Die();
             }
             else
             {
-                StartCoroutine(setInvincible(INVINCIBILITY_ON_HIT));
+                audioSource.clip = onHitAudio;
+                audioSource.Play();
+                StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
             }
         }
     }
@@ -138,7 +157,7 @@ public partial class Enemy : DanmakuCollider
     /// <summary>
     /// Coroutine to make the enemy invincible for some time. Also handles the flashing effect.
     /// </summary>
-    private IEnumerator setInvincible(float time)
+    public IEnumerator SetInvincible(float time)
     {
         Renderer renderer = GetComponent<Renderer>();
         Color color = renderer.material.color;

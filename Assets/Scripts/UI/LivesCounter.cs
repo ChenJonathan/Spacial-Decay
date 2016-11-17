@@ -17,7 +17,7 @@ public class LivesCounter : MonoBehaviour
     [SerializeField]
     private float gap = 6; // Space between hearts
     [SerializeField]
-    private int maxDisplayCount = 5; // Number of hearts that can be displayed - any more will result in a numerical display instead
+    private int maxDisplayCount = 5; // Number of hearts that can be displayed - Any more will result in a numerical display instead
 
     private GameObject[] livesCounter;
 
@@ -26,7 +26,7 @@ public class LivesCounter : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        int maxLives = Player.maxLives;
+        int maxLives = Player.MAX_LIVES;
         heartSize = heartPrefab.GetComponent<RectTransform>().sizeDelta.x;
         RectTransform rt = GetComponent<RectTransform>();
         rt.anchoredPosition = new Vector2(2 * gap + heartSize * transform.localScale.x / 2, -2 * gap - heartSize * transform.localScale.y / 2);
@@ -43,7 +43,7 @@ public class LivesCounter : MonoBehaviour
         }
         if(maxLives > maxDisplayCount)
         {
-            livesCounter[maxDisplayCount] = (GameObject)Instantiate(overFlow);
+            livesCounter[maxDisplayCount] = Instantiate(overFlow);
             livesCounter[maxDisplayCount].transform.SetParent(transform);
             livesCounter[maxDisplayCount].transform.localScale = this.transform.localScale;
             livesCounter[maxDisplayCount].transform.localPosition = new Vector2((heartSize + gap) / 2, 0);
@@ -69,7 +69,7 @@ public class LivesCounter : MonoBehaviour
             {
                 livesCounter[i].SetActive(false);
             }
-            if(Player.maxLives > maxDisplayCount)
+            if(Player.MAX_LIVES > maxDisplayCount)
                 livesCounter[maxDisplayCount].SetActive(false);
         }
         else

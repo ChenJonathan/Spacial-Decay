@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b88b9e18216033144af0303975ad27aa
+timeCreated: 1479199617
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - field: {instanceID: 0}
+  - playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  - LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
+      type: 2}
+  - LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
+      type: 2}
+  - PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
+      type: 2}
+  - TransmissionPrefab: {fileID: 114000013485787570, guid: 0a09326e824453c40ae502d1ae17da65,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

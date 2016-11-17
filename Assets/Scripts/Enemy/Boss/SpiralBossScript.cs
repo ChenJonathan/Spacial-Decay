@@ -19,6 +19,7 @@ public class SpiralBossScript : Enemy
     private bool weaponized = false;
     private bool finalForm = false;
     private int bulletCount = 0;
+    private int phase = 1;
 
     public override void Start()
     {
@@ -89,80 +90,84 @@ public class SpiralBossScript : Enemy
         int change2x = -1;
         int change2y = -1;
         int turnSpeed = 40 - 5 * Difficulty;
+        int rotate = 0;
+        int rotator = 2 + Difficulty;
         bool spedUp = false;
         while (true)
         {
-            if (weaponized)
+            switch (phase)
             {
-                if (cross1x >= turnSpeed)
-                {
-                    change1x = -1;
-                }
-                else if (cross1x <= -turnSpeed)
-                {
-                    change1x = 1;
-                }
+                case 1:
+                    if (weaponized)
+                    {
+                        /*
+                        if (cross1x >= turnSpeed)
+                        {
+                            change1x = -1;
+                        }
+                        else if (cross1x <= -turnSpeed)
+                        {
+                            change1x = 1;
+                        }
 
-                if (cross1y >= turnSpeed)
-                {
-                    change1y = -1;
-                }
-                else if (cross1y <= -turnSpeed)
-                {
-                    change1y = 1;
-                }
+                        if (cross1y >= turnSpeed)
+                        {
+                            change1y = -1;
+                        }
+                        else if (cross1y <= -turnSpeed)
+                        {
+                            change1y = 1;
+                        }
 
-                if (cross2x >= turnSpeed)
-                {
-                    change2x = -1;
-                }
-                else if (cross2x <= -turnSpeed)
-                {
-                    change2x = 1;
-                }
+                        if (cross2x >= turnSpeed)
+                        {
+                            change2x = -1;
+                        }
+                        else if (cross2x <= -turnSpeed)
+                        {
+                            change2x = 1;
+                        }
 
-                if (cross2y >= turnSpeed)
-                {
-                    change2y = -1;
-                }
-                else if (cross2y <= -turnSpeed)
-                {
-                    change2y = 1;
-                }
-                if (enraged && !spedUp)
-                {
-                    turnSpeed = turnSpeed - 10;
-                    cross1x = turnSpeed;
-                    cross1y = 0;
-                    cross2x = 0;
-                    cross2y = turnSpeed;
-                    spedUp = true;
-                }
-
-                fireDataCross1.Facing(new Vector2(cross1x, cross1y));
-                fireDataCross2.Facing(new Vector2(cross2x, cross2y));
-                fireDataCircle.Facing(new Vector2(new DynamicInt(-100, 100), new DynamicInt(-100, 100)));
-                fireDataCross1.Fire();
-                fireDataCross2.Fire();
-                fireDataCircle.Fire();
-                if (finalForm)
-                {
-                    fireDataCircle.Fire();
-                }
-                if (bulletCount % 20 == 0 && enraged)
-                {
-                    circleAttack.Fire();
-                }
-                cross1x += change1x;
-                cross1y += change1y;
-                cross2x += change2x;
-                cross2y += change2y;
-                bulletCount++;
-                yield return new WaitForSeconds(0.1f);
-            }
-            else
-            {
-                yield return new WaitForSeconds(1f);
+                        if (cross2y >= turnSpeed)
+                        {
+                            change2y = -1;
+                        }
+                        else if (cross2y <= -turnSpeed)
+                        {
+                            change2y = 1;
+                        } */
+                        if (enraged)
+                        {
+                            rotator = 4 + Difficulty;
+                        }
+                        fireDataCross1.WithRotation(rotate);
+                        fireDataCross2.WithRotation(rotate + 90);
+                        fireDataCross1.Fire();
+                        fireDataCross2.Fire();
+                        fireDataCircle.Fire();
+                        if (finalForm)
+                        {
+                            fireDataCircle.Fire();
+                        }
+                        if (bulletCount % 20 == 0 && enraged)
+                        {
+                            circleAttack.Fire();
+                        }
+                        cross1x += change1x;
+                        cross1y += change1y;
+                        cross2x += change2x;
+                        cross2y += change2y;
+                        rotate += rotator;
+                        bulletCount++;
+                        yield return new WaitForSeconds(0.1f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(1f);
+                    }
+                    break;
+                case 2:
+                    break;
             }
         }
     }

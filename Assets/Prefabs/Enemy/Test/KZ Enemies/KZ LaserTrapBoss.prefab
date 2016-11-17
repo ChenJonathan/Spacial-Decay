@@ -23,7 +23,7 @@ GameObject:
   - 60: {fileID: 60000012601199284}
   - 50: {fileID: 50000010789068374}
   - 114: {fileID: 114000012870944378}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: KZ LaserTrapBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -74,33 +74,53 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.26999998, y: -0.905}
-      - {x: 0.32, y: -0.84499997}
-      - {x: 0.55, y: -0.505}
-      - {x: 0.55, y: -0.265}
-      - {x: 0.39, y: -0.16499999}
-      - {x: 0.26, y: -0.015}
-      - {x: 0.19, y: 0.195}
-      - {x: 0.14999999, y: 0.45499998}
-      - {x: 0.089999996, y: 0.505}
-      - {x: 0.089999996, y: 0.59499997}
-      - {x: 0.08, y: 0.825}
-      - {x: 0.03, y: 0.97499996}
-      - {x: -0.04, y: 0.97499996}
-      - {x: -0.08, y: 0.815}
-      - {x: -0.089999996, y: 0.59499997}
-      - {x: -0.14, y: 0.445}
-      - {x: -0.24, y: 0.044999998}
-      - {x: -0.32, y: -0.085}
-      - {x: -0.39, y: -0.175}
-      - {x: -0.55, y: -0.275}
-      - {x: -0.55, y: -0.515}
-      - {x: -0.29999998, y: -0.875}
-      - {x: -0.26, y: -0.905}
-      - {x: -0.11, y: -0.905}
-      - {x: -0.04, y: -0.825}
-      - {x: 0.089999996, y: -0.875}
-      - {x: 0.12, y: -0.905}
+    - - {x: 0.114999995, y: -1.435}
+      - {x: 0.175, y: -1.435}
+      - {x: 0.255, y: -1.395}
+      - {x: 0.285, y: -1.225}
+      - {x: 0.375, y: -1.155}
+      - {x: 0.475, y: -1.155}
+      - {x: 0.53499997, y: -1.045}
+      - {x: 0.73499995, y: -1.165}
+      - {x: 0.815, y: -1.155}
+      - {x: 0.815, y: -0.695}
+      - {x: 0.805, y: -0.45499998}
+      - {x: 0.79499996, y: -0.42499998}
+      - {x: 0.715, y: -0.445}
+      - {x: 0.655, y: -0.635}
+      - {x: 0.53499997, y: -0.345}
+      - {x: 0.355, y: -0.015}
+      - {x: 0.355, y: 0.145}
+      - {x: 0.405, y: 0.205}
+      - {x: 0.405, y: 0.755}
+      - {x: 0.385, y: 0.905}
+      - {x: 0.085, y: 1.355}
+      - {x: 0.024999999, y: 1.355}
+      - {x: 0.005, y: 1.3349999}
+      - {x: -0.024999999, y: 1.355}
+      - {x: -0.065, y: 1.355}
+      - {x: -0.375, y: 0.905}
+      - {x: -0.405, y: 0.755}
+      - {x: -0.405, y: 0.195}
+      - {x: -0.345, y: 0.145}
+      - {x: -0.375, y: -0.074999996}
+      - {x: -0.525, y: -0.355}
+      - {x: -0.66499996, y: -0.615}
+      - {x: -0.685, y: -0.465}
+      - {x: -0.79499996, y: -0.415}
+      - {x: -0.805, y: -0.445}
+      - {x: -0.815, y: -0.755}
+      - {x: -0.815, y: -1.115}
+      - {x: -0.79499996, y: -1.175}
+      - {x: -0.685, y: -1.145}
+      - {x: -0.525, y: -1.0849999}
+      - {x: -0.42499998, y: -1.225}
+      - {x: -0.33499998, y: -1.135}
+      - {x: -0.235, y: -1.435}
+      - {x: -0.095, y: -1.435}
+      - {x: 0.005, y: -1.255}
+      - {x: 0.015, y: -1.245}
+      - {x: 0.085, y: -1.425}
 --- !u!114 &114000012870944378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,8 +150,11 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -144,8 +167,11 @@ MonoBehaviour:
       - 600
       - 0
       - 8.0
+      - null
+      - null
       - true
       - 3
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -161,8 +187,11 @@ MonoBehaviour:
   MaxHealth: 600
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   laserPrefab: {fileID: 11442878, guid: b09754002c5d8bb40b02638170a9eade, type: 2}
   petalPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   circlePrefab: {fileID: 11481656, guid: 9051cd0f27c5a5b40b4842b47ebf68a9, type: 2}
@@ -194,7 +223,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4055b7b4106d1174dbc2b3e5dc69e94a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

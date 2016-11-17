@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000011813409250}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: FighterEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ PolygonCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a278fa2547c98dd4093949664a70324a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   _serializationData:
     serializedObjects:
     - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 0}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -296,8 +297,11 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -308,8 +312,11 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
-      - true
       - 1
+      - 1
+      - true
+      - 2
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -325,6 +332,9 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 0
   RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 1
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}

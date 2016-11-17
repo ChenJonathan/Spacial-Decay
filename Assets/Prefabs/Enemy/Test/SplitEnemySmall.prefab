@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 6009790}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000014027378070}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: SplitEnemySmall
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -63,33 +63,39 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.26999998, y: -0.905}
-      - {x: 0.32, y: -0.84499997}
-      - {x: 0.55, y: -0.505}
-      - {x: 0.55, y: -0.265}
-      - {x: 0.39, y: -0.16499999}
-      - {x: 0.26, y: -0.015}
-      - {x: 0.19, y: 0.195}
-      - {x: 0.14999999, y: 0.45499998}
-      - {x: 0.089999996, y: 0.505}
-      - {x: 0.089999996, y: 0.59499997}
-      - {x: 0.08, y: 0.825}
-      - {x: 0.03, y: 0.97499996}
-      - {x: -0.04, y: 0.97499996}
-      - {x: -0.08, y: 0.815}
-      - {x: -0.089999996, y: 0.59499997}
-      - {x: -0.14, y: 0.445}
-      - {x: -0.24, y: 0.044999998}
-      - {x: -0.32, y: -0.085}
-      - {x: -0.39, y: -0.175}
-      - {x: -0.55, y: -0.275}
-      - {x: -0.55, y: -0.515}
-      - {x: -0.29999998, y: -0.875}
-      - {x: -0.26, y: -0.905}
-      - {x: -0.11, y: -0.905}
-      - {x: -0.04, y: -0.825}
-      - {x: 0.089999996, y: -0.875}
-      - {x: 0.12, y: -0.905}
+    - - {x: 0.085, y: -0.89}
+      - {x: 0.345, y: -0.89}
+      - {x: 0.375, y: -0.87}
+      - {x: 0.405, y: -0.7}
+      - {x: 0.405, y: -0.84}
+      - {x: 0.48499998, y: -0.87}
+      - {x: 0.515, y: -0.88}
+      - {x: 0.545, y: -0.79999995}
+      - {x: 0.565, y: -0.42}
+      - {x: 0.565, y: 0.11}
+      - {x: 0.53499997, y: 0.29999998}
+      - {x: 0.49499997, y: 0.56}
+      - {x: 0.39499998, y: 0.74}
+      - {x: 0.235, y: 0.84}
+      - {x: 0.175, y: 0.88}
+      - {x: 0.085, y: 0.89}
+      - {x: -0.125, y: 0.89}
+      - {x: -0.275, y: 0.83}
+      - {x: -0.445, y: 0.65999997}
+      - {x: -0.49499997, y: 0.56}
+      - {x: -0.515, y: 0.47}
+      - {x: -0.565, y: 0.11}
+      - {x: -0.565, y: -0.48999998}
+      - {x: -0.545, y: -0.85999995}
+      - {x: -0.475, y: -0.88}
+      - {x: -0.415, y: -0.79999995}
+      - {x: -0.405, y: -0.66999996}
+      - {x: -0.36499998, y: -0.87}
+      - {x: -0.345, y: -0.89}
+      - {x: -0.095, y: -0.89}
+      - {x: -0.065, y: -0.88}
+      - {x: 0.024999999, y: -0.45}
+      - {x: 0.015, y: -0.66999996}
 --- !u!212 &21249720
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -118,7 +124,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 16ce78ee6b782c64bba4de0475304538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -296,8 +302,12 @@ MonoBehaviour:
       - int Difficulty
       - int MaxHealth
       - int Health
+      - float RotateSpeed
+      - AudioClip OnHitAudio
+      - AudioClip OnDeathAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
+      - float[] parameters
       - string tagFilter
       values:
       - 0
@@ -306,10 +316,14 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 50
+      - 100
       - 0
+      - 8.0
+      - null
+      - null
       - false
       - 1
+      - null
       - null
   _serializerType:
     _name: Vexe.Runtime.Serialization.FullSerializerBackend, Assembly-CSharp, Version=0.0.0.0,
@@ -322,9 +336,13 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 50
+  MaxHealth: 100
   Health: 0
+  RotateSpeed: 8
+  OnHitAudio: {fileID: 0}
+  OnDeathAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
+  parameters: []
   bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
   fireTowardsPlayer: 0

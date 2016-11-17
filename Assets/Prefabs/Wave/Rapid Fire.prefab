@@ -51,17 +51,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000013271819086, guid: 5959ed90b0e7e4b40b7101f1bb4c330b, type: 2}
+  - Prefab: {fileID: 0}
     Data:
     - Location: {x: 20, y: 0}
       Time: 3
-  - Prefab: {fileID: 114000013950007678, guid: 5f974452ca2652943b1a841a4d9a3e24, type: 2}
+      Parameters: []
+  - Prefab: {fileID: 0}
     Data:
     - Location: {x: 20, y: 0}
       Time: 3
+      Parameters: []
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -70,3 +72,4 @@ MonoBehaviour:
     Data:
     - Location: {x: 16, y: 0}
       Time: 0
+      Parameters: []

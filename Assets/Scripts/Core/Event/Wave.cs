@@ -96,7 +96,7 @@ public class Wave : MonoBehaviour
         public List<SpawnData> Data;
     }
 
-    public void Start()
+    public virtual void Start()
     {
         field = ((LevelController)LevelController.Instance).Field;
         Camera camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();

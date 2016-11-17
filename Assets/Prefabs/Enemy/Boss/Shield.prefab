@@ -12,7 +12,7 @@ GameObject:
   - 60: {fileID: 60000012483585880}
   - 50: {fileID: 5060920}
   - 114: {fileID: 114000011417533484}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d3e25527b3a86f8468cb250242a6dd3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
