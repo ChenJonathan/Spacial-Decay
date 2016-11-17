@@ -7854,7 +7854,7 @@ MonoBehaviour:
       - bool keepBetweenScenes
       - bool destroyNewInstances
       values:
-      - '"Petal Easy"'
+      - '"Straight Forward"'
       - '""'
       - 0
       - null
@@ -7870,7 +7870,7 @@ MonoBehaviour:
   _dirty: 0
   keepBetweenScenes: 1
   destroyNewInstances: 1
-  StartLevel: Petal Easy
+  StartLevel: Straight Forward
   CurrentLevel: 
   Difficulty: 0
   LevelLinePrefab: {fileID: 120000013798751376, guid: efbcd8ba825b84db88a78765668cec1a,
@@ -8076,7 +8076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edac7b8c04e80754fa02b0df4185f7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Scene: 
+  Scene: Straight Forward
   Unlocks:
   - {fileID: 2091199505}
   sprites:
