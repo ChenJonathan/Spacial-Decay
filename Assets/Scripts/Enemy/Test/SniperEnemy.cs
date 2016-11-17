@@ -29,7 +29,8 @@ public class SniperEnemy : Enemy
 		laser.SetWidth (0.05f, 0.05f);
 		laser.material = new Material(Shader.Find("Particles/Additive"));
 		laser.SetColors (Color.red, Color.red);
-		laser.useWorldSpace = false;
+        laser.useWorldSpace = false;
+        laser.enabled = false;
 		// Sets the aim in the direction the enemy if facing
 
 		Vector2 aim = (this.transform.position + this.transform.right);

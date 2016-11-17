@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Splitter
+  m_Name: Aim Combo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,18 +43,53 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000012838358080, guid: 65a5f5f00b880874ca46568a100ffe9e, type: 2}
+  - Prefab: {fileID: 114000011340133002, guid: a30d93d3fd6d0694693dc572d3cd4dc5, type: 2}
     Data:
-    - Location: {x: 25, y: 8}
+    - Location: {x: 20, y: 5}
       Time: 3
       Parameters: []
-    - Location: {x: -25, y: 8}
+    - Location: {x: 20, y: -5}
       Time: 3
       Parameters: []
-    - Location: {x: -25, y: -8}
+  - Prefab: {fileID: 114000013328189242, guid: 3dd59096924052b41b040b515cbf5f40, type: 2}
+    Data:
+    - Location: {x: 0, y: 10}
       Time: 3
       Parameters: []
-    - Location: {x: 25, y: -8}
+    - Location: {x: 0, y: -10}
+      Time: 3
+      Parameters: []
+  - Prefab: {fileID: 114000012258096244, guid: 6494f6a6f3309f34fa92561110d8ec5c, type: 2}
+    Data:
+    - Location: {x: 0, y: 10}
+      Time: 3
+      Parameters: []
+    - Location: {x: 0, y: -10}
+      Time: 3
+      Parameters: []
+  - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
+    Data:
+    - Location: {x: -20, y: 8}
+      Time: 6
+      Parameters: []
+    - Location: {x: -19, y: 4}
+      Time: 6
+      Parameters: []
+    - Location: {x: -20, y: 0}
+      Time: 6
+      Parameters: []
+    - Location: {x: -19, y: -4}
+      Time: 6
+      Parameters: []
+    - Location: {x: -20, y: -8}
+      Time: 6
+      Parameters: []
+  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+    Data:
+    - Location: {x: -20, y: -5}
+      Time: 3
+      Parameters: []
+    - Location: {x: -20, y: 5}
       Time: 3
       Parameters: []
   WarningChains:
@@ -63,16 +98,37 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 16, y: 8}
+    - Location: {x: 15, y: 5}
+      Time: 0
+      Parameters: []
+    - Location: {x: 15, y: -5}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: -8}
       Time: 0
       Parameters: []
     - Location: {x: -16, y: 8}
-      Time: 0
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 4}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: -4}
+      Time: 3
       Parameters: []
     - Location: {x: -16, y: -8}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: -5}
       Time: 0
       Parameters: []
-    - Location: {x: 16, y: -8}
+    - Location: {x: -16, y: 5}
       Time: 0
       Parameters: []
 --- !u!1001 &100100000
