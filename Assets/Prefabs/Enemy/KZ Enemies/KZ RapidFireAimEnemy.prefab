@@ -200,7 +200,7 @@ MonoBehaviour:
       - null
       - null
       - 0
-      - 0
+      - 200
       - 0
       - 8.0
       - null
@@ -221,7 +221,7 @@ MonoBehaviour:
   Field: {fileID: 0}
   Wave: {fileID: 0}
   Difficulty: 0
-  MaxHealth: 0
+  MaxHealth: 200
   Health: 0
   RotateSpeed: 8
   onHitAudio: {fileID: 0}
