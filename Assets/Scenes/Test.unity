@@ -181,21 +181,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 1000013141128222, guid: d79ec327570544041810e553a86b9042, type: 2}
+    - {fileID: 1205748683}
+    - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
     - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
     - {fileID: 0}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
       - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -211,6 +212,7 @@ MonoBehaviour:
       - null
       - 0.0
       - 1.0
+      - false
       - true
       - 1000
       - 100
@@ -229,16 +231,17 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
-  - {fileID: 1000013141128222, guid: d79ec327570544041810e553a86b9042, type: 2}
+  - {fileID: 188780, guid: 8704807eec8644984a8735f96a612c29, type: 2}
   - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
   LevelCompleteMessage: {fileID: 0}
   LevelFailedMessage: {fileID: 0}
   PauseMenu: {fileID: 0}
   LevelTime: 0
   TargetTimeScale: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
