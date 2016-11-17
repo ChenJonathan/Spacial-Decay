@@ -20,11 +20,15 @@ public class Level : MonoBehaviour
     public Sprite[] sprites;                        // Sprites to use for the level select
 
     private AudioSource audioSource;
-    public AudioClip onHoverAudio;
-    public AudioClip onClickAudio;
+    [SerializeField]
+    private AudioClip onHoverAudio;
+    [SerializeField]
+    private AudioClip onClickAudio;
 
     [HideInInspector]
     public LineRenderer line;                       // Indicates the level that unlocked this level
+
+    public static bool Clickable = true;            // Indicates that levels are clickable;
 
     // Variables that control the look of the UI elements.
 
@@ -68,9 +72,7 @@ public class Level : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         if (Scene == "")
-        {
             Scene = gameObject.name;
-        }
     }
 
     /// <summary>
@@ -190,9 +192,10 @@ public class Level : MonoBehaviour
     {
         scaleTarg = scaleTargWhenHovered;
         expandTarg = 1;
-
-        if (Input.GetMouseButtonDown(0))
+        
+        if (Input.GetMouseButtonDown(0) && Clickable)
         {
+            Clickable = false;
             StartCoroutine(LoadLevel());
         }
     }
@@ -211,7 +214,6 @@ public class Level : MonoBehaviour
             Camera.main.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
             yield return new WaitForSeconds(step * Time.deltaTime);
         }
-        // yield return new WaitForSeconds(onClickAudio.length);
         GameController.Singleton.LoadLevel(Scene);
     }
 }
