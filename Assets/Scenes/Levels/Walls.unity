@@ -181,25 +181,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+    - {fileID: 1205748683}
     - {fileID: 188780, guid: 80e33dffb2c1f42bf80949f4b1787ac5, type: 2}
     - {fileID: 1000012781792588, guid: f0a656237875f4d308956a577f5686f3, type: 2}
     - {fileID: 1000010225391452, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
     - {fileID: 1000013141128222, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
+    - {fileID: 188780, guid: d333675d9b68d4ba6bf95579b325388e, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
-      - DialoguePauseMenu PauseMenu
+      - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -209,12 +211,13 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2,3,4,5]}'
-      - 6
+      - '{"$content":[2,3,4,5,6]}'
       - 7
       - 8
+      - 9
       - 0.0
       - 1.0
+      - false
       - true
       - 1000
       - 100
@@ -233,13 +236,14 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
   - {fileID: 188780, guid: 80e33dffb2c1f42bf80949f4b1787ac5, type: 2}
   - {fileID: 1000012781792588, guid: f0a656237875f4d308956a577f5686f3, type: 2}
   - {fileID: 1000010225391452, guid: dedc5d16aac36c14b9c613f23133bd09, type: 2}
   - {fileID: 1000013141128222, guid: e2396659d7c56f542a98452ec48ea3ee, type: 2}
+  - {fileID: 188780, guid: d333675d9b68d4ba6bf95579b325388e, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}
   LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
@@ -248,6 +252,7 @@ MonoBehaviour:
     type: 2}
   LevelTime: 0
   TargetTimeScale: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -650,6 +655,8 @@ MonoBehaviour:
   orbActivePrefab: {fileID: 180408, guid: 2f95e36be91fe2a46a03c14f6a0573ef, type: 2}
   orbInactivePrefab: {fileID: 180408, guid: e019f87c30190ae4c91447d24eac0113, type: 2}
   gap: 6
+  orbsCounterActive: []
+  orbsCounterInactive: []
 --- !u!114 &1417255041
 MonoBehaviour:
   m_ObjectHideFlags: 0

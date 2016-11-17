@@ -181,24 +181,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 1205748683}
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
-    - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-    - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
-    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
-    - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
-    - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
+    - {fileID: 1205748683}
+    - {fileID: 188780, guid: adf1314a6e76ff944b89554b3fa02e5e, type: 2}
+    - {fileID: 188780, guid: e88558546e38fd247a1722cd1ca5d50e, type: 2}
+    - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
+    - {fileID: 188780, guid: 4fa9f8f35550d3e40a1a7c123401d652, type: 2}
+    - {fileID: 188780, guid: ae7b658bd3c3d484f94fa275896c558f, type: 2}
+    - {fileID: 0}
     serializedStrings:
       keys:
-      - DanmakuField field
       - Player playerPrefab
+      - DanmakuField field
       - List<GameObject> events
       - GameObject LevelCompleteMessage
       - GameObject LevelFailedMessage
       - MessagePauseMenu PauseMenu
       - float LevelTime
       - float TargetTimeScale
-      - bool permanentInvincible
+      - bool PermanentInvincible
       - bool FrameRateIndependent
       - int danmakuInitialCount
       - int danmakuSpawnOnEmpty
@@ -208,13 +209,13 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2,3]}'
-      - 4
-      - 5
-      - 6
+      - '{"$content":[2,3,4,5,6]}'
+      - 7
+      - 7
+      - null
       - 0.0
       - 1.0
-      - true
+      - false
       - true
       - 1000
       - 100
@@ -233,20 +234,20 @@ MonoBehaviour:
   danmakuInitialCount: 1000
   danmakuSpawnOnEmpty: 100
   angleResolution: 0.1
-  field: {fileID: 1205748683}
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
+  field: {fileID: 1205748683}
   events:
-  - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
-  - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
-  LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
-    type: 2}
-  LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
-    type: 2}
-  PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
-    type: 2}
+  - {fileID: 188780, guid: adf1314a6e76ff944b89554b3fa02e5e, type: 2}
+  - {fileID: 188780, guid: e88558546e38fd247a1722cd1ca5d50e, type: 2}
+  - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
+  - {fileID: 188780, guid: 4fa9f8f35550d3e40a1a7c123401d652, type: 2}
+  - {fileID: 188780, guid: ae7b658bd3c3d484f94fa275896c558f, type: 2}
+  LevelCompleteMessage: {fileID: 0}
+  LevelFailedMessage: {fileID: 0}
+  PauseMenu: {fileID: 0}
   LevelTime: 0
   TargetTimeScale: 1
-  permanentInvincible: 1
+  PermanentInvincible: 0
 --- !u!4 &174129276
 Transform:
   m_ObjectHideFlags: 0
@@ -582,7 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useClipBoundary: 1
-  clipBoundary: 2
+  clipBoundary: 1
   fieldSize: {x: 20, y: 20}
   camera2D: {fileID: 1480303253}
   otherCameras: []
@@ -649,6 +650,8 @@ MonoBehaviour:
   orbActivePrefab: {fileID: 180408, guid: 2f95e36be91fe2a46a03c14f6a0573ef, type: 2}
   orbInactivePrefab: {fileID: 180408, guid: e019f87c30190ae4c91447d24eac0113, type: 2}
   gap: 6
+  orbsCounterActive: []
+  orbsCounterInactive: []
 --- !u!114 &1417255041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +861,7 @@ GameObject:
   - 92: {fileID: 1821701581}
   m_Layer: 8
   m_Name: Background Camera
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
