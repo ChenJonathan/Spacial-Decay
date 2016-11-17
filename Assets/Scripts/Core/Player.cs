@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer; // Renders the ship
     private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
     private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
+    private SpriteRenderer trailRenderer; // Renders the ship trail
+    private Animator trailAnimator; // Animates the ship trail
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
 
     private float currentAlphaHitbox = 0f;
@@ -110,6 +112,7 @@ public class Player : MonoBehaviour
         field = LevelController.Singleton.Field;
         collider2d = GetComponent<Collider2D>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+        trailAnimator = transform.FindChild("Trail").GetComponent<Animator>();
         hitEffect = GetComponentInChildren<ParticleSystem>();
 
         // Initializes the renderers
@@ -123,6 +126,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
+        trailRenderer = transform.FindChild("Trail").GetComponent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -177,6 +181,7 @@ public class Player : MonoBehaviour
                     hitEnemies.Clear();
                     targetAlphaWings = 0f;
                     deltaAlphaWings = 1f;
+                    trailAnimator.SetBool("Active", false);
                 }
             }
         }
@@ -199,6 +204,25 @@ public class Player : MonoBehaviour
                 dashCounter.UpdateCounter(dashes);
             }
         }
+
+        // Update hitbox alpha
+        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.deltaTime);
+        Color temp = hitboxGlowRenderer.color;
+        temp.a = currentAlphaHitbox * spriteRenderer.color.a;
+        hitboxGlowRenderer.color = temp;
+        if(currentAlphaHitbox == targetAlphaHitbox)
+            targetAlphaHitbox = 1 - targetAlphaHitbox;
+
+        // Update wings alpha
+        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.deltaTime * deltaAlphaWings);
+        temp = wingsGlowRenderer.color;
+        temp.a = currentAlphaWings * spriteRenderer.color.a;
+        wingsGlowRenderer.color = temp;
+
+        // Update trail alpha
+        temp = Color.white;
+        temp.a = spriteRenderer.color.a;
+        trailRenderer.color = temp;
     }
 
     /// <summary>
@@ -248,20 +272,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
-        // Update hitbox alpha
-        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
-        Color temp = hitboxGlowRenderer.color;
-        temp.a = currentAlphaHitbox * spriteRenderer.color.a;
-        hitboxGlowRenderer.color = temp;
-        if(currentAlphaHitbox == targetAlphaHitbox)
-            targetAlphaHitbox = 1 - targetAlphaHitbox;
-
-        // Update wings alpha
-        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime * deltaAlphaWings);
-        temp = wingsGlowRenderer.color;
-        temp.a = currentAlphaWings * spriteRenderer.color.a;
-        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -281,6 +291,7 @@ public class Player : MonoBehaviour
             SetMoveTarget(mousePos);
             targetAlphaWings = 1f;
             deltaAlphaWings = 3f;
+            trailAnimator.SetBool("Active", true);
             dashRenderer.SetPosition(0, transform.position);
             dashRenderer.SetPosition(1, mousePos);
             dashRenderer.enabled = true;
@@ -305,6 +316,10 @@ public class Player : MonoBehaviour
 
                 // Disable dash selection
                 selecting = false;
+                targetAlphaWings = 0f;
+                deltaAlphaWings = 3f;
+                trailAnimator.SetBool("Active", false);
+                dashRenderer.enabled = false;
                 SetMoveTarget(mousePos);
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
@@ -329,6 +344,7 @@ public class Player : MonoBehaviour
             selecting = false;
             targetAlphaWings = 0f;
             deltaAlphaWings = 3f;
+            trailAnimator.SetBool("Active", false);
             dashRenderer.enabled = false;
             LevelController.Singleton.TargetTimeScale = 1;
         }
