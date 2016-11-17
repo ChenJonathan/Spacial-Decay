@@ -37,7 +37,7 @@ public class TutorialWave : Wave
         yield return StartCoroutine(transmission.ShowSpeaker("???"));
         yield return StartCoroutine(transmission.ShowContent("Welcome, pilot.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("In the coming days, you will be assisting with the alien threat in the recently discovered Lambda-3 sector. You are to engage any alien hostiles upon detection. Hestation may result in a disadvantageous position.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Your ship is a standard issue fourth-generation fighter produced by SpaceZ Industries. As a combat vehicle, your ship is capable of withstading considerable punishment. It is not invunlerable, however, and you should exercise due caution. You can obtain an overview of your ship's integrity in the upper left corner of your HUD.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Your ship is a standard issue fourth-generation fighter produced by SpaceZ Industries. As a combat vehicle, your ship is capable of withstading considerable punishment. It is not invulnerable, however, and you should exercise due caution. You can obtain an overview of your ship's integrity in the upper left corner of your HUD.", 0.05f));
 
         // Move to location
         yield return StartCoroutine(transmission.ShowContent("As a safety precaution, your ship's capacitor banks have been disabled as you do not have the proper training credentials. Please proceed to the maintanence bay momentarily so the restriction can be lifted.", 0.05f, false));
