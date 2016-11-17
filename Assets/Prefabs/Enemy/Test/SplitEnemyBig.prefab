@@ -350,9 +350,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _serializationData:
     serializedObjects:
-    - {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+    - {fileID: 11481656, guid: 4c414fbd50cea304bb170b72a67b2160, type: 2}
     - {fileID: 114000010195250524, guid: d98dc59106726ab4a96b9dbf861d85ba, type: 2}
-    - {fileID: 0}
     - {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
     serializedStrings:
       keys:
@@ -366,8 +365,9 @@ MonoBehaviour:
       - int MaxHealth
       - int Health
       - float RotateSpeed
-      - AudioClip OnHitAudio
-      - AudioClip OnDeathAudio
+      - AudioClip onHitAudio
+      - AudioClip onDeathAudio
+      - AudioClip onFireAudio
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -383,10 +383,11 @@ MonoBehaviour:
       - 200
       - 0
       - 8.0
-      - 2
-      - 2
+      - null
+      - null
+      - null
       - false
-      - 3
+      - 2
       - null
       - null
   _serializerType:
@@ -403,12 +404,13 @@ MonoBehaviour:
   MaxHealth: 200
   Health: 0
   RotateSpeed: 8
-  OnHitAudio: {fileID: 0}
-  OnDeathAudio: {fileID: 0}
+  onHitAudio: {fileID: 0}
+  onDeathAudio: {fileID: 0}
+  onFireAudio: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
-  bulletPrefab: {fileID: 11442878, guid: 77694c588ffd7ce4ebeb88b115da8bfe, type: 2}
+  bulletPrefab: {fileID: 11481656, guid: 4c414fbd50cea304bb170b72a67b2160, type: 2}
   fireTowardsPlayer: 1
   enemyPrefab: {fileID: 114000010195250524, guid: d98dc59106726ab4a96b9dbf861d85ba,
     type: 2}

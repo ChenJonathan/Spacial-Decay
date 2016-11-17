@@ -28,7 +28,7 @@ public class LaserTrapScript : Enemy
     private bool charging = true;
     private bool chargingLaser = true;
     private float rotate = 0;
-    private float rotator = 1.5f;
+    private float rotator = 2.5f;
 
     public override void Start()
     {
@@ -48,7 +48,6 @@ public class LaserTrapScript : Enemy
         fireLaser2.From(transform);
         fireLaser2.WithSpeed(0);
         fireLaser2.WithController(new AutoDeactivateController(.01f));
-
 
         fireDataPetal = new FireBuilder(petalPrefab, Field);
         fireDataPetal.From(transform);
@@ -71,9 +70,8 @@ public class LaserTrapScript : Enemy
         scatterCircle.From(transform);
         scatterCircle.WithSpeed(8 + 2 * Difficulty);
         scatterCircle.WithModifier(new RandomizeAngleModifier(360));
-        scatterCircle.WithController(new SpeedLimitController(3f, 12f));
+        scatterCircle.WithController(new SpeedLimitController(1f, 12f));
         scatterCircle.WithController(new AccelerationController(-12f));
-        scatterCircle.WithController(new AutoDeactivateController(10f));
 
         switch (Difficulty)
         {
@@ -200,12 +198,12 @@ public class LaserTrapScript : Enemy
                                 rapidFire.Fire();
                             }
                         }
-                        if (bulletCount % ((finalForm ? 5 : 7) - Difficulty) == 0 && enraged)
+                        if (bulletCount % ((finalForm ? 5 : 7)) == 0 && enraged)
                         {
                             scatterCircle.WithRotation(rotate);
                             scatterCircle.Fire();
                         }
-                        rotate += (rotator);
+                        rotate += (rotator + 0.5f * Difficulty);
                         //WILL IMPLEMENT THIS LATER TO CHARGE THE LASER
                         /* if ((bulletCount / 100) % 2 == 0)
                         {
