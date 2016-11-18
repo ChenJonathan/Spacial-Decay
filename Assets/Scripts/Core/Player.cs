@@ -168,8 +168,10 @@ public class Player : MonoBehaviour
         // General movement-related functions
         if(moving)
         {
-            targetRenderer.enabled = true;
-            moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
+            float distance = Vector2.Distance(transform.position, target);
+            if(distance > 1)
+                targetRenderer.enabled = true;
+            moving = distance > (dashing ? 1 : 0.1);
             if(!moving)
             {
                 // Player reached its target
@@ -218,11 +220,6 @@ public class Player : MonoBehaviour
         temp = wingsGlowRenderer.color;
         temp.a = currentAlphaWings * spriteRenderer.color.a;
         wingsGlowRenderer.color = temp;
-
-        // Update trail alpha
-        temp = Color.white;
-        temp.a = spriteRenderer.color.a;
-        trailRenderer.color = temp;
     }
 
     /// <summary>
@@ -414,12 +411,14 @@ public class Player : MonoBehaviour
             {
                 color.a = 1.25f - color.a;
                 spriteRenderer.color = color;
+                trailRenderer.color = color;
             }
             timer += Time.deltaTime;
             yield return null;
         }
         color.a = 1;
         spriteRenderer.color = color;
+        trailRenderer.color = color;
         invincible = false;
         yield break;
     }
