@@ -39,18 +39,18 @@ namespace Assets.Scripts.UI {
 
 		public void GoToMain()
 		{
-			inMain = true;
+            inMain = true;
             LevelParent.transform.position = new Vector3(LevelParent.transform.position.x, LevelParent.transform.position.y, 0);
             lvlback.SetActive(false);
 			mainParent.SetActive(true);
-			LevelParent.SetActive (false);
+
 			settingsParent.SetActive(false);
 			creditsParent.SetActive(false);
 		}
 
 		public void GoToCredits()
 		{
-			inMain = false;
+            inMain = false;
             LevelParent.transform.position = new Vector3(LevelParent.transform.position.x, LevelParent.transform.position.y, 0);
             mainParent.SetActive(false);
 			settingsParent.SetActive(false);
@@ -63,7 +63,6 @@ namespace Assets.Scripts.UI {
             LevelParent.transform.position = new Vector3(LevelParent.transform.position.x, LevelParent.transform.position.y, 25);
             lvlback.SetActive(true);
 			mainParent.SetActive(false);
-			LevelParent.SetActive (true);
 			settingsParent.SetActive(false);
 			creditsParent.SetActive(false);
 		}
@@ -73,7 +72,6 @@ namespace Assets.Scripts.UI {
 			inMain = false;
             LevelParent.transform.position = new Vector3(LevelParent.transform.position.x, LevelParent.transform.position.y, 0);
             mainParent.SetActive(false);
-			LevelParent.SetActive (false);
 			settingsParent.SetActive(true);
 			creditsParent.SetActive(false);
 
