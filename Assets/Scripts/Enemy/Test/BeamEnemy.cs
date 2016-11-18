@@ -15,6 +15,9 @@ public class BeamEnemy : Enemy
     private Danmaku currentWarning;
     private Danmaku currentBeam;
 
+    /// <summary> The horizontal speed of the enemy. </summary>
+    private float speed = -5;
+
     public override void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -45,6 +48,10 @@ public class BeamEnemy : Enemy
         fireData.WithSpeed(0);
         fireData.WithController(new EnemyDeathController(this));
 
+        if (parameters.Length > 0) {
+            speed *= parameters[0];
+        }
+
         base.Start();
     }
 
@@ -54,7 +61,7 @@ public class BeamEnemy : Enemy
         {
             // Moving left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-5, 0);
+            rigidbody2d.velocity = new Vector2(speed, 0);
             yield return new WaitForSeconds(2);
 
             // Stop and face player

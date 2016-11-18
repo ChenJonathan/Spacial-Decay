@@ -140,7 +140,11 @@ public class TowerBoss : Enemy
                 for(int j = 0; j < 12 + Difficulty; j++)
                 {
                     fireDataCircle.Towards(position);
+<<<<<<< HEAD
                     fireDataCircle.WithRotation((12f * Mathf.Sqrt((16 - j) * ((enraged ? 72 : 24)) - 80) * direction));
+=======
+                    fireDataCircle.WithRotation((12f * Mathf.Sqrt((16 - j) * (enraged ? 48 : 24)) - 80) * direction);
+>>>>>>> refs/remotes/origin/master
                     fireDataCircle.Fire();
                     yield return new WaitForSeconds(0.1f);
                 }

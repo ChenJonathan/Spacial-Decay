@@ -24,9 +24,15 @@ public partial class Enemy : DanmakuCollider
     public float RotateSpeed = 8;
 
     protected AudioSource audioSource;
-    public AudioClip onHitAudio;
-    public AudioClip onDeathAudio;
-    public AudioClip onFireAudio;
+    [SerializeField]
+    private AudioClip onHitAudio;
+    [SerializeField]
+    private AudioClip onDeathAudio;
+    [SerializeField]
+    private AudioClip onFireAudio;
+
+    [SerializeField]
+    private Warning explosion;
 
     // Whether the enemy is invincible or not
     protected bool invincible = false;
@@ -65,21 +71,23 @@ public partial class Enemy : DanmakuCollider
         TagFilter = "Untagged";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
-        healthBar.transform.parent = transform;
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
+        healthBar.transform.parent = transform;
 
         Health = MaxHealth;
 
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.volume = 0.75f;
 
-        // Assigns SFX from resources folder if not customized
+        // Assigns fields from resources folder if not customized
         if(!onHitAudio)
             onHitAudio = Resources.Load<AudioClip>("SFX/Hit_Hurt");
         if(!onDeathAudio)
             onDeathAudio = Resources.Load<AudioClip>("SFX/Explosion");
         if(!onFireAudio)
             onFireAudio = Resources.Load<AudioClip>("SFX/Default_Fire");
+        if(!explosion)
+            explosion = Resources.Load<Warning>("Warning/Explosion/Explosion");
     }
 
     /// <summary>
@@ -151,6 +159,11 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public void OnDestroy()
     {
+        Wave.WarningData explosionData = new Wave.WarningData();
+        explosionData.Prefab = explosion;
+        explosionData.Duration = 10.083f;
+        explosionData.Data.Location = transform.position;
+        Wave.SpawnWarning(explosionData);
         Wave.UnregisterEnemy(this);
     }
 

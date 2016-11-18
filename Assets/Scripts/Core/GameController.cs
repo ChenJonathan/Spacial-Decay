@@ -44,6 +44,10 @@ public class GameController : Singleton<GameController>
     /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
     private bool unlockAllLevels;
 
+    // audio variables
+    public float sfxVol = .5f;
+    public float musicVol = .5f;
+
     /// <summary>
     /// Returns the only instance of the GameController.
     /// </summary>

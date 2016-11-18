@@ -647,6 +647,8 @@ MonoBehaviour:
   orbActivePrefab: {fileID: 180408, guid: 2f95e36be91fe2a46a03c14f6a0573ef, type: 2}
   orbInactivePrefab: {fileID: 180408, guid: e019f87c30190ae4c91447d24eac0113, type: 2}
   gap: 6
+  orbsCounterActive: []
+  orbsCounterInactive: []
 --- !u!114 &1417255041
 MonoBehaviour:
   m_ObjectHideFlags: 0

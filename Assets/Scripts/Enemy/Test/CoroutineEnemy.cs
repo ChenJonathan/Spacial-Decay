@@ -9,6 +9,7 @@ public class CoroutineEnemy : Enemy
 
     private FireBuilder fireData;
     private Rigidbody2D rigidbody2d;
+    private float speed;
 
 	public override void Start()
     {
@@ -18,6 +19,11 @@ public class CoroutineEnemy : Enemy
         fireData.From(transform);
         fireData.WithSpeed(6 + 2 * Difficulty);
         fireData.WithModifier(new CircularBurstModifier(45, 2, 0, 0));
+
+        speed = -5;
+        if (parameters.Length > 0) {
+            speed *= parameters[0];
+        }
 
         base.Start();
 	}
@@ -29,7 +35,7 @@ public class CoroutineEnemy : Enemy
         {
             // Moving left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-5, 0);
+            rigidbody2d.velocity = new Vector2(speed, 0);
             yield return new WaitForSeconds(2);
 
             // Stop and face player

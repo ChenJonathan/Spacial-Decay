@@ -66,6 +66,16 @@ MonoBehaviour:
       Time: 3
       Parameters:
       - -1
+  - Prefab: {fileID: 114000013815621762, guid: 0d2c23c12901d5e4699d1d238077ba02, type: 2}
+    Data:
+    - Location: {x: -18, y: -5}
+      Time: 6
+      Parameters:
+      - -1
+    - Location: {x: 18, y: 5}
+      Time: 6
+      Parameters:
+      - 1
   WarningChains:
   - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
     Duration: 3
@@ -77,4 +87,10 @@ MonoBehaviour:
       Parameters: []
     - Location: {x: -16, y: -9}
       Time: 0
+      Parameters: []
+    - Location: {x: -16, y: -5}
+      Time: 3
+      Parameters: []
+    - Location: {x: 16, y: 5}
+      Time: 3
       Parameters: []

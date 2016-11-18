@@ -57,7 +57,7 @@ public class SpiralBossScript : Enemy
         circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 2 * Difficulty, 0, 0));
         circleAttack.WithController(new AutoDeactivateController(8f));
 
-        SetRotation(90);
+        SetRotation(90f);
 
         StartCoroutine(Attack());
     }
@@ -73,6 +73,7 @@ public class SpiralBossScript : Enemy
         }
         else
         {
+            AddRotation(0.5f + (weaponized ? 0.5f : 0f) + (finalForm ? 1f : 0f));
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             weaponized = true;
         }
