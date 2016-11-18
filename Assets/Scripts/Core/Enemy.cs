@@ -115,8 +115,7 @@ public partial class Enemy : DanmakuCollider
     {
         if(FacePlayer)
             TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
-        if(TargetRotation != null)
-            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
     }
 
     /// <summary>

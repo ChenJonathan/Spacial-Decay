@@ -185,6 +185,7 @@ MonoBehaviour:
     - {fileID: 1205748683}
     - {fileID: 1000013141128222, guid: f0454dcce4cab461682690009b45513d, type: 2}
     - {fileID: 1000013141128222, guid: 9ba577dea7001b848826fc02f720c58a, type: 2}
+    - {fileID: 1000013141128222, guid: 962580f59389a4a818a8aa8652bbd701, type: 2}
     - {fileID: 1000013141128222, guid: cecd71fa5fb27495bb906f69d8c6f93f, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
@@ -209,10 +210,10 @@ MonoBehaviour:
       values:
       - 0
       - 1
-      - '{"$content":[2,3,4]}'
-      - 5
+      - '{"$content":[2,3,4,5]}'
       - 6
       - 7
+      - 8
       - 0.0
       - 1.0
       - false
@@ -239,6 +240,7 @@ MonoBehaviour:
   events:
   - {fileID: 1000013141128222, guid: f0454dcce4cab461682690009b45513d, type: 2}
   - {fileID: 1000013141128222, guid: 9ba577dea7001b848826fc02f720c58a, type: 2}
+  - {fileID: 1000013141128222, guid: 962580f59389a4a818a8aa8652bbd701, type: 2}
   - {fileID: 1000013141128222, guid: cecd71fa5fb27495bb906f69d8c6f93f, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}

@@ -52,7 +52,7 @@ public class PetalCrescentDiagonalEnemy : Enemy
 		float radians = Mathf.PI / 2.0f; //init at top of circle
 		float time = 0;
 		StartCoroutine (Attack());
-		for (int cycles = 0; cycles < 3; cycles++) {
+		for (int cycles = 0; cycles < 100; cycles++) {
 			timePassed = 0;
 			while (timePassed < period) {
 				time = Time.deltaTime;
