@@ -74,33 +74,37 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Points:
     m_Paths:
-    - - {x: 0.26999998, y: -0.905}
-      - {x: 0.32, y: -0.84499997}
-      - {x: 0.55, y: -0.505}
-      - {x: 0.55, y: -0.265}
-      - {x: 0.39, y: -0.16499999}
-      - {x: 0.26, y: -0.015}
-      - {x: 0.19, y: 0.195}
-      - {x: 0.14999999, y: 0.45499998}
-      - {x: 0.089999996, y: 0.505}
-      - {x: 0.089999996, y: 0.59499997}
-      - {x: 0.08, y: 0.825}
-      - {x: 0.03, y: 0.97499996}
-      - {x: -0.04, y: 0.97499996}
-      - {x: -0.08, y: 0.815}
-      - {x: -0.089999996, y: 0.59499997}
-      - {x: -0.14, y: 0.445}
-      - {x: -0.24, y: 0.044999998}
-      - {x: -0.32, y: -0.085}
-      - {x: -0.39, y: -0.175}
-      - {x: -0.55, y: -0.275}
-      - {x: -0.55, y: -0.515}
-      - {x: -0.29999998, y: -0.875}
-      - {x: -0.26, y: -0.905}
-      - {x: -0.11, y: -0.905}
-      - {x: -0.04, y: -0.825}
-      - {x: 0.089999996, y: -0.875}
-      - {x: 0.12, y: -0.905}
+    - - {x: 0.28, y: -0.58}
+      - {x: 0.26, y: -0.58}
+      - {x: 0.24, y: -0.81}
+      - {x: 0.32, y: -0.85999995}
+      - {x: 0.42999998, y: -0.85999995}
+      - {x: 0.52, y: -0.65}
+      - {x: 0.52, y: -0.37}
+      - {x: 0.35, y: 0.099999994}
+      - {x: 0.12, y: 0.75}
+      - {x: 0.06, y: 0.83}
+      - {x: -0.08, y: 0.83}
+      - {x: -0.21, y: 0.45999998}
+      - {x: -0.42999998, y: 0}
+      - {x: -0.52, y: -0.42}
+      - {x: -0.52, y: -0.58}
+      - {x: -0.42, y: -0.85999995}
+      - {x: -0.29999998, y: -0.85999995}
+      - {x: -0.25, y: -0.81}
+      - {x: -0.26, y: -0.57}
+      - {x: -0.28, y: -0.57}
+      - {x: -0.28, y: -0.52}
+      - {x: -0.29, y: -0.48}
+      - {x: -0.28, y: -0.52}
+      - {x: -0.26, y: -0.57}
+      - {x: -0.22, y: -0.65999997}
+      - {x: -0.099999994, y: -0.82}
+      - {x: -0.049999997, y: -0.85999995}
+      - {x: 0.08, y: -0.85999995}
+      - {x: 0.22999999, y: -0.65999997}
+      - {x: 0.28, y: -0.52}
+      - {x: 0.28, y: -0.5}
 --- !u!114 &114000013328189242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +133,7 @@ MonoBehaviour:
       - AudioClip onHitAudio
       - AudioClip onDeathAudio
       - AudioClip onFireAudio
+      - Warning explosion
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -142,6 +147,7 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
+      - null
       - null
       - null
       - null
@@ -166,6 +172,7 @@ MonoBehaviour:
   onHitAudio: {fileID: 0}
   onDeathAudio: {fileID: 0}
   onFireAudio: {fileID: 0}
+  explosion: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
@@ -199,7 +206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a278fa2547c98dd4093949664a70324a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1af0556f9e91e0443b2e6cd513c84163, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

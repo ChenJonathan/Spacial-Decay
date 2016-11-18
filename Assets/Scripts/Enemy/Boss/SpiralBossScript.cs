@@ -53,7 +53,9 @@ public class SpiralBossScript : Enemy
         circleAttack = new FireBuilder(enragedPrefab, Field);
         circleAttack.From(transform);
         circleAttack.WithSpeed(5 + 2 * Difficulty);
+        circleAttack.WithAngularSpeed(10);
         circleAttack.WithModifier(new CircularBurstModifier(360, new DynamicInt(13, 20) + 2 * Difficulty, 0, 0));
+        circleAttack.WithController(new AutoDeactivateController(8f));
 
         SetRotation(90f);
 

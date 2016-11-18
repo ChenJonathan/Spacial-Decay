@@ -17,7 +17,7 @@ public class CoroutineEnemy : Enemy
 
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
-        fireData.WithSpeed(6);
+        fireData.WithSpeed(6 + 2 * Difficulty);
         fireData.WithModifier(new CircularBurstModifier(45, 2, 0, 0));
 
         speed = -5;

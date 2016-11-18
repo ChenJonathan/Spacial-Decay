@@ -16,8 +16,8 @@ public class FighterEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.Towards(Player.transform);
-        fireData.WithSpeed(6);
-        fireData.WithModifier(new CircularBurstModifier(100, 5, 0, 0));
+        fireData.WithSpeed(6 + Difficulty);
+        fireData.WithModifier(new CircularBurstModifier(100, 5 + 2 * Difficulty, 0, 0));
 	}
 	
 	public void Update()
@@ -35,7 +35,7 @@ public class FighterEnemy : Enemy
         base.FixedUpdate();
 
         Vector3 direction = Player.transform.position - transform.position;
-        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * 3;
+        GetComponent<Rigidbody2D>().velocity = direction / direction.magnitude * (3 + Difficulty);
         if(direction.magnitude <= 5)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -30,12 +30,12 @@ public class TowerBoss : Enemy
         fireDataBullet.From(transform);
         fireDataBullet.WithSpeed(2);
         fireDataBullet.WithAngularSpeed(45);
-        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(6, 8), 0, 0));
+        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(4, 8) + Difficulty, 0, 0));
         fireDataBullet.WithController(new AccelerationController(3));
 
         fireDataCircle = new FireBuilder(CirclePrefab, Field);
         fireDataCircle.From(transform);
-        fireDataCircle.WithSpeed(12);
+        fireDataCircle.WithSpeed(8 + 2 * Difficulty);
         fireDataCircle.WithModifier(new CircularBurstModifier(45, 7, 0, 0));
 
         fireDataLaser = new FireBuilder(LaserPrefab, Field);
@@ -117,8 +117,8 @@ public class TowerBoss : Enemy
         towers.Remove(tower);
         if(towers.Count == 0)
         {
-            fireDataCircle.WithSpeed(16);
-            RotateSpeed = 16;
+            fireDataCircle.WithSpeed(12 + 2 * Difficulty);
+            RotateSpeed = 10 + 3 * Difficulty;
             enraged = true;
 
             StartCoroutine(EnragedAttack());
@@ -155,7 +155,7 @@ public class TowerBoss : Enemy
                     yield return new WaitForSeconds(1);
                 }
 
-                for(int i = 0; i < (enraged ? 5 : 3); i++)
+                for(int i = 0; i < (enraged ? 3 : 2); i++)
                 {
                     stillRotation = false;
                     FacePlayer = true;
@@ -163,9 +163,10 @@ public class TowerBoss : Enemy
 
                     stillRotation = true;
                     FacePlayer = false;
+                    yield return new WaitForSeconds(0.5f - 0.15f * Difficulty);
                     TargetRotation = transform.rotation;
                     fireDataLaser.Fire();
-                    yield return new WaitForSeconds((enraged ? 0.25f : 0.5f));
+                    yield return new WaitForSeconds((enraged ? 0.33f : 0.5f));
                 }
             }
         }
