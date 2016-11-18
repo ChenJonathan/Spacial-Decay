@@ -1419,8 +1419,8 @@ MonoBehaviour:
   player: {fileID: 1580675767}
   target: {x: 15.38, y: -1}
   button: Options
-  onHoverEffect: {fileID: 0}
-  onClickEffect: {fileID: 0}
+  onHoverEffect: {fileID: 8300000, guid: 9eef13f290735d64998925955e42de51, type: 3}
+  onClickEffect: {fileID: 8300000, guid: 7dd0ac66db6eb9647b31c48b5d15808a, type: 3}
 --- !u!114 &288645809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6036,8 +6036,8 @@ MonoBehaviour:
   player: {fileID: 1580675767}
   target: {x: -15.38, y: -5.58}
   button: Credits
-  onHoverEffect: {fileID: 0}
-  onClickEffect: {fileID: 0}
+  onHoverEffect: {fileID: 8300000, guid: 9eef13f290735d64998925955e42de51, type: 3}
+  onClickEffect: {fileID: 8300000, guid: 7dd0ac66db6eb9647b31c48b5d15808a, type: 3}
 --- !u!114 &985648110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6521,8 +6521,8 @@ MonoBehaviour:
   player: {fileID: 1580675767}
   target: {x: 15.38, y: -5.58}
   button: Exit
-  onHoverEffect: {fileID: 0}
-  onClickEffect: {fileID: 0}
+  onHoverEffect: {fileID: 8300000, guid: 9eef13f290735d64998925955e42de51, type: 3}
+  onClickEffect: {fileID: 8300000, guid: 7dd0ac66db6eb9647b31c48b5d15808a, type: 3}
 --- !u!114 &1124139276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11172,8 +11172,8 @@ MonoBehaviour:
   player: {fileID: 1580675767}
   target: {x: -15.38, y: -1}
   button: Play
-  onHoverEffect: {fileID: 0}
-  onClickEffect: {fileID: 0}
+  onHoverEffect: {fileID: 8300000, guid: 9eef13f290735d64998925955e42de51, type: 3}
+  onClickEffect: {fileID: 8300000, guid: 7dd0ac66db6eb9647b31c48b5d15808a, type: 3}
 --- !u!114 &1766538544
 MonoBehaviour:
   m_ObjectHideFlags: 0
