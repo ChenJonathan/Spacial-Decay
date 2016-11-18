@@ -15423,8 +15423,7 @@ MonoBehaviour:
   ImageEasy: {fileID: 1496708738}
   ImageMedium: {fileID: 316019035}
   ImageHard: {fileID: 1884189738}
-  onHoverEffect: {fileID: 0}
-  onClickEffect: {fileID: 0}
+  onClickEffect: {fileID: 8300000, guid: 7dd0ac66db6eb9647b31c48b5d15808a, type: 3}
 --- !u!61 &2010783009
 BoxCollider2D:
   m_ObjectHideFlags: 0

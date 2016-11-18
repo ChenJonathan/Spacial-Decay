@@ -19,12 +19,12 @@ public class DifficultySelect : MonoBehaviour
 
     private AudioSource audioSource;
     [SerializeField]
-    private AudioClip onHoverEffect;
-    [SerializeField]
     private AudioClip onClickEffect;
 
     public void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         Vector3 position = transform.position;
         switch(GameController.Singleton.Difficulty)
         {
@@ -64,16 +64,19 @@ public class DifficultySelect : MonoBehaviour
             {
                 GameController.Singleton.Difficulty = (int)Difficulty.Easy;
                 targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationEasy.x, LocationEasy.y, 13.2f)).x;
+                AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
             }
             else if(Vector3.Distance(mousePosition, LocationMedium) < 0.1f)
             {
                 GameController.Singleton.Difficulty = (int)Difficulty.Medium;
                 targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationMedium.x, LocationMedium.y, 13.2f)).x;
+                AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
             }
             else if(Vector3.Distance(mousePosition, LocationHard) < 0.1f)
             {
                 GameController.Singleton.Difficulty = (int)Difficulty.Hard;
                 targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationHard.x, LocationHard.y, 13.2f)).x;
+                AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
             }
         }
     }
