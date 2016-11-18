@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class Level : MonoBehaviour
 {
+    [HideInInspector]
     public string Scene;                            // Name of the corresponding scene
     public List<Level> Unlocks;                     // List of levels to unlock once this level is completed
 
@@ -71,8 +72,7 @@ public class Level : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        if (Scene == "")
-            Scene = gameObject.name;
+        Scene = gameObject.name;
     }
 
     /// <summary>

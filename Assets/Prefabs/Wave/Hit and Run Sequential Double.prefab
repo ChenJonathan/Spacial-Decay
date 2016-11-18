@@ -1,0 +1,167 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000013141128222}
+  m_IsPrefabParent: 1
+--- !u!1 &1000013141128222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000013866476222}
+  - 114: {fileID: 114000013255767860}
+  m_Layer: 0
+  m_Name: Hit and Run Sequential Double
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000013866476222
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013141128222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000013255767860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013141128222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClearEnemiesOnEnd: 0
+  ClearDanmakuOnEnd: 0
+  EnemyChains:
+  - Prefab: {fileID: 114000010590808864, guid: eb589cbd1a0c65e4c94e5afcfbd253b5, type: 2}
+    Data:
+    - Location: {x: 25, y: 0}
+      Time: 3
+      Parameters: []
+    - Location: {x: -25, y: 0}
+      Time: 4
+      Parameters: []
+    - Location: {x: 0, y: 17}
+      Time: 5
+      Parameters: []
+    - Location: {x: 0, y: -17}
+      Time: 6
+      Parameters: []
+    - Location: {x: 25, y: 17}
+      Time: 7
+      Parameters: []
+    - Location: {x: 25, y: -17}
+      Time: 8
+      Parameters: []
+    - Location: {x: -25, y: 17}
+      Time: 9
+      Parameters: []
+    - Location: {x: -25, y: -17}
+      Time: 10
+      Parameters: []
+  - Prefab: {fileID: 114000010590808864, guid: eb589cbd1a0c65e4c94e5afcfbd253b5, type: 2}
+    Data:
+    - Location: {x: 25, y: 0}
+      Time: 7
+      Parameters: []
+    - Location: {x: -25, y: 0}
+      Time: 8
+      Parameters: []
+    - Location: {x: 0, y: 17}
+      Time: 9
+      Parameters: []
+    - Location: {x: 0, y: -17}
+      Time: 10
+      Parameters: []
+    - Location: {x: 25, y: 17}
+      Time: 3
+      Parameters: []
+    - Location: {x: 25, y: -17}
+      Time: 4
+      Parameters: []
+    - Location: {x: -25, y: 17}
+      Time: 5
+      Parameters: []
+    - Location: {x: -25, y: -17}
+      Time: 6
+      Parameters: []
+  WarningChains:
+  - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
+    Duration: 3
+    FadeInDuration: 1
+    FadeOutDuration: 1
+    Data:
+    - Location: {x: 16, y: 0}
+      Time: 4
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 5
+      Parameters: []
+    - Location: {x: 16, y: 8}
+      Time: 6
+      Parameters: []
+    - Location: {x: 16, y: -8}
+      Time: 7
+      Parameters: []
+    - Location: {x: -16, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: -8}
+      Time: 1
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 2
+      Parameters: []
+    - Location: {x: 0, y: -8}
+      Time: 3
+      Parameters: []
+  - Prefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027, type: 2}
+    Duration: 3
+    FadeInDuration: 1
+    FadeOutDuration: 1
+    Data:
+    - Location: {x: 16, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 1
+      Parameters: []
+    - Location: {x: 16, y: 8}
+      Time: 2
+      Parameters: []
+    - Location: {x: 16, y: -8}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 8}
+      Time: 4
+      Parameters: []
+    - Location: {x: -16, y: -8}
+      Time: 5
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 6
+      Parameters: []
+    - Location: {x: 0, y: -8}
+      Time: 7
+      Parameters: []

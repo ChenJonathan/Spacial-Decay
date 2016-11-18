@@ -44,9 +44,9 @@ public class GameController : Singleton<GameController>
     /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
     private bool unlockAllLevels;
 
-    // audio variables
-    public float sfxVol = .5f;
-    public float musicVol = .5f;
+    // Audio settings
+    public float effectsVolume = .5f;
+    public float musicVolume = .5f;
 
     /// <summary>
     /// Returns the only instance of the GameController.
@@ -69,7 +69,7 @@ public class GameController : Singleton<GameController>
             return;
 
         // Set camera and camera FOV
-        Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        Camera cam = Camera.main;
         cam.fieldOfView = 2.0f * Mathf.Atan(419.84f / cam.aspect / 400f) * Mathf.Rad2Deg;
         //cameraMaxY = levelCamera.GetComponent<Scroll>().CameraMaxY = 419.84f / 2f - 419.84f / levelCamera.aspect / 2f;
         //cameraY = -cameraMaxY;
@@ -83,6 +83,7 @@ public class GameController : Singleton<GameController>
             {
                 LevelData levelData = Levels[level.name];
                 levelData.Unlocked = true;
+                levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
         }
@@ -94,19 +95,6 @@ public class GameController : Singleton<GameController>
         }
         SceneManager.sceneLoaded += OnLoad;
     }
-
-    /// <summary>
-    /// Prevents coroutine from starting before start level fields are initialized.
-    /// </summary>
-    public void Start()
-    {
-        if(!unlockAllLevels)
-        {
-            Level startLevelObject = GetLevel(StartLevel);
-            startLevelObject.gameObject.SetActive(true);
-            startLevelObject.Appear();
-        }
-    }
     
     /// <summary>
     /// TODO Remove this
@@ -117,10 +105,10 @@ public class GameController : Singleton<GameController>
         {
             foreach(Level level in GetAllLevels())
             {
-                LevelData levelData = Levels[level.name];
+                LevelData levelData = Levels[level.Scene];
                 levelData.Unlocked = true;
                 levelData.Complete = true;
-                Levels[level.name] = levelData;
+                Levels[level.Scene] = levelData;
             }
             CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
@@ -129,11 +117,12 @@ public class GameController : Singleton<GameController>
         {
             foreach(Level level in GetAllLevels())
             {
-                Levels[level.name] = new LevelData();
+                Levels[level.Scene] = new LevelData();
             }
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
             Levels[StartLevel] = levelData;
+            CurrentLevel = null;
             SceneManager.LoadScene("Level Select");
         }
     }
@@ -177,6 +166,11 @@ public class GameController : Singleton<GameController>
 
         if(scene.name.Equals("Level Select"))
         {
+            if(CurrentLevel == null || CurrentLevel == "")
+                Menu.Instance.SetState(Menu.State.Main);
+            else
+                Menu.Instance.SetState(Menu.State.LevelSelect);
+
             // Set camera position and bounds
             float minY = Mathf.Infinity;
             float maxY = -Mathf.Infinity;
@@ -202,7 +196,7 @@ public class GameController : Singleton<GameController>
                     }
                 }
             }
-            Scroll camScroll = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Scroll>();
+            Scroll camScroll = Camera.main.GetComponent<Scroll>();
             camScroll.CameraMinY = minY;
             camScroll.CameraMaxY = maxY;
             camScroll.ScrollTo(curY);
@@ -270,7 +264,7 @@ public class GameController : Singleton<GameController>
     {
         foreach(Level level in GetAllLevels())
         {
-            if(level.Scene.Equals(levelName))
+            if(level.name.Equals(levelName))
                 return level;
         }
         return null;
@@ -280,7 +274,8 @@ public class GameController : Singleton<GameController>
     /// Gets all levels in the game.
     /// </summary>
     /// <returns>All levels in the game.</returns>
-    private Level[] GetAllLevels() {
-        return GameObject.FindGameObjectWithTag("Levels").GetComponentsInChildren<Level>(true);
+    private Level[] GetAllLevels()
+    {
+        return Menu.Instance.Levels.GetComponentsInChildren<Level>(true);
     }
 }

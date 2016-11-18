@@ -15,8 +15,8 @@ public class MessageLevelEnd : Message
     protected override IEnumerator Run()
     {
         Background.transform.localScale = Vector3.zero;
-        Color fadeColor = Fade.color = new Color(Fade.color.r, Fade.color.g, Fade.color.b, 0f);
-        Color textColor = Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, 0f);
+        Fade.color = new Color(Fade.color.r, Fade.color.g, Fade.color.b, 0f);
+        Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, 0f);
 
         // Ensure that game is not paused
         LevelController.Singleton.Paused = false;

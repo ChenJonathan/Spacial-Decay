@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011991056952}
   - 120: {fileID: 120000013798751376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LevelLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

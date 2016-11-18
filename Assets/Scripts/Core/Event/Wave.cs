@@ -99,7 +99,6 @@ public class Wave : MonoBehaviour
     public virtual void Start()
     {
         field = ((LevelController)LevelController.Instance).Field;
-        Camera camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         enemyQueue = new List<EnemyData>();
         warningQueue = new List<WarningData>();
         enemies = new List<Enemy>();

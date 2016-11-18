@@ -115,8 +115,7 @@ public partial class Enemy : DanmakuCollider
     {
         if(FacePlayer)
             TargetRotation = Quaternion.LookRotation(Vector3.forward, Player.transform.position - transform.position);
-        if(TargetRotation != null)
-            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, Time.fixedDeltaTime * RotateSpeed);
     }
 
     /// <summary>
@@ -151,6 +150,12 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public virtual void Die()
     {
+        Wave.WarningData explosionData = new Wave.WarningData();
+        explosionData.Prefab = explosion;
+        explosionData.Duration = 10.083f;
+        explosionData.Data.Location = transform.position;
+        Wave.SpawnWarning(explosionData);
+
         Destroy(gameObject);
     }
 
@@ -159,11 +164,6 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public void OnDestroy()
     {
-        Wave.WarningData explosionData = new Wave.WarningData();
-        explosionData.Prefab = explosion;
-        explosionData.Duration = 10.083f;
-        explosionData.Data.Location = transform.position;
-        Wave.SpawnWarning(explosionData);
         Wave.UnregisterEnemy(this);
     }
 

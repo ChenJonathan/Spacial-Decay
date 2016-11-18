@@ -373,6 +373,7 @@ MonoBehaviour:
       - AudioClip onHitAudio
       - AudioClip onDeathAudio
       - AudioClip onFireAudio
+      - Warning explosion
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -388,6 +389,7 @@ MonoBehaviour:
       - 150
       - 0
       - 8.0
+      - null
       - null
       - null
       - null
@@ -412,6 +414,7 @@ MonoBehaviour:
   onHitAudio: {fileID: 0}
   onDeathAudio: {fileID: 0}
   onFireAudio: {fileID: 0}
+  explosion: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []

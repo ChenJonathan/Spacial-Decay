@@ -58,7 +58,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -331,6 +331,7 @@ MonoBehaviour:
       - AudioClip onHitAudio
       - AudioClip onDeathAudio
       - AudioClip onFireAudio
+      - Warning explosion
       - bool FacePlayer
       - GameObject healthBarPrefab
       - float[] parameters
@@ -344,6 +345,7 @@ MonoBehaviour:
       - 100
       - 0
       - 8.0
+      - null
       - null
       - null
       - null
@@ -368,6 +370,7 @@ MonoBehaviour:
   onHitAudio: {fileID: 0}
   onDeathAudio: {fileID: 0}
   onFireAudio: {fileID: 0}
+  explosion: {fileID: 0}
   FacePlayer: 0
   healthBarPrefab: {fileID: 160722, guid: 00d10dde6764d52428e747996fbe6f5d, type: 2}
   parameters: []
