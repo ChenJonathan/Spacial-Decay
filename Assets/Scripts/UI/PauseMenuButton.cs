@@ -14,9 +14,11 @@ public class PauseMenuButton : MonoBehaviour
     private readonly float scaleTargWhenDefault = 1.0f;
     private readonly float scaleTargWhenHovered = 1.15f;
 
-    public AudioClip onHoverEffect;
-    public AudioClip onClickEffect;
     private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip onHoverEffect;
+    [SerializeField]
+    private AudioClip onClickEffect;
 
     void Awake()
     {

@@ -297,14 +297,14 @@ public class Player : MonoBehaviour
         else if(selecting)
         {
             // Dash targeting
-            if(Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0) || Input.GetMouseButtonDown(1))
             {
                 // Begin dash
-                if(dashes > 0)
+                if(Input.GetMouseButtonUp(0) && dashes > 0)
                 {
                     SetDashTarget(mousePos);
                     dashes--;
-                    
+
                     if(dashes == 0)
                         dashRenderer.SetColors(dashStartInactive, dashEndInactive);
                     audioSource.clip = OnDashAudio;
@@ -316,7 +316,6 @@ public class Player : MonoBehaviour
                 targetAlphaWings = 0f;
                 deltaAlphaWings = 3f;
                 trailAnimator.SetBool("Active", false);
-                dashRenderer.enabled = false;
                 SetMoveTarget(mousePos);
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
@@ -333,17 +332,6 @@ public class Player : MonoBehaviour
         {
             // Normal movement targeting
             SetMoveTarget(mousePos);
-        }
-
-        if(Input.GetMouseButtonDown(1))
-        {
-            // Cancel dash targeting
-            selecting = false;
-            targetAlphaWings = 0f;
-            deltaAlphaWings = 3f;
-            trailAnimator.SetBool("Active", false);
-            dashRenderer.enabled = false;
-            LevelController.Singleton.TargetTimeScale = 1;
         }
     }
 
