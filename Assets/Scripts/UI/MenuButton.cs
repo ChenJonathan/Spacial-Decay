@@ -23,6 +23,12 @@ public class MenuButton : MonoBehaviour
     public void Awake()
     {
         menu = GetComponentInParent<Menu>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnMouseEnter()
+    {
+        audioSource.PlayOneShot(onHoverEffect);
     }
 
     public void OnMouseOver()
@@ -33,6 +39,8 @@ public class MenuButton : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             menu.StateChanged = true;
+
+            AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
 
             switch(menu.CurrentState)
             {
