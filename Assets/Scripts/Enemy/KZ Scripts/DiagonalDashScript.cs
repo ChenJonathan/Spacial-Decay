@@ -21,7 +21,7 @@ public class DiagonalDashScript : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(6 + 2 * Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(100 + 40 * Difficulty, new DynamicInt(10 + 5 * Difficulty, 20 + 10 * Difficulty), 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(30 + 40 * Difficulty, new DynamicInt(10 + 5 * Difficulty, 20 + 10 * Difficulty), 0, 0));
 
         if (parameters.Length > 0) {
             velocityMultiplier = (int) parameters[0];

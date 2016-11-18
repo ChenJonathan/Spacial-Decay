@@ -38,7 +38,7 @@ public class BorderEnemy : Enemy
             fireCooldown = MAX_FIRE_COOLDOWN;
         }
 
-        if(pauseCooldown <= -1f)
+        if(pauseCooldown <= -.33f + -.33f * Difficulty)
         {
             pauseCooldown = MAX_PAUSE_COOLDOWN / (Difficulty + 1);
         }

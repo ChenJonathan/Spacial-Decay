@@ -19,7 +19,7 @@ public class ScreenClockwiseBottomRight : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(6 + 2 * Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(100 + 40 * Difficulty, new DynamicInt(5 + 2 * Difficulty, 10 + 5 * Difficulty), 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(30 + 40 * Difficulty, new DynamicInt(5 + 2 * Difficulty, 10 + 5 * Difficulty), 0, 0));
 
         base.Start();
     }
