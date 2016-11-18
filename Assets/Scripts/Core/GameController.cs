@@ -84,6 +84,8 @@ public class GameController : Singleton<GameController>
                 LevelData levelData = Levels[level.name];
                 levelData.Unlocked = true;
                 levelData.Complete = true;
+                levelData.BestDifficulty = 0;
+                levelData.BestTime = 1000;
                 Levels[level.name] = levelData;
             }
         }
@@ -91,6 +93,9 @@ public class GameController : Singleton<GameController>
         {
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
+            levelData.Complete = false;
+            levelData.BestDifficulty = 0;
+            levelData.BestTime = 1000;
             Levels[StartLevel] = levelData;
         }
         SceneManager.sceneLoaded += OnLoad;
@@ -108,6 +113,8 @@ public class GameController : Singleton<GameController>
                 LevelData levelData = Levels[level.Scene];
                 levelData.Unlocked = true;
                 levelData.Complete = true;
+                levelData.BestDifficulty = 0;
+                levelData.BestTime = 1000;
                 Levels[level.Scene] = levelData;
             }
             CurrentLevel = "Tutorial";
@@ -121,6 +128,9 @@ public class GameController : Singleton<GameController>
             }
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
+            levelData.Complete = false;
+            levelData.BestDifficulty = 0;
+            levelData.BestTime = 1000;
             Levels[StartLevel] = levelData;
             CurrentLevel = null;
             SceneManager.LoadScene("Level Select");

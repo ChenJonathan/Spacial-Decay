@@ -32,6 +32,8 @@ public class MenuButton : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            menu.StateChanged = true;
+
             switch(menu.CurrentState)
             {
                 case Menu.State.Main:
@@ -41,10 +43,10 @@ public class MenuButton : MonoBehaviour
                             menu.SetState(Menu.State.LevelSelect);
                             break;
                         case "Options":
-                            menu.SetState(Menu.State.Options);
+                            // menu.SetState(Menu.State.Options);
                             break;
                         case "Credits":
-                            menu.SetState(Menu.State.Credits);
+                            // menu.SetState(Menu.State.Credits);
                             break;
                         case "Exit":
                             Application.Quit();

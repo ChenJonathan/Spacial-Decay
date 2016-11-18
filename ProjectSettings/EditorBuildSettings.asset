@@ -30,6 +30,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Laser Trap Boss.unity
   - enabled: 1
+    path: Assets/Scenes/Levels/Sniper Boss.unity
+  - enabled: 1
     path: Assets/Scenes/Levels/Spiral Boss.unity
   - enabled: 1
     path: Assets/Scenes/Levels/Straight Forward.unity

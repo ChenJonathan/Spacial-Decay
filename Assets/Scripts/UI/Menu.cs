@@ -32,9 +32,14 @@ public class Menu : Singleton<Menu>
         levelSelectMenu = transform.FindChild("Level Select").gameObject;
     }
 
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) && CurrentState != State.Main)
+            SetState(State.Main);
+    }
+
     public void SetState(State state)
     {
-        StateChanged = true;
         if(state != State.LevelSelect)
             Player.gameObject.SetActive(true);
 
