@@ -7,7 +7,7 @@ public class SniperTurretTower : Enemy
 {
     public DanmakuPrefab bulletPrefab;
     [HideInInspector]
-    public ShieldBoss sBoss;
+    public SniperBoss sBoss;
 
     private FireBuilder fireData;
     private float fireCooldown = MAX_FIRE_COOLDOWN;

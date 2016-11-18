@@ -16,7 +16,7 @@ public class SplitEnemyMed : Enemy
     public bool fireTowardsPlayer;
 
     private Vector2 direction;
-    private bool startup = true;    
+    private bool startup = true;
     public Enemy enemyPrefab;
 
     public override void Start()
