@@ -13,7 +13,7 @@ public class GameController : Singleton<GameController>
     public string StartLevel;
 
     [HideInInspector]
-    public string CurrentLevel = "";
+    public string CurrentLevel = null;
     [HideInInspector]
     public int Difficulty = 0;
 
@@ -43,6 +43,10 @@ public class GameController : Singleton<GameController>
 
     /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
     private bool unlockAllLevels;
+
+    // audio variables
+    public float sfxVol = .5f;
+    public float musicVol = .5f;
 
     /// <summary>
     /// Returns the only instance of the GameController.
@@ -118,6 +122,7 @@ public class GameController : Singleton<GameController>
                 levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
+            CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
         }
         if(Input.GetKeyDown(KeyCode.P))
@@ -188,7 +193,7 @@ public class GameController : Singleton<GameController>
                     maxY = y;
                 if(level.Scene.Equals(CurrentLevel))
                     curY = y;
-                if(CurrentLevel != "")
+                if(CurrentLevel != null)
                 {
                     foreach(Level levelChild in level.Unlocks)
                     {
@@ -253,6 +258,7 @@ public class GameController : Singleton<GameController>
                 }
             }
             CurrentLevel = null;
+            Level.Clickable = true;
         }
     }
 

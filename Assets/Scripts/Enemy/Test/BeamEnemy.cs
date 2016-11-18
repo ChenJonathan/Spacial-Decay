@@ -15,6 +15,9 @@ public class BeamEnemy : Enemy
     private Danmaku currentWarning;
     private Danmaku currentBeam;
 
+    /// <summary> The horizontal speed of the enemy. </summary>
+    private float speed = -5;
+
     public override void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -22,7 +25,6 @@ public class BeamEnemy : Enemy
         warningData = new FireBuilder(warningPrefab, Field);
         warningData.From(transform);
         warningData.WithSpeed(0);
-        //warningData.WithController(new AutoDeactivateController(1f));
         warningData.WithController(new EnemyDeathController(this));
         ColorChangeController colorController = new ColorChangeController();
         GradientAlphaKey[] gak = new GradientAlphaKey[2];
@@ -44,8 +46,11 @@ public class BeamEnemy : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(0);
-        //fireData.WithController(new AutoDeactivateController(2f));
         fireData.WithController(new EnemyDeathController(this));
+
+        if (parameters.Length > 0) {
+            speed *= parameters[0];
+        }
 
         base.Start();
     }
@@ -56,7 +61,7 @@ public class BeamEnemy : Enemy
         {
             // Moving left
             FacePlayer = true;
-            rigidbody2d.velocity = new Vector2(-5, 0);
+            rigidbody2d.velocity = new Vector2(speed, 0);
             yield return new WaitForSeconds(2);
 
             // Stop and face player
@@ -80,13 +85,13 @@ public class BeamEnemy : Enemy
     /// <summary>
     /// Updates the position of the beam if the enemy moves.
     /// </summary>
-    private void FixedUpdate() {
-        if (currentWarning != null && currentWarning.IsActive) {
-            currentWarning.position = transform.position;
-        }
-        if (currentBeam != null && currentBeam.IsActive) {
-            currentBeam.position = transform.position;
-        }
+    public override void FixedUpdate()
+    {
         base.FixedUpdate();
+
+        if (currentWarning != null && currentWarning.IsActive)
+            currentWarning.position = transform.position;
+        if (currentBeam != null && currentBeam.IsActive)
+            currentBeam.position = transform.position;
     }
 }

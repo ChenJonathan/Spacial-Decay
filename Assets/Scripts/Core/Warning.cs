@@ -42,7 +42,7 @@ public class Warning : MonoBehaviour
     {
         renderer2d = GetComponent<SpriteRenderer>();
         Color color = renderer2d.color;
-        color.a = 0;
+        color.a = (fadeInDuration <= 0) ? 1 : 0;
         renderer2d.color = color;
     }
 

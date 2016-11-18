@@ -63,7 +63,7 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 0, y: -9}
+    - Location: {x: 0, y: 0}
       Time: 0
       Parameters: []
 --- !u!1001 &100100000

@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     // Counters to display information
     private LivesCounter livesCounter;
-    private DashCounter dashCounter;
+    public DashCounter dashCounter;
     
     // Player life values
     private int lives = MAX_LIVES;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     private int dashes = 0; // Number of dashes remaining
     private float dashCooldown = 0; // Time since last dash charge was received
     public static int maxDashes = 3; // Maximum number of dashes that can be held at once
-    private static float MAX_DASH_COOLDOWN = 3; // Time required for a dash charge to be gained
+    private static float MAX_DASH_COOLDOWN = 4; // Time required for a dash charge to be gained
 
     // Whether the player is invincible or not
     private bool invincible = false;
@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer; // Renders the ship
     private SpriteRenderer hitboxGlowRenderer; // Renders the glow effect for the hitbox
     private SpriteRenderer wingsGlowRenderer; // Renders the glow effect for the wings
+    private SpriteRenderer trailRenderer; // Renders the ship trail
+    private Animator trailAnimator; // Animates the ship trail
     private ParticleSystem hitEffect; // Particle effect for when the player takes damage
 
     private float currentAlphaHitbox = 0f;
@@ -110,6 +112,7 @@ public class Player : MonoBehaviour
         field = LevelController.Singleton.Field;
         collider2d = GetComponent<Collider2D>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+        trailAnimator = transform.FindChild("Trail").GetComponent<Animator>();
         hitEffect = GetComponentInChildren<ParticleSystem>();
 
         // Initializes the renderers
@@ -123,6 +126,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
+        trailRenderer = transform.FindChild("Trail").GetComponent<SpriteRenderer>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -164,8 +168,10 @@ public class Player : MonoBehaviour
         // General movement-related functions
         if(moving)
         {
-            targetRenderer.enabled = true;
-            moving = Vector2.Distance(transform.position, target) > (dashing ? 1 : 0.1);
+            float distance = Vector2.Distance(transform.position, target);
+            if(distance > 1)
+                targetRenderer.enabled = true;
+            moving = distance > (dashing ? 1 : 0.1);
             if(!moving)
             {
                 // Player reached its target
@@ -177,6 +183,7 @@ public class Player : MonoBehaviour
                     hitEnemies.Clear();
                     targetAlphaWings = 0f;
                     deltaAlphaWings = 1f;
+                    trailAnimator.SetBool("Active", false);
                 }
             }
         }
@@ -199,6 +206,20 @@ public class Player : MonoBehaviour
                 dashCounter.UpdateCounter(dashes);
             }
         }
+
+        // Update hitbox alpha
+        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.deltaTime);
+        Color temp = hitboxGlowRenderer.color;
+        temp.a = currentAlphaHitbox * spriteRenderer.color.a;
+        hitboxGlowRenderer.color = temp;
+        if(currentAlphaHitbox == targetAlphaHitbox)
+            targetAlphaHitbox = 1 - targetAlphaHitbox;
+
+        // Update wings alpha
+        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.deltaTime * deltaAlphaWings);
+        temp = wingsGlowRenderer.color;
+        temp.a = currentAlphaWings * spriteRenderer.color.a;
+        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -248,20 +269,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
-        // Update hitbox alpha
-        currentAlphaHitbox = Mathf.MoveTowards(currentAlphaHitbox, targetAlphaHitbox, Time.fixedDeltaTime);
-        Color temp = hitboxGlowRenderer.color;
-        temp.a = currentAlphaHitbox * spriteRenderer.color.a;
-        hitboxGlowRenderer.color = temp;
-        if(currentAlphaHitbox == targetAlphaHitbox)
-            targetAlphaHitbox = 1 - targetAlphaHitbox;
-
-        // Update wings alpha
-        currentAlphaWings = Mathf.MoveTowards(currentAlphaWings, targetAlphaWings, Time.fixedDeltaTime * deltaAlphaWings);
-        temp = wingsGlowRenderer.color;
-        temp.a = currentAlphaWings * spriteRenderer.color.a;
-        wingsGlowRenderer.color = temp;
     }
 
     /// <summary>
@@ -281,6 +288,7 @@ public class Player : MonoBehaviour
             SetMoveTarget(mousePos);
             targetAlphaWings = 1f;
             deltaAlphaWings = 3f;
+            trailAnimator.SetBool("Active", true);
             dashRenderer.SetPosition(0, transform.position);
             dashRenderer.SetPosition(1, mousePos);
             dashRenderer.enabled = true;
@@ -305,6 +313,10 @@ public class Player : MonoBehaviour
 
                 // Disable dash selection
                 selecting = false;
+                targetAlphaWings = 0f;
+                deltaAlphaWings = 3f;
+                trailAnimator.SetBool("Active", false);
+                dashRenderer.enabled = false;
                 SetMoveTarget(mousePos);
                 dashRenderer.enabled = false;
                 dashCounter.UpdateCounter(dashes);
@@ -329,6 +341,7 @@ public class Player : MonoBehaviour
             selecting = false;
             targetAlphaWings = 0f;
             deltaAlphaWings = 3f;
+            trailAnimator.SetBool("Active", false);
             dashRenderer.enabled = false;
             LevelController.Singleton.TargetTimeScale = 1;
         }
@@ -398,12 +411,14 @@ public class Player : MonoBehaviour
             {
                 color.a = 1.25f - color.a;
                 spriteRenderer.color = color;
+                trailRenderer.color = color;
             }
             timer += Time.deltaTime;
             yield return null;
         }
         color.a = 1;
         spriteRenderer.color = color;
+        trailRenderer.color = color;
         invincible = false;
         yield break;
     }

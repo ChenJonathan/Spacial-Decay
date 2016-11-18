@@ -9,14 +9,26 @@ public class LaserTrapScript : Enemy
     public DanmakuPrefab laserPrefab;
     public DanmakuPrefab petalPrefab;
     public DanmakuPrefab circlePrefab;
+    public DanmakuPrefab laserWarning;
+    public DanmakuPrefab meteor;
 
     private FireBuilder fireDataLaser;
     private FireBuilder fireDataPetal;
     private FireBuilder fireDataCircle;
+    private FireBuilder warningLaser;
+    private FireBuilder fireLaser2;
+    private FireBuilder rapidFire;
+    private FireBuilder scatterCircle;
     private bool enraged = false;
     private bool weaponized = false;
     private bool finalForm = false;
     private float atkSpd;
+    private int phase = 1;
+    private int bulletCount = 0;
+    private bool charging = true;
+    private bool chargingLaser = true;
+    private float rotate = 0;
+    private float rotator = 2.5f;
 
     public override void Start()
     {
@@ -24,6 +36,18 @@ public class LaserTrapScript : Enemy
         fireDataLaser.From(transform);
         fireDataLaser.WithSpeed(0);
         fireDataLaser.WithModifier(new CircularBurstModifier(90, 2, 0, 0));
+
+        warningLaser = new FireBuilder(laserWarning, Field);
+        warningLaser.From(transform);
+        warningLaser.WithSpeed(0);
+        warningLaser.WithDamage(0);
+        warningLaser.WithController(new AutoDeactivateController(.01f));
+
+
+        fireLaser2 = new FireBuilder(laserPrefab, Field);
+        fireLaser2.From(transform);
+        fireLaser2.WithSpeed(0);
+        fireLaser2.WithController(new AutoDeactivateController(.01f));
 
         fireDataPetal = new FireBuilder(petalPrefab, Field);
         fireDataPetal.From(transform);
@@ -36,6 +60,18 @@ public class LaserTrapScript : Enemy
         fireDataCircle.WithSpeed(8 + 2 * Difficulty);
         fireDataCircle.WithModifier(new CircularBurstModifier(360, new DynamicInt(10, 15), 0, 0));
         fireDataCircle.WithController(new AccelerationController(5f));
+
+        rapidFire = new FireBuilder(meteor, Field);
+        rapidFire.From(transform);
+        rapidFire.WithModifier(new RandomizeAngleModifier(360));
+        rapidFire.WithController(new AutoDeactivateController(3f));
+
+        scatterCircle = new FireBuilder(circlePrefab, Field);
+        scatterCircle.From(transform);
+        scatterCircle.WithSpeed(8 + 2 * Difficulty);
+        scatterCircle.WithModifier(new RandomizeAngleModifier(360));
+        scatterCircle.WithController(new SpeedLimitController(1f, 12f));
+        scatterCircle.WithController(new AccelerationController(-12f));
 
         switch (Difficulty)
         {
@@ -78,14 +114,37 @@ public class LaserTrapScript : Enemy
     {
         base.Damage(damage);
 
-        if (Health <= 400)
-        {
-            enraged = true;
-        }
-
-        if (Health <= 200)
+        if (Health <= 150)
         {
             finalForm = true;
+            enraged = true;
+        }
+        else if (Health <= 300)
+        {
+            enraged = true;
+            finalForm = false;
+        }
+        else if (Health <= 450)
+        {
+            phase = 2;
+            enraged = false;
+            finalForm = false;
+        }
+        else if (Health <= 600)
+        {
+            enraged = true;
+            finalForm = true;
+        }
+        else if (Health <= 750)
+        {
+            enraged = true;
+            finalForm = false;
+        }
+        else if (Health <= 900)
+        {
+            enraged = false;
+            finalForm = false;
+            phase = 1;
         }
     }
 
@@ -95,35 +154,75 @@ public class LaserTrapScript : Enemy
         {
             if (weaponized)
             {
-                FacePlayer = false;
-                Transform target = transform;
-                yield return new WaitForSeconds(.1f);
-                fireDataLaser.WithController(new AutoDeactivateController((finalForm ? (atkSpd / 2f) : atkSpd)));
-                fireDataLaser.WithRotation(target);
-                fireDataPetal.WithRotation(transform);
-                fireDataLaser.Fire();
-                for (int i = 0; i < 10; i++)
+                switch (phase)
                 {
-                    
-                    fireDataPetal.Fire();
-                    yield return new WaitForSeconds(finalForm ? atkSpd / 20f: atkSpd / 10f);
-                    if (i % (finalForm ? 2: 4) == 0)
-                    {
-                        EnragedAttack();
-                    }
+                    case 1:
+                        FacePlayer = false;
+                        Transform target = transform;
+                        yield return new WaitForSeconds(.1f);
+                        fireDataLaser.WithController(new AutoDeactivateController((finalForm ? (atkSpd / 2f) : atkSpd)));
+                        fireDataLaser.WithRotation(target);
+                        fireDataPetal.WithRotation(transform);
+                        fireDataLaser.Fire();
+                        for (int i = 0; i < 10; i++)
+                        {
+
+                            fireDataPetal.Fire();
+                            yield return new WaitForSeconds(finalForm ? atkSpd / 20f : atkSpd / 10f);
+                            if (i % (finalForm ? 2 : 4) == 0)
+                            {
+                                if (enraged)
+                                {
+                                    fireDataCircle.Fire();
+                                }
+                            }
+                        }
+                        FacePlayer = true;
+                        yield return new WaitForSeconds(finalForm ? 0.5f : 1f);
+                        break;
+                    case 2:
+                        SetRotation(0);
+                        if (charging)
+                        {
+                            yield return new WaitForSeconds(2);
+                            charging = false;
+                        }
+                        warningLaser.WithRotation(rotate);
+                        fireLaser2.WithRotation(rotate);
+                        fireLaser2.Fire();
+                        if (bulletCount % (finalForm ? 75 : 100) == 0)
+                        {
+                            for (int i = 0; i < 75 + 25 * Difficulty; i++)
+                            {
+                                rapidFire.WithSpeed(new DynamicInt(7, 10));
+                                rapidFire.Fire();
+                            }
+                        }
+                        if (bulletCount % ((finalForm ? 5 : 7)) == 0 && enraged)
+                        {
+                            scatterCircle.WithRotation(rotate);
+                            scatterCircle.Fire();
+                        }
+                        rotate += (rotator + 0.5f * Difficulty);
+                        //WILL IMPLEMENT THIS LATER TO CHARGE THE LASER
+                        /* if ((bulletCount / 100) % 2 == 0)
+                        {
+                            chargingLaser = true;
+                        } else
+                        {
+                            chargingLaser = false;
+                        } */
+                        bulletCount++;
+                        yield return new WaitForSeconds(.02f);
+                        break;
+                    default:
+                        break;
                 }
-                FacePlayer = true;
-                yield return new WaitForSeconds(finalForm ? 0.5f : 1f);
+            } else
+            {
+                yield return new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(0.5f);
         }
     }
 
-    private void EnragedAttack()
-    {
-        if (enraged)
-        {
-            fireDataCircle.Fire();
-        }
-    }
 }

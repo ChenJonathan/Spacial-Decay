@@ -64,7 +64,7 @@ MonoBehaviour:
     - Location: {x: 20, y: -7}
       Time: 3
       Parameters: []
-  - Prefab: {fileID: 114000014114509546, guid: 96ad590f83426df48ab06dec30a50eab, type: 2}
+  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
     Data:
     - Location: {x: 20, y: 7}
       Time: 3
