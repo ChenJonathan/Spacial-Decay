@@ -145,13 +145,6 @@ public class LevelController : DanmakuGameController, IPausable
             pauseMenuRuntime = Instantiate(PauseMenu);
         if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
             Paused = true;
-
-        // TODO Remove these
-        if(Input.GetKeyDown(KeyCode.Tab))
-            GameController.Singleton.LoadLevelSelect(true, LevelTime);
-        if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            EndEvent();
-        }
     }
 
     /// <summary>
