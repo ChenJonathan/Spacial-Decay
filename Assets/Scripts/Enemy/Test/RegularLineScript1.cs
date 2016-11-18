@@ -73,7 +73,7 @@ public class RegularLineScript1 : Enemy
             if(transform.position.x > 16 && !up)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 2 + Difficulty);
-                SetRotation(90);
+                SetRotation(0);
                 fireData.Facing(Vector2.up);
                 up = true;
                 down = false;
@@ -81,7 +81,7 @@ public class RegularLineScript1 : Enemy
             else if(transform.position.y >= 8 && !left)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(-2 - Difficulty, 0);
-                SetRotation(180);
+                SetRotation(90);
                 fireData.Facing(Vector2.left);
                 left = true;
                 right = false;
@@ -89,7 +89,7 @@ public class RegularLineScript1 : Enemy
             else if(transform.position.x <= -16 && !down)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, -2 - Difficulty);
-                SetRotation(270);
+                SetRotation(180);
                 fireData.Facing(Vector2.down);
                 down = true;
                 up = false;
@@ -97,7 +97,7 @@ public class RegularLineScript1 : Enemy
             else if(transform.position.y <= -8 && !right)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(2 + Difficulty, 0);
-                SetRotation(0);
+                SetRotation(270);
                 fireData.Facing(Vector2.right);
                 right = true;
                 left = false;

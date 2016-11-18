@@ -74,15 +74,6 @@ MonoBehaviour:
     - Location: {x: -27, y: 0}
       Time: 3
       Parameters: []
-  - Prefab: {fileID: 114000011340133002, guid: a30d93d3fd6d0694693dc572d3cd4dc5, type: 2}
-    Data:
-    - Location: {x: -20, y: 8}
-      Time: 3
-      Parameters:
-      - -1
-    - Location: {x: 20, y: -8}
-      Time: 3
-      Parameters: []
   - Prefab: {fileID: 114000012258096244, guid: 6494f6a6f3309f34fa92561110d8ec5c, type: 2}
     Data:
     - Location: {x: 0, y: 10}
@@ -90,21 +81,6 @@ MonoBehaviour:
       Parameters:
       - -1
     - Location: {x: 0, y: -10}
-      Time: 3
-      Parameters: []
-  - Prefab: {fileID: 114000011813409250, guid: f148e3c286901574abe1d9b491548fa6, type: 2}
-    Data:
-    - Location: {x: 3, y: 0}
-      Time: 3
-      Parameters:
-      - -1
-    - Location: {x: -3, y: 0}
-      Time: 3
-      Parameters: []
-    - Location: {x: 0, y: 3}
-      Time: 3
-      Parameters: []
-    - Location: {x: 0, y: -3}
       Time: 3
       Parameters: []
   WarningChains:
