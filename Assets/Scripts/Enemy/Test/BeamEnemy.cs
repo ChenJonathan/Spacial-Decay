@@ -66,7 +66,7 @@ public class BeamEnemy : Enemy
 
             // Fire
             currentWarning = warningData.Fire();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f - .25f * Difficulty);
             currentWarning.DeactivateImmediate();
             currentBeam = fireData.Fire();
             yield return new WaitForSeconds(2f);

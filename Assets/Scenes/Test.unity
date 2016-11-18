@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedObjects:
     - {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
     - {fileID: 1205748683}
-    - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+    - {fileID: 188780, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
     - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
     - {fileID: 0}
     serializedStrings:
@@ -234,7 +234,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 11426350, guid: 277ce615e12757b40b70b8c0911308e9, type: 2}
   field: {fileID: 1205748683}
   events:
-  - {fileID: 188780, guid: af9e2ec77877cb540b96386b2d86b354, type: 2}
+  - {fileID: 188780, guid: 21649082c9d916b4b84f36d94b360db7, type: 2}
   - {fileID: 1000013141128222, guid: 31c23d0a9abe9a24eb831928283b3723, type: 2}
   LevelCompleteMessage: {fileID: 0}
   LevelFailedMessage: {fileID: 0}
@@ -644,6 +644,8 @@ MonoBehaviour:
   orbActivePrefab: {fileID: 180408, guid: 2f95e36be91fe2a46a03c14f6a0573ef, type: 2}
   orbInactivePrefab: {fileID: 180408, guid: e019f87c30190ae4c91447d24eac0113, type: 2}
   gap: 6
+  orbsCounterActive: []
+  orbsCounterInactive: []
 --- !u!114 &1417255041
 MonoBehaviour:
   m_ObjectHideFlags: 0

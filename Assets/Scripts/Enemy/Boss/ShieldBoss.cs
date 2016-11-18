@@ -27,12 +27,12 @@ public class ShieldBoss : Enemy
         fireDataBullet.From(transform);
         fireDataBullet.WithSpeed(3);
         fireDataBullet.WithAngularSpeed(45);
-        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(8, 12), 0, 0));
+        fireDataBullet.WithModifier(new CircularBurstModifier(340, new DynamicInt(8, 12) + 3 * Difficulty, 0, 0));
         fireDataBullet.WithController(new AccelerationController(3));
 
         fireDataCircle = new FireBuilder(CirclePrefab, Field);
         fireDataCircle.From(transform);
-        fireDataCircle.WithSpeed(12);
+        fireDataCircle.WithSpeed(8 + 2 * Difficulty);
         fireDataCircle.WithModifier(new CircularBurstModifier(45, 7, 0, 0));
 
         fireDataLaser = new FireBuilder(LaserPrefab, Field);

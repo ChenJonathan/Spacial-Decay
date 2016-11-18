@@ -43,7 +43,7 @@ public class Tower : Enemy
             if(fireCooldown <= 0)
             {
                 fireData.Fire();
-                fireCooldown = MAX_FIRE_COOLDOWN;
+                fireCooldown = MAX_FIRE_COOLDOWN - .2f * Difficulty;
             }
         }
         else
