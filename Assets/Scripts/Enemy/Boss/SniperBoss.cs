@@ -5,20 +5,17 @@ using DanmakU.Modifiers;
 using DanmakU.Controllers;
 using System.Collections.Generic;
 
-public class ShieldBoss : Enemy
+public class SniperBoss : Enemy
 {
     public DanmakuPrefab BulletPrefab;
     public DanmakuPrefab CirclePrefab;
     public DanmakuPrefab LaserPrefab;
-    public Shield Shield;
     public SniperTurretTower turretPrefab;
     private List<SniperTurretTower> turrets;
 
     private FireBuilder fireDataBullet;
     private FireBuilder fireDataCircle;
     private FireBuilder fireDataLaser;
-    private Shield leftShield;
-    private Shield rightShield;
 
     private bool stillMovement = false;
     private bool stillRotation = false;

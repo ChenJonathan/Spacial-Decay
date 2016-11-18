@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     private int dashes = 0; // Number of dashes remaining
     private float dashCooldown = 0; // Time since last dash charge was received
     public static int maxDashes = 3; // Maximum number of dashes that can be held at once
-    private static float MAX_DASH_COOLDOWN = 3; // Time required for a dash charge to be gained
+    private static float MAX_DASH_COOLDOWN = 4; // Time required for a dash charge to be gained
 
     // Whether the player is invincible or not
     private bool invincible = false;
