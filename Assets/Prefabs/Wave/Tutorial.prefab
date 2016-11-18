@@ -59,5 +59,7 @@ MonoBehaviour:
     type: 2}
   WarningPrefab: {fileID: 114000011160122508, guid: 25610111fc7263b429707a18701a5035,
     type: 2}
-  EnemyPrefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671,
+  EnemyWarningPrefab: {fileID: 114000011160122508, guid: 063e2861c01bb134596db116e100a027,
+    type: 2}
+  EnemyPrefab: {fileID: 114000010520459364, guid: d51cb7d5839816e48bd41959ca9be078,
     type: 2}
