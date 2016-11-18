@@ -1,96 +1,80 @@
-﻿using DanmakU;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// A space probe that travels to a level, unlocking it.
+/// Allows the player to choose the difficulty
 /// </summary>
-public class DifficultySelect : Singleton<DifficultySelect>
+public class DifficultySelect : MonoBehaviour
 {
-    [SerializeField]
-    private Text levelName;
-    [SerializeField]
-    private GameObject[] starsActive;
-    [SerializeField]
-    private GameObject[] starsInactive;
+    public Vector2 LocationEasy;
+    public Vector2 LocationMedium;
+    public Vector2 LocationHard;
 
-    private Camera mainCamera;
-    private Level level;
-    public Level Level
-    {
-        get { return level; }
-    }
+    public Image ImageEasy;
+    public Image ImageMedium;
+    public Image ImageHard;
 
-    /// <summary>
-    /// Called when the difficulty select is instantiated.
-    /// </summary>
-    public override void Awake()
-    {
-        base.Awake();
+    private float targetX;
+    private readonly float CURSOR_SPEED = 0.3f;
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        gameObject.SetActive(false);
-    }
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip onHoverEffect;
+    [SerializeField]
+    private AudioClip onClickEffect;
 
     public void Start()
     {
-        SetDifficulty(0);
+        Vector3 position = transform.position;
+        switch(GameController.Singleton.Difficulty)
+        {
+            case 0:
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationEasy.x, LocationEasy.y, 13.2f)).x;
+                break;
+            case 1:
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationMedium.x, LocationMedium.y, 13.2f)).x;
+                break;
+            case 2:
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationHard.x, LocationHard.y, 13.2f)).x;
+                break;
+        }
+        transform.position = position;
     }
 
-    /// <summary>
-    /// Called periodically. Keeps the camera anchored to the selected level.
-    /// </summary>
     public void Update()
     {
-        if(level != null)
+        Vector3 position = transform.position;
+        position.x = Mathf.Lerp(position.x, targetX, CURSOR_SPEED);
+        transform.position = position;
+
+        Color temp = ImageEasy.color;
+        temp.a = Mathf.MoveTowards(temp.a, GameController.Singleton.Difficulty == 0 ? 1 : 0, Time.deltaTime);
+        ImageEasy.color = temp;
+        temp = ImageMedium.color;
+        temp.a = Mathf.MoveTowards(temp.a, GameController.Singleton.Difficulty == 1 ? 1 : 0, Time.deltaTime);
+        ImageMedium.color = temp;
+        temp = ImageHard.color;
+        temp.a = Mathf.MoveTowards(temp.a, GameController.Singleton.Difficulty == 2 ? 1 : 0, Time.deltaTime);
+        ImageHard.color = temp;
+
+        if(Input.GetMouseButtonDown(0))
         {
-            transform.position = mainCamera.WorldToScreenPoint(level.transform.position) + new Vector3(0, (float)(0.25 * Screen.height), 0);
-        }
-    }
-
-    /// <summary>
-    /// Activates the difficulty select and places it next to a level.
-    /// </summary>
-    /// <param name="level">The level object to anchor to</param>
-    public void Activate(Level level)
-    {
-        this.level = level;
-        levelName.text = level.Scene;
-        gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// Deactivates the difficulty select.
-    /// </summary>
-    public void Deactivate()
-    {
-        level = null;
-        gameObject.SetActive(false);
-    }
-
-    public void SetDifficulty(int difficulty)
-    {
-        if(difficulty >= 0 && difficulty <= 2)
-        {
-            GameController.Singleton.Difficulty = difficulty;
-            for(int i = 0; i < 3; i++)
+            Vector2 mousePosition = new Vector2(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height);
+            if(Vector3.Distance(mousePosition, LocationEasy) < 0.1f)
             {
-                if(difficulty >= i)
-                {
-                    starsActive[i].gameObject.SetActive(true);
-                    starsInactive[i].gameObject.SetActive(false);
-                }
-                else
-                {
-                    starsActive[i].gameObject.SetActive(false);
-                    starsInactive[i].gameObject.SetActive(true);
-                }
+                GameController.Singleton.Difficulty = (int)Difficulty.Easy;
+                targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationEasy.x, LocationEasy.y, 13.2f)).x;
+            }
+            else if(Vector3.Distance(mousePosition, LocationMedium) < 0.1f)
+            {
+                GameController.Singleton.Difficulty = (int)Difficulty.Medium;
+                targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationMedium.x, LocationMedium.y, 13.2f)).x;
+            }
+            else if(Vector3.Distance(mousePosition, LocationHard) < 0.1f)
+            {
+                GameController.Singleton.Difficulty = (int)Difficulty.Hard;
+                targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationHard.x, LocationHard.y, 13.2f)).x;
             }
         }
-    }
-
-    public void StartLevel()
-    {
-        GameController.Singleton.LoadLevel(level.Scene);
     }
 }

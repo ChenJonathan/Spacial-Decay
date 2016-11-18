@@ -15,7 +15,7 @@ public class GameController : Singleton<GameController>
     [HideInInspector]
     public string CurrentLevel = null;
     [HideInInspector]
-    public int Difficulty = 0;
+    public int Difficulty = 1;
 
     public struct LevelData
     {
@@ -75,19 +75,19 @@ public class GameController : Singleton<GameController>
         //cameraY = -cameraMaxY;
 
         // Initialize levels
+        Difficulty = 1;
         Levels = new Dictionary<string, LevelData>();
         foreach(Level level in GetAllLevels())
         {
-            Levels[level.name] = new LevelData();
+            LevelData levelData = new LevelData();
             if(unlockAllLevels)
             {
-                LevelData levelData = Levels[level.name];
                 levelData.Unlocked = true;
                 levelData.Complete = true;
-                levelData.BestDifficulty = 0;
-                levelData.BestTime = 1000;
-                Levels[level.name] = levelData;
             }
+            levelData.BestDifficulty = 0;
+            levelData.BestTime = 1000;
+            Levels[level.name] = levelData;
         }
         if(!unlockAllLevels)
         {
