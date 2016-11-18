@@ -21,7 +21,7 @@ public class TrackerEnemy : Enemy
         HomingController HomingController = new HomingController();
         HomingController.Target = Player.transform;
         fireData.WithController(HomingController);
-        fireData.WithController(new AutoDeactivateController(4f));
+        fireData.WithController(new AutoDeactivateController(6f + Difficulty));
     }
 	
 	public void Update()

@@ -47,7 +47,7 @@ public class SwarmEnemy : Enemy
                 }
                 else
                 {
-                    moveTimer = 16;
+                    moveTimer = 10;
                     direction = -direction;
                     rigidbody2d.velocity = new Vector2(direction, 0);
                     transform.Rotate(Vector3.forward * 180);
