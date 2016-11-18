@@ -69,6 +69,11 @@ public class SplitEnemyMed : Enemy
             {
                 startup = false;
             }
+            if (Mathf.Abs(transform.position.x) > 30 || Mathf.Abs(transform.position.y) > 20)
+            {
+                // Edge case where enemy splits past the boundaries.
+                Die();
+            }
         }
         else
         {

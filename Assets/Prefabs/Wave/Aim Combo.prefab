@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Tracker Swarm Small
+  m_Name: Aim Combo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,23 +40,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b60baf910f4814ea4251f502d3c9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClearEnemiesOnEnd: 0
+  ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000011813409250, guid: 8090580e38a0df648a1d06070f2fea58, type: 2}
+  - Prefab: {fileID: 114000011340133002, guid: a30d93d3fd6d0694693dc572d3cd4dc5, type: 2}
     Data:
-    - Location: {x: 0, y: -12}
+    - Location: {x: 20, y: 5}
       Time: 3
       Parameters: []
-    - Location: {x: 0, y: 12}
+    - Location: {x: 20, y: -5}
+      Time: 3
+      Parameters: []
+  - Prefab: {fileID: 114000013328189242, guid: 3dd59096924052b41b040b515cbf5f40, type: 2}
+    Data:
+    - Location: {x: 0, y: 10}
+      Time: 3
+      Parameters: []
+    - Location: {x: 0, y: -10}
+      Time: 3
+      Parameters: []
+  - Prefab: {fileID: 114000012258096244, guid: 6494f6a6f3309f34fa92561110d8ec5c, type: 2}
+    Data:
+    - Location: {x: 0, y: 10}
+      Time: 3
+      Parameters: []
+    - Location: {x: 0, y: -10}
       Time: 3
       Parameters: []
   - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
     Data:
+    - Location: {x: -20, y: 8}
+      Time: 6
+      Parameters: []
+    - Location: {x: -19, y: 4}
+      Time: 6
+      Parameters: []
     - Location: {x: -20, y: 0}
+      Time: 6
+      Parameters: []
+    - Location: {x: -19, y: -4}
+      Time: 6
+      Parameters: []
+    - Location: {x: -20, y: -8}
+      Time: 6
+      Parameters: []
+  - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
+    Data:
+    - Location: {x: -20, y: -5}
       Time: 3
       Parameters: []
-    - Location: {x: 20, y: 0}
+    - Location: {x: -20, y: 5}
       Time: 3
       Parameters: []
   WarningChains:
@@ -65,7 +98,37 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
-    - Location: {x: 0, y: -9}
+    - Location: {x: 15, y: 5}
+      Time: 0
+      Parameters: []
+    - Location: {x: 15, y: -5}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: -8}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 8}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 4}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: -4}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: -8}
+      Time: 3
+      Parameters: []
+    - Location: {x: -16, y: -5}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 5}
       Time: 0
       Parameters: []
 --- !u!1001 &100100000
@@ -86,7 +149,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 11442184, guid: afb15c526336e464eaf6753fdc641482,
+      objectReference: {fileID: 11416366, guid: 69e68dc6dd1778a4e8c835bf5b869cf0,
         type: 2}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].x
@@ -102,7 +165,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Locations.Array.data[0].y
-      value: -12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spawns.Array.data[0].Times.Array.data[0]

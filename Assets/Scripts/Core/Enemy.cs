@@ -71,8 +71,8 @@ public partial class Enemy : DanmakuCollider
         TagFilter = "Untagged";
 
         healthBar = (GameObject)Instantiate(healthBarPrefab, transform.position, Quaternion.identity);
-        healthBar.transform.parent = transform;
         healthBar.transform.localScale = new Vector3(healthBarSize, 1, 1);
+        healthBar.transform.parent = transform;
 
         Health = MaxHealth;
 
