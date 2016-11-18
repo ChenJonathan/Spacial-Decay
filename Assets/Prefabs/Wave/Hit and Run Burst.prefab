@@ -89,3 +89,24 @@ MonoBehaviour:
     - Location: {x: 16, y: 0}
       Time: 0
       Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: -8}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: -8}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: 8}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: -8}
+      Time: 0
+      Parameters: []

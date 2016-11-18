@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000013866476222}
   - 114: {fileID: 114000013255767860}
   m_Layer: 0
-  m_Name: Hit and Run Circle 3
+  m_Name: Four Circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,30 +54,26 @@ MonoBehaviour:
   ClearEnemiesOnEnd: 1
   ClearDanmakuOnEnd: 0
   EnemyChains:
-  - Prefab: {fileID: 114000011944389926, guid: 7e22c12d78c19c84daca80fd3209a34c, type: 2}
+  - Prefab: {fileID: 114000010180421504, guid: 406e759b3f6ae3a43830ca8b8728ece4, type: 2}
     Data:
-    - Location: {x: 25, y: 0}
+    - Location: {x: -8, y: 0}
       Time: 3
       Parameters: []
-    - Location: {x: -25, y: 0}
+    - Location: {x: 8, y: 0}
       Time: 3
       Parameters: []
-    - Location: {x: 0, y: 17}
+    - Location: {x: -8, y: 9}
       Time: 3
       Parameters: []
-    - Location: {x: 0, y: -17}
+    - Location: {x: 8, y: 9}
       Time: 3
       Parameters: []
-    - Location: {x: 25, y: 17}
+  - Prefab: {fileID: 114000011813409250, guid: 8090580e38a0df648a1d06070f2fea58, type: 2}
+    Data:
+    - Location: {x: -20, y: 0}
       Time: 3
       Parameters: []
-    - Location: {x: 25, y: -17}
-      Time: 3
-      Parameters: []
-    - Location: {x: -25, y: 17}
-      Time: 3
-      Parameters: []
-    - Location: {x: -25, y: -17}
+    - Location: {x: 20, y: 0}
       Time: 3
       Parameters: []
   WarningChains:
@@ -86,27 +82,21 @@ MonoBehaviour:
     FadeInDuration: 1
     FadeOutDuration: 1
     Data:
+    - Location: {x: -8, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: 8, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: -8, y: 9}
+      Time: 0
+      Parameters: []
+    - Location: {x: 8, y: 9}
+      Time: 0
+      Parameters: []
     - Location: {x: 16, y: 0}
       Time: 0
       Parameters: []
     - Location: {x: -16, y: 0}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: 8}
-      Time: 0
-      Parameters: []
-    - Location: {x: -16, y: 8}
-      Time: 0
-      Parameters: []
-    - Location: {x: 0, y: 8}
-      Time: 0
-      Parameters: []
-    - Location: {x: 0, y: -8}
-      Time: 0
-      Parameters: []
-    - Location: {x: 16, y: -8}
-      Time: 0
-      Parameters: []
-    - Location: {x: -16, y: -8}
       Time: 0
       Parameters: []
