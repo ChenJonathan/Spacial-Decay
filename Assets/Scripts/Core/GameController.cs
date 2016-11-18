@@ -104,10 +104,10 @@ public class GameController : Singleton<GameController>
         {
             foreach(Level level in GetAllLevels())
             {
-                LevelData levelData = Levels[level.name];
+                LevelData levelData = Levels[level.Scene];
                 levelData.Unlocked = true;
                 levelData.Complete = true;
-                Levels[level.name] = levelData;
+                Levels[level.Scene] = levelData;
             }
             CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
@@ -116,7 +116,7 @@ public class GameController : Singleton<GameController>
         {
             foreach(Level level in GetAllLevels())
             {
-                Levels[level.name] = new LevelData();
+                Levels[level.Scene] = new LevelData();
             }
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
