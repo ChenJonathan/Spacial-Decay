@@ -35,7 +35,7 @@ public class TutorialWave : Wave
             o.GetComponent<CanvasRenderer>().SetAlpha(0);
         // Introduction
         yield return StartCoroutine(transmission.Appear());
-        yield return StartCoroutine(transmission.ShowSpeaker("???"));
+        yield return StartCoroutine(transmission.ShowSpeaker("Station Command"));
         yield return StartCoroutine(transmission.ShowContent("Welcome, pilot.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("In the coming days, you will be assisting with the alien threat in the recently discovered Lambda-3 sector. You are to engage any alien hostiles upon detection. Hestation may result in a disadvantageous position.", 0.05f));
 

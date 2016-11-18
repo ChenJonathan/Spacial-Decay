@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 /// <summary>
 /// Controls the endless level, spawning a new wave whenever one is finished.
@@ -49,11 +50,12 @@ public class EndlessController : LevelController
     /// </summary>
     private IEnumerator Introduction()
     {
+        var level = Path.GetRandomFileName();
         yield return StartCoroutine(transmission.Appear());
-        yield return StartCoroutine(transmission.ShowSpeaker("???"));
-        yield return StartCoroutine(transmission.ShowContent("Welcome, pilot.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 0.05f));
+        yield return StartCoroutine(transmission.ShowSpeaker("SIM_OVERLORD_AI"));
+        yield return StartCoroutine(transmission.ShowContent("SIMULATION INITIALIZING... INITALIZED.\nLOADING tr_" + level + ".vgd... COMPLETE.\nENTERING SIMULATION...", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Welcome to endless mode, pilot. In this simulated enviornment, you will take on wave after wave of hostiles until your inevitable defeat.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("All aspects of combat have been faithfully reproduced down to the last atom of your visor. Save, of course, for your gory death. Bon voyage.", 0.05f));
         yield return StartCoroutine(transmission.Disappear());
         EndEvent();
     }
