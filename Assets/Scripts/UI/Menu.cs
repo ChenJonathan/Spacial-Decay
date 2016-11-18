@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using DanmakU;
+using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class Menu : Singleton<Menu>
 {
     public PlayerFake Player;
     public GameObject Levels;
@@ -19,20 +19,24 @@ public class Menu : MonoBehaviour
         get { return currentState; }
     }
 
-    public void Awake()
+    [HideInInspector]
+    public bool StateChanged = false; // Hacky fix for update order
+
+    public override void Awake()
     {
+        base.Awake();
+
         mainMenu = transform.FindChild("Main").gameObject;
         optionsMenu = transform.FindChild("Options").gameObject;
         creditsMenu = transform.FindChild("Credits").gameObject;
         levelSelectMenu = transform.FindChild("Level Select").gameObject;
-
-        SetState(State.Main);
     }
 
     public void SetState(State state)
     {
-        if(Player.gameObject.activeSelf)
-            Player.SetForcedMoveTarget(false);
+        StateChanged = true;
+        if(state != State.LevelSelect)
+            Player.gameObject.SetActive(true);
 
         mainMenu.SetActive(state == State.Main);
         optionsMenu.SetActive(state == State.Options);

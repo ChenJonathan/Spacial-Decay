@@ -39,8 +39,9 @@ public class PlayerFake : MonoBehaviour
     private float rotateSpeed = 18;
 
     // Forces the player to stay at a location
-    private bool forcedTargetActive;
     private Vector2 forcedTarget;
+    private float forcedTargetTimer;
+    private readonly float MAX_FORCED_TARGET_TIMER = 0.25f;
 
     // Dash selection line colors
     [SerializeField]
@@ -77,7 +78,7 @@ public class PlayerFake : MonoBehaviour
         
         // Initializes the renderers
         target = new Vector2(transform.position.x, transform.position.y);
-        GameObject targetObject = (GameObject)Instantiate(targetPrefab, Vector3.zero, Quaternion.identity);
+        GameObject targetObject = (GameObject)Instantiate(targetPrefab, new Vector3(0, 0, 100), Quaternion.identity);
         targetObject.transform.SetParent(transform.parent);
         targetRenderer = targetObject.GetComponent<SpriteRenderer>();
         dashRenderer = targetObject.GetComponent<LineRenderer>();
@@ -95,6 +96,14 @@ public class PlayerFake : MonoBehaviour
     public void Update()
     {
         HandleInput();
+
+        if(Menu.Instance.StateChanged)
+        {
+            Menu.Instance.StateChanged = false;
+            ResetState();
+            if(Menu.Instance.CurrentState == Menu.State.LevelSelect)
+                gameObject.SetActive(false);
+        }
 
         // General movement-related functions
         if(moving)
@@ -120,6 +129,12 @@ public class PlayerFake : MonoBehaviour
         else if(selecting)
         {
             targetRenderer.enabled = true;
+        }
+
+        // Hold player for a short duration after mouse leaves the button
+        if(forcedTargetTimer > 0)
+        {
+            forcedTargetTimer = Mathf.Max(forcedTargetTimer - Time.deltaTime, 0);
         }
 
         // Update hitbox alpha
@@ -148,16 +163,23 @@ public class PlayerFake : MonoBehaviour
             rigidbody2d.velocity = ((Vector3)target - transform.position) * Time.fixedDeltaTime * (dashing ? dashSpeed : moveSpeed);
             if(!selecting)
             {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward, 
-                    (Vector3)(forcedTargetActive ? forcedTarget : target) - transform.position), Time.fixedDeltaTime * rotateSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward,
+                    (Vector3)target - transform.position), Time.fixedDeltaTime * rotateSpeed);
             }
+        }
+        else if(forcedTargetTimer > 0)
+        {
+            float distance = Vector2.Distance(transform.position, target);
+            if(distance < 1)
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward,
+                (Vector3)mousePos - transform.position), Time.fixedDeltaTime * rotateSpeed);
         }
 
         // Rotate to mouse if selecting
         if(selecting)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(
-                Vector3.forward, (Vector3)targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
+                Vector3.forward, targetRenderer.transform.position - transform.position), Time.fixedDeltaTime * rotateSpeed);
         }
     }
 
@@ -171,7 +193,7 @@ public class PlayerFake : MonoBehaviour
         mousePos.y = Input.mousePosition.y / Screen.height;
         mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0) && !dashing && !forcedTargetActive)
+        if(Input.GetMouseButtonDown(0) && !dashing)
         {
             // Begin dash targeting
             selecting = true;
@@ -212,7 +234,7 @@ public class PlayerFake : MonoBehaviour
         else if(!dashing)
         {
             // Normal movement targeting
-            if(forcedTargetActive)
+            if(forcedTargetTimer > 0)
                 SetMoveTarget(forcedTarget);
             else
                 SetMoveTarget(mousePos);
@@ -226,7 +248,7 @@ public class PlayerFake : MonoBehaviour
     public void SetMoveTarget(Vector2 target)
     {
         moving = true;
-        targetRenderer.transform.position = target;
+        targetRenderer.transform.position = new Vector3(target.x, target.y, 100);
         this.target = BoundsUtil.VerifyBounds(target, new Bounds2D(collider2d.bounds), field.MovementBounds);
     }
 
@@ -250,8 +272,30 @@ public class PlayerFake : MonoBehaviour
     {
         if(!dashing)
         {
-            forcedTargetActive = active;
-            forcedTarget = target;
+            if(active)
+            {
+                forcedTarget = target;
+                forcedTargetTimer = MAX_FORCED_TARGET_TIMER;
+            }
         }
+    }
+
+    /// <summary>
+    /// Resets the ship. For use when the menu changes states.
+    /// </summary>
+    private void ResetState()
+    {
+        // Disable dash selection
+        selecting = false;
+        targetAlphaWings = 0f;
+        deltaAlphaWings = 3f;
+        trailAnimator.SetBool("Active", false);
+        SetMoveTarget(mousePos);
+        dashRenderer.enabled = false;
+
+        targetRenderer.enabled = false;
+        
+        SetForcedMoveTarget(false);
+        forcedTargetTimer = 0f;
     }
 }

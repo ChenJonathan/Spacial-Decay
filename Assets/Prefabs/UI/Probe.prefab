@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 212: {fileID: 212000013860311882}
   - 114: {fileID: 114000012380606636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Probe
   m_TagString: Level
   m_Icon: {fileID: 0}

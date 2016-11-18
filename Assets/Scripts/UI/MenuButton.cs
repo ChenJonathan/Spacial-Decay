@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Adds button functionality to the main menu buttons.
+/// Adds button functionality to the menu buttons.
 /// </summary>
-public class MainMenuButton : MonoBehaviour
+public class MenuButton : MonoBehaviour
 {
     [SerializeField]
     private PlayerFake player;
@@ -20,7 +20,7 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField]
     private AudioClip onClickEffect;
 
-    public void Start()
+    public void Awake()
     {
         menu = GetComponentInParent<Menu>();
     }
@@ -62,6 +62,9 @@ public class MainMenuButton : MonoBehaviour
                     {
                         case "Back":
                             menu.SetState(Menu.State.Main);
+                            break;
+                        case "Endless":
+                            GameController.Singleton.LoadLevel("Endless");
                             break;
                     }
                     break;

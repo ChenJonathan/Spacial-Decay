@@ -37,9 +37,6 @@ public class GameController : Singleton<GameController>
     [Tooltip("Prefab for indicator that moves to unlocked levels.")]
     private Probe ProbePrefab;
 
-    // Menu object containing all the UI
-    private Menu menu;
-
     // Current camera y-position and max y-position in level select
     private float cameraY;
     private float cameraMaxY;
@@ -78,7 +75,6 @@ public class GameController : Singleton<GameController>
         //cameraY = -cameraMaxY;
 
         // Initialize levels
-        menu = GameObject.Find("Menu UI").GetComponent<Menu>();
         Levels = new Dictionary<string, LevelData>();
         foreach(Level level in GetAllLevels())
         {
@@ -98,19 +94,6 @@ public class GameController : Singleton<GameController>
         }
         SceneManager.sceneLoaded += OnLoad;
     }
-
-    /// <summary>
-    /// Start prevents coroutine from starting before start level fields are initialized.
-    /// </summary>
-    public void Start()
-    {
-        if(!unlockAllLevels)
-        {
-            Level startLevelObject = GetLevel(StartLevel);
-            startLevelObject.gameObject.SetActive(true);
-            // startLevelObject.Appear();
-        }
-    }
     
     /// <summary>
     /// TODO Remove this
@@ -126,7 +109,6 @@ public class GameController : Singleton<GameController>
                 levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
-            CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
         }
         if(Input.GetKeyDown(KeyCode.P))
@@ -181,7 +163,10 @@ public class GameController : Singleton<GameController>
 
         if(scene.name.Equals("Level Select"))
         {
-            menu = GameObject.Find("Menu UI").GetComponent<Menu>();
+            if(CurrentLevel == null || CurrentLevel == "")
+                Menu.Instance.SetState(Menu.State.Main);
+            else
+                Menu.Instance.SetState(Menu.State.LevelSelect);
 
             // Set camera position and bounds
             float minY = Mathf.Infinity;
@@ -288,6 +273,6 @@ public class GameController : Singleton<GameController>
     /// <returns>All levels in the game.</returns>
     private Level[] GetAllLevels()
     {
-        return menu.Levels.GetComponentsInChildren<Level>(true);
+        return Menu.Instance.Levels.GetComponentsInChildren<Level>(true);
     }
 }
