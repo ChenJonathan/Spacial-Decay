@@ -99,20 +99,8 @@ MonoBehaviour:
     - Location: {x: 20, y: 2}
       Time: 3
       Parameters: []
-    - Location: {x: 20, y: 2}
-      Time: 9
-      Parameters: []
     - Location: {x: 20, y: -2}
       Time: 3
-      Parameters: []
-    - Location: {x: 20, y: -2}
-      Time: 9
-      Parameters: []
-    - Location: {x: 20, y: 2}
-      Time: 6
-      Parameters: []
-    - Location: {x: 20, y: -2}
-      Time: 6
       Parameters: []
   - Prefab: {fileID: 114000011813409250, guid: 8ee757bc63c51cb42807d20493850671, type: 2}
     Data:
@@ -121,7 +109,7 @@ MonoBehaviour:
       Parameters:
       - -1
     - Location: {x: 20, y: 0}
-      Time: 9
+      Time: 6
       Parameters:
       - -1
   WarningChains:
