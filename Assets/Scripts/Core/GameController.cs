@@ -109,6 +109,7 @@ public class GameController : Singleton<GameController>
                 levelData.Complete = true;
                 Levels[level.name] = levelData;
             }
+            CurrentLevel = "Tutorial";
             SceneManager.LoadScene("Level Select");
         }
         if(Input.GetKeyDown(KeyCode.P))

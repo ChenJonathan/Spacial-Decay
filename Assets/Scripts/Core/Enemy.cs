@@ -151,6 +151,12 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public virtual void Die()
     {
+        Wave.WarningData explosionData = new Wave.WarningData();
+        explosionData.Prefab = explosion;
+        explosionData.Duration = 10.083f;
+        explosionData.Data.Location = transform.position;
+        Wave.SpawnWarning(explosionData);
+
         Destroy(gameObject);
     }
 
@@ -159,11 +165,6 @@ public partial class Enemy : DanmakuCollider
     /// </summary>
     public void OnDestroy()
     {
-        Wave.WarningData explosionData = new Wave.WarningData();
-        explosionData.Prefab = explosion;
-        explosionData.Duration = 10.083f;
-        explosionData.Data.Location = transform.position;
-        Wave.SpawnWarning(explosionData);
         Wave.UnregisterEnemy(this);
     }
 
