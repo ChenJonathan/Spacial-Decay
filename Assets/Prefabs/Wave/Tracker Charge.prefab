@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Tracker Swarm Small
+  m_Name: Tracker Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     - Location: {x: 0, y: 12}
       Time: 3
       Parameters: []
-  - Prefab: {fileID: 11416956, guid: b769857731e86bc4f959ce1126f8d312, type: 2}
+  - Prefab: {fileID: 114000011381990354, guid: 5b695af170d95f541a4e9c721de723f3, type: 2}
     Data:
     - Location: {x: -20, y: 0}
       Time: 3
@@ -66,6 +66,15 @@ MonoBehaviour:
     FadeOutDuration: 1
     Data:
     - Location: {x: 0, y: -9}
+      Time: 0
+      Parameters: []
+    - Location: {x: 0, y: 9}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 0}
       Time: 0
       Parameters: []
 --- !u!1001 &100100000

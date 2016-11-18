@@ -185,8 +185,8 @@ MonoBehaviour:
     - {fileID: 1205748683}
     - {fileID: 188780, guid: adf1314a6e76ff944b89554b3fa02e5e, type: 2}
     - {fileID: 188780, guid: e88558546e38fd247a1722cd1ca5d50e, type: 2}
-    - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
     - {fileID: 188780, guid: 4fa9f8f35550d3e40a1a7c123401d652, type: 2}
+    - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
     - {fileID: 188780, guid: ae7b658bd3c3d484f94fa275896c558f, type: 2}
     - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
     - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
@@ -241,8 +241,8 @@ MonoBehaviour:
   events:
   - {fileID: 188780, guid: adf1314a6e76ff944b89554b3fa02e5e, type: 2}
   - {fileID: 188780, guid: e88558546e38fd247a1722cd1ca5d50e, type: 2}
-  - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
   - {fileID: 188780, guid: 4fa9f8f35550d3e40a1a7c123401d652, type: 2}
+  - {fileID: 188780, guid: d29617bea85671048a3964414dcc2c19, type: 2}
   - {fileID: 188780, guid: ae7b658bd3c3d484f94fa275896c558f, type: 2}
   LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}

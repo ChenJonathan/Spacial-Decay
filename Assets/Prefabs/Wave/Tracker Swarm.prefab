@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 437044}
   - 114: {fileID: 11450628}
   m_Layer: 0
-  m_Name: Tracker Swarm Large
+  m_Name: Tracker Swarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,6 +73,21 @@ MonoBehaviour:
     Data:
     - Location: {x: 0, y: -9}
       Time: 0
+      Parameters: []
+    - Location: {x: 0, y: 9}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 0
+      Parameters: []
+    - Location: {x: 16, y: 0}
+      Time: 7
+      Parameters: []
+    - Location: {x: -16, y: 0}
+      Time: 7
       Parameters: []
 --- !u!1001 &100100000
 Prefab:
