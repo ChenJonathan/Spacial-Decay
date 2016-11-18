@@ -97,14 +97,6 @@ public class PlayerFake : MonoBehaviour
     {
         HandleInput();
 
-        if(Menu.Instance.StateChanged)
-        {
-            Menu.Instance.StateChanged = false;
-            ResetState();
-            if(Menu.Instance.CurrentState == Menu.State.LevelSelect)
-                gameObject.SetActive(false);
-        }
-
         // General movement-related functions
         if(moving)
         {
@@ -150,6 +142,15 @@ public class PlayerFake : MonoBehaviour
         temp = wingsGlowRenderer.color;
         temp.a = currentAlphaWings * spriteRenderer.color.a;
         wingsGlowRenderer.color = temp;
+
+        // Disable player if the state changed
+        if(Menu.Instance.StateChanged)
+        {
+            Menu.Instance.StateChanged = false;
+            ResetState();
+            if(Menu.Instance.CurrentState == Menu.State.LevelSelect)
+                gameObject.SetActive(false);
+        }
     }
 
     /// <summary>

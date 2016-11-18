@@ -78,12 +78,13 @@ public class GameController : Singleton<GameController>
         Levels = new Dictionary<string, LevelData>();
         foreach(Level level in GetAllLevels())
         {
-            Levels[level.Scene] = new LevelData();
+            Levels[level.name] = new LevelData();
             if(unlockAllLevels)
             {
-                LevelData levelData = Levels[level.Scene];
+                LevelData levelData = Levels[level.name];
                 levelData.Unlocked = true;
-                Levels[level.Scene] = levelData;
+                levelData.Complete = true;
+                Levels[level.name] = levelData;
             }
         }
         if(!unlockAllLevels)
@@ -121,6 +122,7 @@ public class GameController : Singleton<GameController>
             LevelData levelData = Levels[StartLevel];
             levelData.Unlocked = true;
             Levels[StartLevel] = levelData;
+            CurrentLevel = null;
             SceneManager.LoadScene("Level Select");
         }
     }
@@ -262,7 +264,7 @@ public class GameController : Singleton<GameController>
     {
         foreach(Level level in GetAllLevels())
         {
-            if(level.Scene.Equals(levelName))
+            if(level.name.Equals(levelName))
                 return level;
         }
         return null;
