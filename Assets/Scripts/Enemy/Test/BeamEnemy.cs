@@ -57,7 +57,7 @@ public class BeamEnemy : Enemy
 
     protected override IEnumerator Run()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             // Moving left
             FacePlayer = true;
@@ -73,12 +73,15 @@ public class BeamEnemy : Enemy
 
             // Fire
             currentWarning = warningData.Fire();
-            yield return new WaitForSeconds(1f - .25f * Difficulty);
+            yield return new WaitForSeconds(1f - .15f * Difficulty);
             currentWarning.DeactivateImmediate();
             currentBeam = fireData.Fire();
             yield return new WaitForSeconds(2f);
             currentBeam.Deactivate();
         }
+        FacePlayer = true;
+        rigidbody2d.velocity = new Vector2(speed, 0);
+        yield return new WaitForSeconds(2);
         Die();
     }
 

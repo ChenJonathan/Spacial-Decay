@@ -10,7 +10,7 @@ public class FodderScript : Enemy
     private FireBuilder fireData;
     private float fireCooldown;
     private static readonly float MAX_FIRE_COOLDOWN = 2f;
-    private float timer = 15f;
+    private float timer = 5f;
 
     /// <summary> Multiplier for the enemy's horizontal speed. </summary>
     private float speedMultiplier = 1;
@@ -52,7 +52,10 @@ public class FodderScript : Enemy
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
-            Die();
+            if (transform.position.x > 19 || transform.position.x < -19)
+            {
+                Die();
+            }
         }
         Vector3 direction = new Vector3(speedMultiplier, 0.0f);
         GetComponent<Rigidbody2D>().velocity = direction * 3;
