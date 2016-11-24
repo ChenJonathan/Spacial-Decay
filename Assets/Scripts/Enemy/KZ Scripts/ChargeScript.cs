@@ -20,7 +20,7 @@ public class ChargeScript : Enemy
         fireData = new FireBuilder(bulletPrefab, Field);
         fireData.From(transform);
         fireData.WithSpeed(8 + Difficulty);
-        fireData.WithModifier(new CircularBurstModifier(70, 5 + Difficulty, 0, 0));
+        fireData.WithModifier(new CircularBurstModifier(30, 5 + Difficulty, 0, 0));
 
         charge = new FireBuilder(initializeCharge, Field);
         charge.From(transform);
