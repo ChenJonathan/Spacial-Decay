@@ -37,7 +37,10 @@ public abstract class Message : MonoBehaviour
 
             backgroundScale.x = x;
             Background.transform.localScale = backgroundScale;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
+            if(Input.GetKeyDown(KeyCode.Escape))
+                yield break;
         }
         for(float y = backgroundScale.y; y <= 1f; y = Mathf.Lerp(y, 1.01f, 0.1f))
         {
@@ -46,13 +49,19 @@ public abstract class Message : MonoBehaviour
 
             backgroundScale.y = y;
             Background.transform.localScale = backgroundScale;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
+            if(Input.GetKeyDown(KeyCode.Escape))
+                yield break;
         }
-        for(float a = textColor.a; a <= 1f; a += 0.02f)
+        for(float a = textColor.a; a <= 1f; a += 0.05f)
         {
             textColor.a = a;
             Text.color = textColor;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
+            if(Input.GetKeyDown(KeyCode.Escape))
+                yield break;
         }
     }
 
@@ -64,22 +73,25 @@ public abstract class Message : MonoBehaviour
         Color textColor = Text.color;
         Vector3 backgroundScale = Background.transform.localScale;
 
-        for(float a = textColor.a; a >= 0f; a -= 0.02f)
+        for(float a = textColor.a; a >= 0f; a -= 0.05f)
         {
             textColor.a = a;
             Text.color = textColor;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
         }
         for(float y = backgroundScale.y; y >= 0.05f; y = Mathf.Lerp(y, 0.04f, 0.1f))
         {
             backgroundScale.y = y;
             Background.transform.localScale = backgroundScale;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
         }
         for(float x = backgroundScale.x; x >= 0f; x = Mathf.Lerp(x, -0.01f, 0.1f))
         {
             backgroundScale.x = x;
             Background.transform.localScale = backgroundScale;
+
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
         }
     }

@@ -188,17 +188,17 @@ MonoBehaviour:
     - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
     - {fileID: 188780, guid: d1f5ddd5d1f094429b5f50cca1a9cfa7, type: 2}
     - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
-    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
-    - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
+    - {fileID: 114000013311016578, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
+    - {fileID: 114000011397276812, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
       - Player playerPrefab
       - DanmakuField field
       - List<GameObject> events
-      - GameObject LevelCompleteMessage
-      - GameObject LevelFailedMessage
-      - MessagePauseMenu PauseMenu
+      - MessageLevelEnd levelCompleteMessage
+      - MessageLevelEnd levelFailedMessage
+      - MessagePauseMenu pauseMenuMessage
       - float LevelTime
       - float TargetTimeScale
       - bool PermanentInvincible
@@ -244,11 +244,11 @@ MonoBehaviour:
   - {fileID: 188780, guid: 9a0378e547605df40ac79f9151b90df2, type: 2}
   - {fileID: 188780, guid: d1f5ddd5d1f094429b5f50cca1a9cfa7, type: 2}
   - {fileID: 1000013141128222, guid: 9679db576918a9f409c5a96a09fad3ef, type: 2}
-  LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
+  levelCompleteMessage: {fileID: 114000013311016578, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}
-  LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
+  levelFailedMessage: {fileID: 114000011397276812, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
     type: 2}
-  PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
+  pauseMenuMessage: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
     type: 2}
   LevelTime: 0
   TargetTimeScale: 1

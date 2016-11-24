@@ -51,16 +51,6 @@ public class SniperBoss : Enemy
         fireDataLaser.WithRotation(transform);
         fireDataLaser.WithController(new AutoDeactivateController(0.25f));
 
-        /*
-        Vector3 offset = new Vector3(2, 0, 0);
-        leftShield = (Shield)Instantiate(Shield, transform.position + offset, Quaternion.identity);
-        leftShield.transform.parent = transform;
-        leftShield.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, -90);
-        rightShield = (Shield)Instantiate(Shield, transform.position - offset, Quaternion.identity);
-        rightShield.transform.parent = transform;
-        rightShield.transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 90);
-        */
-
         direction = Vector3.zero - transform.position;
         dest = Vector3.zero;
         turrets = new List<SniperTurretTower>();
@@ -224,9 +214,9 @@ public class SniperBoss : Enemy
 
     public override void Die()
     {
-        foreach (SniperTurretTower turret in turrets)
+        while(turrets.Count > 0)
         {
-            turret.Die();
+            turrets[0].Die();
         }
         base.Die();
     }

@@ -216,20 +216,12 @@ public class GameController : Singleton<GameController>
             {
                 if(Levels[level.Scene].Unlocked)
                 {
-                    if(!Levels[level.Scene].Complete)
+                    // Set information display values
+                    if(Levels[level.Scene].Complete)
                     {
-                        // Highlight unplayed levels
-                        level.Highlight();
-                    }
-                    else
-                    {
-                        // Set values
-                        if(Levels[level.Scene].Complete)
-                        {
-                            Text details = level.transform.Find("Details/DetailText").GetComponent<Text>();
-                            details.text = "Best Difficulty\n<color=#ffff00ff>" + Levels[level.Scene].BestDifficulty.ToString()
-                                     + "</color>\nBest Time\n<color=#ffff00ff>" + Levels[level.Scene].BestTime.ToString("F2") + " seconds</color>";
-                        }
+                        Text details = level.transform.Find("Details/DetailText").GetComponent<Text>();
+                        details.text = "Best Difficulty\n<color=#ffff00ff>" + Levels[level.Scene].BestDifficulty.ToString()
+                                 + "</color>\nBest Time\n<color=#ffff00ff>" + Levels[level.Scene].BestTime.ToString("F2") + " seconds</color>";
 
                         // Re-enable lines
                         foreach(Level levelChild in level.Unlocks)
@@ -237,13 +229,13 @@ public class GameController : Singleton<GameController>
                             if(Levels[levelChild.Scene].Unlocked || level.Scene.Equals(CurrentLevel))
                             {
                                 // Set line between the two levels
-                                LineRenderer levelLine = GameObject.Instantiate(LevelLinePrefab);
+                                LineRenderer levelLine = Instantiate(LevelLinePrefab);
                                 levelLine.transform.parent = level.transform;
                                 levelLine.SetPosition(0, level.transform.position);
                                 levelLine.SetPosition(1, levelChild.transform.position);
 
                                 // Send probe to new levels
-                                if(!(Levels[levelChild.Scene].Unlocked))
+                                if(!Levels[levelChild.Scene].Unlocked)
                                 {
                                     levelLine.enabled = false;
                                     levelChild.line = levelLine;
@@ -253,6 +245,11 @@ public class GameController : Singleton<GameController>
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        // Highlight unplayed levels
+                        level.Highlight();
                     }
                 }
                 else

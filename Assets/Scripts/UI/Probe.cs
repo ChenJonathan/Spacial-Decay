@@ -49,13 +49,12 @@ public class Probe : MonoBehaviour
 
             if(color.a <= 0)
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination.transform.position, totalDistance / 6);
+                transform.position = Vector3.MoveTowards(transform.position, destination.transform.position, totalDistance / 5);
                 direction = 1;
 
+                yield return new WaitForSeconds(0.1f);
                 if(transform.position == destination.transform.position)
                 {
-                    yield return new WaitForSeconds(0.5f);
-
                     if(destination.gameObject.activeSelf)
                     {
                         destination.LineAppear();
@@ -67,10 +66,6 @@ public class Probe : MonoBehaviour
                     }
                     Destroy(gameObject);
                     yield break;
-                }
-                else
-                {
-                    yield return new WaitForSeconds(0.1f);
                 }
             }
             else if(color.a >= 1)

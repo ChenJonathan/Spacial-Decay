@@ -190,17 +190,17 @@ MonoBehaviour:
     - {fileID: 1000013141128222, guid: 367f9adeba6f90f49b647ba0a989bf55, type: 2}
     - {fileID: 1000013141128222, guid: ed68ae76e3b85d9439ab301e2d51697b, type: 2}
     - {fileID: 1000013141128222, guid: e13a251ca144a0a45a0961bd1e817a3f, type: 2}
-    - {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
-    - {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
+    - {fileID: 114000013311016578, guid: 20dc82e3dcba453468d06860c5a4591f, type: 2}
+    - {fileID: 114000011397276812, guid: b02ac63c5ac2ce14fa92e8d6fc403609, type: 2}
     - {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb, type: 2}
     serializedStrings:
       keys:
       - Player playerPrefab
       - DanmakuField field
       - List<GameObject> events
-      - GameObject LevelCompleteMessage
-      - GameObject LevelFailedMessage
-      - MessagePauseMenu PauseMenu
+      - MessageLevelEnd levelCompleteMessage
+      - MessageLevelEnd levelFailedMessage
+      - MessagePauseMenu pauseMenuMessage
       - float LevelTime
       - float TargetTimeScale
       - bool PermanentInvincible
@@ -248,11 +248,11 @@ MonoBehaviour:
   - {fileID: 1000013141128222, guid: 367f9adeba6f90f49b647ba0a989bf55, type: 2}
   - {fileID: 1000013141128222, guid: ed68ae76e3b85d9439ab301e2d51697b, type: 2}
   - {fileID: 1000013141128222, guid: e13a251ca144a0a45a0961bd1e817a3f, type: 2}
-  LevelCompleteMessage: {fileID: 1000012958953406, guid: 20dc82e3dcba453468d06860c5a4591f,
+  levelCompleteMessage: {fileID: 114000013311016578, guid: 20dc82e3dcba453468d06860c5a4591f,
     type: 2}
-  LevelFailedMessage: {fileID: 1000012958953406, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
+  levelFailedMessage: {fileID: 114000011397276812, guid: b02ac63c5ac2ce14fa92e8d6fc403609,
     type: 2}
-  PauseMenu: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
+  pauseMenuMessage: {fileID: 114000012164292832, guid: f094907c128263d4d9b7f671318a9adb,
     type: 2}
   LevelTime: 0
   TargetTimeScale: 1

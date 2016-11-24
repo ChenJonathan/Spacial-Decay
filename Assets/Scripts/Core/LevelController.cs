@@ -41,8 +41,15 @@ public class LevelController : DanmakuGameController, IPausable
         get { return viewportRect; }
     }
 
-    public GameObject LevelCompleteMessage;
-    public GameObject LevelFailedMessage;
+    // Prefabs
+    [SerializeField]
+    private MessageLevelEnd levelCompleteMessage;
+    [SerializeField]
+    private MessageLevelEnd levelFailedMessage;
+    [SerializeField]
+    private MessagePauseMenu pauseMenuMessage;
+
+    private Message currentMessage;
 
     /// <summary>
     /// Returns the only instance of the LevelController.
@@ -68,9 +75,6 @@ public class LevelController : DanmakuGameController, IPausable
                 TargetTimeScale = 1;
         }
     }
-
-    public MessagePauseMenu PauseMenu;
-    private MessagePauseMenu pauseMenuRuntime;
 
     // Total time
     [HideInInspector]
@@ -141,10 +145,18 @@ public class LevelController : DanmakuGameController, IPausable
 
         // Pausing things
         Time.timeScale = Mathf.MoveTowards(Time.timeScale, TargetTimeScale, Time.unscaledDeltaTime);
-        if(Time.timeScale == 0f && Paused && pauseMenuRuntime == null)
-            pauseMenuRuntime = Instantiate(PauseMenu);
         if(Input.GetKeyDown(KeyCode.Escape) && !Paused && FindObjectOfType<Message>() == null)
-            Paused = true;
+        {
+            if(!(currentMessage is MessageLevelEnd))
+            {
+                Paused = true;
+                currentMessage = Instantiate(pauseMenuMessage);
+            }
+        }
+
+        // TODO Remove
+        if(Input.GetKeyDown(KeyCode.Tab))
+            GameController.Singleton.LoadLevelSelect(true, 1000);
     }
 
     /// <summary>
@@ -165,13 +177,19 @@ public class LevelController : DanmakuGameController, IPausable
         eventCount++;
 
         if(eventCount == events.Count)
-        {
-            if(FindObjectOfType<MessageLevelEnd>() == null)
-                Instantiate(LevelCompleteMessage);
-        }
+            EndLevel(true);
         else
-        {
             StartEvent();
-        }
+    }
+
+    /// <summary>
+    /// Called when the current level is completed.
+    /// </summary>
+    public virtual void EndLevel(bool victory)
+    {
+        if(currentMessage)
+            Destroy(currentMessage);
+
+        currentMessage = Instantiate(victory ? levelCompleteMessage : levelFailedMessage);
     }
 }
