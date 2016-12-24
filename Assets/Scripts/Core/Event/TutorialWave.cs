@@ -83,7 +83,6 @@ public class TutorialWave : Wave
                 timer = WARNING_DELAY;
             Color temp = runtime.GetComponent<SpriteRenderer>().color;
             runtime.GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, timer / WARNING_DELAY);
-            Debug.Log(runtime.GetComponent<SpriteRenderer>().color);
 
             yield return null;
         }
