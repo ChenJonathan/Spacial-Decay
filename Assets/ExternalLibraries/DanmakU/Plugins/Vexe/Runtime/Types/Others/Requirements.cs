@@ -270,9 +270,9 @@ namespace Vexe.Runtime.Types
 				[MenuItem("Tools/Vexe/Requirements/ResolveScene")]
 				public static void ResolveSceneRequirments()
 				{
-					Profiler.BeginSample("ResolveSceneReq");
+					UnityEngine.Profiling.Profiler.BeginSample("ResolveSceneReq");
 					Requirements.ResolveScene();
-					Profiler.EndSample();
+					UnityEngine.Profiling.Profiler.EndSample();
 				}
 
 				[MenuItem("Tools/Vexe/Requirements/Manual")]

@@ -226,11 +226,11 @@ namespace DanmakU {
 						Danmaku danmaku = enumerator.Current;
 						particles[i].position = danmaku.position;
                         particles[i].startSize = danmaku.Scale;
-						particles[i].lifetime = 1000;
+						particles[i].remainingLifetime = 1000;
 						particles[i].startColor = danmaku.Color;
 					} else {
 						particles[i].startSize = 0f;
-						particles[i].lifetime = -1;
+						particles[i].remainingLifetime = -1;
 					}
 				}
 			} else {
@@ -244,11 +244,11 @@ namespace DanmakU {
 						particles[i].startSize = danmaku.Scale;
 						particles[i].axisOfRotation = forward;
 						particles[i].startColor = danmaku.Color;
-						if(particles[i].lifetime <= 1)
-							particles[i].lifetime = 1000;
+						if(particles[i].remainingLifetime <= 1)
+							particles[i].remainingLifetime = 1000;
 					} else {
 						particles[i].startSize = 0f;
-						particles[i].lifetime = -1;
+						particles[i].remainingLifetime = -1;
 					}
 				}
 			}
@@ -374,7 +374,7 @@ namespace DanmakU {
 					vertexes[i] = transformMatrix * vertexes[i];
 				}
 				renderMesh.vertices = vertexes;
-				renderMesh.Optimize();
+				;
 			}
 
             // Hacky fix for lasers disappearing when center is off screen (by enlargening the bounds to cover the size of the laser)
