@@ -122,7 +122,8 @@ public class Player : MonoBehaviour
         dashRenderer = targetObject.GetComponent<LineRenderer>();
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
-        dashRenderer.SetColors(dashStartInactive, dashEndInactive);
+        dashRenderer.startColor = dashStartInactive;
+        dashRenderer.endColor = dashEndInactive;
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
@@ -199,10 +200,10 @@ public class Player : MonoBehaviour
             if(dashCooldown >= MAX_DASH_COOLDOWN)
             {
                 dashes++;
-                audioSource.clip = OnNewDashAudio;
-                audioSource.Play();
+                audioSource.PlayOneShot(OnNewDashAudio, GameController.Instance.Audio.VolumeEffects);
                 dashCooldown = 0;
-                dashRenderer.SetColors(dashStartActive, dashEndActive);
+                dashRenderer.startColor = dashStartActive;
+                dashRenderer.endColor = dashEndActive;
                 dashCounter.UpdateCounter(dashes);
             }
         }
@@ -306,9 +307,11 @@ public class Player : MonoBehaviour
                     dashes--;
 
                     if(dashes == 0)
-                        dashRenderer.SetColors(dashStartInactive, dashEndInactive);
-                    audioSource.clip = OnDashAudio;
-                    audioSource.Play();
+                    {
+                        dashRenderer.startColor = dashStartInactive;
+                        dashRenderer.endColor = dashEndInactive;
+                    }
+                    audioSource.PlayOneShot(OnDashAudio, GameController.Instance.Audio.VolumeEffects);
                 }
 
                 // Disable dash selection
@@ -350,15 +353,13 @@ public class Player : MonoBehaviour
         if(lives == 0)
         {
             LevelController.Singleton.EndLevel(false);
-            audioSource.clip = OnDeathAudio;
+            audioSource.PlayOneShot(OnDeathAudio, GameController.Instance.Audio.VolumeEffects);
         }
         else
         {
             StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
-
-            audioSource.clip = OnHitAudio;
+            audioSource.PlayOneShot(OnHitAudio, GameController.Instance.Audio.VolumeEffects);
         }
-        audioSource.Play();
     }
 
     /// <summary>

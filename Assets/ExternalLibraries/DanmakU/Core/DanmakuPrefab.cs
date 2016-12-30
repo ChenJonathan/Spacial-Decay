@@ -374,7 +374,6 @@ namespace DanmakU {
 					vertexes[i] = transformMatrix * vertexes[i];
 				}
 				renderMesh.vertices = vertexes;
-				;
 			}
 
             // Hacky fix for lasers disappearing when center is off screen (by enlargening the bounds to cover the size of the laser)

@@ -13,8 +13,7 @@ public class Transmission : MonoBehaviour
     public Text Speaker;
     public Text Content;
     public Text Continue;
-
-    private AudioSource audioSource;
+    
     public AudioClip onDialogueAudio;
     public AudioClip onContinueAudio;
 
@@ -23,8 +22,6 @@ public class Transmission : MonoBehaviour
     /// </summary>
     public virtual IEnumerator Appear()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = onDialogueAudio;
         Color color = Background.color = Portrait.color = Speaker.color = Content.color = Continue.color = new Color(1, 1, 1, 0);
         for(float a = color.a; a <= 1f; a += 0.02f)
         {
@@ -104,7 +101,7 @@ public class Transmission : MonoBehaviour
                     time -= delay;
                     index = (index == content.Length) ? content.Length : index + 1;
                     if (index % 2 == 0)
-                        audioSource.Play();
+                        AudioSource.PlayClipAtPoint(onDialogueAudio, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
                 }
                 Content.text = content.Substring(0, index);
 
@@ -136,7 +133,7 @@ public class Transmission : MonoBehaviour
                 targetAlpha = 1 - targetAlpha;
             yield return null;
         }
-        audioSource.PlayOneShot(onContinueAudio);
+        AudioSource.PlayClipAtPoint(onContinueAudio, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
         Continue.color = new Color(1, 1, 1, 0);
     }
 }

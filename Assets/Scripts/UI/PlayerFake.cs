@@ -84,7 +84,8 @@ public class PlayerFake : MonoBehaviour
         dashRenderer = targetObject.GetComponent<LineRenderer>();
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
-        dashRenderer.SetColors(dashStart, dashEnd);
+        dashRenderer.startColor = dashStart;
+        dashRenderer.endColor = dashEnd;
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();

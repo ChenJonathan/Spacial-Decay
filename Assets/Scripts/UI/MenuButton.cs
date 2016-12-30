@@ -13,8 +13,7 @@ public class MenuButton : MonoBehaviour
     private string button;
 
     private Menu menu;
-
-    private AudioSource audioSource;
+    
     [SerializeField]
     private AudioClip onHoverEffect;
     [SerializeField]
@@ -23,12 +22,11 @@ public class MenuButton : MonoBehaviour
     public void Awake()
     {
         menu = GetComponentInParent<Menu>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnMouseEnter()
     {
-        audioSource.PlayOneShot(onHoverEffect);
+        AudioSource.PlayClipAtPoint(onHoverEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
     }
 
     public void OnMouseOver()
@@ -40,7 +38,7 @@ public class MenuButton : MonoBehaviour
         {
             menu.StateChanged = true;
 
-            AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(onClickEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
 
             switch(menu.CurrentState)
             {

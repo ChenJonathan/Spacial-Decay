@@ -133,13 +133,12 @@ public partial class Enemy : DanmakuCollider
 
             if(Health <= 0)
             {
-                AudioSource.PlayClipAtPoint(onDeathAudio, Camera.main.transform.position);
+                audioSource.PlayOneShot(onDeathAudio, GameController.Instance.Audio.VolumeEffects);
                 Die();
             }
             else
             {
-                audioSource.clip = onHitAudio;
-                audioSource.Play();
+                audioSource.PlayOneShot(onHitAudio, GameController.Instance.Audio.VolumeEffects);
                 StartCoroutine(SetInvincible(INVINCIBILITY_ON_HIT));
             }
         }

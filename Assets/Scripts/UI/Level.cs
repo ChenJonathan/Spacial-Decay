@@ -19,8 +19,7 @@ public class Level : MonoBehaviour
     private Text newText;                           // A reference to the level's "NEW!" text
 
     public Sprite[] sprites;                        // Sprites to use for the level select
-
-    private AudioSource audioSource;
+    
     [SerializeField]
     private AudioClip onHoverAudio;
     [SerializeField]
@@ -70,8 +69,6 @@ public class Level : MonoBehaviour
         center.transform.localScale = Vector3.zero;
         details.transform.localScale = Vector3.zero;
 
-        audioSource = GetComponent<AudioSource>();
-
         Scene = gameObject.name;
     }
 
@@ -106,8 +103,10 @@ public class Level : MonoBehaviour
             center.color = color;
             ordinalText.color = color;
         }
-        if (line != null) {
-            line.SetColors(color, color);
+        if (line != null)
+        {
+            line.startColor = color;
+            line.endColor = color;
             line.enabled = true;
         }
 
@@ -116,14 +115,17 @@ public class Level : MonoBehaviour
             yield return new WaitForSeconds(duration / 30.0f);
             color.a = Mathf.Pow(i / 30.0f, 0.25f);
 
-            if (!lineOnly) {
+            if (!lineOnly)
+            {
                 details.color = color;
                 titleText.color = color;
                 center.color = color;
                 ordinalText.color = color;
             }
-            if (line != null) {
-                line.SetColors(color, color);
+            if (line != null)
+            {
+                line.startColor = color;
+                line.endColor = color;
             }
         }
 
@@ -181,8 +183,8 @@ public class Level : MonoBehaviour
             nText = 1.25f;
             nTextCol = Color.yellow;
         }
-        
-        audioSource.PlayOneShot(onHoverAudio);
+
+        AudioSource.PlayClipAtPoint(onHoverAudio, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
     }
 
     /// <summary>
@@ -202,18 +204,19 @@ public class Level : MonoBehaviour
 
     private IEnumerator LoadLevel()
     {
-        AudioSource.PlayClipAtPoint(onClickAudio, Camera.main.transform.position);
-        float start = 1.0F;
+        float start = GameController.Instance.Audio.VolumeMusic;
         float end = 0.0F;
         float i = 0.0F;
         float step = 1.0F / onClickAudio.length;
+        AudioSource.PlayClipAtPoint(onClickAudio, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
 
         while (i <= 1.0F)
         {
             i += step * Time.deltaTime;
-            Camera.main.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
+            GameController.Instance.GetComponent<AudioSource>().volume = Mathf.Lerp(start, end, i);
             yield return new WaitForSeconds(step * Time.deltaTime);
         }
         GameController.Singleton.LoadLevel(Scene);
+        GameController.Instance.GetComponent<AudioSource>().volume = start;
     }
 }
