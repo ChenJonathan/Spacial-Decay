@@ -31,7 +31,6 @@ public class AudioManager : MonoBehaviour
 
     public void Restart(int song)
     {
-        Debug.Log(song);
         audioSource.clip = clips[song];
         audioSource.Play();
     }

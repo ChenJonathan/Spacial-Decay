@@ -13845,9 +13845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d828a13feff6849b2f6d42c8d5c225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocationEasy: {x: 0.3, y: 0}
+  LocationEasy: {x: 0.35, y: 0}
   LocationMedium: {x: 0.5, y: 0}
-  LocationHard: {x: 0.7, y: 0}
+  LocationHard: {x: 0.65, y: 0}
   ImageEasy: {fileID: 1496708738}
   ImageMedium: {fileID: 316019035}
   ImageHard: {fileID: 1884189738}
