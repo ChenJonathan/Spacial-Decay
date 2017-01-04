@@ -31,13 +31,13 @@ public class DifficultySelect : MonoBehaviour
         switch(GameController.Singleton.Difficulty)
         {
             case 0:
-                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationEasy.x, LocationEasy.y, 13.2f)).x;
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationEasy.x, LocationEasy.y, 17)).x;
                 break;
             case 1:
-                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationMedium.x, LocationMedium.y, 13.2f)).x;
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationMedium.x, LocationMedium.y, 17)).x;
                 break;
             case 2:
-                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationHard.x, LocationHard.y, 13.2f)).x;
+                position.x = targetX = Camera.main.ViewportToWorldPoint(new Vector3(LocationHard.x, LocationHard.y, 17)).x;
                 break;
         }
         transform.position = position;
@@ -77,7 +77,7 @@ public class DifficultySelect : MonoBehaviour
                 targetX = Camera.main.ViewportToWorldPoint(new Vector3(Mathf.Clamp(mousePosition.x, LocationEasy.x, LocationHard.x), LocationEasy.y, 17)).x;
             }
         }
-        else if(Input.GetMouseButtonDown(0))
+        else if(Input.GetMouseButtonDown(0) && Mathf.Abs(mousePosition.y - LocationEasy.y) < 0.1f && mousePosition.x > LocationEasy.x - 0.05f && mousePosition.x < LocationHard.x + 0.05f)
         {
             dragging = true;
         }

@@ -195,7 +195,7 @@ public class PlayerFake : MonoBehaviour
         mousePos.y = Input.mousePosition.y / Screen.height;
         mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0) && !dashing)
+        if(Input.GetMouseButtonDown(0) && !dashing && forcedTargetTimer == 0)
         {
             // Begin dash targeting
             selecting = true;

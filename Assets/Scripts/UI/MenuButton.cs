@@ -19,12 +19,12 @@ public class MenuButton : MonoBehaviour
     [SerializeField]
     private AudioClip onClickEffect;
 
-    public void Awake()
+    public virtual void Awake()
     {
         menu = GetComponentInParent<Menu>();
     }
 
-    private void OnMouseEnter()
+    public void OnMouseEnter()
     {
         AudioSource.PlayClipAtPoint(onHoverEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
     }
@@ -37,8 +37,6 @@ public class MenuButton : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             menu.StateChanged = true;
-
-            AudioSource.PlayClipAtPoint(onClickEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
 
             switch(menu.CurrentState)
             {
@@ -60,10 +58,28 @@ public class MenuButton : MonoBehaviour
                     }
                     break;
                 case Menu.State.Options:
-                    menu.SetState(Menu.State.Main);
+                    switch(button)
+                    {
+                        case "Music":
+                            GetComponent<VolumeIndicator>().MouseDown();
+                            menu.StateChanged = false;
+                            break;
+                        case "Effects":
+                            GetComponent<VolumeIndicator>().MouseDown();
+                            menu.StateChanged = false;
+                            break;
+                        case "Back":
+                            menu.SetState(Menu.State.Main);
+                            break;
+                    }
                     break;
                 case Menu.State.Credits:
-                    menu.SetState(Menu.State.Main);
+                    switch(button)
+                    {
+                        case "Back":
+                            menu.SetState(Menu.State.Main);
+                            break;
+                    }
                     break;
                 case Menu.State.LevelSelect:
                     switch(button)
@@ -77,6 +93,8 @@ public class MenuButton : MonoBehaviour
                     }
                     break;
             }
+
+            AudioSource.PlayClipAtPoint(onClickEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
         }
     }
 
