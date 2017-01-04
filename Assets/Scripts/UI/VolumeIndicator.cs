@@ -13,6 +13,7 @@ public class VolumeIndicator : MenuButton
     private Image fgRenderer;
     private Image edgeRendererL;
     private Image edgeRendererR;
+    private Text display;
 
     private bool dragging;
 
@@ -27,10 +28,12 @@ public class VolumeIndicator : MenuButton
         fgRenderer = transform.GetChild(2).GetComponent<Image>();
         edgeRendererL = transform.GetChild(0).GetComponent<Image>();
         edgeRendererR = transform.GetChild(1).GetComponent<Image>();
+        display = transform.GetChild(4).GetComponent<Text>();
 
         // Initialize volume
         float volume = (music ? GameController.Singleton.Audio.VolumeMusic : GameController.Singleton.Audio.VolumeEffects);
         fgRenderer.transform.localScale = new Vector3(volume, 1, 1);
+        display.text = Mathf.RoundToInt(volume * 100).ToString();
 
         // Initialize bar color
         bgRenderer.color = new Color((1 - volume) / 2, volume / 2, 0);
@@ -57,6 +60,7 @@ public class VolumeIndicator : MenuButton
                 GameController.Singleton.Audio.VolumeMusic = volume;
             else
                 GameController.Singleton.Audio.VolumeEffects = volume;
+            display.text = Mathf.RoundToInt(volume * 100).ToString();
 
             // Set bar color
             bgRenderer.color = new Color((1 - volume) / 2, volume / 2, 0);
