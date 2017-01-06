@@ -12,6 +12,7 @@ public abstract class Message : MonoBehaviour
     
     public void Start()
     {
+        GetComponent<AudioSource>().volume = GameController.Instance.Audio.VolumeEffects;
         LevelController.Singleton.TargetTimeScale = 0f;
         StartCoroutine(Run());
     }

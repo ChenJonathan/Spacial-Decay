@@ -157,6 +157,8 @@ public class LevelController : DanmakuGameController, IPausable
         // TODO Remove
         if(Input.GetKeyDown(KeyCode.Tab))
             GameController.Singleton.LoadLevelSelect(true, 1000);
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+            EndEvent();
     }
 
     /// <summary>
@@ -188,7 +190,7 @@ public class LevelController : DanmakuGameController, IPausable
     public virtual void EndLevel(bool victory)
     {
         if(currentMessage)
-            Destroy(currentMessage);
+            Destroy(currentMessage.gameObject);
 
         currentMessage = Instantiate(victory ? levelCompleteMessage : levelFailedMessage);
     }

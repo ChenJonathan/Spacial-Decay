@@ -44,9 +44,7 @@ public class GameController : Singleton<GameController>
     /// <summary> Causes all levels to be unlocked at the start of the game. </summary>
     private bool unlockAllLevels;
 
-    // Audio settings
-    public float effectsVolume = .5f;
-    public float musicVolume = .5f;
+    public AudioManager Audio;
 
     /// <summary>
     /// Returns the only instance of the GameController.
@@ -71,8 +69,8 @@ public class GameController : Singleton<GameController>
         // Set camera and camera FOV
         Camera cam = Camera.main;
         cam.fieldOfView = 2.0f * Mathf.Atan(419.84f / cam.aspect / 400f) * Mathf.Rad2Deg;
-        //cameraMaxY = levelCamera.GetComponent<Scroll>().CameraMaxY = 419.84f / 2f - 419.84f / levelCamera.aspect / 2f;
-        //cameraY = -cameraMaxY;
+
+        Audio = GetComponent<AudioManager>();
 
         // Initialize levels
         Difficulty = 1;
@@ -173,6 +171,7 @@ public class GameController : Singleton<GameController>
     private void OnLoad(Scene scene, LoadSceneMode mode)
     {
         Time.timeScale = 1;
+        Audio.Restart((scene.name.Equals("Level Select") || scene.name.Equals("Tutorial")) ? 0 : 1);
 
         if(scene.name.Equals("Level Select"))
         {

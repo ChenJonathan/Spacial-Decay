@@ -13,22 +13,20 @@ public class MenuButton : MonoBehaviour
     private string button;
 
     private Menu menu;
-
-    private AudioSource audioSource;
+    
     [SerializeField]
     private AudioClip onHoverEffect;
     [SerializeField]
     private AudioClip onClickEffect;
 
-    public void Awake()
+    public virtual void Awake()
     {
         menu = GetComponentInParent<Menu>();
-        audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnMouseEnter()
+    public void OnMouseEnter()
     {
-        audioSource.PlayOneShot(onHoverEffect);
+        AudioSource.PlayClipAtPoint(onHoverEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
     }
 
     public void OnMouseOver()
@@ -40,8 +38,6 @@ public class MenuButton : MonoBehaviour
         {
             menu.StateChanged = true;
 
-            AudioSource.PlayClipAtPoint(onClickEffect, Camera.main.transform.position);
-
             switch(menu.CurrentState)
             {
                 case Menu.State.Main:
@@ -51,10 +47,10 @@ public class MenuButton : MonoBehaviour
                             menu.SetState(Menu.State.LevelSelect);
                             break;
                         case "Options":
-                            // menu.SetState(Menu.State.Options);
+                            menu.SetState(Menu.State.Options);
                             break;
                         case "Credits":
-                            // menu.SetState(Menu.State.Credits);
+                            menu.SetState(Menu.State.Credits);
                             break;
                         case "Exit":
                             Application.Quit();
@@ -62,10 +58,28 @@ public class MenuButton : MonoBehaviour
                     }
                     break;
                 case Menu.State.Options:
-                    menu.SetState(Menu.State.Main);
+                    switch(button)
+                    {
+                        case "Music":
+                            GetComponent<VolumeIndicator>().MouseDown();
+                            menu.StateChanged = false;
+                            break;
+                        case "Effects":
+                            GetComponent<VolumeIndicator>().MouseDown();
+                            menu.StateChanged = false;
+                            break;
+                        case "Back":
+                            menu.SetState(Menu.State.Main);
+                            break;
+                    }
                     break;
                 case Menu.State.Credits:
-                    menu.SetState(Menu.State.Main);
+                    switch(button)
+                    {
+                        case "Back":
+                            menu.SetState(Menu.State.Main);
+                            break;
+                    }
                     break;
                 case Menu.State.LevelSelect:
                     switch(button)
@@ -79,6 +93,8 @@ public class MenuButton : MonoBehaviour
                     }
                     break;
             }
+
+            AudioSource.PlayClipAtPoint(onClickEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
         }
     }
 

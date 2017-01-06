@@ -84,7 +84,8 @@ public class PlayerFake : MonoBehaviour
         dashRenderer = targetObject.GetComponent<LineRenderer>();
         dashRenderer.sortingOrder = -1;
         dashRenderer.material = new Material(Shader.Find("Particles/Additive"));
-        dashRenderer.SetColors(dashStart, dashEnd);
+        dashRenderer.startColor = dashStart;
+        dashRenderer.endColor = dashEnd;
         spriteRenderer = GetComponent<SpriteRenderer>();
         hitboxGlowRenderer = transform.FindChild("GlowHitbox").GetComponent<SpriteRenderer>();
         wingsGlowRenderer = transform.FindChild("GlowWings").GetComponent<SpriteRenderer>();
@@ -194,7 +195,7 @@ public class PlayerFake : MonoBehaviour
         mousePos.y = Input.mousePosition.y / Screen.height;
         mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0) && !dashing)
+        if(Input.GetMouseButtonDown(0) && !dashing && forcedTargetTimer == 0)
         {
             // Begin dash targeting
             selecting = true;
