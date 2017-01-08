@@ -44,8 +44,9 @@ public class Player : MonoBehaviour
     private bool selecting = false; // True while the mouse is held down
     private int dashes = 0; // Number of dashes remaining
     private float dashCooldown = 0; // Time since last dash charge was received
-    public static int maxDashes = 3; // Maximum number of dashes that can be held at once
+    public static readonly int MAX_DASHES = 3; // Maximum number of dashes that can be held at once
     private static float MAX_DASH_COOLDOWN = 4; // Time required for a dash charge to be gained
+    public bool CanDash = true; // True if dashing and dash charge gaining is enabled
 
     // Whether the player is invincible or not
     private bool invincible = false;
@@ -194,7 +195,7 @@ public class Player : MonoBehaviour
         }
 
         // Handling the dash cooldown
-        if(dashes < maxDashes)
+        if(dashes < MAX_DASHES && CanDash)
         {
             dashCooldown += Time.deltaTime;
             if(dashCooldown >= MAX_DASH_COOLDOWN)
@@ -282,7 +283,7 @@ public class Player : MonoBehaviour
         mousePos.y = (Input.mousePosition.y / Screen.height - LevelController.Singleton.ViewportRect.y) / LevelController.Singleton.ViewportRect.height;
         mousePos = field.WorldPoint(mousePos);
 
-        if(Input.GetMouseButtonDown(0) && !dashing)
+        if(Input.GetMouseButtonDown(0) && !dashing && CanDash)
         {
             // Begin dash targeting
             selecting = true;

@@ -30,11 +30,12 @@ public class TutorialWave : Wave
 
     private IEnumerator Run()
     {
-        Player.maxDashes = 0;
-        ArrayList orbs = new ArrayList(LevelController.Singleton.Player.dashCounter.orbsCounterActive);
-        orbs.AddRange(LevelController.Singleton.Player.dashCounter.orbsCounterInactive);
+        Player player = LevelController.Singleton.Player;
+        player.CanDash = false;
+        ArrayList orbs = new ArrayList(player.dashCounter.orbsCounterActive);
+        orbs.AddRange(player.dashCounter.orbsCounterInactive);
         foreach (GameObject o in orbs)
-            o.GetComponent<CanvasRenderer>().SetAlpha(0);
+            o.gameObject.SetActive(false);
         float timer;
 
         // Introduction
@@ -67,7 +68,7 @@ public class TutorialWave : Wave
         }
         Destroy(runtime.gameObject);
         foreach (GameObject o in orbs)
-            o.GetComponent<CanvasRenderer>().SetAlpha(100);
+            o.gameObject.SetActive(true);
         yield return StartCoroutine(transmission.ShowContent("ACCESS GRANTED...\nYou are authorized to access the ship's combat functions. You should now see your ship's charge in the upper left corner.", 0.05f));
 
         // Move to location 2
@@ -83,11 +84,12 @@ public class TutorialWave : Wave
                 timer = WARNING_DELAY;
             Color temp = runtime.GetComponent<SpriteRenderer>().color;
             runtime.GetComponent<SpriteRenderer>().color = new Color(temp.r, temp.g, temp.b, timer / WARNING_DELAY);
+            Debug.Log(runtime.GetComponent<SpriteRenderer>().color);
 
             yield return null;
         }
         Destroy(runtime.gameObject);
-        Player.maxDashes = 3;
+        player.CanDash = true;
         yield return StartCoroutine(transmission.ShowContent("UPGRADE COMPLETE...\nYour ship is now outfitted with its offensive package. Your HUD should reflect this momentarily.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("The last century of warfare has led High Command to conclude that any targeted projectile is too easily mitigated by vast improvements in ship mobility. As a result, warp jumps represent the current standard of both offensive and defensive strategy.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("Your ship's capacitor banks are capable of storing enough charge for up to three warp jumps. Charge will automatically accumulate while you are below peak charge.", 0.05f));
