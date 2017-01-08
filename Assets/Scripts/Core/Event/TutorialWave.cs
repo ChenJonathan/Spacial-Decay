@@ -92,12 +92,12 @@ public class TutorialWave : Wave
         player.CanDash = true;
         yield return StartCoroutine(transmission.ShowContent("UPGRADE COMPLETE...\nYour ship is now outfitted with its offensive package. Your HUD should reflect this momentarily.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("The last century of warfare has led High Command to conclude that any targeted projectile is too easily mitigated by vast improvements in ship mobility. As a result, warp jumps represent the current standard of both offensive and defensive strategy.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Your ship's capacitor banks are capable of storing enough charge for up to three warp jumps. Charge will automatically accumulate while you are below peak charge.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Your ship's capacitor banks are capable of storing enough charge for up to three warp jumps. Charge will automatically accumulate while you have less than three jumps.", 0.05f));
 
         // Dash mechanic explanation - Dash charges and canceling
-        yield return StartCoroutine(transmission.ShowContent("Naturally, warp jumps are mathematically complex. To help you handle the n-dimensional calculations, a core-cortex link will automatically kick in; many pilots describe it as a sensation of \"slo-mo.\"", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Plot warp jumps using your HUD by selecting a target destination. Keep the primary click (LMB) engaged; the computer will calculate and render the warp jump for you.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("You may cancel a jump through an alternate click (RMB), but as the engines have already been overloaded, the ship will still fire the engines. The capacitors will retain the jump charge, and the ship will proceed to the destination at a sub-warp speed.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Plot warp jumps dragging to a destination. Hold the LMB down; the computer will calculate and render the jump path for you.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Plotting a warp jump will cause a moment of \"slo-mo.\" The effect is slight, but it may save your life in the heat of combat.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("You may cancel a jump through an alternate click (RMB), but the ship will still fire the engines at subwarp speed. The capacitors will retain the jump charge, so you will not lose a warp jump.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("To illustrate the potent offensive power of a warp jump, a target ship will be provided. Use a warp jump to destroy the ship. Your HUD will automatically warn you of the incoming threat. Aim carefully, and accelerate through the target.", 0.05f, false));
         WarningData enemyWarning = new WarningData();
         enemyWarning.Prefab = EnemyWarningPrefab;
@@ -116,8 +116,8 @@ public class TutorialWave : Wave
         yield return StartCoroutine(transmission.ShowContent("Excellent. Multidimensional warp calculations typically pose a serious challenge for new pilots.", 0.05f));
 
         // Hitbox explanation - Polygon for enemy ships
-        yield return StartCoroutine(transmission.ShowContent("While warping, massive energies twist the fabric of space around you and disintegrate anything in a linear path - ignoring the non-Euclidian geometry of such convoluted spacetime, of course.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("As a result, you may freely pass through both steel and plasma while warping, ignoring collisions with enemy ships or enemy projectiles.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("While warping, massive energies twist the fabric of space around you and disintegrate anything in a linear path, steel or plasma.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("As a result, you may freely pass through both enemy ships and their projectiles while warping, ignoring collisions with enemy ships or enemy projectiles.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("Your ship is a standard issue fourth-generation fighter produced by SpaceZ Industries. As a combat vehicle, your ship is capable of withstading considerable punishment.", 0.05f));
         yield return StartCoroutine(transmission.ShowContent("It is not invunlerable, however, and you should exercise due caution. You can obtain an overview of your ship's integrity in the upper left corner of your HUD.", 0.05f));
 
@@ -137,8 +137,8 @@ public class TutorialWave : Wave
 
         // Hitbox explanation - Center circle for bullets
         yield return StartCoroutine(transmission.ShowContent("It is important to note that most plasma-based weapons concentrate matter in the core of the visible structure as a result of the charged ions.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("Generally, your ship's hull will be able to dissipate the outer portion of plasma projectiles; the inner core, however, will inflict considerable damage.", 0.05f));
-        yield return StartCoroutine(transmission.ShowContent("A number of plasma-based projectiles will approach your ship. You may experiment with your ship's tolerance of plasma density. Once you have taken a critical hit to your hull, the projectiles will stop.", 0.05f, false));
+        yield return StartCoroutine(transmission.ShowContent("As a result, most projectiles will only inflict damage if you collide with their inner core.", 0.05f));
+        yield return StartCoroutine(transmission.ShowContent("Take hull damage from the projectiles to proceed.", 0.05f, false));
         runtime = SpawnWarning(enemyWarning);
         yield return new WaitForSeconds(3);
         TrainingEnemy enemy3 = (TrainingEnemy)Instantiate(EnemyPrefab, new Vector3(32, 0), Quaternion.identity);
