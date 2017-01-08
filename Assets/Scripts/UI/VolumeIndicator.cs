@@ -54,7 +54,7 @@ public class VolumeIndicator : MenuButton
                 dragging = false;
 
             // Set volume
-            float volume = Mathf.InverseLerp(0.345f, 0.655f, Input.mousePosition.x / Screen.width);
+            float volume = Mathf.InverseLerp(0.381f, 0.691f, Input.mousePosition.x / Screen.width);
             fgRenderer.transform.localScale = new Vector3(volume, 1, 1);
             if(music)
                 GameController.Singleton.Audio.VolumeMusic = volume;

@@ -6,9 +6,12 @@
 public class Scroll : MonoBehaviour
 {
     [HideInInspector]
+    public bool Zoom;
+    [HideInInspector]
     public float CameraSpeed;
     public float CameraMinY;
     public float CameraMaxY;
+    public float CameraMaxZ;
 
     public readonly float CAMERA_ACCELERATION = 0.3f;
     public readonly float CAMERA_SPEED_DECAY = 0.9f;
@@ -18,26 +21,36 @@ public class Scroll : MonoBehaviour
     /// </summary>
     public void FixedUpdate()
     {
-        // Calculating new camera speed
-
-        float border = Screen.height / 4;
-        if (Input.mousePosition.y > Screen.height - border)
+        if(Zoom)
         {
-            float ratio = Mathf.InverseLerp(Screen.height - border, Screen.height, Input.mousePosition.y);
-            CameraSpeed += ratio * ratio * CAMERA_ACCELERATION;
+            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Lerp(transform.position.z, CameraMaxZ, 0.1f));
         }
-
-        else if (Input.mousePosition.y < border)
+        else if(transform.position.z != 0)
         {
-            float ratio = Mathf.InverseLerp(border, 0, Input.mousePosition.y);
-            CameraSpeed -= ratio * ratio * CAMERA_ACCELERATION;
+            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Lerp(transform.position.z, 0, 0.1f));
+            if(transform.position.z < 0.1f)
+                transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         }
+        else
+        {
+            // Calculating new camera speed
+            float border = Screen.height / 6;
+            if(Input.mousePosition.y > Screen.height - border)
+            {
+                float ratio = Mathf.InverseLerp(Screen.height - border, Screen.height, Input.mousePosition.y);
+                CameraSpeed += ratio * ratio * CAMERA_ACCELERATION;
+            }
+            else if(Input.mousePosition.y < border + Screen.height / 10 && Input.mousePosition.y > Screen.height / 10)
+            {
+                float ratio = Mathf.InverseLerp(border + Screen.height / 10, Screen.height / 10, Input.mousePosition.y);
+                CameraSpeed -= ratio * ratio * CAMERA_ACCELERATION;
+            }
 
-        CameraSpeed *= CAMERA_SPEED_DECAY;
+            CameraSpeed *= CAMERA_SPEED_DECAY;
 
-        // Scroll the view
-
-        ScrollTo(transform.position.y + CameraSpeed);
+            // Scroll the view
+            ScrollTo(transform.position.y + CameraSpeed);
+        }
     }
 
     public void ScrollTo(float y)

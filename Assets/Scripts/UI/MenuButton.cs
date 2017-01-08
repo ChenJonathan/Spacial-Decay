@@ -47,9 +47,11 @@ public class MenuButton : MonoBehaviour
                             menu.SetState(Menu.State.LevelSelect);
                             break;
                         case "Options":
+                            Camera.main.GetComponent<Scroll>().Zoom = true;
                             menu.SetState(Menu.State.Options);
                             break;
                         case "Credits":
+                            Camera.main.GetComponent<Scroll>().Zoom = true;
                             menu.SetState(Menu.State.Credits);
                             break;
                         case "Exit":
@@ -69,6 +71,7 @@ public class MenuButton : MonoBehaviour
                             menu.StateChanged = false;
                             break;
                         case "Back":
+                            Camera.main.GetComponent<Scroll>().Zoom = false;
                             menu.SetState(Menu.State.Main);
                             break;
                     }
@@ -77,6 +80,7 @@ public class MenuButton : MonoBehaviour
                     switch(button)
                     {
                         case "Back":
+                            Camera.main.GetComponent<Scroll>().Zoom = false;
                             menu.SetState(Menu.State.Main);
                             break;
                     }
