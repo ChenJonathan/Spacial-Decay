@@ -153,12 +153,6 @@ public class LevelController : DanmakuGameController, IPausable
                 currentMessage = Instantiate(pauseMenuMessage);
             }
         }
-
-        // TODO Remove
-        if(Input.GetKeyDown(KeyCode.Tab))
-            GameController.Singleton.LoadLevelSelect(true, 1000);
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-            EndEvent();
     }
 
     /// <summary>

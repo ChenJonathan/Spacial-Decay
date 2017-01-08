@@ -99,9 +99,7 @@ public class GameController : Singleton<GameController>
         SceneManager.sceneLoaded += OnLoad;
     }
     
-    /// <summary>
-    /// TODO Remove this
-    /// </summary>
+    /*
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.O))
@@ -134,6 +132,7 @@ public class GameController : Singleton<GameController>
             SceneManager.LoadScene("Level Select");
         }
     }
+    */
 
     /// <summary>
     /// Called by Level objects to load a specific level.

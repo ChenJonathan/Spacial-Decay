@@ -34,8 +34,11 @@ public class Menu : Singleton<Menu>
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && CurrentState != State.Main)
+        if(Input.GetKeyDown(KeyCode.Escape) && CurrentState != State.Main && Level.Clickable)
+        {
+            Camera.main.GetComponent<Scroll>().Zoom = false;
             SetState(State.Main);
+        }
     }
 
     public void SetState(State state)

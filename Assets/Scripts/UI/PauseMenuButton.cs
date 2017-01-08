@@ -19,16 +19,16 @@ public class PauseMenuButton : MonoBehaviour
     [SerializeField]
     private AudioClip onClickEffect;
 
-    void Update()
+    public void Update()
     {
         scale += (scaleTarg - scale) * scaleDrag;
         transform.localScale = Vector3.one * scale;
         scaleTarg = scaleTargWhenDefault;
     }
 
-    private void OnMouseEnter()
+    public void OnMouseEnter()
     {
-        AudioSource.PlayClipAtPoint(onHoverEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
+        GetComponentInParent<AudioSource>().PlayOneShot(onHoverEffect, GameController.Instance.Audio.VolumeEffects);
         scale = scaleWhenFirstHovered;
     }
 
@@ -38,7 +38,7 @@ public class PauseMenuButton : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0) && GetComponent<SpriteRenderer>().color.a >= 0.5f)
         {
-            AudioSource.PlayClipAtPoint(onClickEffect, GameController.Instance.transform.position, GameController.Instance.Audio.VolumeEffects);
+            GetComponentInParent<AudioSource>().PlayOneShot(onClickEffect, GameController.Instance.Audio.VolumeEffects);
             if (ContinueLevel)
                 transform.parent.GetComponent<MessagePauseMenu>().SetResume();
             else
