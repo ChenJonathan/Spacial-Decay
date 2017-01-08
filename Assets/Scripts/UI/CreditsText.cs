@@ -12,7 +12,7 @@ public class CreditsText : MonoBehaviour
     {
         if(countdown == 0)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, TargetLocation, 0.05f);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, TargetLocation, 0.1f);
         }
         else
         {
