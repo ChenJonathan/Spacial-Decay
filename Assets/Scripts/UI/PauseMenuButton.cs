@@ -5,7 +5,7 @@
 /// </summary>
 public class PauseMenuButton : MonoBehaviour
 {
-    public bool ContinueLevel;
+    public enum ButtonType { Continue, Restart, Exit }
 
     private float scale = 0f;
     private float scaleTarg = 0f;
@@ -18,6 +18,8 @@ public class PauseMenuButton : MonoBehaviour
     private AudioClip onHoverEffect;
     [SerializeField]
     private AudioClip onClickEffect;
+    [SerializeField]
+    private ButtonType buttonType;
 
     public void Update()
     {
@@ -39,8 +41,10 @@ public class PauseMenuButton : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && GetComponent<SpriteRenderer>().color.a >= 0.5f)
         {
             GetComponentInParent<AudioSource>().PlayOneShot(onClickEffect, GameController.Instance.Audio.VolumeEffects);
-            if (ContinueLevel)
+            if (buttonType == ButtonType.Continue)
                 transform.parent.GetComponent<MessagePauseMenu>().SetResume();
+            else if (buttonType == ButtonType.Restart)
+                transform.parent.GetComponent<MessagePauseMenu>().SetRestart();
             else
                 transform.parent.GetComponent<MessagePauseMenu>().SetExit();
         }

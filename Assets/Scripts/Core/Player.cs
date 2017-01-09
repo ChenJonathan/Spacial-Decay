@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     {
         get { return lives; }
     }
-    public static readonly int MAX_LIVES = 8;
+    public static readonly int MAX_LIVES = 9;
 
     // Whether the player is moving or not
     private bool moving;

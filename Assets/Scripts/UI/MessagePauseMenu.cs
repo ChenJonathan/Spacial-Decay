@@ -7,9 +7,11 @@ using System.Collections;
 public class MessagePauseMenu : Message
 {
     public SpriteRenderer Resume;
+    public SpriteRenderer Restart;
     public SpriteRenderer Exit;
 
     private bool resume = false;
+    private bool restart = false;
     private bool exit = false;
 
     /// <summary>
@@ -18,15 +20,16 @@ public class MessagePauseMenu : Message
     protected override IEnumerator Run()
     {
         Fade.color = new Color(Fade.color.r, Fade.color.g, Fade.color.b, 0f);
-        Text.color = Resume.color = Exit.color = new Color(Text.color.r, Text.color.g, Text.color.b, 0f);
+        Text.color = Resume.color = Restart.color = Exit.color = new Color(Text.color.r, Text.color.g, Text.color.b, 0f);
 
         yield return StartCoroutine(Appear());
 
-        while(!resume && !exit)
+        while(!resume && !restart && !exit)
         {
             if(!LevelController.Singleton.Paused || Input.GetKeyDown(KeyCode.Escape))
             {
                 resume = true;
+                restart = false;
                 exit = false;
             }
             yield return null;
@@ -37,6 +40,8 @@ public class MessagePauseMenu : Message
         LevelController.Singleton.Paused = false;
         if(resume)
             Destroy(gameObject);
+        else if (restart)
+            GameController.Singleton.LoadLevel(GameController.Singleton.CurrentLevel);
         else
             GameController.Singleton.LoadLevelSelect(false);
     }
@@ -63,7 +68,7 @@ public class MessagePauseMenu : Message
             if(Input.GetKeyDown(KeyCode.Escape))
                 yield break;
         }
-        for(float y = backgroundScale.y; y <= 1f; y = Mathf.Lerp(y, 1.01f, 0.1f))
+        for(float y = backgroundScale.y; y <= 1.5f; y = Mathf.Lerp(y, 1.51f, 0.1f))
         {
             fadeColor.a = 0.5f + y / 2;
             Fade.color = fadeColor;
@@ -80,6 +85,7 @@ public class MessagePauseMenu : Message
             textColor.a = a;
             Text.color = textColor;
             Resume.color = textColor;
+            Restart.color = textColor;
             Exit.color = textColor;
 
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
@@ -101,6 +107,7 @@ public class MessagePauseMenu : Message
             textColor.a = a;
             Text.color = textColor;
             Resume.color = textColor;
+            Restart.color = textColor;
             Exit.color = textColor;
 
             yield return StartCoroutine(WaitForRealSeconds(0.005f));
@@ -123,13 +130,19 @@ public class MessagePauseMenu : Message
 
     public void SetResume()
     {
-        if(!exit)
+        if(!restart && !exit)
             resume = true;
+    }
+
+    public void SetRestart()
+    {
+        if (!resume && !exit)
+            restart = true;
     }
 
     public void SetExit()
     {
-        if(!resume)
+        if(!resume && !restart)
             exit = true;
     }
 }
